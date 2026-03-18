@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="Switchr helps expats in Spain switch to a cheaper electricity tariff in under 5 minutes — entirely via WhatsApp.">
+
+  <meta name="facebook-domain-verification" content="3fta816nkamtmp85k7fobtiur8auin" />
+  <title>Switchr — Switch Electricity in Spain via WhatsApp</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --green: #00c896;
+      --gdim: rgba(0, 200, 150, 0.12);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-behavior: smooth
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--black);
+      color: #fff;
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .6
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 18px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, rgba(10, 10, 10, .96) 0%, transparent 100%);
+      backdrop-filter: blur(12px)
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 20px
+    }
+
+    .nav-brand {
+      font-family: 'Fraunces', serif;
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #fff;
+      text-decoration: none
+    }
+
+    .nav-brand span {
+      color: var(--green)
+    }
+
+    .ltoggle {
+      display: flex;
+      gap: 3px
+    }
+
+    .lbtn {
+      background: transparent;
+      border: 1px solid #222;
+      color: #555;
+      padding: 4px 12px;
+      border-radius: 100px;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all .15s;
+      letter-spacing: .5px
+    }
+
+    .lbtn.on {
+      background: var(--green);
+      border-color: var(--green);
+      color: var(--black);
+      font-weight: 700
+    }
+
+    .nav-cta {
+      background: var(--green);
+      color: var(--black);
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all .2s;
+      white-space: nowrap
+    }
+
+    .nav-cta:hover {
+      background: #fff;
+      transform: translateY(-1px)
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 48px 80px;
+      overflow: hidden
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: -10%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 200, 150, .14) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none
+    }
+
+    .hero-inner {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      z-index: 1
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gdim);
+      border: 1px solid rgba(0, 200, 150, .3);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1)
+      }
+
+      50% {
+        opacity: .5;
+        transform: scale(.8)
+      }
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(44px, 5.5vw, 76px);
+      font-weight: 900;
+      line-height: .95;
+      letter-spacing: -3px;
+      margin-bottom: 28px
+    }
+
+    h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--green)
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      font-weight: 300;
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 40px;
+      max-width: 440px
+    }
+
+    .hero-sub strong {
+      color: #fff;
+      font-weight: 400
+    }
+
+    .ctag {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap
+    }
+
+    .btn-p {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: var(--black);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: all .25s;
+      box-shadow: 0 0 40px rgba(0, 200, 150, .3)
+    }
+
+    .btn-p:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 0 60px rgba(0, 200, 150, .4)
+    }
+
+    .btn-p svg {
+      width: 20px;
+      height: 20px
+    }
+
+    .btn-g {
+      color: #aaa;
+      font-size: 14px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color .2s
+    }
+
+    .btn-g:hover {
+      color: #fff
+    }
+
+    .btn-g::after {
+      content: '↓'
+    }
+
+    /* PHONE */
+    .hero-vis {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative
+    }
+
+    .pw {
+      position: relative;
+      animation: float 4s ease-in-out infinite
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-2deg)
+      }
+
+      50% {
+        transform: translateY(-16px) rotate(-1deg)
+      }
+    }
+
+    .pglow {
+      position: absolute;
+      inset: -40px;
+      background: radial-gradient(circle at center, rgba(0, 200, 150, .12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: -1
+    }
+
+    .phone {
+      width: 280px;
+      background: #1a1a1a;
+      border-radius: 36px;
+      border: 1px solid #333;
+      padding: 16px;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .05)
+    }
+
+    .ph {
+      background: #075e54;
+      border-radius: 20px 20px 0 0;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: -16px -16px 0
+    }
+
+    .pav {
+      width: 36px;
+      height: 36px;
+      background: var(--green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--black);
+      flex-shrink: 0
+    }
+
+    .pcn {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff
+    }
+
+    .pcs {
+      font-size: 11px;
+      color: rgba(255, 255, 255, .6)
+    }
+
+    .cb {
+      padding: 16px 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px
+    }
+
+    .msg {
+      max-width: 85%;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+      animation: fadeUp .4s ease both
+    }
+
+    .mb {
+      background: #1f2c34;
+      color: #e9e9e9;
+      align-self: flex-start;
+      border-radius: 4px 12px 12px 12px
+    }
+
+    .mu {
+      background: #005c4b;
+      color: #e9e9e9;
+      align-self: flex-end;
+      border-radius: 12px 4px 12px 12px
+    }
+
+    .sp {
+      background: linear-gradient(135deg, var(--gdim), rgba(0, 200, 150, .05));
+      border: 1px solid rgba(0, 200, 150, .4);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 11px;
+      color: var(--green);
+      align-self: flex-start;
+      animation: fadeUp .4s ease 1.2s both
+    }
+
+    .sa {
+      font-size: 20px;
+      font-weight: 700;
+      display: block;
+      color: #fff;
+      margin: 2px 0
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(8px)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .msg:nth-child(1) {
+      animation-delay: .1s
+    }
+
+    .msg:nth-child(2) {
+      animation-delay: .4s
+    }
+
+    .msg:nth-child(3) {
+      animation-delay: .8s
+    }
+
+    .msg:nth-child(5) {
+      animation-delay: 1.6s
+    }
+
+    /* STATS */
+    .stats {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 32px 48px
+    }
+
+    .si {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr)
+    }
+
+    .st {
+      padding: 16px 40px;
+      border-right: 1px solid #1a1a1a;
+      text-align: center
+    }
+
+    .st:last-child {
+      border-right: none
+    }
+
+    .sn {
+      font-family: 'Fraunces', serif;
+      font-size: 48px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: var(--green);
+      line-height: 1;
+      margin-bottom: 6px
+    }
+
+    .sl {
+      font-size: 14px;
+      color: #777;
+      font-weight: 300
+    }
+
+    /* SECTIONS */
+    .sec {
+      padding: 100px 48px;
+      position: relative;
+      z-index: 1
+    }
+
+    .sec.alt {
+      background: #0d0d0d
+    }
+
+    .sin {
+      max-width: 1100px;
+      margin: 0 auto
+    }
+
+    .slabel {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 16px
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(36px, 4vw, 54px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.05;
+      margin-bottom: 48px
+    }
+
+    h2 em {
+      font-style: italic;
+      font-weight: 300;
+      color: #aaa
+    }
+
+    /* HOW */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px
+    }
+
+    .step {
+      background: #111;
+      padding: 36px 28px;
+      transition: background .2s
+    }
+
+    .step:hover {
+      background: #161616
+    }
+
+    .step:first-child {
+      border-radius: 12px 0 0 12px
+    }
+
+    .step:last-child {
+      border-radius: 0 12px 12px 0
+    }
+
+    .snum {
+      font-family: 'Fraunces', serif;
+      font-size: 64px;
+      font-weight: 900;
+      color: #1e1e1e;
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: -3px
+    }
+
+    .sico {
+      font-size: 28px;
+      margin-bottom: 16px;
+      display: block
+    }
+
+    .step h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 10px
+    }
+
+    .step p {
+      font-size: 14px;
+      color: #777;
+      line-height: 1.6;
+      font-weight: 300
+    }
+
+    /* WHY */
+    .wgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center
+    }
+
+    .wcards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px
+    }
+
+    .wcard {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color .2s
+    }
+
+    .wcard:hover {
+      border-color: rgba(0, 200, 150, .3)
+    }
+
+    .wico {
+      width: 44px;
+      height: 44px;
+      background: var(--gdim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0
+    }
+
+    .wcard h4 {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 6px
+    }
+
+    .wcard p {
+      font-size: 13px;
+      color: #777;
+      font-weight: 300;
+      line-height: 1.5
+    }
+
+    .wdesc {
+      font-size: 16px;
+      color: #777;
+      font-weight: 300;
+      line-height: 1.7;
+      margin-top: 16px
+    }
+
+    /* TESTI */
+    .tgrid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 48px
+    }
+
+    .tcard {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 12px;
+      padding: 28px
+    }
+
+    .tstars {
+      color: var(--green);
+      font-size: 16px;
+      margin-bottom: 14px;
+      letter-spacing: 2px
+    }
+
+    .ttext {
+      font-size: 15px;
+      color: #ccc;
+      line-height: 1.65;
+      font-weight: 300;
+      margin-bottom: 20px;
+      font-style: italic
+    }
+
+    .tauth {
+      display: flex;
+      align-items: center;
+      gap: 10px
+    }
+
+    .tav {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gdim);
+      border: 1px solid rgba(0, 200, 150, .3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--green);
+      font-family: 'Fraunces', serif
+    }
+
+    .tname {
+      font-size: 14px;
+      font-weight: 500
+    }
+
+    .tloc {
+      font-size: 12px;
+      color: #666
+    }
+
+    /* CTA */
+    .ctasec {
+      text-align: center;
+      position: relative;
+      overflow: hidden
+    }
+
+    .ctag2 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 800px;
+      height: 400px;
+      background: radial-gradient(ellipse, rgba(0, 200, 150, .08) 0%, transparent 70%);
+      pointer-events: none
+    }
+
+    .ctac {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto
+    }
+
+    .ctac h2 {
+      font-size: clamp(40px, 5vw, 64px);
+      letter-spacing: -2.5px;
+      margin-bottom: 20px
+    }
+
+    .ctac>p {
+      font-size: 18px;
+      color: #888;
+      font-weight: 300;
+      margin-bottom: 40px
+    }
+
+    .ctanote {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #444
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid #1a1a1a;
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px
+    }
+
+    .fbrand {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.5px
+    }
+
+    .fbrand span {
+      color: var(--green)
+    }
+
+    .flinks {
+      display: flex;
+      gap: 24px
+    }
+
+    .flinks a {
+      font-size: 13px;
+      color: #555;
+      text-decoration: none;
+      transition: color .15s
+    }
+
+    .flinks a:hover {
+      color: #fff
+    }
+
+    .fcopy {
+      font-size: 12px;
+      color: #444
+    }
+
+    /* WA FLOAT */
+    .waf {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 200;
+      background: #25d366;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, .4);
+      text-decoration: none;
+      transition: all .2s;
+      animation: boin .6s cubic-bezier(.175, .885, .32, 1.275) 2s both
+    }
+
+    .waf:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 30px rgba(37, 211, 102, .5)
+    }
+
+    .waf svg {
+      width: 28px;
+      height: 28px;
+      fill: #fff
+    }
+
+    @keyframes boin {
+      from {
+        opacity: 0;
+        transform: scale(.3)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    /* LANG */
+    [data-l] {
+      display: none
+    }
+
+    [data-l].on {
+      display: block
+    }
+
+    span[data-l] {
+      display: none
+    }
+
+    span[data-l].on {
+      display: inline
+    }
+
+    div[data-l] {
+      display: none
+    }
+
+    div[data-l].on {
+      display: block
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px) {
+      nav {
+        padding: 14px 20px
+      }
+
+      .nav-cta {
+        display: none
+      }
+
+      .hero {
+        padding: 100px 24px 60px
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px
+      }
+
+      .hero-vis {
+        order: -1
+      }
+
+      .phone {
+        width: 240px
+      }
+
+      .stats {
+        padding: 24px
+      }
+
+      .si {
+        grid-template-columns: repeat(3, 1fr)
+      }
+
+      .st {
+        padding: 12px 16px
+      }
+
+      .sn {
+        font-size: 32px
+      }
+
+      .sec {
+        padding: 64px 24px
+      }
+
+      .steps {
+        grid-template-columns: 1fr 1fr
+      }
+
+      .step:first-child {
+        border-radius: 12px 0 0 0
+      }
+
+      .step:nth-child(2) {
+        border-radius: 0 12px 0 0
+      }
+
+      .step:nth-child(3) {
+        border-radius: 0 0 0 12px
+      }
+
+      .step:last-child {
+        border-radius: 0 0 12px 0
+      }
+
+      .wgrid {
+        grid-template-columns: 1fr;
+        gap: 40px
+      }
+
+      .tgrid {
+        grid-template-columns: 1fr
+      }
+
+      footer {
+        padding: 24px;
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+
+    @media(max-width:480px) {
+      .steps {
+        grid-template-columns: 1fr
+      }
+
+      .step {
+        border-radius: 0 !important
+      }
+
+      .step:first-child {
+        border-radius: 12px 12px 0 0 !important
+      }
+
+      .step:last-child {
+        border-radius: 0 0 12px 12px !important
+      }
+
+      h1 {
+        letter-spacing: -2px
+      }
+
+      .ctag {
+        flex-direction: column;
+        align-items: flex-start
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <a href="https://wa.me/34662403660" target="_blank" class="waf" id="wafloat" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <nav>
+    <div class="nav-left">
+      <a href="#" class="nav-brand">Switch<span>r</span></a>
+      <div class="ltoggle">
+        <button class="lbtn on" onclick="setLang('en',this)">EN</button>
+        <button class="lbtn" onclick="setLang('es',this)">ES</button>
+      </div>
+    </div>
+    <a href="https://wa.me/34662403660?text=Hi!%20I'd%20like%20to%20check%20my%20electricity%20savings" target="_blank"
+      class="nav-cta" id="navcta">
+      <span data-l="en" class="on">Get free savings quote →</span>
+      <span data-l="es">Calcula tu ahorro gratis →</span>
+    </a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div data-l="en" class="on">
+          <div class="eyebrow">Live in Spain · Pay less</div>
+          <h1>Cut your<br><em>electricity</em><br>bill in Spain</h1>
+          <p class="hero-sub">Send us your bill on WhatsApp. We'll show you <strong>exactly how much you can
+              save</strong> — and switch your tariff in under 5 minutes. No calls. No paperwork.</p>
+          <div class="ctag">
+            <a href="https://wa.me/34662403660?text=Hi!%20I'd%20like%20to%20check%20my%20electricity%20savings"
+              target="_blank" class="btn-p">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Check my savings free
+            </a>
+            <a href="#how" class="btn-g">How it works</a>
+          </div>
+        </div>
+        <div data-l="es">
+          <div class="eyebrow">Vive en España · Paga menos</div>
+          <h1>Reduce tu<br><em>factura</em><br>de la luz</h1>
+          <p class="hero-sub">Mándanos tu factura por WhatsApp. Te decimos <strong>exactamente cuánto puedes
+              ahorrar</strong> — y cambiamos tu tarifa en menos de 5 minutos. Sin llamadas. Sin papeleo.</p>
+          <div class="ctag">
+            <a href="https://wa.me/34662403660?text=Hola!%20Quiero%20saber%20cuánto%20puedo%20ahorrar%20en%20mi%20factura%20de%20luz"
+              target="_blank" class="btn-p">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+              </svg>
+              Calcula mi ahorro gratis
+            </a>
+            <a href="#how" class="btn-g">Cómo funciona</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-vis">
+        <div class="pw">
+          <div class="pglow"></div>
+          <div class="phone">
+            <div class="ph">
+              <div class="pav">S</div>
+              <div>
+                <div class="pcn">Switchr</div>
+                <div class="pcs">online</div>
+              </div>
+            </div>
+            <div class="cb">
+              <div class="msg mb"><span data-l="en" class="on">Hi! Send me a photo of your electricity bill and I'll
+                  find you a better deal</span><span data-l="es">Hola! Mándame una foto de tu factura de luz y te busco
+                  una tarifa mejor</span></div>
+              <div class="msg mu"><span data-l="en" class="on">Here it is! [photo]</span><span data-l="es">Aquí la
+                  tienes! [foto]</span></div>
+              <div class="msg mb"><span data-l="en" class="on">Analysing your bill... give me 20 seconds</span><span
+                  data-l="es">Analizando tu factura... dame 20 segundos</span></div>
+              <div class="sp">
+                <span data-l="en" class="on">Your estimated saving:</span><span data-l="es">Tu ahorro estimado:</span>
+                <span class="sa">€312 / year</span>
+                <span data-l="en" class="on">Switch to a better tariff?</span><span data-l="es">¿Cambiamos de
+                  tarifa?</span>
+              </div>
+              <div class="msg mu"><span data-l="en" class="on">Yes, let's switch!</span><span data-l="es">Sí, quiero
+                  cambiar!</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="si">
+      <div class="st">
+        <div class="sn">5<span style="font-size:28px">min</span></div>
+        <div class="sl"><span data-l="en" class="on">Average switch time</span><span data-l="es">Tiempo medio de
+            cambio</span></div>
+      </div>
+      <div class="st">
+        <div class="sn">€0</div>
+        <div class="sl"><span data-l="en" class="on">Cost to you — ever</span><span data-l="es">Coste para ti —
+            siempre</span></div>
+      </div>
+      <div class="st">
+        <div class="sn">100%</div>
+        <div class="sl"><span data-l="en" class="on">Via WhatsApp</span><span data-l="es">Por WhatsApp</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <section class="sec" id="how">
+    <div class="sin">
+      <div class="slabel"><span data-l="en" class="on">The process</span><span data-l="es">El proceso</span></div>
+      <h2><span data-l="en" class="on">Four steps.<br><em>Five minutes.</em></span><span data-l="es">Cuatro
+          pasos.<br><em>Cinco minutos.</em></span></h2>
+      <div class="steps">
+        <div class="step">
+          <div class="snum">01</div><span class="sico">📲</span>
+          <h3><span data-l="en" class="on">Message us</span><span data-l="es">Escríbenos</span></h3>
+          <p><span data-l="en" class="on">Open WhatsApp and send us a message. No app to download, no account to
+              create.</span><span data-l="es">Abre WhatsApp y mándanos un mensaje. Sin descargas, sin registros.</span>
+          </p>
+        </div>
+        <div class="step">
+          <div class="snum">02</div><span class="sico">📄</span>
+          <h3><span data-l="en" class="on">Send your bill</span><span data-l="es">Manda tu factura</span></h3>
+          <p><span data-l="en" class="on">Take a photo of your electricity bill. Our AI reads it in seconds — CUPS,
+              consumption, everything.</span><span data-l="es">Haz una foto a tu factura de luz. Nuestra IA la lee en
+              segundos — CUPS, consumo, todo.</span></p>
+        </div>
+        <div class="step">
+          <div class="snum">03</div><span class="sico">💡</span>
+          <h3><span data-l="en" class="on">See your savings</span><span data-l="es">Ve tu ahorro</span></h3>
+          <p><span data-l="en" class="on">We show you exactly how much you'd save with a better tariff. Real numbers,
+              not estimates.</span><span data-l="es">Te mostramos exactamente cuánto ahorrarías con una tarifa mejor.
+              Números reales.</span></p>
+        </div>
+        <div class="step">
+          <div class="snum">04</div><span class="sico">✍️</span>
+          <h3><span data-l="en" class="on">Sign &amp; done</span><span data-l="es">Firma y listo</span></h3>
+          <p><span data-l="en" class="on">Confirm on WhatsApp and sign digitally by email. Your new tariff activates
+              within 3 working days.</span><span data-l="es">Confirma por WhatsApp y firma por email. Nueva tarifa
+              activa en 3 días hábiles.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY -->
+  <section class="sec alt">
+    <div class="sin">
+      <div class="wgrid">
+        <div>
+          <div class="slabel"><span data-l="en" class="on">Why Switchr</span><span data-l="es">Por qué Switchr</span>
+          </div>
+          <h2><span data-l="en" class="on">Built for<br>people<br><em>in Spain</em></span><span data-l="es">Hecho
+              para<br>vivir<br><em>en España</em></span></h2>
+          <p class="wdesc"><span data-l="en" class="on">Energy companies make switching deliberately complicated.
+              Switchr exists so you don't need to spend an afternoon on hold — or navigate a Spanish website — just to
+              pay less for electricity.</span><span data-l="es">Las eléctricas hacen que cambiar sea complicado a
+              propósito. Switchr existe para que no tengas que pasarte la tarde al teléfono para pagar menos por la
+              luz.</span></p>
+        </div>
+        <div class="wcards">
+          <div class="wcard">
+            <div class="wico">🌍</div>
+            <div>
+              <h4><span data-l="en" class="on">English &amp; Spanish</span><span data-l="es">Inglés y español</span>
+              </h4>
+              <p><span data-l="en" class="on">The entire process works in English or Spanish — your choice, from first
+                  message to signed contract.</span><span data-l="es">Todo funciona en inglés o español — tú eliges,
+                  desde el primer mensaje hasta la firma.</span></p>
+            </div>
+          </div>
+          <div class="wcard">
+            <div class="wico">💸</div>
+            <div>
+              <h4><span data-l="en" class="on">Completely free</span><span data-l="es">Totalmente gratis</span></h4>
+              <p><span data-l="en" class="on">We're paid by the energy supplier, not you. Our incentive is to find you
+                  the best deal.</span><span data-l="es">Nos paga la comercializadora, no tú. Nuestro incentivo es
+                  encontrarte la mejor tarifa.</span></p>
+            </div>
+          </div>
+          <div class="wcard">
+            <div class="wico">🔒</div>
+            <div>
+              <h4><span data-l="en" class="on">GDPR compliant</span><span data-l="es">Cumplimiento RGPD</span></h4>
+              <p><span data-l="en" class="on">Your data stays in EU servers. We never sell your information or share it
+                  with advertisers.</span><span data-l="es">Tus datos permanecen en servidores de la UE. Nunca vendemos
+                  tu información.</span></p>
+            </div>
+          </div>
+          <div class="wcard">
+            <div class="wico">📱</div>
+            <div>
+              <h4><span data-l="en" class="on">100% WhatsApp</span><span data-l="es">100% WhatsApp</span></h4>
+              <p><span data-l="en" class="on">No apps, no portals, no forms. Just WhatsApp — the app you already use
+                  every day.</span><span data-l="es">Sin apps, sin portales, sin formularios. Solo WhatsApp — la app que
+                  ya usas a diario.</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="sec">
+    <div class="sin">
+      <div class="slabel"><span data-l="en" class="on">What people say</span><span data-l="es">Lo que dicen</span></div>
+      <h2><span data-l="en" class="on">Real <em>savings,</em><br>real people</span><span data-l="es">Ahorros
+          <em>reales,</em><br>personas reales</span></h2>
+      <div class="tgrid">
+        <div class="tcard">
+          <div class="tstars">★★★★★</div>
+          <p class="ttext"><span data-l="en" class="on">"Took about 4 minutes on WhatsApp. We're saving over €280 a
+              year. Wish I'd done it years ago."</span><span data-l="es">"Tardé unos 4 minutos por WhatsApp. Ahorramos
+              más de 280€ al año. Ojalá lo hubiera hecho antes."</span></p>
+          <div class="tauth">
+            <div class="tav">J</div>
+            <div>
+              <div class="tname">James T.</div>
+              <div class="tloc">Torrevieja, Alicante</div>
+            </div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tstars">★★★★★</div>
+          <p class="ttext"><span data-l="en" class="on">"As a Belgian I was dreading Spanish bureaucracy. Switchr
+              handled everything in English. Super smooth."</span><span data-l="es">"Como belga me temía la burocracia
+              española. Switchr lo gestionó todo en inglés. Muy fácil."</span></p>
+          <div class="tauth">
+            <div class="tav">S</div>
+            <div>
+              <div class="tname">Sophie V.</div>
+              <div class="tloc">Marbella, Málaga</div>
+            </div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tstars">★★★★★</div>
+          <p class="ttext"><span data-l="en" class="on">"Sent a photo of my bill, got a savings estimate in under a
+              minute. New tariff was live 2 days later."</span><span data-l="es">"Mandé una foto de mi factura y en
+              menos de un minuto ya tenía el ahorro. Nueva tarifa en 2 días."</span></p>
+          <div class="tauth">
+            <div class="tav">M</div>
+            <div>
+              <div class="tname">Michael R.</div>
+              <div class="tloc">Torre-Pacheco, Murcia</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="sec ctasec">
+    <div class="ctag2"></div>
+    <div class="ctac">
+      <div class="slabel"><span data-l="en" class="on">Get started</span><span data-l="es">Empieza ahora</span></div>
+      <h2><span data-l="en" class="on">Find out what<br>you could <em>save</em></span><span data-l="es">Descubre
+          cuánto<br>puedes <em>ahorrar</em></span></h2>
+      <p><span data-l="en" class="on">Takes 5 minutes. Completely free. No commitment until you sign.</span><span
+          data-l="es">5 minutos. Completamente gratis. Sin compromiso hasta que firmes.</span></p>
+      <a href="https://wa.me/34662403660?text=Hi!%20I'd%20like%20to%20check%20my%20electricity%20savings"
+        target="_blank" class="btn-p" id="ctabtn" style="display:inline-flex;font-size:18px;padding:18px 40px">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px">
+          <path
+            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
+        <span data-l="en" class="on">Start on WhatsApp</span><span data-l="es">Empezar en WhatsApp</span>
+      </a>
+      <p class="ctanote"><span data-l="en" class="on">Operated by Switchr - Authorised energy intermediary ·
+          Spain</span><span data-l="es">Operado por Switchr - Intermediario energético autorizado · España</span></p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="fbrand">Switch<span>r</span></div>
+    <div class="flinks">
+      <a href="/privacy-policy.html"><span data-l="en" class="on">Privacy Policy</span><span
+          data-l="es">Privacidad</span></a>
+      <a href="/terms.html"><span data-l="en" class="on">Terms &amp; Conditions</span><span
+          data-l="es">Términos</span></a>
+      <a href="https://wa.me/34662403660" target="_blank"><span data-l="en" class="on">Contact</span><span
+          data-l="es">Contacto</span></a>
+    </div>
+    <div class="fcopy">© 2026 Switchr · <span data-l="en" class="on">Authorised energy intermediary · Spain</span><span
+        data-l="es">Intermediario energético autorizado · España</span></div>
+  </footer>
+
+  <script>
+    const WA_EN = 'https://wa.me/34662403660?text=Hi!%20I%27d%20like%20to%20check%20my%20electricity%20savings';
+    const WA_ES = 'https://wa.me/34662403660?text=Hola!%20Quiero%20saber%20cu%C3%A1nto%20puedo%20ahorrar%20en%20mi%20factura%20de%20luz';
+
+    function setLang(l, btn) {
+      document.querySelectorAll('[data-l]').forEach(e => {
+        e.classList.toggle('on', e.getAttribute('data-l') === l);
+      });
+      document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('on'));
+      btn.classList.add('on');
+      document.documentElement.lang = l;
+      document.getElementById('wafloat').href = l === 'es' ? WA_ES : WA_EN;
+      document.getElementById('ctabtn').href = l === 'es' ? WA_ES : WA_EN;
+    }
+  </script>
+</body>
+
+</html>
