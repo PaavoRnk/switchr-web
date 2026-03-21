@@ -1,1283 +1,1871 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Switchr helps expats in Spain switch to a cheaper electricity tariff in under 5 minutes — entirely via WhatsApp.">
-
-  <meta name="facebook-domain-verification" content="3fta816nkamtmp85k7fobtiur8auin" />
-  <title>Switchr — Switch Electricity in Spain via WhatsApp</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --black: #0a0a0a;
-      --green: #00c896;
-      --gdim: rgba(0, 200, 150, 0.12);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box
-    }
-
-    html {
-      scroll-behavior: smooth
-    }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--black);
-      color: #fff;
-      overflow-x: hidden
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: .6
-    }
-
-    /* NAV */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 18px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: linear-gradient(to bottom, rgba(10, 10, 10, .96) 0%, transparent 100%);
-      backdrop-filter: blur(12px)
-    }
-
-    .nav-left {
-      display: flex;
-      align-items: center;
-      gap: 20px
-    }
-
-    .nav-brand {
-      font-family: 'Fraunces', serif;
-      font-size: 24px;
-      font-weight: 900;
-      letter-spacing: -1px;
-      color: #fff;
-      text-decoration: none
-    }
-
-    .nav-brand span {
-      color: var(--green)
-    }
-
-    .ltoggle {
-      display: flex;
-      gap: 3px
-    }
-
-    .lbtn {
-      background: transparent;
-      border: 1px solid #222;
-      color: #555;
-      padding: 4px 12px;
-      border-radius: 100px;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      transition: all .15s;
-      letter-spacing: .5px
-    }
-
-    .lbtn.on {
-      background: var(--green);
-      border-color: var(--green);
-      color: var(--black);
-      font-weight: 700
-    }
-
-    .nav-cta {
-      background: var(--green);
-      color: var(--black);
-      font-size: 14px;
-      font-weight: 500;
-      padding: 10px 22px;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: all .2s;
-      white-space: nowrap
-    }
-
-    .nav-cta:hover {
-      background: #fff;
-      transform: translateY(-1px)
-    }
-
-    /* HERO */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 48px 80px;
-      overflow: hidden
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 20%;
-      right: -10%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(0, 200, 150, .14) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none
-    }
-
-    .hero-inner {
-      position: relative;
-      max-width: 1100px;
-      margin: 0 auto;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      z-index: 1
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--gdim);
-      border: 1px solid rgba(0, 200, 150, .3);
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 100px;
-      margin-bottom: 24px
-    }
-
-    .eyebrow::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s infinite
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-        transform: scale(1)
-      }
-
-      50% {
-        opacity: .5;
-        transform: scale(.8)
-      }
-    }
-
-    h1 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(44px, 5.5vw, 76px);
-      font-weight: 900;
-      line-height: .95;
-      letter-spacing: -3px;
-      margin-bottom: 28px
-    }
-
-    h1 em {
-      font-style: italic;
-      font-weight: 300;
-      color: var(--green)
-    }
-
-    .hero-sub {
-      font-size: 18px;
-      font-weight: 300;
-      color: #aaa;
-      line-height: 1.6;
-      margin-bottom: 40px;
-      max-width: 440px
-    }
-
-    .hero-sub strong {
-      color: #fff;
-      font-weight: 400
-    }
-
-    .ctag {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      flex-wrap: wrap
-    }
-
-    .btn-p {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--green);
-      color: var(--black);
-      font-size: 16px;
-      font-weight: 600;
-      padding: 16px 32px;
-      border-radius: 100px;
-      text-decoration: none;
-      transition: all .25s;
-      box-shadow: 0 0 40px rgba(0, 200, 150, .3)
-    }
-
-    .btn-p:hover {
-      background: #fff;
-      transform: translateY(-2px);
-      box-shadow: 0 0 60px rgba(0, 200, 150, .4)
-    }
-
-    .btn-p svg {
-      width: 20px;
-      height: 20px
-    }
-
-    .btn-g {
-      color: #aaa;
-      font-size: 14px;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color .2s
-    }
-
-    .btn-g:hover {
-      color: #fff
-    }
-
-    .btn-g::after {
-      content: '↓'
-    }
-
-    /* PHONE */
-    .hero-vis {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative
-    }
-
-    .pw {
-      position: relative;
-      animation: float 4s ease-in-out infinite
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0) rotate(-2deg)
-      }
-
-      50% {
-        transform: translateY(-16px) rotate(-1deg)
-      }
-    }
-
-    .pglow {
-      position: absolute;
-      inset: -40px;
-      background: radial-gradient(circle at center, rgba(0, 200, 150, .12) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: -1
-    }
-
-    .phone {
-      width: 280px;
-      background: #1a1a1a;
-      border-radius: 36px;
-      border: 1px solid #333;
-      padding: 16px;
-      box-shadow: 0 40px 80px rgba(0, 0, 0, .6), 0 0 0 1px rgba(255, 255, 255, .05)
-    }
-
-    .ph {
-      background: #075e54;
-      border-radius: 20px 20px 0 0;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: -16px -16px 0
-    }
-
-    .pav {
-      width: 36px;
-      height: 36px;
-      background: var(--green);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Fraunces', serif;
-      font-weight: 900;
-      font-size: 14px;
-      color: var(--black);
-      flex-shrink: 0
-    }
-
-    .pcn {
-      font-size: 13px;
-      font-weight: 500;
-      color: #fff
-    }
-
-    .pcs {
-      font-size: 11px;
-      color: rgba(255, 255, 255, .6)
-    }
-
-    .cb {
-      padding: 16px 4px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px
-    }
-
-    .msg {
-      max-width: 85%;
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      animation: fadeUp .4s ease both
-    }
-
-    .mb {
-      background: #1f2c34;
-      color: #e9e9e9;
-      align-self: flex-start;
-      border-radius: 4px 12px 12px 12px
-    }
-
-    .mu {
-      background: #005c4b;
-      color: #e9e9e9;
-      align-self: flex-end;
-      border-radius: 12px 4px 12px 12px
-    }
-
-    .sp {
-      background: linear-gradient(135deg, var(--gdim), rgba(0, 200, 150, .05));
-      border: 1px solid rgba(0, 200, 150, .4);
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 11px;
-      color: var(--green);
-      align-self: flex-start;
-      animation: fadeUp .4s ease 1.2s both
-    }
-
-    .sa {
-      font-size: 20px;
-      font-weight: 700;
-      display: block;
-      color: #fff;
-      margin: 2px 0
-    }
-
-    @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(8px)
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0)
-      }
-    }
-
-    .msg:nth-child(1) {
-      animation-delay: .1s
-    }
-
-    .msg:nth-child(2) {
-      animation-delay: .4s
-    }
-
-    .msg:nth-child(3) {
-      animation-delay: .8s
-    }
-
-    .msg:nth-child(5) {
-      animation-delay: 1.6s
-    }
-
-    /* STATS */
-    .stats {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid #1a1a1a;
-      border-bottom: 1px solid #1a1a1a;
-      padding: 32px 48px
-    }
-
-    .si {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr)
-    }
-
-    .st {
-      padding: 16px 40px;
-      border-right: 1px solid #1a1a1a;
-      text-align: center
-    }
-
-    .st:last-child {
-      border-right: none
-    }
-
-    .sn {
-      font-family: 'Fraunces', serif;
-      font-size: 48px;
-      font-weight: 900;
-      letter-spacing: -2px;
-      color: var(--green);
-      line-height: 1;
-      margin-bottom: 6px
-    }
-
-    .sl {
-      font-size: 14px;
-      color: #777;
-      font-weight: 300
-    }
-
-    /* SECTIONS */
-    .sec {
-      padding: 100px 48px;
-      position: relative;
-      z-index: 1
-    }
-
-    .sec.alt {
-      background: #0d0d0d
-    }
-
-    .sin {
-      max-width: 1100px;
-      margin: 0 auto
-    }
-
-    .slabel {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 16px
-    }
-
-    h2 {
-      font-family: 'Fraunces', serif;
-      font-size: clamp(36px, 4vw, 54px);
-      font-weight: 900;
-      letter-spacing: -2px;
-      line-height: 1.05;
-      margin-bottom: 48px
-    }
-
-    h2 em {
-      font-style: italic;
-      font-weight: 300;
-      color: #aaa
-    }
-
-    /* HOW */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2px
-    }
-
-    .step {
-      background: #111;
-      padding: 36px 28px;
-      transition: background .2s
-    }
-
-    .step:hover {
-      background: #161616
-    }
-
-    .step:first-child {
-      border-radius: 12px 0 0 12px
-    }
-
-    .step:last-child {
-      border-radius: 0 12px 12px 0
-    }
-
-    .snum {
-      font-family: 'Fraunces', serif;
-      font-size: 64px;
-      font-weight: 900;
-      color: #1e1e1e;
-      line-height: 1;
-      margin-bottom: 16px;
-      letter-spacing: -3px
-    }
-
-    .sico {
-      font-size: 28px;
-      margin-bottom: 16px;
-      display: block
-    }
-
-    .step h3 {
-      font-size: 16px;
-      font-weight: 600;
-      margin-bottom: 10px
-    }
-
-    .step p {
-      font-size: 14px;
-      color: #777;
-      line-height: 1.6;
-      font-weight: 300
-    }
-
-    /* WHY */
-    .wgrid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center
-    }
-
-    .wcards {
-      display: flex;
-      flex-direction: column;
-      gap: 16px
-    }
-
-    .wcard {
-      background: #111;
-      border: 1px solid #1e1e1e;
-      border-radius: 12px;
-      padding: 24px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-      transition: border-color .2s
-    }
-
-    .wcard:hover {
-      border-color: rgba(0, 200, 150, .3)
-    }
-
-    .wico {
-      width: 44px;
-      height: 44px;
-      background: var(--gdim);
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0
-    }
-
-    .wcard h4 {
-      font-size: 15px;
-      font-weight: 500;
-      margin-bottom: 6px
-    }
-
-    .wcard p {
-      font-size: 13px;
-      color: #777;
-      font-weight: 300;
-      line-height: 1.5
-    }
-
-    .wdesc {
-      font-size: 16px;
-      color: #777;
-      font-weight: 300;
-      line-height: 1.7;
-      margin-top: 16px
-    }
-
-    /* TESTI */
-    .tgrid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 48px
-    }
-
-    .tcard {
-      background: #111;
-      border: 1px solid #1e1e1e;
-      border-radius: 12px;
-      padding: 28px
-    }
-
-    .tstars {
-      color: var(--green);
-      font-size: 16px;
-      margin-bottom: 14px;
-      letter-spacing: 2px
-    }
-
-    .ttext {
-      font-size: 15px;
-      color: #ccc;
-      line-height: 1.65;
-      font-weight: 300;
-      margin-bottom: 20px;
-      font-style: italic
-    }
-
-    .tauth {
-      display: flex;
-      align-items: center;
-      gap: 10px
-    }
-
-    .tav {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--gdim);
-      border: 1px solid rgba(0, 200, 150, .3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--green);
-      font-family: 'Fraunces', serif
-    }
-
-    .tname {
-      font-size: 14px;
-      font-weight: 500
-    }
-
-    .tloc {
-      font-size: 12px;
-      color: #666
-    }
-
-    /* CTA */
-    .ctasec {
-      text-align: center;
-      position: relative;
-      overflow: hidden
-    }
-
-    .ctag2 {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 800px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(0, 200, 150, .08) 0%, transparent 70%);
-      pointer-events: none
-    }
-
-    .ctac {
-      position: relative;
-      z-index: 1;
-      max-width: 600px;
-      margin: 0 auto
-    }
-
-    .ctac h2 {
-      font-size: clamp(40px, 5vw, 64px);
-      letter-spacing: -2.5px;
-      margin-bottom: 20px
-    }
-
-    .ctac>p {
-      font-size: 18px;
-      color: #888;
-      font-weight: 300;
-      margin-bottom: 40px
-    }
-
-    .ctanote {
-      margin-top: 16px;
-      font-size: 13px;
-      color: #444
-    }
-
-    /* FOOTER */
-    footer {
-      position: relative;
-      z-index: 1;
-      border-top: 1px solid #1a1a1a;
-      padding: 32px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px
-    }
-
-    .fbrand {
-      font-family: 'Fraunces', serif;
-      font-size: 18px;
-      font-weight: 900;
-      color: #fff;
-      letter-spacing: -.5px
-    }
-
-    .fbrand span {
-      color: var(--green)
-    }
-
-    .flinks {
-      display: flex;
-      gap: 24px
-    }
-
-    .flinks a {
-      font-size: 13px;
-      color: #555;
-      text-decoration: none;
-      transition: color .15s
-    }
-
-    .flinks a:hover {
-      color: #fff
-    }
-
-    .fcopy {
-      font-size: 12px;
-      color: #444
-    }
-
-    /* WA FLOAT */
-    .waf {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 200;
-      background: #25d366;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, .4);
-      text-decoration: none;
-      transition: all .2s;
-      animation: boin .6s cubic-bezier(.175, .885, .32, 1.275) 2s both
-    }
-
-    .waf:hover {
-      transform: scale(1.1);
-      box-shadow: 0 8px 30px rgba(37, 211, 102, .5)
-    }
-
-    .waf svg {
-      width: 28px;
-      height: 28px;
-      fill: #fff
-    }
-
-    @keyframes boin {
-      from {
-        opacity: 0;
-        transform: scale(.3)
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1)
-      }
-    }
-
-    /* LANG */
-    [data-l] {
-      display: none
-    }
-
-    [data-l].on {
-      display: block
-    }
-
-    span[data-l] {
-      display: none
-    }
-
-    span[data-l].on {
-      display: inline
-    }
-
-    div[data-l] {
-      display: none
-    }
-
-    div[data-l].on {
-      display: block
-    }
-
-    /* RESPONSIVE */
-    @media(max-width:900px) {
-      nav {
-        padding: 14px 20px
-      }
-
-      .nav-cta {
-        display: none
-      }
-
-      .hero {
-        padding: 100px 24px 60px
-      }
-
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 48px
-      }
-
-      .hero-vis {
-        order: -1
-      }
-
-      .phone {
-        width: 240px
-      }
-
-      .stats {
-        padding: 24px
-      }
-
-      .si {
-        grid-template-columns: repeat(3, 1fr)
-      }
-
-      .st {
-        padding: 12px 16px
-      }
-
-      .sn {
-        font-size: 32px
-      }
-
-      .sec {
-        padding: 64px 24px
-      }
-
-      .steps {
-        grid-template-columns: 1fr 1fr
-      }
-
-      .step:first-child {
-        border-radius: 12px 0 0 0
-      }
-
-      .step:nth-child(2) {
-        border-radius: 0 12px 0 0
-      }
-
-      .step:nth-child(3) {
-        border-radius: 0 0 0 12px
-      }
-
-      .step:last-child {
-        border-radius: 0 0 12px 0
-      }
-
-      .wgrid {
-        grid-template-columns: 1fr;
-        gap: 40px
-      }
-
-      .tgrid {
-        grid-template-columns: 1fr
-      }
-
-      footer {
-        padding: 24px;
-        flex-direction: column;
-        align-items: flex-start
-      }
-    }
-
-    @media(max-width:480px) {
-      .steps {
-        grid-template-columns: 1fr
-      }
-
-      .step {
-        border-radius: 0 !important
-      }
-
-      .step:first-child {
-        border-radius: 12px 12px 0 0 !important
-      }
-
-      .step:last-child {
-        border-radius: 0 0 12px 12px !important
-      }
-
-      h1 {
-        letter-spacing: -2px
-      }
-
-      .ctag {
-        flex-direction: column;
-        align-items: flex-start
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switchr — Cut your Spanish electricity bill</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--gl:#1ebe58;
+  --gp:#f0fdf4;--gb:rgba(37,211,102,0.12);--gbr:rgba(37,211,102,0.2);
+  --ink:#0a1a15;--ink2:#253d35;--ink3:#4e7265;--ink4:#8aada3;
+  --bg:#f8fdfb;--white:#fff;
+  --border:rgba(37,211,102,0.18);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;--r3:28px;
+  --wa:#25D366;--email:#3b82f6;--web:#8b5cf6;
+}
+html{scroll-behavior:smooth}
+body{font-family:DM Sans,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:0 40px;height:64px;
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .3s,border-color .3s;
+}
+nav.scrolled{background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border)}
+.logo{font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
+.logo-mark{width:32px;height:32px;border-radius:9px;background:var(--g);display:flex;align-items:center;justify-content:center}
+.logo-mark svg{width:18px;height:18px}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--ink2);text-decoration:none;font-size:14px;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{background:var(--g)!important;color:#fff!important;padding:9px 20px;border-radius:9px;font-weight:500!important;display:flex;align-items:center;gap:7px;transition:background .2s!important}
+.nav-cta:hover{background:var(--gd)!important}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:100px 40px 40px;text-align:center;position:relative;overflow:hidden;
+  background:#061510;
+}
+/* Animated grain texture */
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.6;pointer-events:none;
+}
+/* Deep radial glow from center */
+.hero::after{
+  content:'';position:absolute;
+  width:900px;height:600px;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(37,211,102,0.09) 0%,rgba(18,140,126,0.04) 40%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-60%);
+  pointer-events:none;
+}
+.hero-inner{position:relative;z-index:1;max-width:900px;width:100%}
+
+/* Override text colors for dark hero */
+.hero h1{color:#fff!important}
+.hero-sub{color:rgba(255,255,255,0.5)!important}
+.hero-kicker{background:rgba(255,255,255,0.06)!important;border-color:rgba(37,211,102,0.25)!important;color:#25D366!important}
+.trust-row .tpill{background:rgba(255,255,255,0.05)!important;border-color:rgba(37,211,102,0.15)!important;color:rgba(255,255,255,0.45)!important}
+.channel-header{color:rgba(255,255,255,0.35)!important}
+.channel-tabs{background:rgba(255,255,255,0.06)!important;border-color:rgba(255,255,255,0.08)!important}
+.ctab{color:rgba(255,255,255,0.3)!important}
+.ctab.active-wa,.ctab.active-email,.ctab.active-web{background:rgba(255,255,255,0.1)!important;box-shadow:none!important}
+
+/* Live price counter */
+.price-counter{
+  display:flex;align-items:center;justify-content:center;gap:24px;
+  margin-bottom:36px;animation:fadeDown .5s .08s ease both;
+  flex-wrap:wrap;
+}
+.price-box{
+  display:flex;flex-direction:column;align-items:center;gap:5px;
+  padding:16px 24px;border-radius:16px;
+  position:relative;min-width:160px;
+}
+.price-box.fixed{
+  background:rgba(37,211,102,0.08);
+  border:1px solid rgba(37,211,102,0.25);
+}
+.price-box.market{
+  background:rgba(239,68,68,0.07);
+  border:1px solid rgba(239,68,68,0.2);
+}
+.price-box-label{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+}
+.price-box.fixed .price-box-label{color:rgba(37,211,102,0.7)}
+.price-box.market .price-box-label{color:rgba(239,68,68,0.7)}
+.price-box-val{
+  font-family:Sora,sans-serif;font-size:32px;font-weight:800;line-height:1;
+  letter-spacing:-0.02em;font-variant-numeric:tabular-nums;
+}
+.price-box.fixed .price-box-val{color:#25D366}
+.price-box.market .price-box-val{color:#ef4444}
+.price-box-sub{font-size:11px;font-weight:500;}
+.price-box.fixed .price-box-sub{color:rgba(37,211,102,0.5)}
+.price-box.market .price-box-sub{color:rgba(239,68,68,0.5)}
+/* Stable badge */
+.stable-badge{
+  display:flex;align-items:center;gap:5px;
+  background:rgba(37,211,102,0.12);border:1px solid rgba(37,211,102,0.2);
+  padding:3px 10px;border-radius:8px;font-size:10px;font-weight:600;
+  color:#25D366;margin-top:4px;
+}
+/* Volatile badge */
+.volatile-badge{
+  display:flex;align-items:center;gap:4px;
+  font-size:10px;color:rgba(239,68,68,0.6);
+  margin-top:4px;
+}
+/* Blinking cursor on market price */
+.blink{animation:blink .9s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+/* VS divider */
+.price-vs{
+  font-family:Sora,sans-serif;font-size:11px;font-weight:700;
+  color:rgba(255,255,255,0.2);letter-spacing:.08em;
+  display:flex;align-items:center;
+}
+/* Mini sparkline canvas */
+.sparkline-wrap{
+  position:absolute;bottom:8px;left:12px;right:12px;height:28px;opacity:0.5;
+}
+
+/* Navigation override for dark hero */
+nav:not(.scrolled) .logo{color:#fff}
+nav:not(.scrolled) .nav-links a:not(.nav-cta){color:rgba(255,255,255,0.55)}
+nav:not(.scrolled) .nav-links a:not(.nav-cta):hover{color:#fff}
+
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--white);border:1px solid var(--border);
+  padding:6px 16px;border-radius:24px;
+  font-size:13px;font-weight:500;color:var(--gd);
+  margin-bottom:28px;animation:fadeDown .5s ease both;
+  box-shadow:0 2px 12px rgba(37,211,102,0.1);
+}
+.kicker-dot{width:7px;height:7px;border-radius:50%;background:var(--g);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+
+.hero h1{
+  font-family:Sora,sans-serif;
+  font-size:clamp(40px,6.5vw,76px);
+  font-weight:800;line-height:1.05;
+  letter-spacing:-0.03em;color:var(--ink);
+  margin-bottom:20px;animation:fadeDown .5s .1s ease both;
+}
+.hero h1 em{color:var(--g);font-style:normal}
+
+.hero-sub{
+  font-size:clamp(16px,2vw,19px);color:var(--ink3);font-weight:300;
+  max-width:540px;margin:0 auto 20px;line-height:1.65;
+  animation:fadeDown .5s .15s ease both;
+}
+
+/* trust pills */
+.trust-row{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
+  margin-bottom:52px;animation:fadeDown .5s .2s ease both;
+}
+.tpill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,0.8);border:1px solid var(--border);
+  padding:5px 12px;border-radius:20px;font-size:12px;color:var(--ink3);
+  backdrop-filter:blur(4px);
+}
+.tpill-dot{width:5px;height:5px;border-radius:50%;background:var(--g);flex-shrink:0}
+
+/* ── CHANNEL PICKER ── */
+.channel-section{
+  animation:fadeUp .6s .25s ease both;
+  width:100%;max-width:820px;
+}
+.channel-header{
+  font-size:13px;font-weight:500;color:var(--ink4);
+  margin-bottom:16px;letter-spacing:.01em;
+}
+
+/* Tab switcher */
+.channel-tabs{
+  display:flex;gap:4px;background:rgba(0,0,0,0.04);
+  border-radius:14px;padding:4px;margin-bottom:20px;
+  border:1px solid var(--border2);
+}
+.ctab{
+  flex:1;padding:10px 12px;border-radius:10px;border:none;
+  font-family:DM Sans,sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:7px;
+  background:transparent;color:var(--ink4);
+}
+.ctab svg{width:15px;height:15px;flex-shrink:0}
+.ctab.active-wa{background:#fff;color:var(--wa);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.ctab.active-email{background:#fff;color:var(--email);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.ctab.active-web{background:#fff;color:var(--web);box-shadow:0 2px 8px rgba(0,0,0,0.08)}
+.ctab-label{white-space:nowrap}
+.ctab-rec{
+  font-size:9px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:1px 6px;border-radius:6px;
+}
+.rec-mobile{background:rgba(37,211,102,0.12);color:var(--gd)}
+.rec-email{background:rgba(59,130,246,0.12);color:#1d4ed8}
+.rec-web{background:rgba(139,92,246,0.12);color:#6d28d9}
+
+/* Channel panels */
+.channel-panel{display:none}
+.channel-panel.active{display:block}
+
+/* WA panel */
+.wa-panel{
+  background:var(--white);border:1px solid var(--border);border-radius:var(--r3);
+  overflow:hidden;
+}
+.wa-panel-top{
+  background:linear-gradient(135deg,#075e54 0%,#128C7E 100%);
+  padding:28px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.wa-panel-text h3{font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.wa-panel-text p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.55;max-width:340px}
+.wa-big-btn{
+  display:inline-flex;align-items:center;gap:10px;flex-shrink:0;
+  background:var(--g);color:#fff;
+  padding:14px 28px;border-radius:12px;
+  font-family:Sora,sans-serif;font-size:15px;font-weight:700;
+  text-decoration:none;transition:background .2s,transform .1s;
+  white-space:nowrap;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+.wa-big-btn:hover{background:#1ebe58;transform:translateY(-1px)}
+.wa-big-btn svg{width:20px;height:20px}
+.wa-panel-bottom{
+  padding:20px 32px;
+  display:flex;align-items:center;gap:32px;flex-wrap:wrap;
+}
+.wa-step{display:flex;align-items:flex-start;gap:10px;flex:1;min-width:160px}
+.wa-step-num{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:var(--gp);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:var(--gd);
+}
+.wa-step-text{font-size:13px;color:var(--ink3);line-height:1.45}
+.wa-step-text strong{color:var(--ink2);font-weight:500;display:block;margin-bottom:2px}
+/* WA chat mock */
+.wa-chat-preview{
+  border-top:1px solid var(--border2);background:#f5f5f0;
+  padding:16px 32px 20px;
+}
+.wa-msgs-row{display:flex;gap:10px;align-items:flex-end}
+.wa-msg-bubble{
+  padding:8px 12px;border-radius:8px;font-size:12px;line-height:1.45;max-width:70%;
+}
+.wm-in-sm{background:#fff;border-radius:2px 8px 8px 8px;color:#111}
+.wm-out-sm{background:#dcf8c6;border-radius:8px 2px 8px 8px;color:#111;margin-left:auto}
+.wa-time-sm{font-size:9px;color:#aaa;text-align:right;margin-top:2px}
+.wa-result-sm{
+  background:#fff;border-radius:2px 10px 10px 10px;
+  padding:10px 12px;border-left:3px solid var(--g);
+  max-width:72%;
+}
+.wa-result-sm-num{font-family:Sora,sans-serif;font-size:18px;font-weight:800;color:var(--g)}
+.wa-result-sm-sub{font-size:11px;color:#555;margin-top:3px}
+.wa-btns-sm{display:flex;gap:6px;margin-top:8px}
+.wa-btn-sm{
+  padding:5px 10px;border-radius:6px;border:1px solid rgba(37,211,102,0.3);
+  background:#fff;font-size:11px;font-weight:500;color:var(--gd);
+}
+
+/* EMAIL panel */
+.email-panel{
+  background:var(--white);border:1px solid rgba(59,130,246,0.2);border-radius:var(--r3);
+  overflow:hidden;
+}
+.email-panel-top{
+  background:linear-gradient(135deg,#1e3a8a 0%,#3b82f6 100%);
+  padding:28px 32px;
+  display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start;
+}
+.email-panel-text h3{font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.email-panel-text p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.55;max-width:380px}
+.email-address-card{
+  background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);
+  border-radius:12px;padding:16px 20px;text-align:center;flex-shrink:0;
+}
+.email-address-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin-bottom:6px}
+.email-address{font-family:monospace;font-size:16px;font-weight:700;color:#fff;letter-spacing:.01em}
+.copy-btn{
+  display:flex;align-items:center;gap:5px;margin-top:8px;
+  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);
+  border-radius:6px;padding:4px 10px;
+  font-size:11px;color:rgba(255,255,255,0.8);cursor:pointer;
+  transition:background .15s;font-family:DM Sans,sans-serif;
+  justify-content:center;
+}
+.copy-btn:hover{background:rgba(255,255,255,0.25)}
+.email-panel-bottom{padding:20px 32px;display:flex;gap:24px;flex-wrap:wrap}
+.email-step{display:flex;gap:10px;flex:1;min-width:160px}
+.email-step-num{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:#eff6ff;border:1px solid rgba(59,130,246,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#1d4ed8;
+}
+.email-step-text{font-size:13px;color:var(--ink3);line-height:1.45}
+.email-step-text strong{color:var(--ink2);font-weight:500;display:block;margin-bottom:2px}
+/* email mock */
+.email-mock{
+  border-top:1px solid rgba(59,130,246,0.1);
+  background:#f8faff;padding:16px 32px 20px;
+}
+.email-mock-msg{
+  background:#fff;border:1px solid rgba(0,0,0,0.07);border-radius:10px;
+  padding:14px 16px;max-width:480px;
+}
+.email-mock-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px}
+.email-from{font-size:12px;font-weight:500;color:var(--ink2)}
+.email-from span{font-size:11px;color:var(--ink4);font-weight:400}
+.email-date{font-size:11px;color:var(--ink4)}
+.email-subject{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.email-body-preview{font-size:12px;color:var(--ink3);line-height:1.55;margin-bottom:10px}
+.email-attach{
+  display:flex;align-items:center;gap:8px;background:#f5f7ff;
+  border:1px solid rgba(59,130,246,0.15);border-radius:7px;padding:7px 10px;
+}
+.pdf-sm{width:24px;height:24px;background:#ff3b30;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;color:#fff;flex-shrink:0}
+.email-attach-name{font-size:11px;font-weight:500;color:var(--ink2)}
+.forward-arrow{
+  display:flex;align-items:center;gap:8px;margin-top:10px;
+  font-size:12px;color:#3b82f6;font-weight:500;
+}
+.forward-arrow svg{width:14px;height:14px}
+
+/* WEB panel */
+.web-panel{
+  background:var(--white);border:1px solid rgba(139,92,246,0.2);border-radius:var(--r3);
+  overflow:hidden;
+}
+.web-panel-top{
+  background:linear-gradient(135deg,#312e81 0%,#7c3aed 100%);
+  padding:28px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+}
+.web-panel-text h3{font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:6px}
+.web-panel-text p{font-size:14px;color:rgba(255,255,255,0.65);line-height:1.55;max-width:340px}
+.web-upload-btn{
+  display:inline-flex;align-items:center;gap:10px;flex-shrink:0;
+  background:rgba(255,255,255,0.15);border:1.5px solid rgba(255,255,255,0.3);color:#fff;
+  padding:14px 28px;border-radius:12px;
+  font-family:Sora,sans-serif;font-size:15px;font-weight:700;
+  text-decoration:none;transition:background .2s,transform .1s;
+  white-space:nowrap;cursor:pointer;
+}
+.web-upload-btn:hover{background:rgba(255,255,255,0.25);transform:translateY(-1px)}
+.web-upload-btn svg{width:20px;height:20px}
+.web-panel-bottom{padding:20px 32px;display:flex;gap:24px;flex-wrap:wrap}
+.web-step{display:flex;gap:10px;flex:1;min-width:160px}
+.web-step-num{
+  width:24px;height:24px;border-radius:50%;flex-shrink:0;
+  background:#f5f3ff;border:1px solid rgba(139,92,246,0.2);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#6d28d9;
+}
+.web-step-text{font-size:13px;color:var(--ink3);line-height:1.45}
+.web-step-text strong{color:var(--ink2);font-weight:500;display:block;margin-bottom:2px}
+.web-preview{
+  border-top:1px solid rgba(139,92,246,0.1);background:#faf8ff;padding:16px 32px 20px;
+}
+/* Drop zone mock */
+.dropzone-mock{
+  border:2px dashed rgba(139,92,246,0.3);border-radius:12px;
+  padding:28px;text-align:center;background:#fff;max-width:400px;margin:0 auto;
+}
+.dropzone-icon{
+  width:48px;height:48px;border-radius:12px;background:#f5f3ff;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 12px;
+}
+.dropzone-mock h4{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.dropzone-mock p{font-size:12px;color:var(--ink4)}
+.dropzone-btn{
+  display:inline-block;margin-top:12px;
+  padding:8px 18px;background:#7c3aed;color:#fff;
+  border-radius:8px;font-size:13px;font-weight:500;
+}
+.or-divider{display:flex;align-items:center;gap:12px;margin:12px 0;font-size:12px;color:var(--ink4)}
+.or-divider::before,.or-divider::after{content:'';flex:1;height:1px;background:rgba(139,92,246,0.15)}
+
+/* ── RESULT EMAIL PREVIEW ── */
+.result-preview-section{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r3);
+  overflow:hidden;margin-top:16px;
+}
+.rps-header{
+  background:var(--gp);border-bottom:1px solid var(--border);
+  padding:14px 24px;display:flex;align-items:center;gap:10px;
+}
+.rps-header p{font-size:13px;color:var(--gd);font-weight:500}
+.rps-header svg{width:16px;height:16px;color:var(--g)}
+.rps-body{padding:20px 24px}
+.rps-email-mock{
+  background:#fff;border:1px solid var(--border2);border-radius:10px;
+  padding:18px 20px;max-width:500px;
+}
+.rps-from{font-size:12px;color:var(--ink4);margin-bottom:4px}
+.rps-subject{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px}
+.rps-save-num{font-family:Sora,sans-serif;font-size:36px;font-weight:800;color:var(--g);margin-bottom:4px}
+.rps-save-sub{font-size:13px;color:var(--ink3);margin-bottom:16px}
+.rps-switch-detail{
+  background:var(--gp);border-radius:8px;padding:12px 14px;
+  font-size:13px;color:var(--ink2);margin-bottom:14px;
+}
+.rps-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--g);color:#fff;padding:11px 22px;border-radius:9px;
+  font-size:14px;font-weight:600;text-decoration:none;
+}
+.rps-fine{font-size:11px;color:var(--ink4);margin-top:12px;line-height:1.55}
+
+/* ── HOW IT WORKS (compact) ── */
+.hiw-compact{padding:80px 40px}
+.section-inner{max-width:1040px;margin:0 auto}
+.section-kicker{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gd);margin-bottom:10px;display:block}
+.section-title{font-family:Sora,sans-serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--ink);letter-spacing:-0.025em;line-height:1.1;margin-bottom:14px}
+.section-sub{font-size:16px;color:var(--ink3);font-weight:300;line-height:1.65}
+.steps-row{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  margin-top:48px;border:1px solid var(--border2);border-radius:var(--r2);overflow:hidden;
+}
+.step-box{
+  padding:28px 22px;background:var(--white);
+  border-right:1px solid var(--border2);position:relative;
+  transition:background .2s;
+}
+.step-box:last-child{border-right:none}
+.step-box:hover{background:var(--gp)}
+.step-n{font-family:Sora,sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--g);text-transform:uppercase;margin-bottom:14px}
+.step-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+.step-header h3{margin-bottom:0;}
+.step-header .step-icon{margin-bottom:0;}
+@media(max-width:600px){.step-header{flex-direction:column;align-items:flex-start;gap:8px;}}
+.step-icon{display:block;margin-bottom:12px;line-height:0;}
+.step-box h3{font-family:Sora,sans-serif;font-size:15px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.step-box p{font-size:13px;color:var(--ink3);line-height:1.55}
+.step-box .step-channel-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}
+.sct{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px}
+.sct-wa{background:rgba(37,211,102,0.1);color:var(--gd)}
+.sct-em{background:rgba(59,130,246,0.1);color:#1d4ed8}
+.sct-web{background:rgba(139,92,246,0.1);color:#6d28d9}
+
+/* ── WHY ── */
+.why-dark{background:var(--ink);padding:80px 40px}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.why-text .section-kicker{color:rgba(37,211,102,0.55)}
+.why-text .section-title{color:#fff}
+.why-text .section-sub{color:rgba(255,255,255,0.4);max-width:none;margin:0 0 32px}
+.why-cards{display:flex;flex-direction:column;gap:14px}
+.why-card{
+  background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);
+  border-radius:12px;padding:18px;display:flex;gap:14px;
+}
+.why-card-icon{flex-shrink:0;margin-top:0;line-height:0;}
+.why-card h4{font-size:14px;font-weight:500;color:#fff;margin-bottom:3px}
+.why-card p{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.5}
+.compare-table{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:24px}
+.ct-header{display:grid;grid-template-columns:2fr 1fr 1fr;font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:14px}
+.ct-header span:first-child{color:rgba(255,255,255,0.25)}
+.ct-header span:nth-child(2){color:rgba(255,255,255,0.25);text-align:center}
+.ct-header span:last-child{color:var(--g);text-align:center}
+.ct-row{display:grid;grid-template-columns:2fr 1fr 1fr;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);align-items:center;font-size:13px}
+.ct-row:last-child{border-bottom:none}
+.ct-row span:first-child{color:rgba(255,255,255,0.5)}
+.ct-row span:nth-child(2){text-align:center;color:rgba(255,255,255,0.25);font-size:14px}
+.ct-row span:last-child{text-align:center;color:var(--g);font-size:14px}
+
+/* ── TESTIMONIALS ── */
+.testi-section{padding:80px 40px}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.tcard{background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);padding:22px;transition:box-shadow .2s}
+.tcard:hover{box-shadow:0 6px 24px rgba(37,211,102,0.1)}
+.tcard-stars{color:var(--g);font-size:13px;letter-spacing:2px;margin-bottom:12px}
+.tcard-body{font-size:14px;color:var(--ink2);line-height:1.65;margin-bottom:14px;font-style:italic}
+.tcard-foot{display:flex;align-items:center;gap:10px}
+.tcard-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
+.tcard-name{font-size:13px;font-weight:500;color:var(--ink)}
+.tcard-detail{font-size:12px;color:var(--ink4)}
+.tcard-via{display:inline-flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:8px}
+.tcard-via-wa{background:rgba(37,211,102,0.1);color:var(--gd)}
+.tcard-via-em{background:rgba(59,130,246,0.1);color:#1d4ed8}
+
+/* ── FAQ ── */
+.faq-section{padding:80px 40px;background:var(--white)}
+.faq-grid{display:flex;gap:12px;margin-top:48px;align-items:flex-start}.faq-col{display:flex;flex-direction:column;gap:12px;flex:1;min-width:0;}
+.faq-item{background:var(--bg);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.faq-q{padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:14px;font-size:14px;font-weight:500;color:var(--ink);user-select:none}
+.faq-q:hover{background:var(--gp)}
+.faq-ch{flex-shrink:0;color:var(--ink4);transition:transform .2s;margin-top:2px}
+.faq-a{display:none;padding:0 18px 16px;font-size:13px;color:var(--ink3);line-height:1.7}
+.faq-a.open{display:block}
+
+/* ── FINAL CTA ── */
+.final{background:var(--ink);padding:96px 40px;text-align:center;position:relative;overflow:hidden}
+.final::before{content:'';position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(37,211,102,0.06) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%)}
+.final-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.final h2{font-family:Sora,sans-serif;font-size:clamp(28px,4.5vw,52px);font-weight:800;color:#fff;letter-spacing:-0.025em;line-height:1.1;margin-bottom:16px}
+.final h2 em{color:var(--g);font-style:normal}
+.final p{font-size:17px;color:rgba(255,255,255,0.4);font-weight:300;margin-bottom:40px;line-height:1.65}
+.final-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:20px}
+.final-btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--g);color:#fff;padding:14px 28px;border-radius:12px;font-family:Sora,sans-serif;font-size:15px;font-weight:700;text-decoration:none;transition:background .2s,transform .1s;box-shadow:0 6px 24px rgba(37,211,102,0.25)}
+.final-btn-wa:hover{background:var(--gl);transform:translateY(-1px)}
+.final-btn-wa svg{width:19px;height:19px}
+.final-btn-em{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.25);color:rgba(255,255,255,0.8);padding:14px 28px;border-radius:12px;font-family:Sora,sans-serif;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s}
+.final-btn-em:hover{background:rgba(59,130,246,0.25)}
+.final-btn-em svg{width:17px;height:17px}
+.final-btn-web{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.25);color:rgba(255,255,255,0.7);padding:14px 28px;border-radius:12px;font-family:Sora,sans-serif;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s}
+.final-btn-web:hover{background:rgba(139,92,246,0.25)}
+.final-trust{font-size:12px;color:rgba(255,255,255,0.2)}
+.final-trust span{color:rgba(255,255,255,0.35)}
+
+/* ── TICKER ── */
+.ticker-wrap{background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:10px 0;overflow:hidden}
+.ticker-track{display:inline-flex;gap:48px;white-space:nowrap;animation:tick 22s linear infinite}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3)}
+.tick-item strong{color:var(--g);font-weight:600}
+.tick-dot{width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0}
+
+/* ── FOOTER ── */
+footer{background:#060f0c;padding:48px 40px 32px}
+.footer-inner{max-width:1040px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.footer-brand .logo{color:#fff;margin-bottom:10px;display:inline-flex}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.65;max-width:240px}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;margin-bottom:7px}
+.footer-col a:hover{color:rgba(255,255,255,0.75)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.18)}
+
+/* ── UTILS ── */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Upload modal */
+.upload-modal{display:none;position:fixed;inset:0;z-index:300;background:rgba(10,26,21,0.65);backdrop-filter:blur(4px);align-items:center;justify-content:center}
+.upload-modal.open{display:flex}
+.upload-box{background:#fff;border-radius:20px;width:100%;max-width:480px;margin:20px;overflow:hidden;animation:fadeUp .25s ease}
+.upload-box-header{padding:20px 24px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center}
+.upload-box-title{font-family:Sora,sans-serif;font-size:17px;font-weight:700}
+.upload-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border2);background:none;cursor:pointer;font-size:15px;color:var(--ink3);display:flex;align-items:center;justify-content:center}
+.upload-box-body{padding:28px 24px}
+.upload-drop{border:2px dashed var(--border);border-radius:14px;padding:36px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s}
+.upload-drop:hover{border-color:var(--g);background:var(--gp)}
+.upload-drop-icon{font-size:36px;margin-bottom:12px}
+.upload-drop h3{font-size:16px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.upload-drop p{font-size:13px;color:var(--ink4)}
+.upload-drop input{display:none}
+.upload-or{display:flex;align-items:center;gap:12px;margin:16px 0;font-size:12px;color:var(--ink4)}
+.upload-or::before,.upload-or::after{content:'';flex:1;height:1px;background:var(--border2)}
+.upload-gdpr{font-size:12px;color:var(--ink4);margin-top:16px;display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.upload-gdpr input{accent-color:var(--g);margin-top:2px;flex-shrink:0}
+.upload-start-btn{width:100%;margin-top:16px;padding:13px;background:var(--g);color:#fff;border:none;border-radius:10px;font-family:Sora,sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .2s}
+.upload-start-btn:hover{background:var(--gd)}
+.upload-security{text-align:center;margin-top:12px;font-size:12px;color:var(--ink4);display:flex;align-items:center;justify-content:center;gap:6px}
+
+.panel-mobile-tag{
+  display:none;font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px;
+  letter-spacing:.06em;text-transform:uppercase;margin-bottom:8px;
+}
+/* High contrast on dark panel backgrounds */
+.rec-mobile-panel{background:rgba(255,255,255,0.2);color:#fff;}
+.rec-email-panel{background:rgba(255,255,255,0.2);color:#fff;}
+.rec-web-panel{background:rgba(255,255,255,0.2);color:#fff;}
+@media(max-width:860px){
+  .channel-tabs .ctab-label{display:none}
+  .ctab-rec{display:none}
+  .panel-mobile-tag{display:inline-block;}
+  .wa-panel-top,.email-panel-top,.web-panel-top{flex-direction:column}
+  .steps-row{grid-template-columns:1fr 1fr}
+  .why-grid,.testi-grid{grid-template-columns:1fr}
+  .faq-grid{flex-direction:column}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:580px){
+  nav{padding:0 20px}
+  .hero{padding:80px 20px 40px}
+  .channel-section,.hiw-compact,.why-dark,.testi-section,.faq-section,.final{padding-left:20px;padding-right:20px}
+  .wa-panel-top,.email-panel-top,.web-panel-top{padding:20px}
+  .wa-panel-bottom,.email-panel-bottom,.web-panel-bottom{padding:16px 20px}
+  .wa-chat-preview,.email-mock,.web-preview,.rps-body{padding:14px 20px 16px}
+  .steps-row{grid-template-columns:1fr}
+  .nav-links a:not(.nav-cta){display:none}
+  .email-panel-top{grid-template-columns:1fr}
+}
+
+/* Orb float animations */
+@keyframes orb1{from{transform:translate(0,0) scale(1)}to{transform:translate(30px,-20px) scale(1.1)}}
+@keyframes orb2{from{transform:translate(0,0) scale(1)}to{transform:translate(-20px,15px) scale(0.9)}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 </head>
-
 <body>
 
-  <a href="https://wa.me/34662403660" target="_blank" class="waf" id="wafloat" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-    </svg>
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <div class="logo-mark"><svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+    Switchr
   </a>
-
-  <nav>
-    <div class="nav-left">
-      <a href="#" class="nav-brand">Switch<span>r</span></a>
-      <div class="ltoggle">
-        <button class="lbtn on" onclick="setLang('en',this)">EN</button>
-        <button class="lbtn" onclick="setLang('es',this)">ES</button>
-      </div>
-    </div>
-    <a href="https://wa.me/34662403660?text=Hi!%20I'd%20like%20to%20check%20my%20electricity%20savings" target="_blank"
-      class="nav-cta" id="navcta">
-      <span data-l="en" class="on">Get free savings quote →</span>
-      <span data-l="es">Calcula tu ahorro gratis →</span>
+  <div class="nav-links">
+    <a href="#how-it-works">How it works</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://wa.me/34662403660" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start now
     </a>
-  </nav>
+  </div>
+</nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div>
-        <div data-l="en" class="on">
-          <div class="eyebrow">Live in Spain · Pay less</div>
-          <h1>Cut your<br><em>electricity</em><br>bill in Spain</h1>
-          <p class="hero-sub">Send us your bill on WhatsApp. We'll show you <strong>exactly how much you can
-              save</strong> — and switch your tariff in under 5 minutes. No calls. No paperwork.</p>
-          <div class="ctag">
-            <a href="https://wa.me/34662403660?text=Hi!%20I'd%20like%20to%20check%20my%20electricity%20savings"
-              target="_blank" class="btn-p">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              Check my savings free
-            </a>
-            <a href="#how" class="btn-g">How it works</a>
-          </div>
-        </div>
-        <div data-l="es">
-          <div class="eyebrow">Vive en España · Paga menos</div>
-          <h1>Reduce tu<br><em>factura</em><br>de la luz</h1>
-          <p class="hero-sub">Mándanos tu factura por WhatsApp. Te decimos <strong>exactamente cuánto puedes
-              ahorrar</strong> — y cambiamos tu tarifa en menos de 5 minutos. Sin llamadas. Sin papeleo.</p>
-          <div class="ctag">
-            <a href="https://wa.me/34662403660?text=Hola!%20Quiero%20saber%20cuánto%20puedo%20ahorrar%20en%20mi%20factura%20de%20luz"
-              target="_blank" class="btn-p">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path
-                  d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-              </svg>
-              Calcula mi ahorro gratis
-            </a>
-            <a href="#how" class="btn-g">Cómo funciona</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-vis">
-        <div class="pw">
-          <div class="pglow"></div>
-          <div class="phone">
-            <div class="ph">
-              <div class="pav">S</div>
-              <div>
-                <div class="pcn">Switchr</div>
-                <div class="pcs">online</div>
-              </div>
-            </div>
-            <div class="cb">
-              <div class="msg mb"><span data-l="en" class="on">Hi! Send me a photo of your electricity bill and I'll
-                  find you a better deal</span><span data-l="es">Hola! Mándame una foto de tu factura de luz y te busco
-                  una tarifa mejor</span></div>
-              <div class="msg mu"><span data-l="en" class="on">Here it is! [photo]</span><span data-l="es">Aquí la
-                  tienes! [foto]</span></div>
-              <div class="msg mb"><span data-l="en" class="on">Analysing your bill... give me 20 seconds</span><span
-                  data-l="es">Analizando tu factura... dame 20 segundos</span></div>
-              <div class="sp">
-                <span data-l="en" class="on">Your estimated saving:</span><span data-l="es">Tu ahorro estimado:</span>
-                <span class="sa">€312 / year</span>
-                <span data-l="en" class="on">Switch to a better tariff?</span><span data-l="es">¿Cambiamos de
-                  tarifa?</span>
-              </div>
-              <div class="msg mu"><span data-l="en" class="on">Yes, let's switch!</span><span data-l="es">Sí, quiero
-                  cambiar!</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-kicker">
+      <div class="kicker-dot"></div>
+      Live across Murcia, Alicante & Costa Blanca
     </div>
-  </section>
+    <h1>Stop overpaying for<br>electricity in Spain.</h1>
+    <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);border-radius:12px;padding:10px 18px;margin:4px 0 16px;animation:fadeDown .5s .12s ease both;">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+      <span style="font-family:Sora,sans-serif;font-size:15px;font-weight:700;color:#25D366;">€380</span>
+      <span style="font-size:13px;color:rgba(255,255,255,0.55);">average annual saving for expats in Spain</span>
+    </div>
+    <p class="hero-sub">Send us your bill — any way that works for you — and we will calculate your real savings and switch you to a cheaper tariff. Free, in English, in under 5 minutes.</p>
 
-  <!-- STATS -->
-  <div class="stats">
-    <div class="si">
-      <div class="st">
-        <div class="sn">5<span style="font-size:28px">min</span></div>
-        <div class="sl"><span data-l="en" class="on">Average switch time</span><span data-l="es">Tiempo medio de
-            cambio</span></div>
+    <div class="trust-row">
+      <div class="tpill"><div class="tpill-dot"></div>100% free</div>
+      <div class="tpill"><div class="tpill-dot"></div>No power interruption</div>
+      <div class="tpill"><div class="tpill-dot"></div>English throughout</div>
+      <div class="tpill"><div class="tpill-dot"></div>WhatsApp · Email · Website</div>
+    </div>
+
+    <!-- CHANNEL PICKER -->
+    <div class="channel-section">
+      <div class="channel-header">How would you like to send your bill?</div>
+
+      <!-- Tab bar -->
+      <div class="channel-tabs" id="channel-tabs">
+        <button class="ctab active-wa" onclick="switchTab('wa',this)" id="tab-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span class="ctab-label">WhatsApp</span>
+          <span class="ctab-rec rec-mobile">Best on mobile</span>
+        </button>
+        <button class="ctab" onclick="switchTab('email',this)" id="tab-email">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+          <span class="ctab-label">Forward by email</span>
+          <span class="ctab-rec rec-email">Easiest option</span>
+        </button>
+        <button class="ctab" onclick="switchTab('web',this)" id="tab-web">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <span class="ctab-label">Upload on website</span>
+          <span class="ctab-rec rec-web">Best on desktop</span>
+        </button>
       </div>
-      <div class="st">
-        <div class="sn">€0</div>
-        <div class="sl"><span data-l="en" class="on">Cost to you — ever</span><span data-l="es">Coste para ti —
-            siempre</span></div>
+
+      <!-- WA Panel -->
+      <div class="channel-panel active" id="panel-wa">
+        <div class="wa-panel">
+          <div class="wa-panel-top">
+            <div class="wa-panel-text">
+              <span class="panel-mobile-tag rec-mobile-panel">Best on mobile</span>
+              <h3>Send your bill on WhatsApp</h3>
+              <p>Open a chat with Switchr, attach your bill PDF or take a photo, and we'll have your savings in under 2 minutes.</p>
+            </div>
+            <a href="https://wa.me/34662403660?text=Hi%2C+I'd+like+to+check+my+electricity+bill" class="wa-big-btn">
+              <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Open WhatsApp
+            </a>
+          </div>
+          <div class="wa-panel-bottom">
+            <div class="wa-step"><div class="wa-step-num">1</div><div class="wa-step-text"><strong>Open the chat</strong>Tap the button — WhatsApp opens automatically</div></div>
+            <div class="wa-step"><div class="wa-step-num">2</div><div class="wa-step-text"><strong>Send your bill</strong>Attach the PDF from your email app, or take a photo</div></div>
+            <div class="wa-step"><div class="wa-step-num">3</div><div class="wa-step-text"><strong>Get your result</strong>Savings figure in under 2 minutes, switch in one tap</div></div>
+          </div>
+          <div class="wa-chat-preview">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div class="wm-in-sm wa-msg-bubble" style="max-width:75%">Hi! Send me your latest electricity bill and I'll check if you're overpaying.</div>
+              <div class="pdf-msg" style="background:#dcf8c6;border-radius:8px 2px 8px 8px;align-self:flex-end;padding:7px 10px;display:flex;align-items:center;gap:7px;max-width:70%">
+                <div class="pdf-sm">PDF</div>
+                <div style="font-size:11px;color:#333;font-weight:500">factura_junio.pdf<div style="font-size:9px;color:#888;font-weight:400">248 KB</div></div>
+              </div>
+              <div class="wm-result-sm">
+                <div style="font-size:10px;color:#888;margin-bottom:3px">Your savings report · ES0021 0000 1343...</div>
+                <div class="wa-result-sm-num">Save €456/yr</div>
+                <div class="wa-result-sm-sub">Switch Iberdrola → cheaper tariff · ~28% less</div>
+                <div class="wa-btns-sm"><div class="wa-btn-sm">Switch now</div><div class="wa-btn-sm">See breakdown</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="st">
-        <div class="sn">100%</div>
-        <div class="sl"><span data-l="en" class="on">Via WhatsApp</span><span data-l="es">Por WhatsApp</span></div>
+
+      <!-- EMAIL Panel -->
+      <div class="channel-panel" id="panel-email">
+        <div class="email-panel">
+          <div class="email-panel-top">
+            <div class="email-panel-text">
+              <span class="panel-mobile-tag rec-email-panel">Easiest option</span>
+              <h3>Forward your bill by email</h3>
+              <p>Got your bill as an email from Iberdrola, Endesa, or Naturgy? Just forward that email to us — attachment included. We'll reply with your savings report within minutes.</p>
+            </div>
+            <div class="email-address-card">
+              <div class="email-address-label">Forward your bill to</div>
+              <div class="email-address"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e1f0b1a170a3e0d09170a1d160c501b0d">[email&#160;protected]</a></div>
+              <button class="copy-btn" onclick="copyEmail()">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <span id="copy-label">Copy address</span>
+              </button>
+            </div>
+          </div>
+          <div class="email-panel-bottom">
+            <div class="email-step"><div class="email-step-num">1</div><div class="email-step-text"><strong>Find the bill email</strong>Check your inbox — your provider sent it as a PDF attachment</div></div>
+            <div class="email-step"><div class="email-step-num">2</div><div class="email-step-text"><strong>Forward to <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c1d091815083c0f0b15081f140e52190f">[email&#160;protected]</a></strong>Just forward the email — we extract the bill from the attachment automatically</div></div>
+            <div class="email-step"><div class="email-step-num">3</div><div class="email-step-text"><strong>Get your report by email</strong>We reply with your savings breakdown and a link to switch</div></div>
+          </div>
+          <div class="email-mock">
+            <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+              <div class="email-mock-msg" style="flex:1;min-width:240px">
+                <div class="email-mock-header">
+                  <div>
+                    <div class="email-from">You <span>→ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="96f7e3f2ffe2d6e5e1ffe2f5fee4b8f3e5">[email&#160;protected]</a></span></div>
+                  </div>
+                  <div class="email-date">now</div>
+                </div>
+                <div class="email-subject">Fwd: Tu factura de Iberdrola — Junio 2025</div>
+                <div class="email-body-preview">---------- Forwarded message ---------<br>From: Iberdrola &lt;<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c2acadb0a7b2aebb82aba0a7b0a6b0adaea3eca7b1">[email&#160;protected]</a>&gt;<br>Subject: Tu factura de luz está disponible</div>
+                <div class="email-attach">
+                  <div class="pdf-sm">PDF</div>
+                  <div class="email-attach-name">factura_junio_2025.pdf<div style="font-size:10px;color:#aaa">248 KB</div></div>
+                </div>
+              </div>
+              <div style="display:flex;align-items:center;color:var(--ink4);font-size:20px;padding-top:32px">→</div>
+              <div style="flex:1;min-width:200px">
+                <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#3b82f6;margin-bottom:8px">Reply from Switchr</div>
+                <div style="background:#fff;border:1px solid rgba(59,130,246,0.15);border-radius:10px;padding:14px;border-left:3px solid #3b82f6">
+                  <div style="font-size:11px;color:#888;margin-bottom:4px">Results for your Iberdrola bill</div>
+                  <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:var(--g)">Save €456/yr</div>
+                  <div style="font-size:12px;color:#555;margin:4px 0 10px">Switch to a cheaper tariff · ~28% less</div>
+                  <div style="display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Switch now on WhatsApp →
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WEB Panel -->
+      <div class="channel-panel" id="panel-web">
+        <div class="web-panel">
+          <div class="web-panel-top">
+            <div class="web-panel-text">
+              <span class="panel-mobile-tag rec-web-panel">Best on desktop</span>
+              <h3>Upload your bill on this website</h3>
+              <p>On a computer? Drag and drop your bill PDF here. We'll analyse it instantly and show your full savings report on screen.</p>
+            </div>
+            <button class="web-upload-btn" onclick="openUploadModal()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              Upload my bill
+            </button>
+          </div>
+          <div class="web-panel-bottom">
+            <div class="web-step"><div class="web-step-num">1</div><div class="web-step-text"><strong>Upload your PDF</strong>Drag it in or click to browse — any Spanish energy provider</div></div>
+            <div class="web-step"><div class="web-step-num">2</div><div class="web-step-text"><strong>See your full report</strong>Interactive savings breakdown, tariff comparison, all on screen</div></div>
+            <div class="web-step"><div class="web-step-num">3</div><div class="web-step-text"><strong>Switch in one click</strong>Confirm on WhatsApp — takes 2 minutes, no paperwork</div></div>
+          </div>
+          <div class="web-preview">
+            <div class="dropzone-mock" id="dropzone" ondragover="event.preventDefault();this.style.borderColor='var(--web)'" ondragleave="this.style.borderColor=''" ondrop="handleDrop(event)">
+              <div class="dropzone-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+              </div>
+              <h4>Drop your bill PDF here</h4>
+              <p>or</p>
+              <label class="dropzone-btn" style="cursor:pointer">
+                Browse files
+                <input type="file" accept=".pdf,image/*" onchange="handleFileSelect(this)" style="display:none">
+              </label>
+              <div class="or-divider">or</div>
+              <p style="font-size:12px;color:var(--ink4)">PDF, JPG, or PNG · Max 10MB</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /channel-section -->
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> via WhatsApp · Costa Blanca · 2 days ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> · Murcia · 5 days ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> via email · Alicante · 1 week ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> · Torrevieja · 1 week ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Linda saved <strong>€612/yr</strong> via website · Benidorm · 2 weeks ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> via WhatsApp · Costa Blanca · 2 days ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> · Murcia · 5 days ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> via email · Alicante · 1 week ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> · Torrevieja · 1 week ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Linda saved <strong>€612/yr</strong> via website · Benidorm · 2 weeks ago</div>
+  </div>
+</div>
+
+
+<!-- PARTNER LOGOS -->
+<div style="background:var(--white);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:24px 40px;">
+  <div style="max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;">
+    <img src="https://vaporeta.ganaenergia.com/gana-web/v1/gana-logo.svg" alt="Gana Energía" style="height:36px;width:auto;opacity:0.75;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.75">
+    <img src="https://nordy.es/hubfs/Nordy_August_2024/Images/Header%20logo.svg" alt="Nordy" style="height:32px;width:auto;opacity:0.75;transition:opacity .2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.75">
+    <div style="display:flex;align-items:center;gap:8px;opacity:0.35;">
+      <div style="width:28px;height:28px;border-radius:7px;border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink4)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      </div>
+      <span style="font-size:11px;color:var(--ink4);font-style:italic;">More providers coming</span>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="hiw-compact" id="how-it-works">
+  <div class="section-inner">
+    <div class="reveal" style="margin-bottom:0;max-width:600px">
+      <span class="section-kicker">How it works</span>
+      <h2 class="section-title">Four steps. Every channel.</h2>
+      <p class="section-sub">Whether you come via WhatsApp, email or website — the process is the same and you're done in minutes.</p>
+    </div>
+    <div class="steps-row reveal">
+      <div class="step-box">
+        <div class="step-n">Step 01</div>
+        <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+  <rect width="44" height="44" rx="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  
+  <rect x="12" y="9" width="14" height="18" rx="2" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="1.4"/>
+  <line x1="15" y1="14" x2="23" y2="14" stroke="#10b981" stroke-width="1" stroke-linecap="round" opacity=".6"/>
+  <line x1="15" y1="17" x2="23" y2="17" stroke="#10b981" stroke-width="1" stroke-linecap="round" opacity=".6"/>
+  <line x1="15" y1="20" x2="20" y2="20" stroke="#10b981" stroke-width="1" stroke-linecap="round" opacity=".6"/>
+  <circle cx="30" cy="30" r="7" fill="#10b981"/>
+  <line x1="30" y1="33" x2="30" y2="27" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
+  <polyline points="27,29.5 30,27 33,29.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg></span><h3>Send us your bill</h3></div>
+        <p>WhatsApp, email forward, or website upload — your choice.</p>
+        <div class="step-channel-tags">
+          <span class="sct sct-wa">WhatsApp</span>
+          <span class="sct sct-em">Email</span>
+          <span class="sct sct-web">Website</span>
+        </div>
+      </div>
+      <div class="step-box">
+        <div class="step-n">Step 02</div>
+        <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+  <rect width="44" height="44" rx="12" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.2)" stroke-width="1"/>
+  
+  <rect x="13" y="13" width="18" height="18" rx="3" fill="rgba(59,130,246,0.2)" stroke="#3b82f6" stroke-width="1.4"/>
+  <line x1="17" y1="22" x2="27" y2="22" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="17" y1="18" x2="20" y2="18" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  <line x1="17" y1="26" x2="20" y2="26" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  <line x1="24" y1="18" x2="27" y2="18" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  <line x1="24" y1="26" x2="27" y2="26" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+  <line x1="17" y1="9" x2="17" y2="13" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="22" y1="9" x2="22" y2="13" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="27" y1="9" x2="27" y2="13" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="17" y1="31" x2="17" y2="35" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="22" y1="31" x2="22" y2="35" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="27" y1="31" x2="27" y2="35" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
+
+</svg></span><h3>AI reads every line</h3></div>
+        <p>We extract your real P1/P2/P3 consumption, potencia, and current provider — not estimates.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-n">Step 03</div>
+        <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+  <rect width="44" height="44" rx="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  
+  <polyline points="9,30 15,22 20,25 27,14 35,18" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <circle cx="27" cy="14" r="1.5" fill="#10b981"/>
+  <path d="M22 32 Q22 28 26 27 Q30 28 30 32 Q30 36 26 37 Q22 36 22 32Z" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="1.3"/>
+  <line x1="24" y1="31" x2="28" y2="31" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="24" y1="33" x2="28" y2="33" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
+
+</svg></span><h3>Your savings report</h3></div>
+        <p>We compare tariffs from our partner providers against your usage and show you the honest number.</p>
+      </div>
+      <div class="step-box">
+        <div class="step-n">Step 04</div>
+        <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
+  <rect width="44" height="44" rx="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  
+  <circle cx="22" cy="22" r="10" fill="rgba(16,185,129,0.15)" stroke="#10b981" stroke-width="1.4"/>
+  <polyline points="16,20 19,17 22,20" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M19,17 Q19,26 26,26" stroke="#10b981" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+  <polyline points="28,24 25,27 22,24" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M25,27 Q25,18 18,18" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+
+</svg></span><h3>Switch — we handle it</h3></div>
+        <p>Confirm on WhatsApp. No phone calls, no Spanish paperwork, no interruption to your supply.</p>
+        <div class="step-channel-tags">
+          <span class="sct sct-wa">Confirms via WhatsApp</span>
+        </div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- HOW IT WORKS -->
-  <section class="sec" id="how">
-    <div class="sin">
-      <div class="slabel"><span data-l="en" class="on">The process</span><span data-l="es">El proceso</span></div>
-      <h2><span data-l="en" class="on">Four steps.<br><em>Five minutes.</em></span><span data-l="es">Cuatro
-          pasos.<br><em>Cinco minutos.</em></span></h2>
-      <div class="steps">
-        <div class="step">
-          <div class="snum">01</div><span class="sico">📲</span>
-          <h3><span data-l="en" class="on">Message us</span><span data-l="es">Escríbenos</span></h3>
-          <p><span data-l="en" class="on">Open WhatsApp and send us a message. No app to download, no account to
-              create.</span><span data-l="es">Abre WhatsApp y mándanos un mensaje. Sin descargas, sin registros.</span>
-          </p>
+<!-- WHY SWITCHR -->
+<section class="why-dark">
+  <div class="section-inner">
+    <div class="why-grid">
+      <div class="why-text reveal">
+        <span class="section-kicker">Why Switchr</span>
+        <h2 class="section-title" style="color:#fff">Three ways in.<br>One honest result.</h2>
+        <p class="section-sub">Every competitor makes you fill a form and wait. Switchr meets you where you already are — WhatsApp, email, or browser — and gives you accurate savings, not inflated estimates.</p>
+        <div class="why-cards">
+          <div class="why-card"><div class="why-card-icon"><svg viewBox="0 0 36 36" fill="none" width="36" height="36">
+  <rect width="36" height="36" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  <path d="M20 6L11 20h8l-3 10L27 16h-8l1-10z" fill="rgba(16,185,129,0.3)" stroke="#10b981" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M20 6L13 19h7l-3 9 10-13h-7z" fill="rgba(255,255,255,0.15)"/>
+</svg></div><div><h4>No new apps, no accounts</h4><p>Use what you already have — WhatsApp on your phone, your email app, or this browser.</p></div></div>
+          <div class="why-card"><div class="why-card-icon"><svg viewBox="0 0 36 36" fill="none" width="36" height="36">
+  <rect width="36" height="36" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  <rect x="9" y="22" width="4" height="8" rx="1.5" fill="rgba(16,185,129,0.3)" stroke="#10b981" stroke-width="1.2"/>
+  <rect x="16" y="16" width="4" height="14" rx="1.5" fill="rgba(16,185,129,0.5)" stroke="#10b981" stroke-width="1.2"/>
+  <rect x="23" y="10" width="4" height="20" rx="1.5" fill="#10b981" stroke="#10b981" stroke-width="1.2"/>
+  <line x1="9" y1="31" x2="27" y2="31" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+</svg></div><div><h4>Calculated from your real usage</h4><p>We use your actual P1/P2/P3 kWh — not industry averages. If the saving is small, we tell you that too.</p></div></div>
+          <div class="why-card"><div class="why-card-icon"><svg viewBox="0 0 36 36" fill="none" width="36" height="36">
+  <rect width="36" height="36" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
+  <rect x="8" y="9" width="20" height="14" rx="3" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="1.3"/>
+  <polygon points="12,23 8,27 16,23" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="1.2" stroke-linejoin="round"/>
+  <line x1="12" y1="14" x2="24" y2="14" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
+  <line x1="12" y1="17.5" x2="24" y2="17.5" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
+  <line x1="12" y1="21" x2="19" y2="21" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
+</svg></div><div><h4>English, start to finish</h4><p>Built for expats. Not translated as an afterthought.</p></div></div>
         </div>
-        <div class="step">
-          <div class="snum">02</div><span class="sico">📄</span>
-          <h3><span data-l="en" class="on">Send your bill</span><span data-l="es">Manda tu factura</span></h3>
-          <p><span data-l="en" class="on">Take a photo of your electricity bill. Our AI reads it in seconds — CUPS,
-              consumption, everything.</span><span data-l="es">Haz una foto a tu factura de luz. Nuestra IA la lee en
-              segundos — CUPS, consumo, todo.</span></p>
+      </div>
+      <div class="compare-table reveal">
+        <div class="ct-header"><span>Feature</span><span>Others</span><span>Switchr</span></div>
+        <div class="ct-row"><span>WhatsApp-native switching</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>Email bill forwarding</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>Website upload option</span><span>✓</span><span>✓</span></div>
+        <div class="ct-row"><span>Real P1/P2/P3 calculation</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>English throughout</span><span>Partial</span><span>✓</span></div>
+        <div class="ct-row"><span>No forms, no accounts</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>100% free</span><span>✓</span><span>✓</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-kicker">What expats say</span>
+      <h2 class="section-title">Real people, real savings</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="tcard reveal">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-body">"I just forwarded the Iberdrola email I'd been ignoring for months. Got my report back in minutes. Done before my morning coffee."</p>
+        <div class="tcard-foot">
+          <div class="tcard-avatar" style="background:#3b82f6">JM</div>
+          <div>
+            <div class="tcard-name">James M. · Torrevieja</div>
+            <div class="tcard-via tcard-via-em">via email forward · saved €389/yr</div>
+          </div>
         </div>
-        <div class="step">
-          <div class="snum">03</div><span class="sico">💡</span>
-          <h3><span data-l="en" class="on">See your savings</span><span data-l="es">Ve tu ahorro</span></h3>
-          <p><span data-l="en" class="on">We show you exactly how much you'd save with a better tariff. Real numbers,
-              not estimates.</span><span data-l="es">Te mostramos exactamente cuánto ahorrarías con una tarifa mejor.
-              Números reales.</span></p>
+      </div>
+      <div class="tcard reveal" style="transition-delay:.1s">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-body">"WhatsApp was so easy. Sent the PDF, got the savings figure, tapped switch. No Spanish, no forms, no waiting on hold."</p>
+        <div class="tcard-foot">
+          <div class="tcard-avatar" style="background:#25D366">SE</div>
+          <div>
+            <div class="tcard-name">Sarah E. · San Javier</div>
+            <div class="tcard-via tcard-via-wa">via WhatsApp · saved €503/yr</div>
+          </div>
         </div>
-        <div class="step">
-          <div class="snum">04</div><span class="sico">✍️</span>
-          <h3><span data-l="en" class="on">Sign &amp; done</span><span data-l="es">Firma y listo</span></h3>
-          <p><span data-l="en" class="on">Confirm on WhatsApp and sign digitally by email. Your new tariff activates
-              within 3 working days.</span><span data-l="es">Confirma por WhatsApp y firma por email. Nueva tarifa
-              activa en 3 días hábiles.</span></p>
+      </div>
+      <div class="tcard reveal" style="transition-delay:.2s">
+        <div class="tcard-stars">★★★★★</div>
+        <p class="tcard-body">"Used the website on my laptop. The breakdown was really transparent — they actually showed where one charge would be slightly higher. That made me trust them completely."</p>
+        <div class="tcard-foot">
+          <div class="tcard-avatar" style="background:#7c3aed">PK</div>
+          <div>
+            <div class="tcard-name">Peter K. · Orihuela Costa</div>
+            <div class="tcard-via" style="background:rgba(139,92,246,0.1);color:#6d28d9">via website · saved €441/yr</div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- WHY -->
-  <section class="sec alt">
-    <div class="sin">
-      <div class="wgrid">
+
+
+<!-- MARKET WATCH SECTION -->
+<section style="background:#0b1f3a;padding:96px 40px;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(16,185,129,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;"></div>
+  <div style="position:absolute;width:600px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(16,185,129,0.06) 0%,transparent 70%);top:-80px;left:50%;transform:translateX(-50%);pointer-events:none;"></div>
+
+  <div style="max-width:1040px;margin:0 auto;position:relative;z-index:1;" class="reveal">
+
+    <!-- Header -->
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#10b981;margin-bottom:16px;">
+      <div style="width:6px;height:6px;border-radius:50%;background:#10b981;animation:mwPulse 2s ease-in-out infinite;"></div>
+      Market Watch · Spain 2025
+    </div>
+    <h2 style="font-family:Sora,sans-serif;font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin-bottom:12px;">Two tariffs.<br><span style="color:#10b981;">Two very different years.</span></h2>
+    <p style="font-size:17px;color:#a8c4d8;font-weight:300;max-width:580px;line-height:1.65;margin-bottom:48px;">One stayed flat. One swung 148%. Which worked better depends entirely on how you live — and the quiz below will tell you which fits you.</p>
+
+    <!-- Plan Cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
+
+      <!-- Plan A: Set & Forget — emerald -->
+      <div onclick="mwSelect('sf')" id="mw-card-sf"
+        style="border-radius:20px;padding:28px;background:linear-gradient(135deg,rgba(16,185,129,0.12) 0%,rgba(5,150,105,0.06) 100%);border:1.5px solid #10b981;box-shadow:0 0 0 1px #10b981,0 8px 32px rgba(16,185,129,0.15);cursor:pointer;transition:transform .2s;position:relative;">
+        <div id="mw-ring-sf" style="position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:50%;background:#10b981;display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;opacity:1;">✓</div>
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(16,185,129,0.15);display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+  <rect x="12" y="22" width="24" height="18" rx="3" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="1.5"/>
+  <path d="M16 22v-6a8 8 0 0 1 16 0v6" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/>
+  <circle cx="24" cy="31" r="3" fill="rgba(255,255,255,0.6)"/>
+  <line x1="24" y1="34" x2="24" y2="37" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round"/>
+</svg></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#10b981;margin-bottom:6px;">Plan A</div>
+        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Set &amp; Forget</div>
+        <div style="font-size:14px;color:#a8c4d8;line-height:1.6;margin-bottom:18px;">Pay the same price 24/7. No monitoring, no surprises. Ideal for a stress-free Spanish life — you never think about your electricity bill again.</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#10b981;">€0.099</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Fixed rate, always</div></div>
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#10b981;">100%</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Price stability</div></div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;margin-top:14px;">✓ 85% of Switchr expats choose this</div>
+      </div>
+
+      <!-- Plan B: Active Savings — electric sky blue (neutral, smart) -->
+      <div onclick="mwSelect('as')" id="mw-card-as"
+        style="border-radius:20px;padding:28px;background:rgba(255,255,255,0.03);border:1.5px solid rgba(255,255,255,0.1);cursor:pointer;transition:transform .2s;position:relative;">
+        <div id="mw-ring-as" style="position:absolute;top:14px;right:14px;width:20px;height:20px;border-radius:50%;background:#38bdf8;display:flex;align-items:center;justify-content:center;font-size:11px;color:#0c4a6e;opacity:0;">✓</div>
+        <div style="width:48px;height:48px;border-radius:14px;background:rgba(56,189,248,0.1);display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg viewBox="0 0 48 48" fill="none" width="48" height="48">
+  <rect x="6" y="30" width="36" height="1.5" rx=".75" fill="rgba(56,189,248,0.3)"/>
+  <polyline points="8,34 16,22 24,26 32,16 40,20" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="34,16 40,16 40,22" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="40" cy="20" r="2.5" fill="#38bdf8"/>
+  <line x1="8" y1="38" x2="8" y2="34" stroke="rgba(56,189,248,0.5)" stroke-width="1" stroke-linecap="round"/>
+</svg></div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#38bdf8;margin-bottom:6px;">Plan B</div>
+        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Active Savings</div>
+        <div style="font-size:14px;color:#a8c4d8;line-height:1.6;margin-bottom:18px;">Market-linked pricing. Save more in winter and off-peak hours. Great for part-time residents, EV owners, or those who shift usage to cheaper times.</div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#38bdf8;">€0.075–0.186</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Hourly rate range</div></div>
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#38bdf8;">38%</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Price stability</div></div>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(56,189,248,0.1);color:#38bdf8;margin-top:14px;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Best for part-time residents &amp; EV owners
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart -->
+    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px 28px 20px;margin-bottom:16px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
         <div>
-          <div class="slabel"><span data-l="en" class="on">Why Switchr</span><span data-l="es">Por qué Switchr</span>
-          </div>
-          <h2><span data-l="en" class="on">Built for<br>people<br><em>in Spain</em></span><span data-l="es">Hecho
-              para<br>vivir<br><em>en España</em></span></h2>
-          <p class="wdesc"><span data-l="en" class="on">Energy companies make switching deliberately complicated.
-              Switchr exists so you don't need to spend an afternoon on hold — or navigate a Spanish website — just to
-              pay less for electricity.</span><span data-l="es">Las eléctricas hacen que cambiar sea complicado a
-              propósito. Switchr existe para que no tengas que pasarte la tarde al teléfono para pagar menos por la
-              luz.</span></p>
+          <div style="font-family:Sora,sans-serif;font-size:15px;font-weight:600;color:#fff;margin-bottom:3px;">Electricity price comparison — Spain 2025</div>
+          <div style="font-size:12px;color:#a8c4d8;">€/kWh · Monthly average · Based on real OMIE market data</div>
         </div>
-        <div class="wcards">
-          <div class="wcard">
-            <div class="wico">🌍</div>
-            <div>
-              <h4><span data-l="en" class="on">English &amp; Spanish</span><span data-l="es">Inglés y español</span>
-              </h4>
-              <p><span data-l="en" class="on">The entire process works in English or Spanish — your choice, from first
-                  message to signed contract.</span><span data-l="es">Todo funciona en inglés o español — tú eliges,
-                  desde el primer mensaje hasta la firma.</span></p>
-            </div>
+        <div style="display:flex;gap:20px;flex-wrap:wrap;">
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#a8c4d8;">
+            <div style="width:28px;height:2.5px;background:#10b981;border-radius:2px;flex-shrink:0;"></div>
+            Set &amp; Forget &nbsp;<span style="font-family:Sora,sans-serif;font-size:12px;font-weight:700;color:#10b981;">€0.099 flat</span>
           </div>
-          <div class="wcard">
-            <div class="wico">💸</div>
-            <div>
-              <h4><span data-l="en" class="on">Completely free</span><span data-l="es">Totalmente gratis</span></h4>
-              <p><span data-l="en" class="on">We're paid by the energy supplier, not you. Our incentive is to find you
-                  the best deal.</span><span data-l="es">Nos paga la comercializadora, no tú. Nuestro incentivo es
-                  encontrarte la mejor tarifa.</span></p>
-            </div>
-          </div>
-          <div class="wcard">
-            <div class="wico">🔒</div>
-            <div>
-              <h4><span data-l="en" class="on">GDPR compliant</span><span data-l="es">Cumplimiento RGPD</span></h4>
-              <p><span data-l="en" class="on">Your data stays in EU servers. We never sell your information or share it
-                  with advertisers.</span><span data-l="es">Tus datos permanecen en servidores de la UE. Nunca vendemos
-                  tu información.</span></p>
-            </div>
-          </div>
-          <div class="wcard">
-            <div class="wico">📱</div>
-            <div>
-              <h4><span data-l="en" class="on">100% WhatsApp</span><span data-l="es">100% WhatsApp</span></h4>
-              <p><span data-l="en" class="on">No apps, no portals, no forms. Just WhatsApp — the app you already use
-                  every day.</span><span data-l="es">Sin apps, sin portales, sin formularios. Solo WhatsApp — la app que
-                  ya usas a diario.</span></p>
-            </div>
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#a8c4d8;">
+            <div style="width:28px;height:0;border-top:2.5px dashed #38bdf8;flex-shrink:0;"></div>
+            Active Savings &nbsp;<span style="font-family:Sora,sans-serif;font-size:12px;font-weight:700;color:#38bdf8;">€0.075–0.186</span>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+      <div style="position:relative;height:240px;"><canvas id="mw-chart"></canvas></div>
 
-  <!-- TESTIMONIALS -->
-  <section class="sec">
-    <div class="sin">
-      <div class="slabel"><span data-l="en" class="on">What people say</span><span data-l="es">Lo que dicen</span></div>
-      <h2><span data-l="en" class="on">Real <em>savings,</em><br>real people</span><span data-l="es">Ahorros
-          <em>reales,</em><br>personas reales</span></h2>
-      <div class="tgrid">
-        <div class="tcard">
-          <div class="tstars">★★★★★</div>
-          <p class="ttext"><span data-l="en" class="on">"Took about 4 minutes on WhatsApp. We're saving over €280 a
-              year. Wish I'd done it years ago."</span><span data-l="es">"Tardé unos 4 minutos por WhatsApp. Ahorramos
-              más de 280€ al año. Ojalá lo hubiera hecho antes."</span></p>
-          <div class="tauth">
-            <div class="tav">J</div>
-            <div>
-              <div class="tname">James T.</div>
-              <div class="tloc">Torrevieja, Alicante</div>
-            </div>
-          </div>
+      <!-- Delta bar -->
+      <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
+        <div style="display:flex;justify-content:space-between;font-size:12px;color:#a8c4d8;margin-bottom:8px;">
+          <span>Price spread this year</span>
+          <span style="font-weight:600;color:#38bdf8;">Market peaked 88% above fixed rate in August</span>
         </div>
-        <div class="tcard">
-          <div class="tstars">★★★★★</div>
-          <p class="ttext"><span data-l="en" class="on">"As a Belgian I was dreading Spanish bureaucracy. Switchr
-              handled everything in English. Super smooth."</span><span data-l="es">"Como belga me temía la burocracia
-              española. Switchr lo gestionó todo en inglés. Muy fácil."</span></p>
-          <div class="tauth">
-            <div class="tav">S</div>
-            <div>
-              <div class="tname">Sophie V.</div>
-              <div class="tloc">Marbella, Málaga</div>
-            </div>
-          </div>
-        </div>
-        <div class="tcard">
-          <div class="tstars">★★★★★</div>
-          <p class="ttext"><span data-l="en" class="on">"Sent a photo of my bill, got a savings estimate in under a
-              minute. New tariff was live 2 days later."</span><span data-l="es">"Mandé una foto de mi factura y en
-              menos de un minuto ya tenía el ahorro. Nueva tarifa en 2 días."</span></p>
-          <div class="tauth">
-            <div class="tav">M</div>
-            <div>
-              <div class="tname">Michael R.</div>
-              <div class="tloc">Torre-Pacheco, Murcia</div>
-            </div>
-          </div>
+        <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;">
+          <div id="mw-delta-fill" style="height:6px;border-radius:3px;background:linear-gradient(90deg,#10b981 0%,#38bdf8 100%);width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1);"></div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section class="sec ctasec">
-    <div class="ctag2"></div>
-    <div class="ctac">
-      <div class="slabel"><span data-l="en" class="on">Get started</span><span data-l="es">Empieza ahora</span></div>
-      <h2><span data-l="en" class="on">Find out what<br>you could <em>save</em></span><span data-l="es">Descubre
-          cuánto<br>puedes <em>ahorrar</em></span></h2>
-      <p><span data-l="en" class="on">Takes 5 minutes. Completely free. No commitment until you sign.</span><span
-          data-l="es">5 minutos. Completamente gratis. Sin compromiso hasta que firmes.</span></p>
-      <a href="https://wa.me/34662403660?text=Hi!%20I'd%20like%20to%20check%20my%20electricity%20savings"
-        target="_blank" class="btn-p" id="ctabtn" style="display:inline-flex;font-size:18px;padding:18px 40px">
-        <svg viewBox="0 0 24 24" fill="currentColor" style="width:22px;height:22px">
-          <path
-            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-        <span data-l="en" class="on">Start on WhatsApp</span><span data-l="es">Empezar en WhatsApp</span>
+    <!-- Stability row -->
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-bottom:16px;">
+      <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:14px;padding:16px 18px;text-align:center;">
+        <div style="font-family:Sora,sans-serif;font-size:28px;font-weight:800;color:#10b981;">100%</div>
+        <div style="font-size:11px;color:#a8c4d8;margin-top:2px;">Set &amp; Forget stability</div>
+      </div>
+      <div style="font-family:Sora,sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.2);text-align:center;">VS</div>
+      <div style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);border-radius:14px;padding:16px 18px;text-align:center;">
+        <div style="font-family:Sora,sans-serif;font-size:28px;font-weight:800;color:#38bdf8;">38%</div>
+        <div style="font-size:11px;color:#a8c4d8;margin-top:2px;">Active Savings stability</div>
+      </div>
+    </div>
+
+    <!-- Verdict -->
+    <div style="background:linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(11,31,58,0.8) 100%);border:1px solid rgba(16,185,129,0.2);border-radius:16px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;margin-bottom:16px;">
+      <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#10b981;border-radius:2px 0 0 2px;"></div>
+      <div style="flex:1;min-width:240px;">
+        <div style="font-family:Sora,sans-serif;font-size:clamp(28px,3.5vw,40px);font-weight:800;color:#10b981;line-height:1;margin-bottom:4px;">85% <span style="font-size:16px;color:#a8c4d8;font-weight:400;font-family:DM Sans,sans-serif;">of Switchr expats</span></div>
+        <div style="font-size:15px;color:#fff;line-height:1.55;margin-bottom:4px;">choose <strong style="color:#10b981;">Set &amp; Forget</strong> for total peace of mind.</div>
+        <div style="font-size:13px;color:#a8c4d8;line-height:1.5;">Not sure which suits you? Our 30-second audit reads your usage pattern and tells you exactly which plan saves you more.</div>
+      </div>
+      <a href="https://wa.me/34662403660" style="display:inline-flex;align-items:center;gap:9px;background:#10b981;color:#fff;padding:13px 24px;border-radius:11px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 4px 20px rgba(16,185,129,0.25);flex-shrink:0;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Get my free audit
       </a>
-      <p class="ctanote"><span data-l="en" class="on">Operated by Switchr - Authorised energy intermediary ·
-          Spain</span><span data-l="es">Operado por Switchr - Intermediario energético autorizado · España</span></p>
     </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="fbrand">Switch<span>r</span></div>
-    <div class="flinks">
-      <a href="/privacy-policy.html"><span data-l="en" class="on">Privacy Policy</span><span
-          data-l="es">Privacidad</span></a>
-      <a href="/terms.html"><span data-l="en" class="on">Terms &amp; Conditions</span><span
-          data-l="es">Términos</span></a>
-      <a href="https://wa.me/34662403660" target="_blank"><span data-l="en" class="on">Contact</span><span
-          data-l="es">Contacto</span></a>
+    <!-- Help Me Choose Questionnaire -->
+    <div id="hmc-widget" style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:20px;overflow:hidden;">
+
+      <!-- Header -->
+      <div style="padding:22px 28px 0;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px;">
+          <div style="width:32px;height:32px;border-radius:9px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div style="font-family:Sora,sans-serif;font-size:16px;font-weight:700;color:#fff;">Help me choose</div>
+          <div style="font-size:11px;color:#a8c4d8;margin-left:auto;">4 questions · 30 seconds</div>
+        </div>
+        <p style="font-size:13px;color:#a8c4d8;line-height:1.5;margin-bottom:20px;">Answer honestly — we'll tell you exactly which plan fits your lifestyle and estimate your savings.</p>
+
+        <!-- Progress bar -->
+        <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:0;">
+          <div id="hmc-progress" style="height:3px;background:#10b981;border-radius:2px;width:0%;transition:width .4s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Questions container -->
+      <div id="hmc-questions" style="padding:24px 28px;">
+
+        <!-- Q1 -->
+        <div class="hmc-q" id="hmc-q1">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 1 of 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">How do you feel about unexpected bill surprises?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button class="hmc-opt" onclick="hmcAnswer(event,1,'fixed')" data-q="1">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">I hate bill surprises — I want to know exactly what I'm paying</div></div>
+            </button>
+            <button class="hmc-opt" onclick="hmcAnswer(event,1,'market')" data-q="1">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">I'm okay with price swings if it means savings in cheap months</div></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="hmc-q" id="hmc-q2" style="display:none;">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 2 of 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">When do you run heavy appliances — washing machine, dishwasher, tumble dryer?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button class="hmc-opt" onclick="hmcAnswer(event,2,'fixed')" data-q="2">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">Whenever it's convenient — daytime, evenings, no fixed pattern</div></div>
+            </button>
+            <button class="hmc-opt" onclick="hmcAnswer(event,2,'market')" data-q="2">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">I can schedule them late at night or during off-peak hours</div></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="hmc-q" id="hmc-q3" style="display:none;">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 3 of 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">Do you have solar panels or charge an electric vehicle at home?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button class="hmc-opt" onclick="hmcAnswer(event,3,'fixed')" data-q="3">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">No — standard home, no solar or EV</div></div>
+            </button>
+            <button class="hmc-opt" onclick="hmcAnswer(event,3,'market')" data-q="3">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">Yes — I have solar panels and/or charge an EV overnight</div></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="hmc-q" id="hmc-q4" style="display:none;">
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 4 of 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">How much time do you spend at your Spanish property?</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <button class="hmc-opt" onclick="hmcAnswer(event,4,'fixed')" data-q="4">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">Full time or most of the year — it's my main home</div></div>
+            </button>
+            <button class="hmc-opt" onclick="hmcAnswer(event,4,'market')" data-q="4">
+              <div class="hmc-opt-radio"></div>
+              <div><div class="hmc-opt-title">Part time — holidays, summers, or a few months a year</div></div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Bill input (shown after Q4) -->
+        <div id="hmc-bill-input" style="display:none;margin-top:20px;">
+          <div style="height:1px;background:rgba(255,255,255,0.08);margin-bottom:20px;"></div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">One last thing</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;line-height:1.3;">What's your typical monthly electricity bill?</div>
+          <p style="font-size:13px;color:#a8c4d8;margin-bottom:14px;">We'll use this to calculate your personalised savings estimate.</p>
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div style="position:relative;flex:1;min-width:140px;max-width:200px;">
+              <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:Sora,sans-serif;font-size:16px;font-weight:600;color:#a8c4d8;">€</span>
+              <input id="hmc-bill" type="number" min="20" max="500" value="85" placeholder="85"
+                style="width:100%;padding:11px 14px 11px 30px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;font-size:16px;font-weight:600;color:#fff;font-family:Sora,sans-serif;outline:none;">
+            </div>
+            <span style="font-size:13px;color:#a8c4d8;">per month</span>
+            <button onclick="hmcShowResult()" style="padding:11px 24px;background:#10b981;color:#fff;border:none;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;">See my result →</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Result panel (hidden until complete) -->
+      <div id="hmc-result" style="display:none;padding:28px;">
+        <div id="hmc-result-inner"></div>
+      </div>
+
     </div>
-    <div class="fcopy">© 2026 Switchr · <span data-l="en" class="on">Authorised energy intermediary · Spain</span><span
-        data-l="es">Intermediario energético autorizado · España</span></div>
-  </footer>
 
-  <script>
-    const WA_EN = 'https://wa.me/34662403660?text=Hi!%20I%27d%20like%20to%20check%20my%20electricity%20savings';
-    const WA_ES = 'https://wa.me/34662403660?text=Hola!%20Quiero%20saber%20cu%C3%A1nto%20puedo%20ahorrar%20en%20mi%20factura%20de%20luz';
-
-    function setLang(l, btn) {
-      document.querySelectorAll('[data-l]').forEach(e => {
-        e.classList.toggle('on', e.getAttribute('data-l') === l);
-      });
-      document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('on'));
-      btn.classList.add('on');
-      document.documentElement.lang = l;
-      document.getElementById('wafloat').href = l === 'es' ? WA_ES : WA_EN;
-      document.getElementById('ctabtn').href = l === 'es' ? WA_ES : WA_EN;
+    <style>
+    .hmc-q { animation: hmcFadeIn .3s ease both; }
+    @keyframes hmcFadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+    .hmc-opt {
+      width:100%;text-align:left;
+      background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);
+      border-radius:10px;padding:13px 16px;
+      display:flex;align-items:flex-start;gap:12px;
+      cursor:pointer;transition:all .15s;color:#fff;font-family:DM Sans,sans-serif;
     }
-  </script>
-</body>
+    .hmc-opt:hover { background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2); }
+    .hmc-opt.selected-fixed { background:rgba(16,185,129,0.12);border-color:#10b981; }
+    .hmc-opt.selected-market { background:rgba(56,189,248,0.1);border-color:#38bdf8; }
+    .hmc-opt-radio {
+      width:18px;height:18px;border-radius:50%;
+      border:2px solid rgba(255,255,255,0.25);flex-shrink:0;margin-top:1px;
+      transition:all .15s;
+    }
+    .hmc-opt.selected-fixed .hmc-opt-radio { border-color:#10b981;background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,0.2); }
+    .hmc-opt.selected-market .hmc-opt-radio { border-color:#38bdf8;background:#38bdf8;box-shadow:0 0 0 3px rgba(56,189,248,0.2); }
+    .hmc-opt-title { font-size:14px;line-height:1.5;color:#fff; }
+    #hmc-bill:focus { border-color:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,0.15); }
+    </style>
 
-</html>
+    <script>
+    (function(){
+      var scores = {fixed:0, market:0};
+      var answered = 0;
+      var totalQ = 4;
+
+      function updateProgress(q) {
+        document.getElementById('hmc-progress').style.width = (q / (totalQ+1) * 100) + '%';
+      }
+
+      window.hmcAnswer = function(e, q, type) {
+        // Mark selected
+        var opts = document.querySelectorAll('[data-q="' + q + '"]');
+        opts.forEach(function(o){ o.classList.remove('selected-fixed','selected-market'); });
+        e.currentTarget.classList.add('selected-' + type);
+        scores[type]++;
+        answered++;
+        updateProgress(q);
+
+        // Short delay before advancing
+        setTimeout(function(){
+          document.getElementById('hmc-q' + q).style.display = 'none';
+          if (q < totalQ) {
+            var next = document.getElementById('hmc-q' + (q+1));
+            next.style.display = 'block';
+          } else {
+            // All Qs done — show bill input
+            document.getElementById('hmc-bill-input').style.display = 'block';
+            updateProgress(totalQ + 0.5);
+          }
+        }, 350);
+      };
+
+      window.hmcShowResult = function() {
+        var bill = parseFloat(document.getElementById('hmc-bill').value) || 85;
+        var annual = bill * 12;
+        var isFixed = scores.fixed >= scores.market;
+        var planName = isFixed ? 'Set & Forget' : 'Active Savings';
+        var planColor = isFixed ? '#10b981' : '#38bdf8';
+        var planBg = isFixed ? 'rgba(16,185,129,0.1)' : 'rgba(56,189,248,0.08)';
+        var planBorder = isFixed ? 'rgba(16,185,129,0.25)' : 'rgba(56,189,248,0.2)';
+
+        // Savings calc
+        var savingPct = isFixed ? 0.27 : (scores.market >= 3 ? 0.22 : 0.18);
+        // Part-time residents get lower fixed savings but market is worse in summer
+        var annualSaving = Math.round(annual * savingPct);
+        var monthlySaving = Math.round(annualSaving / 12);
+        var newMonthly = Math.round(bill - monthlySaving);
+
+        // Score breakdown text
+        var scoreText = 'You scored ' + scores.fixed + '/4 for predictability';
+        if (scores.market >= 3) scoreText = 'You scored ' + scores.market + '/4 for flexibility';
+
+        // Verdict sentence
+        var verdict, caveat;
+        if (isFixed && scores.fixed >= 3) {
+          verdict = 'Set &amp; Forget is the clear match for your lifestyle.';
+          caveat = 'You value predictability and use energy on your own schedule. Locking in at €0.099/kWh means you will never worry about summer spikes or changing habits.';
+        } else if (isFixed && scores.fixed === 2) {
+          verdict = 'Set &amp; Forget is the safer choice.';
+          caveat = 'Your answers are balanced — but the predictability of a fixed rate will suit your lifestyle better than chasing off-peak windows.';
+        } else if (!isFixed && scores.market >= 3) {
+          verdict = 'Active Savings could work well for you.';
+          caveat = 'You have the flexibility and tools (EV, solar, or part-time usage) to genuinely benefit from market pricing in cheaper months.';
+        } else {
+          verdict = 'Active Savings may be worth exploring.';
+          caveat = 'Your usage patterns suggest some potential for market savings — but you can always start with Set &amp; Forget and switch later.';
+        }
+
+        // Build result HTML
+        var html = '<div style="animation:hmcFadeIn .4s ease both;">';
+
+        // Plan recommendation badge
+        html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">';
+        html += '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a8c4d8;">Your result</div>';
+        html += '<div style="flex:1;height:1px;background:rgba(255,255,255,0.08);"></div>';
+        html += '<div style="font-size:11px;color:#a8c4d8;">' + scoreText + '</div>';
+        html += '</div>';
+
+        // Main recommendation
+        html += '<div style="background:' + planBg + ';border:1px solid ' + planBorder + ';border-radius:16px;padding:22px 24px;margin-bottom:16px;">';
+        html += '<div style="display:flex;align-items:flex-start;gap:14px;">';
+        html += '<div style="width:44px;height:44px;border-radius:12px;background:' + planBg + ';border:1px solid ' + planBorder + ';display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">' + (isFixed ? '<svg viewBox=\"0 0 24 24\" fill=\"none\" width=\"22\" height=\"22\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"11\" rx=\"2\" fill=\"rgba(16,185,129,0.25)\" stroke=\"#10b981\" stroke-width=\"1.4\"/><path d=\"M8 11V7a4 4 0 0 1 8 0v4\" stroke=\"#10b981\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"16\" r=\"1.5\" fill=\"rgba(255,255,255,0.6)\"/></svg>' : '<svg viewBox=\"0 0 24 24\" fill=\"none\" width=\"22\" height=\"22\"><polyline points=\"3,17 8,11 12,13 17,7 21,9\" stroke=\"#38bdf8\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"18,7 21,7 21,10\" stroke=\"#38bdf8\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>') + '</div>';
+        html += '<div style="flex:1;">';
+        html += '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:' + planColor + ';margin-bottom:4px;">Recommended for you</div>';
+        html += '<div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;">' + planName + '</div>';
+        html += '<div style="font-size:14px;color:#a8c4d8;line-height:1.55;">' + caveat + '</div>';
+        html += '</div></div></div>';
+
+        // Savings estimate
+        html += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px 24px;margin-bottom:16px;">';
+        html += '<div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:14px;">Your personalised savings estimate</div>';
+        html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">';
+
+        // Current
+        html += '<div style="text-align:center;">';
+        html += '<div style="font-size:11px;color:#a8c4d8;margin-bottom:4px;">Current bill</div>';
+        html += '<div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:rgba(255,255,255,0.5);">€' + bill + '</div>';
+        html += '<div style="font-size:11px;color:rgba(255,255,255,0.3);">/ month</div>';
+        html += '</div>';
+
+        // Arrow
+        html += '<div style="display:flex;align-items:center;justify-content:center;">';
+        html += '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="' + planColor + '" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+        html += '</div>';
+
+        // New
+        html += '<div style="text-align:center;">';
+        html += '<div style="font-size:11px;color:#a8c4d8;margin-bottom:4px;">With Switchr</div>';
+        html += '<div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:' + planColor + ';">€' + newMonthly + '</div>';
+        html += '<div style="font-size:11px;color:rgba(255,255,255,0.3);">/ month</div>';
+        html += '</div>';
+
+        html += '</div>';
+
+        // Annual saving highlight
+        html += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;">';
+        html += '<div style="font-size:13px;color:#a8c4d8;">Estimated annual saving</div>';
+        html += '<div style="font-family:Sora,sans-serif;font-size:20px;font-weight:800;color:' + planColor + ';">€' + annualSaving + ' / year</div>';
+        html += '</div>';
+        html += '</div>';
+
+        // Disclaimer + CTA
+        html += '<div style="font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:14px;line-height:1.55;">Estimates based on your answers and average consumption for a household of your bill size. Your actual saving is calculated from your real bill.</div>';
+
+        html += '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
+        html += '<a href="https://wa.me/34662403660" style="display:inline-flex;align-items:center;gap:8px;background:#10b981;color:#fff;padding:12px 22px;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(16,185,129,0.25);">';
+        html += '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
+        html += 'Get my exact saving on WhatsApp</a>';
+        html += '<button onclick="hmcReset()" style="padding:12px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#a8c4d8;border-radius:10px;font-family:DM Sans,sans-serif;font-size:13px;cursor:pointer;">Retake quiz</button>';
+        html += '</div>';
+        html += '</div>';
+
+        // Hide questions, show result
+        document.getElementById('hmc-questions').style.display = 'none';
+        var resultEl = document.getElementById('hmc-result');
+        resultEl.style.display = 'block';
+        document.getElementById('hmc-result-inner').innerHTML = html;
+        document.getElementById('hmc-progress').style.width = '100%';
+
+        // Highlight the matching plan card above
+        if (window.mwSelect) window.mwSelect(isFixed ? 'sf' : 'as');
+      };
+
+      window.hmcReset = function() {
+        scores = {fixed:0, market:0};
+        answered = 0;
+        // Reset all questions
+        for(var i=1;i<=4;i++){
+          var q = document.getElementById('hmc-q'+i);
+          q.style.display = i===1 ? 'block' : 'none';
+          q.querySelectorAll('.hmc-opt').forEach(function(o){
+            o.classList.remove('selected-fixed','selected-market');
+          });
+        }
+        document.getElementById('hmc-bill-input').style.display = 'none';
+        document.getElementById('hmc-result').style.display = 'none';
+        document.getElementById('hmc-questions').style.display = 'block';
+        document.getElementById('hmc-progress').style.width = '0%';
+      };
+    })();
+    </script>
+
+  </div>
+</section>
+
+<style>
+@keyframes mwPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.4;transform:scale(1.4)} }
+</style>
+
+<script>
+(function() {
+  function initChart() {
+    if (typeof Chart === 'undefined') { setTimeout(initChart, 200); return; }
+    const canvas = document.getElementById('mw-chart');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+
+    const gGrad = ctx.createLinearGradient(0, 0, 0, 240);
+    gGrad.addColorStop(0, 'rgba(16,185,129,0.18)');
+    gGrad.addColorStop(1, 'rgba(16,185,129,0.0)');
+
+    const bGrad = ctx.createLinearGradient(0, 0, 0, 240);
+    bGrad.addColorStop(0, 'rgba(56,189,248,0.14)');
+    bGrad.addColorStop(1, 'rgba(56,189,248,0.0)');
+
+    const mwChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        datasets: [
+          {
+            label: 'Set & Forget',
+            data: Array(12).fill(0.099),
+            borderColor: '#10b981',
+            borderWidth: 2.5,
+            borderDash: [],
+            pointRadius: 0,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: '#10b981',
+            fill: true,
+            backgroundColor: gGrad,
+            tension: 0,
+            order: 1
+          },
+          {
+            label: 'Active Savings',
+            data: [0.082,0.075,0.088,0.094,0.108,0.131,0.158,0.186,0.142,0.103,0.091,0.079],
+            borderColor: '#38bdf8',
+            borderWidth: 2,
+            borderDash: [6, 4],
+            pointRadius: function(ctx) {
+              var v = ctx.parsed.y;
+              return (v >= 0.158 || v <= 0.082) ? 5 : 0;
+            },
+            pointBackgroundColor: '#38bdf8',
+            pointBorderColor: '#0b1f3a',
+            pointBorderWidth: 2,
+            pointHoverRadius: 6,
+            fill: true,
+            backgroundColor: bGrad,
+            tension: 0.35,
+            order: 2
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#132d52',
+            borderColor: 'rgba(255,255,255,0.1)',
+            borderWidth: 1,
+            titleColor: '#a8c4d8',
+            bodyColor: '#ffffff',
+            padding: 12,
+            callbacks: {
+              label: function(ctx) {
+                var prefix = ctx.datasetIndex === 0 ? '🔒 Fixed: ' : '📈 Market: ';
+                return prefix + '€' + ctx.parsed.y.toFixed(3) + '/kWh';
+              },
+              afterBody: function(items) {
+                if (items.length === 2) {
+                  var diff = ((items[1].parsed.y - items[0].parsed.y) / items[0].parsed.y * 100).toFixed(0);
+                  var sign = diff > 0 ? '+' : '';
+                  return ['─────────────', 'Market vs Fixed: ' + sign + diff + '%'];
+                }
+              }
+            }
+          }
+        },
+        scales: {
+          x: {
+            grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
+            ticks: { color: '#a8c4d8', font: { family: "'DM Sans', sans-serif", size: 11 } }
+          },
+          y: {
+            min: 0.06,
+            max: 0.21,
+            grid: { color: 'rgba(255,255,255,0.05)', drawBorder: false },
+            ticks: {
+              color: '#a8c4d8',
+              font: { family: "'DM Sans', sans-serif", size: 11 },
+              callback: function(v) { return '€' + v.toFixed(3); },
+              stepSize: 0.03
+            },
+            border: { dash: [4, 4] }
+          }
+        },
+        animation: { duration: 1000, easing: 'easeInOutQuart' }
+      }
+    });
+
+    // Delta bar on scroll
+    var fill = document.getElementById('mw-delta-fill');
+    if (fill) {
+      new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { setTimeout(function(){ fill.style.width = '88%'; }, 300); }
+        });
+      }, { threshold: 0.4 }).observe(fill.parentElement);
+    }
+
+    // Card interactions
+    window.mwSelect = function(plan) {
+      var sf = document.getElementById('mw-card-sf');
+      var as = document.getElementById('mw-card-as');
+      var rsf = document.getElementById('mw-ring-sf');
+      var ras = document.getElementById('mw-ring-as');
+      if (plan === 'sf') {
+        sf.style.border = '1.5px solid #10b981';
+        sf.style.boxShadow = '0 0 0 1px #10b981, 0 8px 32px rgba(16,185,129,0.15)';
+        as.style.border = '1.5px solid rgba(255,255,255,0.1)';
+        as.style.boxShadow = 'none';
+        rsf.style.opacity = '1';
+        ras.style.opacity = '0';
+        mwChart.data.datasets[0].borderWidth = 3;
+        mwChart.data.datasets[1].borderWidth = 1.5;
+        mwChart.data.datasets[0].borderColor = '#10b981';
+        mwChart.data.datasets[1].borderColor = 'rgba(56,189,248,0.3)';
+      } else {
+        as.style.border = '1.5px solid rgba(56,189,248,0.5)';
+        as.style.boxShadow = '0 0 0 1px rgba(56,189,248,0.3), 0 8px 32px rgba(56,189,248,0.08)';
+        sf.style.border = '1.5px solid rgba(255,255,255,0.1)';
+        sf.style.boxShadow = 'none';
+        ras.style.opacity = '1';
+        rsf.style.opacity = '0';
+        mwChart.data.datasets[0].borderWidth = 1.5;
+        mwChart.data.datasets[1].borderWidth = 3;
+        mwChart.data.datasets[0].borderColor = 'rgba(16,185,129,0.35)';
+        mwChart.data.datasets[1].borderColor = '#38bdf8';
+      }
+      mwChart.update('none');
+    };
+  }
+
+  initChart();
+})();
+</script>
+
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="section-kicker">Questions</span>
+      <h2 class="section-title">Everything you need to know</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-col">
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is this really free?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes — completely free for you. We earn a commission from our energy partners when a switch completes. They pay us, not you. This is standard practice in the energy sector and does not affect your tariff price.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is it safe to forward my bill email?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes. Your bill contains no sensitive payment data — just your consumption, CUPS code, and account number. We process it securely to extract the data needed for comparison and delete it after 30 days. We comply with GDPR.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">I am renting — can I switch?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes, if the electricity bill is in your name. If your landlord pays the electricity, you would need to speak with them first.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">How long until I see the savings?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">The switch completes in 3–4 working days. Your first bill from the new provider typically arrives 30–40 days after the switch date, and that is when you will see the lower number.</div></div>
+      </div>
+      <div class="faq-col">
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Will my electricity be cut off?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Never. Switching suppliers in Spain only changes the billing company — the physical supply is never interrupted. Switch completes in 3–4 working days.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Which provider will I switch to?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">We work with a growing network of licensed Spanish energy providers — currently Gana Energía and Nordy, with more being added. We compare tariffs across our partners against your actual usage to find the best match for your household.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What areas do you cover?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Currently active across Murcia, Alicante, and Costa Blanca. Expanding nationally. If you are elsewhere in Spain, send us your bill and we will let you know when your area is live.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is my data safe?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes. Your bill data is processed securely and used only to calculate your savings and submit your switch. We comply with GDPR and do not sell or share your personal data with third parties beyond our partner providers for the purpose of completing your contract.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="final-inner">
+    <h2>Ready to stop<br><em>overpaying?</em></h2>
+    <p>Choose whatever's easiest for you — WhatsApp, a quick email forward, or upload right here. All three take under 5 minutes.</p>
+    <div class="final-btns">
+      <a href="https://wa.me/34662403660" class="final-btn-wa">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="/cdn-cgi/l/email-protection#aacbdfcec3deead9ddc3dec9c2d884cfd995d9dfc8c0cfc9de97e7d38f989acfc6cfc9ded8c3c9c3ded38f989ac8c3c6c6" class="final-btn-em">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
+        Email your bill
+      </a>
+      <a href="#" onclick="openUploadModal();return false" class="final-btn-web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload PDF
+      </a>
+    </div>
+    <div class="final-trust">100% free · <span>No power interruption</span> · <span>English throughout</span> · GDPR compliant</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo" style="color:#fff">
+          <div class="logo-mark"><svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+          Switchr
+        </a>
+        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#how-it-works">How it works</a>
+        <a href="switchr-how-it-works.html">Full explainer</a>
+        <a href="switchr-results.html">Sample report</a>
+      </div>
+      <div class="footer-col">
+        <h4>Start</h4>
+        <a href="https://wa.me/34662403660">WhatsApp</a>
+        <a href="/cdn-cgi/l/email-protection#4b2a3e2f223f0b383c223f282339652e38">Email <span class="__cf_email__" data-cfemail="debfabbab7aa9eada9b7aabdb6acf0bbad">[email&#160;protected]</span></a>
+        <a href="#" onclick="openUploadModal()">Upload PDF</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="#faq">FAQ</a>
+        <a href="#">Privacy policy</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Switchr · Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
+      <p>Made for expats in Spain</p>
+    </div>
+  </div>
+</footer>
+
+<!-- UPLOAD MODAL -->
+<div class="upload-modal" id="upload-modal" onclick="closeModalOutside(event)">
+  <div class="upload-box" id="upload-box">
+    <div class="upload-box-header">
+      <div class="upload-box-title">Upload your bill</div>
+      <button class="upload-close" onclick="closeUploadModal()">✕</button>
+    </div>
+    <div class="upload-box-body">
+      <div class="upload-drop" id="upload-drop" onclick="document.getElementById('file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--g)'" ondragleave="this.style.borderColor=''" ondrop="handleModalDrop(event)">
+        <div class="upload-drop-icon" id="drop-icon">📄</div>
+        <h3 id="drop-title">Drag your bill here</h3>
+        <p id="drop-sub">PDF, JPG or PNG · Max 10MB</p>
+        <input type="file" id="file-input" accept=".pdf,image/*" onchange="handleModalFile(this)" style="display:none">
+      </div>
+      <div class="upload-gdpr">
+        <input type="checkbox" id="gdpr-check">
+        <label for="gdpr-check">I agree to Switchr's <a href="#" style="color:var(--g)">terms of service</a> and allow processing of my bill data to calculate my savings.</label>
+      </div>
+      <button class="upload-start-btn" id="upload-btn" onclick="startAnalysis()">Start analysis</button>
+      <div class="upload-security">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Bank-grade encryption · GDPR compliant
+      </div>
+    </div>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// Nav scroll
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40));
+
+// Reveal
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Channel tabs
+let activeTab='wa';
+function switchTab(tab,btn){
+  document.querySelectorAll('.ctab').forEach(t=>t.className='ctab');
+  document.querySelectorAll('.channel-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active-'+tab);
+  document.getElementById('panel-'+tab).classList.add('active');
+  activeTab=tab;
+}
+
+// Detect device on load — suggest best tab
+window.addEventListener('DOMContentLoaded',()=>{
+  const mobile=/Android|iPhone|iPad/i.test(navigator.userAgent);
+  // Default stays WhatsApp for mobile, which is already default
+  // For desktop, we could default to web but WhatsApp still works — keep WA as default
+});
+
+// FAQ
+function toggleFaq(el){
+  const a=el.nextElementSibling,ch=el.querySelector('.faq-ch');
+  const open=a.classList.toggle('open');
+  ch.style.transform=open?'rotate(180deg)':'rotate(0deg)';
+}
+
+// Copy email
+function copyEmail(){
+  navigator.clipboard.writeText('audit@switchr.es').then(()=>{
+    const btn=document.getElementById('copy-label');
+    btn.textContent='Copied!';
+    setTimeout(()=>btn.textContent='Copy address',2000);
+  });
+}
+
+// Upload modal
+function openUploadModal(){document.getElementById('upload-modal').classList.add('open');document.body.style.overflow='hidden'}
+function closeUploadModal(){document.getElementById('upload-modal').classList.remove('open');document.body.style.overflow=''}
+function closeModalOutside(e){if(e.target===document.getElementById('upload-modal'))closeUploadModal()}
+
+function handleDrop(e){e.preventDefault();openUploadModal()}
+function handleFileSelect(input){if(input.files[0])openUploadModal()}
+
+let _currentFile=null;
+function handleModalDrop(e){
+  e.preventDefault();
+  const f=e.dataTransfer.files[0];
+  if(f)setFile(f);
+}
+function handleModalFile(input){if(input.files[0])setFile(input.files[0])}
+function setFile(f){
+  _currentFile=f;
+  document.getElementById('drop-icon').textContent='✅';
+  document.getElementById('drop-title').textContent=f.name;
+  document.getElementById('drop-sub').textContent=(f.size/1024).toFixed(0)+' KB · Ready to analyse';
+  document.getElementById('upload-drop').style.borderColor='var(--g)';
+  document.getElementById('upload-drop').style.background='var(--gp)';
+}
+function startAnalysis(){
+  if(!document.getElementById('gdpr-check').checked){alert('Please agree to the terms to proceed.');return}
+  if(!_currentFile){alert('Please select a bill file first.');return}
+  const btn=document.getElementById('upload-btn');
+  btn.disabled=true;btn.textContent='Preparing...';
+  const reader=new FileReader();
+  reader.onerror=function(){btn.disabled=false;btn.textContent='Start analysis';alert('Could not read the file. Please try again.');};
+  reader.onload=function(e){
+    try{
+      sessionStorage.setItem('sw_bill_name',_currentFile.name);
+      sessionStorage.setItem('sw_bill_type',_currentFile.type||'application/pdf');
+      sessionStorage.setItem('sw_bill_data',e.target.result);
+      window.location.href='processing.html';
+    }catch(err){
+      btn.disabled=false;btn.textContent='Start analysis';
+      alert('File too large for browser storage. Please use a PDF under 3 MB.');
+    }
+  };
+  reader.readAsDataURL(_currentFile);
+}
+</script>
+
+<script>
+/* ── LIVE PRICE COUNTER ── */
+(function() {
+  // Simulated market prices across today's 24h (based on OMIE patterns)
+  const hourlyPrices = [
+    0.072,0.068,0.065,0.063,0.066,0.071,
+    0.088,0.112,0.134,0.148,0.156,0.158,
+    0.142,0.138,0.132,0.129,0.136,0.152,
+    0.168,0.174,0.162,0.148,0.121,0.094
+  ];
+  const FIXED = 0.099;
+  const now = new Date();
+  let currentHour = now.getHours();
+  let currentPrice = hourlyPrices[currentHour];
+
+  // Add slight randomness to feel "live"
+  function jitter(base) { return base + (Math.random() - 0.5) * 0.008; }
+
+  function updatePrice() {
+    currentHour = new Date().getHours();
+    const base = hourlyPrices[currentHour];
+    currentPrice = jitter(base);
+    const el = document.getElementById('market-price');
+    const sub = document.getElementById('market-sub');
+    const diff = document.getElementById('market-diff');
+    if (!el) return;
+    const pct = ((currentPrice - FIXED) / FIXED * 100);
+    const sign = pct >= 0 ? '+' : '';
+    el.textContent = '€' + currentPrice.toFixed(3);
+    el.style.color = currentPrice > FIXED ? '#ef4444' : '#25D366';
+    diff.textContent = sign + pct.toFixed(0) + '% ' + (pct >= 0 ? 'above' : 'below') + ' your fixed rate';
+    diff.style.color = pct >= 0 ? 'rgba(239,68,68,0.7)' : 'rgba(37,211,102,0.7)';
+    drawSparklines(currentHour, currentPrice);
+  }
+
+  // Draw mini sparklines
+  function drawSparklines(hour, marketNow) {
+    // Fixed sparkline — flat line
+    const fc = document.getElementById('spark-fixed');
+    if (fc) {
+      const fctx = fc.getContext('2d');
+      fc.width = fc.offsetWidth; fc.height = fc.offsetHeight;
+      fctx.clearRect(0,0,fc.width,fc.height);
+      fctx.strokeStyle = 'rgba(37,211,102,0.6)';
+      fctx.lineWidth = 1.5;
+      fctx.beginPath();
+      fctx.moveTo(0, fc.height/2);
+      fctx.lineTo(fc.width, fc.height/2);
+      fctx.stroke();
+    }
+    // Market sparkline — jagged
+    const mc = document.getElementById('spark-market');
+    if (mc) {
+      const mctx = mc.getContext('2d');
+      mc.width = mc.offsetWidth; mc.height = mc.offsetHeight;
+      mctx.clearRect(0,0,mc.width,mc.height);
+      const slice = hourlyPrices.slice(0, hour + 1);
+      const min = 0.060, max = 0.190;
+      mctx.strokeStyle = 'rgba(239,68,68,0.6)';
+      mctx.lineWidth = 1.5;
+      mctx.beginPath();
+      slice.forEach((p, i) => {
+        const x = (i / (slice.length - 1 || 1)) * mc.width;
+        const y = mc.height - ((p - min) / (max - min)) * mc.height;
+        i === 0 ? mctx.moveTo(x, y) : mctx.lineTo(x, y);
+      });
+      mctx.stroke();
+    }
+  }
+
+  updatePrice();
+  // Update every 4 seconds to feel live
+  setInterv

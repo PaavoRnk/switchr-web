@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Cut your Spanish electricity bill in 30 seconds. Forward your bill to audit@switchr.es or WhatsApp us for a free instant audit. No calls. No Spanish. 100% Free.">
+<meta name="facebook-domain-verification" content="3fta816nkamtmp85k7fobtiur8auin">
+<title>Switchr — Cut Your Spanish Electricity Bill in 30 Seconds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,300;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+:root{--navy:#0b1120;--navy2:#111827;--navy3:#1a2236;--green:#00c896;--green-dim:rgba(0,200,150,.12);--green-border:rgba(0,200,150,.25);--white:#fff;--gray:#9ca3af;--gray2:#6b7280;--gray3:#374151}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.5}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 48px;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(11,17,32,.97) 0%,transparent 100%);backdrop-filter:blur(12px)}
+.nav-left{display:flex;align-items:center;gap:20px}
+.nav-brand{font-family:'Fraunces',serif;font-size:24px;font-weight:900;letter-spacing:-1px;color:#fff;text-decoration:none}
+.nav-brand span{color:var(--green)}
+.ltoggle{display:flex;gap:3px}
+.lbtn{background:transparent;border:1px solid #1e293b;color:#6b7280;padding:4px 12px;border-radius:100px;cursor:pointer;font-family:'Inter',sans-serif;font-size:12px;font-weight:500;transition:all .15s;letter-spacing:.5px}
+.lbtn.on{background:var(--green);border-color:var(--green);color:var(--navy);font-weight:700}
+.nav-cta{background:var(--green);color:var(--navy);font-size:14px;font-weight:600;padding:10px 22px;border-radius:100px;text-decoration:none;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:#fff;transform:translateY(-1px)}
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:120px 48px 80px;overflow:hidden}
+.hero::after{content:'';position:absolute;top:20%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(0,200,150,.1) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+.hero-inner{position:relative;max-width:1140px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;background:var(--green-dim);border:1px solid var(--green-border);color:var(--green);font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:100px;margin-bottom:24px}
+.eyebrow::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+h1{font-family:'Fraunces',serif;font-size:clamp(42px,5.2vw,72px);font-weight:900;line-height:.95;letter-spacing:-3px;margin-bottom:28px}
+h1 em{font-style:italic;font-weight:300;color:var(--green)}
+h1 strong{color:var(--green)}
+.hero-sub{font-size:17px;font-weight:300;color:var(--gray);line-height:1.65;margin-bottom:14px;max-width:460px}
+.hero-sub strong{color:#fff;font-weight:500}
+.hero-email-note{font-size:14px;color:var(--gray2);margin-bottom:36px;max-width:460px}
+.hero-email-note a{color:var(--green);text-decoration:none;font-weight:500}
+.hero-email-note a:hover{text-decoration:underline}
+.ctag{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.btn-p{display:inline-flex;align-items:center;gap:10px;background:var(--green);color:var(--navy);font-size:15px;font-weight:700;padding:15px 28px;border-radius:100px;text-decoration:none;transition:all .25s;box-shadow:0 0 40px rgba(0,200,150,.25)}
+.btn-p:hover{background:#fff;transform:translateY(-2px);box-shadow:0 0 60px rgba(0,200,150,.35)}
+.btn-p svg{width:18px;height:18px}
+.btn-email{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid var(--green-border);color:var(--green);font-size:15px;font-weight:600;padding:15px 28px;border-radius:100px;text-decoration:none;transition:all .2s}
+.btn-email:hover{background:var(--green-dim);border-color:var(--green);transform:translateY(-1px)}
+.btn-g{color:var(--gray2);font-size:14px;text-decoration:none;display:flex;align-items:center;gap:6px;transition:color .2s;margin-top:8px;width:100%}
+.btn-g:hover{color:#fff}
+.btn-g::after{content:'↓'}
+/* PHONE MOCKUP */
+.hero-vis{display:flex;justify-content:center;align-items:center;position:relative}
+.pw{position:relative;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-14px) rotate(-1deg)}}
+.pglow{position:absolute;inset:-40px;background:radial-gradient(circle at center,rgba(0,200,150,.1) 0%,transparent 70%);pointer-events:none;z-index:-1}
+.phone{width:280px;background:#151f30;border-radius:36px;border:1px solid #1e293b;padding:16px;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04)}
+.ph{background:#075e54;border-radius:20px 20px 0 0;padding:12px 16px;display:flex;align-items:center;gap:10px;margin:-16px -16px 0}
+.pav{width:36px;height:36px;background:var(--green);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:900;font-size:14px;color:var(--navy);flex-shrink:0}
+.pcn{font-size:13px;font-weight:500;color:#fff}
+.pcs{font-size:11px;color:rgba(255,255,255,.6)}
+.cb{padding:16px 4px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:85%;padding:8px 12px;border-radius:12px;font-size:12px;line-height:1.5;animation:fadeUp .4s ease both}
+.mb{background:#1f2c34;color:#e9e9e9;align-self:flex-start;border-radius:4px 12px 12px 12px}
+.mu{background:#005c4b;color:#e9e9e9;align-self:flex-end;border-radius:12px 4px 12px 12px}
+.sp{background:linear-gradient(135deg,var(--green-dim),rgba(0,200,150,.04));border:1px solid rgba(0,200,150,.35);border-radius:10px;padding:10px 12px;font-size:11px;color:var(--green);align-self:flex-start;animation:fadeUp .4s ease 1.2s both}
+.sa{font-size:20px;font-weight:700;display:block;color:#fff;margin:2px 0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg:nth-child(1){animation-delay:.1s}.msg:nth-child(2){animation-delay:.4s}.msg:nth-child(3){animation-delay:.8s}.msg:nth-child(5){animation-delay:1.6s}
+/* STATS BAR */
+.stats{position:relative;z-index:1;border-top:1px solid #1e293b;border-bottom:1px solid #1e293b;padding:28px 48px}
+.si{max-width:1140px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr)}
+.st{padding:14px 40px;border-right:1px solid #1e293b;text-align:center}
+.st:last-child{border-right:none}
+.sn{font-family:'Fraunces',serif;font-size:46px;font-weight:900;letter-spacing:-2px;color:var(--green);line-height:1;margin-bottom:4px}
+.sl{font-size:13px;color:var(--gray2);font-weight:400}
+/* SECTIONS */
+.sec{padding:96px 48px;position:relative;z-index:1}
+.sec.alt{background:#0d1526}
+.sin{max-width:1140px;margin:0 auto}
+.slabel{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--green);margin-bottom:14px}
+h2{font-family:'Fraunces',serif;font-size:clamp(34px,4vw,52px);font-weight:900;letter-spacing:-2px;line-height:1.05;margin-bottom:48px}
+h2 em{font-style:italic;font-weight:300;color:var(--gray)}
+/* THREE WAYS */
+.ways{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.way{background:var(--navy2);border:1px solid #1e293b;border-radius:16px;padding:36px 28px;transition:all .2s;position:relative;overflow:hidden}
+.way::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at top left,rgba(0,200,150,.06),transparent 60%);opacity:0;transition:opacity .3s}
+.way:hover{border-color:var(--green-border);transform:translateY(-3px)}
+.way:hover::before{opacity:1}
+.way-icon{font-size:36px;margin-bottom:20px;display:block}
+.way h3{font-size:18px;font-weight:700;margin-bottom:10px}
+.way p{font-size:14px;color:var(--gray);line-height:1.6;font-weight:300}
+.way .way-cta{display:inline-flex;align-items:center;gap:6px;margin-top:20px;font-size:13px;font-weight:600;color:var(--green);text-decoration:none;transition:gap .2s}
+.way .way-cta:hover{gap:10px}
+.way .way-cta::after{content:'→'}
+/* UPLOAD DROP ZONE */
+.drop-zone{border:2px dashed #2d3f5c;border-radius:10px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;margin-top:16px;font-size:13px;color:var(--gray2)}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--green);background:var(--green-dim);color:var(--green)}
+.drop-zone .dz-icon{font-size:24px;display:block;margin-bottom:6px}
+.savings-blur{display:none;margin-top:16px;border-radius:10px;overflow:hidden;position:relative}
+.savings-blur.show{display:block}
+.savings-blur-inner{background:linear-gradient(135deg,#0d1a12,#091a2a);border:1px solid var(--green-border);border-radius:10px;padding:16px;filter:blur(5px);user-select:none;pointer-events:none}
+.savings-blur-overlay{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}
+.savings-blur-overlay .reveal-btn{background:var(--green);color:var(--navy);font-size:12px;font-weight:700;padding:8px 18px;border-radius:100px;text-decoration:none;white-space:nowrap}
+/* CHART SECTION */
+.chart-wrap{background:var(--navy2);border:1px solid #1e293b;border-radius:16px;padding:32px;margin-top:0}
+.chart-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px;flex-wrap:wrap;gap:16px}
+.chart-title{font-size:18px;font-weight:600}
+.chart-legend{display:flex;gap:20px;flex-wrap:wrap}
+.cleg{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--gray)}
+.cleg-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.chart-canvas-wrap{position:relative;height:260px}
+.chart-copy{margin-top:28px;background:var(--green-dim);border:1px solid var(--green-border);border-radius:10px;padding:18px 22px;font-size:14px;color:var(--green);line-height:1.6}
+.chart-copy strong{color:#fff}
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:20px}
+/* WHY */
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.wcards{display:flex;flex-direction:column;gap:14px}
+.wcard{background:var(--navy2);border:1px solid #1e293b;border-radius:12px;padding:22px;display:flex;gap:14px;align-items:flex-start;transition:border-color .2s}
+.wcard:hover{border-color:var(--green-border)}
+.wico{width:42px;height:42px;background:var(--green-dim);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0}
+.wcard h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.wcard p{font-size:13px;color:var(--gray);font-weight:300;line-height:1.5}
+.wdesc{font-size:15px;color:var(--gray);font-weight:300;line-height:1.7;margin-top:14px}
+.transparency{margin-top:28px;border:1px solid #1e293b;border-radius:12px;padding:20px 22px;font-size:13px;color:var(--gray2);line-height:1.65}
+.transparency strong{color:var(--gray);font-weight:500}
+/* TESTIMONIALS */
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.tcard{background:var(--navy2);border:1px solid #1e293b;border-radius:14px;padding:28px;transition:border-color .2s}
+.tcard:hover{border-color:var(--green-border)}
+.tstars{color:var(--green);font-size:15px;margin-bottom:14px;letter-spacing:2px}
+.ttext{font-size:14px;color:#d1d5db;line-height:1.65;font-weight:300;margin-bottom:20px;font-style:italic}
+.tauth{display:flex;align-items:center;gap:10px}
+.tav{width:36px;height:36px;border-radius:50%;background:var(--green-dim);border:1px solid var(--green-border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--green);font-family:'Fraunces',serif;flex-shrink:0}
+.tname{font-size:13px;font-weight:600}
+.tloc{font-size:12px;color:var(--gray2)}
+.compliance{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:24px;padding:20px;border:1px solid #1e293b;border-radius:12px;flex-wrap:wrap}
+.comp-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--gray);font-weight:400}
+/* CTA */
+.ctasec{text-align:center;position:relative;overflow:hidden}
+.ctag2{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:800px;height:400px;background:radial-gradient(ellipse,rgba(0,200,150,.07) 0%,transparent 70%);pointer-events:none}
+.ctac{position:relative;z-index:1;max-width:620px;margin:0 auto}
+.ctac h2{font-size:clamp(38px,5vw,62px);letter-spacing:-2.5px;margin-bottom:18px}
+.ctac>p{font-size:17px;color:var(--gray2);font-weight:300;margin-bottom:36px}
+.ctag3{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.ctanote{margin-top:18px;font-size:13px;color:#374151}
+/* WAITLIST BANNER */
+.waitlist-banner{position:relative;z-index:1;background:var(--navy2);border-top:1px solid #1e293b;border-bottom:1px solid #1e293b;padding:16px 48px;text-align:center}
+.wl-inner{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;max-width:900px;margin:0 auto}
+.wl-inner p{font-size:14px;color:var(--gray);font-weight:300}
+.wl-inner a{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--green);border:1px solid var(--green-border);padding:5px 16px;border-radius:100px;text-decoration:none;transition:all .2s;white-space:nowrap}
+.wl-inner a:hover{background:var(--green);color:var(--navy)}
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid #1e293b;padding:30px 48px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.fbrand{font-family:'Fraunces',serif;font-size:18px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.fbrand span{color:var(--green)}
+.flinks{display:flex;gap:24px}
+.flinks a{font-size:13px;color:#4b5563;text-decoration:none;transition:color .15s}
+.flinks a:hover{color:#fff}
+.fcopy{font-size:12px;color:#374151}
+/* WhatsApp FLOAT */
+.waf{position:fixed;bottom:28px;right:28px;z-index:200;background:#25d366;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);text-decoration:none;transition:all .2s;animation:boin .6s cubic-bezier(.175,.885,.32,1.275) 2s both}
+.waf:hover{transform:scale(1.1);box-shadow:0 8px 30px rgba(37,211,102,.5)}
+.waf svg{width:28px;height:28px;fill:#fff}
+@keyframes boin{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:scale(1)}}
+/* LANG */
+[data-l]{display:none}[data-l].on{display:block}
+span[data-l]{display:none}span[data-l].on{display:inline}
+div[data-l]{display:none}div[data-l].on{display:block}
+a[data-l]{display:none}a[data-l].on{display:inline-flex}
+/* RESPONSIVE */
+@media(max-width:960px){
+nav{padding:14px 20px}.nav-cta{display:none}
+.hero{padding:100px 24px 60px}.hero-inner{grid-template-columns:1fr;gap:48px}.hero-vis{order:-1}.phone{width:240px}
+.stats{padding:24px}.si{grid-template-columns:repeat(3,1fr)}.st{padding:12px 14px}.sn{font-size:32px}
+.sec{padding:64px 24px}
+.ways{grid-template-columns:1fr}
+.wgrid{grid-template-columns:1fr;gap:40px}
+.tgrid{grid-template-columns:1fr}
+.chart-grid{grid-template-columns:1fr}
+footer{padding:24px;flex-direction:column;align-items:flex-start}
+.compliance{justify-content:flex-start}
+.waitlist-banner{padding:14px 24px}
+.ctag3{flex-direction:column;align-items:center}
+}
+@media(max-width:480px){
+h1{letter-spacing:-2px}
+.ctag{flex-direction:column;align-items:flex-start}
+.compliance{flex-direction:column;align-items:flex-start;gap:12px}
+}
+</style>
+</head>
+<body>
+
+  <!-- WA FLOAT -->
+  <a href="#" target="_blank" class="waf" id="wafloat" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-left">
+      <a href="#" class="nav-brand">Switch<span>r</span></a>
+      <div class="ltoggle">
+        <button class="lbtn on" onclick="setLang('en',this)">EN</button>
+        <button class="lbtn" onclick="setLang('es',this)">ES</button>
+      </div>
+    </div>
+    <a href="#" id="navcta" class="nav-cta">
+      <span data-l="en" class="on">Get free audit →</span>
+      <span data-l="es">Auditar gratis →</span>
+    </a>
+  </nav>
+
+  <!-- SECTION 01: HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div>
+        <div data-l="en" class="on">
+          <div class="eyebrow">30-Second Audit · 100% Free</div>
+          <h1>Cut your Spanish<br><em>electricity</em><br>bill in <strong>30 seconds.</strong></h1>
+          <p class="hero-sub">No calls. No Spanish. <strong>100% Free.</strong> Send us your bill and we'll find you a better fixed tariff — instantly.</p>
+          <p class="hero-email-note">Forward your provider's bill to <a href="mailto:audit@switchr.es">audit@switchr.es</a> or snap a photo on WhatsApp below.</p>
+          <div class="ctag">
+            <a href="#" id="hero-wa-en" target="_blank" class="btn-p">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Snap a Photo on WhatsApp
+            </a>
+            <a href="mailto:audit@switchr.es?subject=Bill%20Audit%20Request&body=Hi%20Switchr%2C%20please%20audit%20my%20electricity%20bill.%20I%20have%20attached%20it%20below." class="btn-email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Email Your Bill
+            </a>
+            <a href="#ways" class="btn-g">See all 3 ways to save</a>
+          </div>
+        </div>
+        <div data-l="es">
+          <div class="eyebrow">Auditoría en 30 segundos · Gratis</div>
+          <h1>Reduce tu<br><em>factura</em> de<br>luz en <strong>30 segundos.</strong></h1>
+          <p class="hero-sub">Sin llamadas. Sin burocracia. <strong>100% Gratis.</strong> Mándanos tu factura y te encontramos la mejor tarifa fija al instante.</p>
+          <p class="hero-email-note">Reenvía tu factura a <a href="mailto:audit@switchr.es">audit@switchr.es</a> o haznos una foto por WhatsApp.</p>
+          <div class="ctag">
+            <a href="#" id="hero-wa-es" target="_blank" class="btn-p">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Auditar por WhatsApp
+            </a>
+            <a href="mailto:audit@switchr.es?subject=Auditoría%20Factura&body=Hola%20Switchr%2C%20me%20gustaría%20que%20auditarais%20mi%20factura.%20La%20adjunto%20a%20continuación." class="btn-email">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              Enviar por Email
+            </a>
+            <a href="#ways" class="btn-g">Las 3 formas de ahorrar</a>
+          </div>
+        </div>
+      </div>
+      <div class="hero-vis">
+        <div class="pw">
+          <div class="pglow"></div>
+          <div class="phone">
+            <div class="ph">
+              <div class="pav">S</div>
+              <div><div class="pcn">Switchr</div><div class="pcs">online</div></div>
+            </div>
+            <div class="cb">
+              <div class="msg mb"><span data-l="en" class="on">Hi! Send me a photo of your bill — I'll find you a better deal in 30 seconds</span><span data-l="es">Hola! Mándame una foto de tu factura — te busco una tarifa mejor en 30 segundos</span></div>
+              <div class="msg mu"><span data-l="en" class="on">Here it is! [photo]</span><span data-l="es">Aquí la tienes! [foto]</span></div>
+              <div class="msg mb"><span data-l="en" class="on">Analysing your bill... 30 seconds ⚡</span><span data-l="es">Analizando tu factura... 30 segundos ⚡</span></div>
+              <div class="sp">
+                <span data-l="en" class="on">Your estimated saving:</span><span data-l="es">Tu ahorro estimado:</span>
+                <span class="sa">€312 / year</span>
+                <span data-l="en" class="on">Switch to a better tariff?</span><span data-l="es">¿Cambiamos de tarifa?</span>
+              </div>
+              <div class="msg mu"><span data-l="en" class="on">Yes, let's switch!</span><span data-l="es">Sí, quiero cambiar!</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS BAR -->
+  <div class="stats">
+    <div class="si">
+      <div class="st"><div class="sn">30<span style="font-size:22px">sec</span></div><div class="sl"><span data-l="en" class="on">Average audit time</span><span data-l="es">Tiempo medio de auditoría</span></div></div>
+      <div class="st"><div class="sn">€0</div><div class="sl"><span data-l="en" class="on">Cost to you — ever</span><span data-l="es">Coste para ti — siempre</span></div></div>
+      <div class="st"><div class="sn">100%</div><div class="sl"><span data-l="en" class="on">Free. Always.</span><span data-l="es">Gratis. Siempre.</span></div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 02: THREE WAYS TO SAVE -->
+  <section class="sec" id="ways">
+    <div class="sin">
+      <div class="slabel"><span data-l="en" class="on">The path of least resistance</span><span data-l="es">El camino más fácil</span></div>
+      <h2><span data-l="en" class="on">Three ways to <em>save.</em></span><span data-l="es">Tres formas de <em>ahorrar.</em></span></h2>
+      <div class="ways">
+        <!-- WhatsApp -->
+        <div class="way">
+          <span class="way-icon">📸</span>
+          <h3><span data-l="en" class="on">WhatsApp</span><span data-l="es">WhatsApp</span></h3>
+          <p><span data-l="en" class="on">Snap a photo of your electricity bill and send it to us. Our AI reads it in 30 seconds — CUPS, consumption, everything. Simple.</span><span data-l="es">Haz una foto a tu factura de luz y mándanosla. Nuestra IA la lee en 30 segundos — CUPS, consumo, todo. Así de fácil.</span></p>
+          <a href="#" id="way-wa" target="_blank" class="way-cta"><span data-l="en" class="on">Snap a photo now</span><span data-l="es">Hacer foto ahora</span></a>
+        </div>
+        <!-- Email -->
+        <div class="way">
+          <span class="way-icon">📧</span>
+          <h3><span data-l="en" class="on">Email Forward</span><span data-l="es">Reenvío por Email</span></h3>
+          <p><span data-l="en" class="on">Forward your provider's bill PDF directly to <strong style="color:#fff">audit@switchr.es</strong>. We'll reply with your personalised savings report within minutes.</span><span data-l="es">Reenvía el PDF de tu factura directamente a <strong style="color:#fff">audit@switchr.es</strong>. Te respondemos con tu informe de ahorro personalizado en minutos.</span></p>
+          <a href="mailto:audit@switchr.es?subject=Bill%20Audit%20Request&body=Hi%20Switchr%2C%20please%20audit%20my%20electricity%20bill.%20I%20have%20attached%20it%20below." class="way-cta"><span data-l="en" class="on">Email your bill</span><span data-l="es">Enviar factura</span></a>
+        </div>
+        <!-- Upload -->
+        <div class="way">
+          <span class="way-icon">📂</span>
+          <h3><span data-l="en" class="on">Web Upload</span><span data-l="es">Subir Archivo</span></h3>
+          <p><span data-l="en" class="on">Drop your bill PDF here for a preview of your savings. Confirm on WhatsApp to lock in your new tariff.</span><span data-l="es">Arrastra aquí el PDF de tu factura para ver un adelanto de tu ahorro. Confirma por WhatsApp para fijar tu nueva tarifa.</span></p>
+          <div class="drop-zone" id="dropZone" onclick="handleDropClick()">
+            <span class="dz-icon">⬆️</span>
+            <span data-l="en" class="on">Drop PDF here or click to upload</span><span data-l="es">Arrastra el PDF aquí o haz clic</span>
+          </div>
+          <div class="savings-blur" id="savingsBlur">
+            <div class="savings-blur-inner">
+              <div style="font-size:11px;color:#00c896;margin-bottom:4px">YOUR ESTIMATED SAVING</div>
+              <div style="font-size:28px;font-weight:700;color:#fff">€████ / year</div>
+              <div style="font-size:12px;color:#9ca3af;margin-top:4px">Switch to Nordy Fixed · Lock rate now</div>
+            </div>
+            <div class="savings-blur-overlay">
+              <div style="font-size:12px;color:#fff;font-weight:600">🔒 Claim your real result</div>
+              <a href="#" id="blur-wa" target="_blank" class="reveal-btn">Confirm on WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 03: BIG THREE COST OF INACTION -->
+  <section class="sec alt">
+    <div class="sin">
+      <div class="slabel"><span data-l="en" class="on">Fixed vs. Market rates</span><span data-l="es">Tarifa fija vs. mercado</span></div>
+      <h2><span data-l="en" class="on">While the Big Three <em>raise prices,</em><br>we lock yours in.</span><span data-l="es">Mientras las grandes suben <em>precios,</em><br>nosotros los fijamos.</span></h2>
+      <div class="chart-wrap">
+        <div class="chart-header">
+          <div>
+            <div class="chart-title"><span data-l="en" class="on">Typical Monthly Bill (€) — 2024</span><span data-l="es">Factura Mensual Típica (€) — 2024</span></div>
+            <div style="font-size:12px;color:#6b7280;margin-top:4px"><span data-l="en" class="on">Based on average 3,500 kWh/year household</span><span data-l="es">Basado en hogar medio de 3.500 kWh/año</span></div>
+          </div>
+          <div class="chart-legend">
+            <div class="cleg"><div class="cleg-dot" style="background:#ef4444"></div> Iberdrola Market</div>
+            <div class="cleg"><div class="cleg-dot" style="background:#f97316"></div> Endesa Market</div>
+            <div class="cleg"><div class="cleg-dot" style="background:#00c896"></div> Nordy Fixed</div>
+            <div class="cleg"><div class="cleg-dot" style="background:#34d399"></div> Gana Energía Fixed</div>
+          </div>
+        </div>
+        <div class="chart-canvas-wrap"><canvas id="rateChart"></canvas></div>
+        <div class="chart-copy">
+          <strong><span data-l="en" class="on">Lock in your savings today.</span><span data-l="es">Fija tu ahorro hoy.</span></strong>
+          <span data-l="en" class="on"> The Big Three profit from market volatility. Our fixed-rate partners — Nordy and Gana Energía — give you a flat monthly bill so you always know what you'll pay.</span>
+          <span data-l="es"> Las grandes eléctricas se benefician de la volatilidad del mercado. Nuestros socios de tarifa fija — Nordy y Gana Energía — te dan una factura mensual plana para que siempre sepas lo que pagas.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 04: WHY SWITCHR -->
+  <section class="sec">
+    <div class="sin">
+      <div class="wgrid">
+        <div>
+          <div class="slabel"><span data-l="en" class="on">Why Switchr</span><span data-l="es">Por qué Switchr</span></div>
+          <h2><span data-l="en" class="on">The premium<br><em>advantage.</em></span><span data-l="es">La ventaja<br><em>premium.</em></span></h2>
+          <p class="wdesc"><span data-l="en" class="on">Energy companies make switching deliberately complicated. Switchr exists so you don't need to spend an afternoon on hold — or navigate a Spanish website — just to pay less for electricity.</span><span data-l="es">Las eléctricas hacen que cambiar sea complicado a propósito. Switchr existe para que no tengas que pasarte la tarde al teléfono — ni navegar una web en español — solo para pagar menos luz.</span></p>
+          <div class="transparency">
+            <strong><span data-l="en" class="on">How do we make money?</span><span data-l="es">¿Cómo ganamos dinero?</span></strong>
+            <span data-l="en" class="on"> Energy suppliers pay us a one-time referral fee when you switch. This never affects the price you pay — it's built into the supplier's own acquisition budget. Your savings are 100% real.</span>
+            <span data-l="es"> Las comercializadoras nos pagan una comisión única cuando cambias. Esto nunca afecta al precio que pagas — está dentro del presupuesto de captación del proveedor. Tu ahorro es 100% real.</span>
+          </div>
+        </div>
+        <div class="wcards">
+          <div class="wcard"><div class="wico">💸</div><div><h4><span data-l="en" class="on">100% Free</span><span data-l="es">100% Gratis</span></h4><p><span data-l="en" class="on">We get paid by providers, not by you. Our only incentive is to find you the best deal.</span><span data-l="es">Nos pagan las comercializadoras, no tú. Nuestro único incentivo es encontrarte la mejor tarifa.</span></p></div></div>
+          <div class="wcard"><div class="wico">📵</div><div><h4><span data-l="en" class="on">Zero Calls</span><span data-l="es">Cero Llamadas</span></h4><p><span data-l="en" class="on">No annoying telemarketers. Guaranteed. Everything happens over WhatsApp or email, at your own pace.</span><span data-l="es">Sin teleoperadores molestos. Garantizado. Todo por WhatsApp o email, a tu ritmo.</span></p></div></div>
+          <div class="wcard"><div class="wico">🌍</div><div><h4><span data-l="en" class="on">Expat-Friendly</span><span data-l="es">Para Expatriados</span></h4><p><span data-l="en" class="on">English-first support for everything — from first message to signed contract. No Spanish required.</span><span data-l="es">Soporte en inglés para todo — desde el primer mensaje hasta la firma. Sin necesidad de español.</span></p></div></div>
+          <div class="wcard"><div class="wico">🔒</div><div><h4><span data-l="en" class="on">GDPR Compliant</span><span data-l="es">Cumplimiento RGPD</span></h4><p><span data-l="en" class="on">Your data stays in EU servers. We never sell your information or share it with advertisers.</span><span data-l="es">Tus datos permanecen en servidores de la UE. Nunca vendemos tu información ni la compartimos.</span></p></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 05: SOCIAL PROOF -->
+  <section class="sec alt">
+    <div class="sin">
+      <div class="slabel"><span data-l="en" class="on">What people say</span><span data-l="es">Lo que dicen</span></div>
+      <h2><span data-l="en" class="on">Real <em>savings,</em><br>real people</span><span data-l="es">Ahorros <em>reales,</em><br>personas reales</span></h2>
+      <div class="tgrid">
+        <div class="tcard"><div class="tstars">★★★★★</div><p class="ttext"><span data-l="en" class="on">"Took about 4 minutes on WhatsApp. We're saving over €280 a year. Wish I'd done it years ago."</span><span data-l="es">"Tardé unos 4 minutos por WhatsApp. Ahorramos más de 280€ al año. Ojalá lo hubiera hecho antes."</span></p><div class="tauth"><div class="tav">J</div><div><div class="tname">James T.</div><div class="tloc">Torrevieja, Alicante</div></div></div></div>
+        <div class="tcard"><div class="tstars">★★★★★</div><p class="ttext"><span data-l="en" class="on">"As a Belgian I was dreading Spanish bureaucracy. Switchr handled everything in English. Super smooth."</span><span data-l="es">"Como belga me temía la burocracia española. Switchr lo gestionó todo en inglés. Muy fácil."</span></p><div class="tauth"><div class="tav">S</div><div><div class="tname">Sophie V.</div><div class="tloc">Marbella, Málaga</div></div></div></div>
+        <div class="tcard"><div class="tstars">★★★★★</div><p class="ttext"><span data-l="en" class="on">"Sent a photo of my bill, got a savings estimate in under a minute. New tariff was live 2 days later."</span><span data-l="es">"Mandé una foto de mi factura y en menos de un minuto ya tenía el ahorro. Nueva tarifa en 2 días."</span></p><div class="tauth"><div class="tav">M</div><div><div class="tname">Michael R.</div><div class="tloc">Torre-Pacheco, Murcia</div></div></div></div>
+      </div>
+      <div class="compliance">
+        <div class="comp-item">✅ <span data-l="en" class="on">Authorised Intermediary in Spain</span><span data-l="es">Intermediario Autorizado en España</span></div>
+        <div class="comp-item">🔒 GDPR Compliant</div>
+        <div class="comp-item">📋 NIF-IVA: ES+NIE</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA SECTION -->
+  <section class="sec ctasec">
+    <div class="ctag2"></div>
+    <div class="ctac">
+      <div class="slabel"><span data-l="en" class="on">Get started — it's free</span><span data-l="es">Empieza — es gratis</span></div>
+      <h2><span data-l="en" class="on">Find out what<br>you could <em>save</em></span><span data-l="es">Descubre cuánto<br>puedes <em>ahorrar</em></span></h2>
+      <p><span data-l="en" class="on">Takes 30 seconds. <strong style="color:#fff">Completely free.</strong> No commitment until you sign.</span><span data-l="es">30 segundos. <strong style="color:#fff">Completamente gratis.</strong> Sin compromiso hasta que firmes.</span></p>
+      <div class="ctag3">
+        <a href="#" id="ctabtn" target="_blank" class="btn-p" style="font-size:17px;padding:18px 36px">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-l="en" class="on">Start on WhatsApp</span><span data-l="es">Empezar en WhatsApp</span>
+        </a>
+        <a href="mailto:audit@switchr.es?subject=Bill%20Audit%20Request&body=Hi%20Switchr%2C%20please%20audit%20my%20electricity%20bill.%20I%20have%20attached%20it%20below." class="btn-email" style="font-size:17px;padding:18px 36px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span data-l="en" class="on">Email Your Bill</span><span data-l="es">Enviar por Email</span>
+        </a>
+      </div>
+      <p class="ctanote"><span data-l="en" class="on">Operated by Switchr · Authorised energy intermediary · Spain</span><span data-l="es">Operado por Switchr · Intermediario energético autorizado · España</span></p>
+    </div>
+  </section>
+
+  <!-- WAITLIST BANNER -->
+  <div class="waitlist-banner">
+    <div class="wl-inner">
+      <p>🚗 <span data-l="en" class="on"><strong style="color:#fff">Coming Soon:</strong> One-Click Car Insurance Audits.</span><span data-l="es"><strong style="color:#fff">Próximamente:</strong> Auditoría de Seguro de Coche en un clic.</span></p>
+      <a href="mailto:waitlist@switchr.es?subject=Car%20Insurance%20Waitlist&body=Hi%2C%20please%20add%20me%20to%20the%20car%20insurance%20audit%20waitlist." target="_blank">
+        <span data-l="en" class="on">Join the Waitlist →</span><span data-l="es">Unirse a la Lista →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="fbrand">Switch<span>r</span></div>
+    <div class="flinks">
+      <a href="/privacy-policy.html"><span data-l="en" class="on">Privacy Policy</span><span data-l="es">Privacidad</span></a>
+      <a href="/terms-and-conditions.html"><span data-l="en" class="on">Terms &amp; Conditions</span><span data-l="es">Términos</span></a>
+      <a href="https://wa.me/34662403660" target="_blank"><span data-l="en" class="on">Contact</span><span data-l="es">Contacto</span></a>
+    </div>
+    <div class="fcopy">© 2026 Switchr · <span data-l="en" class="on">Authorised energy intermediary · Spain</span><span data-l="es">Intermediario energético autorizado · España</span></div>
+  </footer>
+
+  <script>
+    // === PRICING DATA (single source of truth) ===
+    const PRICING = {
+      nordy:  { monthly: 42, annual: 504,  label: 'Nordy Fixed' },
+      gana:   { monthly: 38, annual: 456,  label: 'Gana Energía Fixed' },
+      iberdrola: [68,72,81,76,83,90,96,99,85,78,73,80],
+      endesa:    [65,69,77,73,79,86,91,94,81,74,70,76]
+    };
+
+    // === WHATSAPP LINKS ===
+    const WA_EN = 'https://wa.me/34662403660?text=Hi!%20I%27d%20like%20to%20audit%20my%20bill.%20I%27m%20ready%20to%20snap%20a%20photo.';
+    const WA_ES = 'https://wa.me/34662403660?text=Hola!%20Quiero%20auditar%20mi%20factura.%20Estoy%20listo%20para%20hacer%20una%20foto.';
+
+    function applyWaLinks(lang) {
+      const url = lang === 'es' ? WA_ES : WA_EN;
+      ['wafloat','navcta','hero-wa-en','hero-wa-es','way-wa','ctabtn','blur-wa'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.href = url;
+      });
+    }
+
+    // === LANGUAGE TOGGLE ===
+    function setLang(l, btn) {
+      document.querySelectorAll('[data-l]').forEach(e => {
+        e.classList.toggle('on', e.getAttribute('data-l') === l);
+      });
+      document.querySelectorAll('.lbtn').forEach(b => b.classList.remove('on'));
+      if (btn) btn.classList.add('on');
+      else document.querySelector(`.lbtn[onclick*="'${l}'"]`).classList.add('on');
+      document.documentElement.lang = l;
+      localStorage.setItem('lang', l);
+      applyWaLinks(l);
+    }
+
+    // Auto-detect language (mirrors Cloudflare Worker logic)
+    (function() {
+      const saved = localStorage.getItem('lang');
+      const lang = saved || (navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en');
+      if (lang !== 'en') setLang(lang);
+      else applyWaLinks('en');
+    })();
+
+    // === DROP ZONE ===
+    const dz = document.getElementById('dropZone');
+    const sb = document.getElementById('savingsBlur');
+    function showBlur() { sb.classList.add('show'); }
+    function handleDropClick() { showBlur(); }
+    if (dz) {
+      dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+      dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+      dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); showBlur(); });
+    }
+
+    // === CHART ===
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const nordyFlat  = Array(12).fill(PRICING.nordy.monthly);
+    const ganaFlat   = Array(12).fill(PRICING.gana.monthly);
+
+    const ctx = document.getElementById('rateChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          { label:'Iberdrola Market', data: PRICING.iberdrola, borderColor:'#ef4444', backgroundColor:'rgba(239,68,68,.08)', tension:.4, borderWidth:2.5, pointRadius:3, fill:false },
+          { label:'Endesa Market',    data: PRICING.endesa,    borderColor:'#f97316', backgroundColor:'rgba(249,115,22,.08)', tension:.4, borderWidth:2.5, pointRadius:3, fill:false },
+          { label:'Nordy Fixed',      data: nordyFlat,         borderColor:'#00c896', backgroundColor:'rgba(0,200,150,.12)', tension:0, borderWidth:2.5, pointRadius:3, borderDash:[], fill:true },
+          { label:'Gana Fixed',       data: ganaFlat,          borderColor:'#34d399', backgroundColor:'rgba(52,211,153,.08)', tension:0, borderWidth:2, pointRadius:3, borderDash:[6,3], fill:false }
+        ]
+      },
+      options: {
+        responsive:true, maintainAspectRatio:false,
+        interaction:{ mode:'index', intersect:false },
+        plugins:{ legend:{ display:false }, tooltip:{ backgroundColor:'#1a2236', titleColor:'#9ca3af', bodyColor:'#fff', borderColor:'#1e293b', borderWidth:1, padding:12, callbacks:{ label: ctx => ` ${ctx.dataset.label}: €${ctx.raw}/mo` } } },
+        scales:{
+          x:{ grid:{ color:'rgba(255,255,255,.04)' }, ticks:{ color:'#6b7280', font:{ size:11 } } },
+          y:{ grid:{ color:'rgba(255,255,255,.04)' }, ticks:{ color:'#6b7280', font:{ size:11 }, callback: v => '€'+v }, min:20, max:115 }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
