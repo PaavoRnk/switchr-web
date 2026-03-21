@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Savings Report — Switchr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--gp:#f0fdf4;--gb:rgba(37,211,102,0.12);
+  --ink:#0a1a15;--ink2:#2d4a3e;--ink3:#6b8c7e;--ink4:#a8c4b8;
+  --bg:#f8fdfb;--white:#fff;
+  --red:#e53e3e;--amber:#d97706;
+  --border:rgba(37,211,102,0.15);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(248,253,251,0.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 32px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:var(--ink);display:flex;align-items:center;gap:7px;text-decoration:none}
+.logo-dot{width:9px;height:9px;border-radius:50%;background:var(--g)}
+
+/* PROGRESS STEPPER */
+.stepper{display:flex;align-items:center;gap:0;padding:20px 32px 0;max-width:900px;margin:0 auto}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;position:relative}
+.step-item:not(:last-child)::after{content:'';position:absolute;top:14px;left:calc(50% + 16px);right:calc(-50% + 16px);height:2px;background:var(--border2);z-index:0}
+.step-item.done:not(:last-child)::after,.step-item.active:not(:last-child)::after{background:var(--g)}
+.step-circle{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;z-index:1;
+  transition:all .3s;
+}
+.step-item.done .step-circle{background:var(--g);color:#fff}
+.step-item.active .step-circle{background:#fff;border:2px solid var(--g);color:var(--g)}
+.step-item.todo .step-circle{background:#fff;border:2px solid var(--border2);color:var(--ink4)}
+.step-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.step-item.done .step-label{color:var(--g)}
+.step-item.active .step-label{color:var(--ink)}
+.step-item.todo .step-label{color:var(--ink4)}
+
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:0 32px 120px}
+
+/* RESULTS HERO */
+.results-hero{
+  text-align:center;
+  padding:40px 0 32px;
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.analyzed-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gp);border:1px solid var(--border);
+  padding:5px 14px;border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--gd);
+  margin-bottom:20px;
+}
+.save-num{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(64px,10vw,96px);
+  font-weight:800;line-height:.95;
+  color:var(--g);letter-spacing:-0.03em;
+  margin-bottom:4px;
+}
+.save-period{font-size:18px;color:var(--ink3);font-weight:300;margin-bottom:16px}
+.pct-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--ink);color:#fff;
+  padding:7px 18px;border-radius:24px;
+  font-size:13px;font-weight:500;
+  margin-bottom:20px;
+}
+.switch-from-to{
+  font-size:15px;color:var(--ink2);margin-bottom:8px;
+}
+.switch-from-to strong{color:var(--ink);font-weight:500}
+.tariff-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--gp);border:1px solid var(--border);
+  padding:4px 12px;border-radius:16px;
+  font-size:12px;font-weight:500;color:var(--gd);
+  margin-bottom:20px;
+}
+.meta-line{font-size:12px;color:var(--ink4);font-family:monospace}
+
+/* TICKER */
+.ticker-wrap{
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:10px 0;margin:0 -32px 32px;background:var(--white);
+}
+.ticker-inner{
+  display:inline-flex;gap:40px;white-space:nowrap;
+  animation:tick 18s linear infinite;
+}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3)}
+.tick-item strong{color:var(--g)}
+.tick-dot{width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0}
+
+/* SECTION CARD */
+.scard{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:28px;margin-bottom:16px;
+  animation:fadeUp .5s ease both;
+}
+.scard-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.scard-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.scard-icon.green{background:var(--gp)}
+.scard-icon.amber{background:#fffbeb}
+.scard-icon.blue{background:#eff6ff}
+.scard-num-badge{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#fff;flex-shrink:0;margin-top:6px;
+}
+.scard-num-badge.green{background:var(--g)}
+.scard-num-badge.amber{background:#d97706}
+.scard-num-badge.blue{background:#3b82f6}
+.scard-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.scard-sub{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4)}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table th{
+  font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink4);padding:8px 0;text-align:right;
+}
+.comp-table th:first-child{text-align:left}
+.comp-table td{padding:14px 0;border-bottom:1px solid #f0f7f3;font-size:14px;text-align:right;vertical-align:middle}
+.comp-table td:first-child{text-align:left;color:var(--ink2);font-weight:400}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table .current-val{color:var(--ink);font-weight:500}
+.comp-table .new-val{color:var(--g);font-weight:700;font-size:16px}
+.comp-table .saving-pill{
+  display:inline-block;
+  background:var(--gp);color:var(--gd);
+  padding:2px 8px;border-radius:10px;
+  font-size:11px;font-weight:600;margin-left:6px;
+}
+.comp-table .worse-pill{
+  display:inline-block;
+  background:#fff7ed;color:#92400e;
+  padding:2px 8px;border-radius:10px;
+  font-size:11px;font-weight:600;margin-left:6px;
+}
+.totals-row td{font-weight:700!important;font-size:15px!important;background:var(--gp);padding:16px 12px!important;border-radius:8px}
+.totals-row td:first-child{border-radius:8px 0 0 8px}
+.totals-row td:last-child{border-radius:0 8px 8px 0}
+.you-save-row{background:var(--gp)}
+.you-save-row td{padding:18px 12px!important;border-bottom:none!important}
+.you-save-label{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--gd);text-transform:uppercase;letter-spacing:.06em}
+.you-save-val{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--g)}
+
+/* RATE GRID */
+.rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.rate-card{border-radius:10px;padding:14px 16px}
+.rate-card.current{background:#fafafa;border:1px solid #eee}
+.rate-card.new{background:var(--gp);border:1px solid var(--border)}
+.rate-card-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.rate-card.current .rate-card-label{color:var(--ink4)}
+.rate-card.new .rate-card-label{color:var(--gd)}
+.rate-card-period{font-size:12px;color:var(--ink3);margin-bottom:8px}
+.rate-card-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:700}
+.rate-card.current .rate-card-val{color:var(--red)}
+.rate-card.new .rate-card-val{color:var(--g)}
+
+/* AUDIT BOX */
+.audit-highlight{
+  background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
+  padding:16px;margin-top:12px;
+}
+.audit-highlight p{font-size:14px;color:#78350f;line-height:1.6}
+.audit-amount{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#d97706;margin-top:4px}
+
+/* DARK SUMMARY */
+.dark-summary{
+  background:var(--ink);border-radius:var(--r2);
+  padding:32px;margin-bottom:16px;
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  align-items:start;
+  animation:fadeUp .5s ease both;
+}
+.ds-left{}
+.ds-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.ds-subtitle{font-size:13px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px}
+.ds-body{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7}
+.ds-costs{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.ds-cost-row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.ds-cost-label{color:rgba(255,255,255,0.5)}
+.ds-cost-val{font-weight:500;color:#fff}
+.ds-cost-row.divider{border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;margin-top:4px}
+.ds-right{
+  background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.2);
+  border-radius:16px;padding:24px;text-align:center;
+}
+.ds-est-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px}
+.ds-big-num{font-family:'Sora',sans-serif;font-size:52px;font-weight:800;color:var(--g);line-height:1;margin-bottom:4px}
+.ds-per-month{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.ds-new-cost{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px;margin-bottom:16px}
+.ds-new-cost-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.4);margin-bottom:4px}
+.ds-new-cost-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#fff}
+.ds-new-cost-from{font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px}
+.ds-trust{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.ds-trust-item{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,0.4)}
+.ds-trust-item svg{opacity:.5}
+
+/* HOW CALCULATED */
+.calc-accordion{
+  border:1px solid var(--border2);border-radius:10px;
+  overflow:hidden;margin-top:8px;
+}
+.calc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;cursor:pointer;
+  background:#fafafa;
+  font-size:13px;font-weight:500;color:var(--ink2);
+  user-select:none;
+}
+.calc-header:hover{background:#f5f5f5}
+.calc-body{
+  display:none;padding:16px 18px;font-size:13px;color:var(--ink3);line-height:1.7;
+  border-top:1px solid var(--border2);background:#fff;
+}
+.calc-body.open{display:block}
+.calc-body ul{padding-left:18px;margin-top:8px}
+.calc-body li{margin-bottom:4px}
+
+/* EMAIL CAPTURE */
+.email-card{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:28px;text-align:center;margin-bottom:16px;
+}
+.email-card-icon{font-size:32px;margin-bottom:12px}
+.email-card h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:600;margin-bottom:6px}
+.email-card p{font-size:14px;color:var(--ink3);margin-bottom:20px}
+.email-row{display:flex;gap:10px;max-width:480px;margin:0 auto 12px}
+.email-row input{
+  flex:1;padding:11px 16px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;outline:none;
+}
+.email-row input:focus{border-color:var(--g)}
+.email-send-btn{
+  padding:11px 20px;background:var(--ink);color:#fff;
+  border:none;border-radius:8px;font-size:14px;font-weight:500;
+  cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;
+}
+.reminder-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3);justify-content:center}
+.reminder-check input{accent-color:var(--g)}
+
+/* STICKY FOOTER */
+.sticky-footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(248,253,251,0.95);backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  padding:12px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.sf-saving{display:flex;flex-direction:column}
+.sf-saving-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);font-weight:600}
+.sf-saving-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--g)}
+.sf-trust{display:flex;gap:20px;font-size:12px;color:var(--ink3)}
+.sf-trust-item{display:flex;align-items:center;gap:5px}
+.switch-cta{
+  display:flex;align-items:center;gap:10px;
+  background:var(--g);color:#fff;
+  padding:12px 24px;border-radius:10px;
+  border:none;font-family:'Sora',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;
+  white-space:nowrap;transition:background .2s,transform .1s;
+}
+.switch-cta:hover{background:var(--gd)}
+.switch-cta:active{transform:scale(.98)}
+.switch-cta-sub{font-size:11px;opacity:.75;font-weight:400;margin-top:1px}
+
+/* MODAL */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(10,26,21,0.6);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:#fff;border-radius:20px;
+  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
+  margin:20px;
+  animation:modalIn .25s ease both;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 16px;border-bottom:1px solid var(--border2);
+  position:sticky;top:0;background:#fff;z-index:1;
+}
+.modal-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700}
+.modal-close{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);
+  background:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
+  color:var(--ink3);
+}
+.modal-body{padding:24px}
+
+/* FORM */
+.form-section{margin-bottom:24px}
+.form-section-label{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--gd);
+  text-transform:uppercase;letter-spacing:.06em;
+  padding-bottom:10px;margin-bottom:16px;
+  border-bottom:2px solid var(--border);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:12px;font-weight:500;color:var(--ink3)}
+.form-input{
+  padding:10px 14px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;
+  transition:border-color .2s;
+}
+.form-input:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gb)}
+.form-input.prefilled{background:var(--gp);border-color:var(--border)}
+.form-select{
+  padding:10px 14px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;
+  background:#fff;cursor:pointer;
+}
+.form-hint{font-size:11px;color:var(--ink4);margin-top:3px}
+.iban-wrap{position:relative}
+.iban-wrap .lock-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px}
+.iban-input{padding-left:34px!important}
+.consent-box{
+  background:var(--gp);border:1px solid var(--border);border-radius:10px;
+  padding:14px;margin-top:4px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.consent-check{accent-color:var(--g);margin-top:2px;flex-shrink:0}
+.consent-text{font-size:13px;color:var(--ink2);line-height:1.55}
+.submit-btn{
+  width:100%;padding:14px;margin-top:20px;
+  background:var(--g);color:#fff;border:none;border-radius:10px;
+  font-family:'Sora',sans-serif;font-size:16px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background .2s;
+}
+.submit-btn:hover{background:var(--gd)}
+.submit-btn:disabled{background:var(--ink4);cursor:not-allowed}
+.modal-footer-trust{
+  text-align:center;padding:0 24px 20px;
+  font-size:12px;color:var(--ink4);
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+
+/* CONFIRMATION */
+.confirm-screen{
+  display:none;text-align:center;padding:48px 32px;
+}
+.confirm-screen.show{display:block}
+.confirm-icon{font-size:56px;margin-bottom:20px}
+.confirm-title{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.confirm-sub{font-size:16px;color:var(--ink3);line-height:1.65;max-width:360px;margin:0 auto 24px}
+.confirm-steps{text-align:left;max-width:340px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.confirm-step{display:flex;gap:12px;font-size:14px;color:var(--ink2)}
+.confirm-step-num{
+  width:24px;height:24px;border-radius:50%;background:var(--gp);
+  color:var(--gd);font-weight:700;font-size:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+
+/* LOADING STATES */
+.modal-loading{display:none;text-align:center;padding:48px 32px}
+.modal-loading.show{display:block}
+.loading-spinner{
+  width:56px;height:56px;border-radius:50%;
+  border:3px solid var(--border2);border-top-color:var(--g);
+  animation:spin 1s linear infinite;margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-spinner-inner{width:24px;height:24px;font-size:16px}
+.loading-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:600;margin-bottom:6px}
+.loading-sub{font-size:14px;color:var(--ink3)}
+.security-line{
+  margin-top:20px;font-size:12px;color:var(--ink4);
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+/* UTILS */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
+.tag-green{background:var(--gp);color:var(--gd)}
+.tag-amber{background:#fffbeb;color:#92400e}
+.divider-line{height:1px;background:var(--border2);margin:20px 0}
+
+@media(max-width:640px){
+  nav{padding:0 16px}
+  main{padding:0 16px 120px}
+  .stepper{padding:16px 16px 0;gap:0}
+  .dark-summary{grid-template-columns:1fr}
+  .rate-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .sticky-footer{padding:12px 16px}
+  .sf-trust{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo"><div class="logo-dot"></div>Switchr</a>
+  <div style="font-size:13px;color:var(--ink3)">Your savings report</div>
+</nav>
+
+<!-- STEPPER -->
+<div class="stepper">
+  <div class="step-item done">
+    <div class="step-circle">✓</div>
+    <div class="step-label">Bill sent</div>
+  </div>
+  <div class="step-item done">
+    <div class="step-circle">✓</div>
+    <div class="step-label">Analysed</div>
+  </div>
+  <div class="step-item active">
+    <div class="step-circle">3</div>
+    <div class="step-label">Review</div>
+  </div>
+  <div class="step-item todo">
+    <div class="step-circle">4</div>
+    <div class="step-label">Switch</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="results-hero">
+    <div class="analyzed-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Best tariff match · calculated from your actual usage
+    </div>
+    <div class="save-num">€456</div>
+    <div class="save-period">estimated annual saving</div>
+    <div class="pct-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      28% less than your current bill
+    </div>
+    <div class="switch-from-to">Switch from <strong>Iberdrola</strong> to <strong>Nordy — Tarifa Tramos</strong></div>
+    <div style="margin-bottom:8px"><span class="tag tag-green">Fixed price · No exit fees · No minimum stay</span></div>
+    <div class="meta-line">CUPS: ES 0021 0000 1343 2884 RF &nbsp;·&nbsp; Period: 04/07/2025 – 24/07/2025 (30 days)</div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> switching to Nordy &nbsp;·&nbsp; Costa Blanca · 2 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> switching to Nordy &nbsp;·&nbsp; Costa Blanca · 2 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: CONSUMPTION & RATES -->
+  <div class="scard" style="animation-delay:.1s">
+    <div class="scard-header">
+      <div class="scard-num-badge green">1</div>
+      <div>
+        <div class="scard-icon green" style="display:none"></div>
+        <div class="scard-title">Consumption & rates</div>
+        <div class="scard-sub">Your actual kWh per period vs. new rates</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">We applied your real P1/P2/P3 consumption to both your current Iberdrola rates and the recommended tariff rates. Every figure comes from your bill — nothing estimated.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Time period</th>
+          <th>Annual usage</th>
+          <th>Current rate</th>
+          <th>New rate</th>
+          <th>Annual saving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Punta (P1)</td>
+          <td class="current-val">1,008 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0.2156</td>
+          <td class="new-val">€0.1020</td>
+          <td class="current-val">€116.46<span class="saving-pill">−53%</span></td>
+        </tr>
+        <tr>
+          <td>Llano (P2)</td>
+          <td class="current-val">1,344 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0.1890</td>
+          <td class="new-val">€0.0890</td>
+          <td class="current-val">€134.40<span class="saving-pill">−53%</span></td>
+        </tr>
+        <tr>
+          <td>Valle (P3)</td>
+          <td class="current-val">2,352 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0.1240</td>
+          <td class="new-val">€0.0480</td>
+          <td class="current-val">€178.75<span class="saving-pill">−61%</span></td>
+        </tr>
+        <tr class="you-save-row">
+          <td colspan="4" class="you-save-label">Energy saving total</td>
+          <td class="you-save-val" style="font-size:18px">€429.61/yr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 2: POTENCIA -->
+  <div class="scard" style="animation-delay:.2s">
+    <div class="scard-header">
+      <div class="scard-num-badge amber">2</div>
+      <div>
+        <div class="scard-title">Potencia (contracted power)</div>
+        <div class="scard-sub">Fixed daily charges comparison</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Your contracted power is 3.45kW on both P1 and P2. These are the fixed daily charges you pay regardless of consumption. The new provider's rates here are slightly higher — we've included this in the total calculation.</p>
+
+    <div class="rate-grid">
+      <div class="rate-card current">
+        <div class="rate-card-label">Current Iberdrola</div>
+        <div class="rate-card-period">P1 (punta)</div>
+        <div class="rate-card-val">€0.1137<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+      <div class="rate-card new">
+        <div class="rate-card-label">Nordy Tarifa Tramos</div>
+        <div class="rate-card-period">P1 (punta)</div>
+        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+      <div class="rate-card current">
+        <div class="rate-card-label">Current Iberdrola</div>
+        <div class="rate-card-period">P2 (llano/valle)</div>
+        <div class="rate-card-val">€0.0465<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+      <div class="rate-card new">
+        <div class="rate-card-label">Nordy Tarifa Tramos</div>
+        <div class="rate-card-period">P2 (llano/valle)</div>
+        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+    </div>
+
+    <div style="background:#fafafa;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:13px;color:var(--ink2)">Net potencia difference (annual)</div>
+      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--amber)">+€47.58 <span style="font-size:12px;font-weight:400;color:var(--ink4)">(slightly higher)</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: OPTIONAL SERVICES -->
+  <div class="scard" style="animation-delay:.3s">
+    <div class="scard-header">
+      <div class="scard-num-badge blue">3</div>
+      <div>
+        <div class="scard-title">Optional service on your bill</div>
+        <div class="scard-sub">Audit result · charges you may not know about</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:16px;line-height:1.6">We found an optional maintenance service bundled into your current bill. This is not required by law and is not included in the new provider's contract.</p>
+    <div class="audit-highlight">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#92400e;margin-bottom:4px">Pack Iberdrola Hogar</div>
+          <p>You are currently paying for an optional maintenance service. <strong>It is not required by the new provider.</strong> Switching automatically removes this charge.</p>
+        </div>
+        <div style="text-align:right;flex-shrink:0;margin-left:20px">
+          <div style="font-size:11px;color:#92400e;font-weight:600;text-transform:uppercase">Annual cost</div>
+          <div class="audit-amount">€129</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DARK SUMMARY -->
+  <div class="dark-summary" style="animation-delay:.4s">
+    <div class="ds-left">
+      <div class="ds-title">Your financial summary</div>
+      <div class="ds-subtitle">Based on 4,704 kWh annual consumption</div>
+      <div class="ds-body">We applied your actual metered usage to today's published tariff rates. All figures include IEE (5.11%) and IVA (21%). No change to your electricity habits is assumed.</div>
+      <div class="ds-costs">
+        <div class="ds-cost-row">
+          <div class="ds-cost-label">Your current annual cost</div>
+          <div class="ds-cost-val">€1,632</div>
+        </div>
+        <div class="ds-cost-row">
+          <div class="ds-cost-label">New estimated annual cost</div>
+          <div class="ds-cost-val" style="color:var(--g)">€1,176</div>
+        </div>
+        <div class="ds-cost-row divider">
+          <div class="ds-cost-label" style="color:var(--g);font-weight:600">You save</div>
+          <div class="ds-cost-val" style="color:var(--g);font-size:18px;font-weight:700">€456 / year</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-right">
+      <div class="ds-est-label">Estimated first year saving</div>
+      <div class="ds-big-num">€456</div>
+      <div class="ds-per-month">≈ €38 per month</div>
+      <div class="ds-new-cost">
+        <div class="ds-new-cost-label">Your new annual cost</div>
+        <div class="ds-new-cost-val">€1,176</div>
+        <div class="ds-new-cost-from">Down from €1,632</div>
+      </div>
+      <div class="ds-trust">
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Switches in 48–72h
+        </div>
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No power interruption
+        </div>
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          100% free to you
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW CALCULATED -->
+  <div class="calc-accordion">
+    <div class="calc-header" onclick="toggleCalc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        How we calculated your saving — audit proof & tariff logic
+      </span>
+      <svg id="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="calc-body" id="calc-body">
+      <p>All figures are calculated using your actual metered consumption from the bill you submitted, your billing dates, and your currently contracted power (potencia).</p>
+      <ul>
+        <li>Annual totals are estimated using your supplier's stated yearly usage and today's published tariff rates</li>
+        <li>Energy prices include IEE (5.11%) and IVA (21%) as required by Spanish law</li>
+        <li>Potencia charges are based on your current contracted 3.45kW on both P1 and P2 — we do not assume a power reduction</li>
+        <li>Optional services (Pack Iberdrola Hogar) are included in your current cost and excluded from the new cost, as they are not part of the new provider's offer</li>
+        <li>No change to your electricity consumption habits is assumed — we use your actual P1/P2/P3 split</li>
+      </ul>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--gp);border-radius:8px;font-size:12px;color:var(--gd)">
+        ALL CONTRACTS ARE DIRECT WITH GANA ENERGÍA. NO EXIT FEES. NO MINIMUM STAY.
+      </div>
+    </div>
+  </div>
+
+  <div style="height:24px"></div>
+
+  <!-- EMAIL CAPTURE -->
+  <div class="email-card">
+    <div class="email-card-icon">✉</div>
+    <h3>Send this report to your inbox</h3>
+    <p>We'll email you this full breakdown — including all the figures above — so you can review it later or share it.</p>
+    <div class="email-row">
+      <input type="email" placeholder="your@email.com" id="email-input">
+      <button class="email-send-btn" onclick="sendReport()">Send report</button>
+    </div>
+    <div class="reminder-check">
+      <input type="checkbox" id="remind" checked>
+      <label for="remind">Also send me a reminder in 48 hours if I haven't switched yet</label>
+    </div>
+  </div>
+
+</main>
+
+<!-- STICKY FOOTER -->
+<div class="sticky-footer">
+  <div class="sf-saving">
+    <div class="sf-saving-label">Estimated saving</div>
+    <div class="sf-saving-val">€456 / year</div>
+  </div>
+  <div class="sf-trust">
+    <div class="sf-trust-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Bank-grade security
+    </div>
+    <div class="sf-trust-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Switches in 48h
+    </div>
+  </div>
+  <button class="switch-cta" onclick="openModal()">
+    <div>
+      <div>Switch to Tarifa Tramos</div>
+      <div class="switch-cta-sub">Save €456 per year →</div>
+    </div>
+  </button>
+</div>
+
+<!-- SWITCH MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-inner">
+
+    <!-- LOADING STATE -->
+    <div class="modal-loading" id="modal-loading">
+      <div class="loading-spinner">
+        <div class="loading-spinner-inner" id="spinner-inner">🔒</div>
+      </div>
+      <div class="loading-title" id="loading-title">Submitting your switch...</div>
+      <div class="loading-sub" id="loading-sub">Sending your contract to the new provider</div>
+      <div class="security-line">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Bank-grade encryption · GDPR compliant
+      </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirm-screen" id="confirm-screen">
+      <div class="confirm-icon">✅</div>
+      <div class="confirm-title">Switch confirmed!</div>
+      <div class="confirm-sub">Your switch to Nordy — Tarifa Tramos has been submitted. You'll receive a confirmation email shortly.</div>
+      <div class="confirm-steps">
+        <div class="confirm-step"><div class="confirm-step-num">1</div><div>Your new provider will contact your current supplier within 24 hours</div></div>
+        <div class="confirm-step"><div class="confirm-step-num">2</div><div>Switch completes in 3–4 working days — no interruption to your supply</div></div>
+        <div class="confirm-step"><div class="confirm-step-num">3</div><div>Your first bill from the new provider arrives within 30–40 days</div></div>
+      </div>
+      <button onclick="closeModal()" style="margin-top:28px;padding:12px 32px;background:var(--g);color:#fff;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Done</button>
+    </div>
+
+    <!-- FORM -->
+    <div id="modal-form">
+      <div class="modal-header">
+        <div class="modal-title">Complete your switch</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Summary strip -->
+        <div style="background:var(--gp);border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gd);margin-bottom:2px">Switching to</div>
+            <div style="font-size:14px;font-weight:500;color:var(--ink)">Nordy · Tarifa Tramos</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--gd);font-weight:600;text-transform:uppercase">Saving</div>
+            <div style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--g)">€456/yr</div>
+          </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div class="form-section">
+          <div class="form-section-label">📋 Personal details</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">First name</label>
+              <input id="f-name" class="form-input" placeholder="First name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last name (primer apellido)</label>
+              <input id="f-surname1" class="form-input" placeholder="First surname">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Second last name <span style="color:var(--ink4)">(optional)</span></label>
+              <input id="f-surname2" class="form-input" placeholder="Second surname">
+            </div>
+            <div class="form-group">
+              <label class="form-label">NIE / NIF</label>
+              <input id="f-nie" class="form-input" placeholder="Z1234567T">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input id="f-email" class="form-input" type="email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Mobile phone</label>
+              <input id="f-phone" class="form-input" type="tel" placeholder="+34 6xx xxx xxx">
+            </div>
+          </div>
+        </div>
+
+        <!-- Supply Address -->
+        <div class="form-section">
+          <div class="form-section-label">🏠 Supply address</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label class="form-label">Full address</label>
+              <input id="f-address" class="form-input" placeholder="Calle Mayor 10">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Postal code</label>
+              <input id="f-postal" class="form-input" placeholder="30709">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Town</label>
+              <input id="f-municipality" class="form-input" placeholder="Murcia">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Province</label>
+              <input id="f-province" class="form-input" placeholder="Murcia">
+            </div>
+            <div class="form-group full">
+              <label class="form-label">CUPS number</label>
+              <input id="f-cups" class="form-input" placeholder="ES0021000013432884RF">
+              <div class="form-hint">Extracted from your bill · 20–22 characters starting ES</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="form-section">
+          <div class="form-section-label">💳 Bank details</div>
+          <p style="font-size:13px;color:var(--ink3);margin-bottom:14px;line-height:1.6">Your IBAN is needed for direct debit setup with the new provider. Your bank account does not change — only where your energy bill is taken from.</p>
+          <div class="form-group">
+            <label class="form-label">IBAN</label>
+            <div class="iban-wrap">
+              <span class="lock-icon">🔒</span>
+              <input id="f-iban" class="form-input iban-input" placeholder="ES45 0081 0544 0600 0273 ****">
+            </div>
+            <div class="form-hint">Your IBAN stays with your bank — this just sets up the direct debit instruction</div>
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent-box">
+          <input type="checkbox" class="consent-check" id="consent">
+          <label for="consent" class="consent-text">I explicitly authorise Switchr to submit this change of supplier request to the new provider on my behalf. I confirm that all provided data is accurate and I am the named holder of the supply point.</label>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitSwitch()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Submit switch request
+        </button>
+      </div>
+
+      <div class="modal-footer-trust">
+        <span>🔒 Bank-grade encryption</span>
+        <span>✓ GDPR compliant</span>
+        <span>✓ No exit fees</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ufyindkuuvsberajyiar.supabase.co';
+const SUBMIT_URL = SUPABASE_URL + '/functions/v1/website-submit-contract';
+
+/* ── Load session data ── */
+const params = new URLSearchParams(location.search);
+const sessionId = params.get('session');
+let _session = null;
+let _selectedTariffId = null;
+let _selectedProvider = null;
+let _selectedTariffName = null;
+
+(function init() {
+  const raw = sessionStorage.getItem('sw_session');
+  if (!raw) {
+    if (!sessionId) { document.body.innerHTML = '<div style="padding:40px;text-align:center"><h2>Session not found</h2><p>Please <a href="index.html">upload your bill again</a>.</p></div>'; return; }
+    // Session ID in URL but no sessionStorage — user refreshed or came back
+    // Show a minimal message (could fetch from API in future)
+    return;
+  }
+  try { _session = JSON.parse(raw); } catch (_) {}
+  if (!_session) return;
+
+  const ext = _session.extracted_data || {};
+  const comp = _session.comparison_result;
+
+  // Pick default tariff: bestTariff
+  const best = comp?.bestTariff;
+  if (best) {
+    _selectedTariffId = best.id;
+    _selectedProvider = best.provider;
+    _selectedTariffName = best.name;
+  }
+
+  // ── Update hero ──
+  if (best && comp) {
+    const saveNum = document.querySelector('.save-num');
+    if (saveNum) saveNum.textContent = '€' + Math.round(best.annualSaving);
+
+    const saveFrom = document.querySelector('.switch-from-to');
+    if (saveFrom) saveFrom.innerHTML = 'Switch from <strong>' + (ext.current_provider || 'your current provider') + '</strong> to <strong>' + best.name + '</strong>';
+
+    // Update percentage badge if present
+    const pct = comp.currentMonthly > 0 ? Math.round((best.monthlySaving / comp.currentMonthly) * 100) : 0;
+    const badge = document.querySelector('.save-badge');
+    if (badge) badge.textContent = pct + '% less than now';
+  }
+
+  // ── Update modal summary strip ──
+  const modalTariffLine = document.querySelector('#modal-form [style*="font-weight:500;color:var(--ink)"]');
+  if (modalTariffLine && best) modalTariffLine.textContent = (best.provider === 'nordy' ? 'Nordy' : 'Gana') + ' · ' + best.name;
+  const modalSavingLine = document.querySelector('#modal-form [style*="font-family:\'Sora\'"][style*="font-size:20px"]');
+  if (modalSavingLine && best) modalSavingLine.textContent = '€' + Math.round(best.annualSaving) + '/yr';
+
+  // ── Pre-fill form ──
+  function set(id, val) { const el = document.getElementById(id); if (el && val) { el.value = val; el.classList.add('prefilled'); } }
+  set('f-name', ext.name);
+  set('f-surname1', ext.surname1);
+  set('f-surname2', ext.surname2);
+  set('f-nie', ext.dni);
+  set('f-email', ext.email);
+  set('f-phone', ext.phone);
+  set('f-address', ext.address);
+  set('f-postal', ext.postal_code);
+  set('f-municipality', ext.municipality);
+  set('f-province', ext.province);
+  set('f-cups', ext.cups);
+  if (ext.iban_prefix) {
+    const ibanEl = document.getElementById('f-iban');
+    if (ibanEl) { ibanEl.placeholder = ext.iban_prefix + ' (enter full IBAN)'; }
+  }
+})();
+
+/* ── Modal helpers ── */
+function toggleCalc(el) {
+  const body = document.getElementById('calc-body');
+  const chevron = document.getElementById('calc-chevron');
+  body.classList.toggle('open');
+  chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  document.getElementById('modal-loading').classList.remove('show');
+  document.getElementById('confirm-screen').classList.remove('show');
+  document.getElementById('modal-form').style.display = '';
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+/* ── Submit ── */
+async function submitSwitch() {
+  const consent = document.getElementById('consent').checked;
+  if (!consent) { alert('Please confirm the authorisation checkbox to proceed.'); return; }
+
+  const g = id => (document.getElementById(id) || {}).value || '';
+  const payload = {
+    session_id: _session?.session_id || sessionId,
+    name: g('f-name'), surname1: g('f-surname1'), surname2: g('f-surname2'),
+    nie: g('f-nie'), email: g('f-email'), phone: g('f-phone'), iban: g('f-iban'),
+    address: g('f-address'), postal_code: g('f-postal'),
+    municipality: g('f-municipality'), province: g('f-province'),
+    cups: g('f-cups'),
+    power_p1: _session?.extracted_data?.power_p1 || 4.4,
+    power_p2: _session?.extracted_data?.power_p2 || 4.4,
+    selected_tariff_id: _selectedTariffId,
+    selected_tariff_name: _selectedTariffName,
+    selected_provider: _selectedProvider,
+  };
+
+  // Basic validation
+  const required = ['name','surname1','nie','email','phone','iban','cups','address','postal_code','municipality','province'];
+  const missing = required.filter(k => !payload[k]);
+  if (missing.length) { alert('Please fill in: ' + missing.join(', ')); return; }
+
+  // Show loading
+  document.getElementById('modal-form').style.display = 'none';
+  const loading = document.getElementById('modal-loading');
+  loading.classList.add('show');
+
+  try {
+    const res = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+
+    loading.classList.remove('show');
+
+    if (!res.ok || !data.success) {
+      document.getElementById('modal-form').style.display = '';
+      alert('Error: ' + (data.error || 'Something went wrong. Please try again.'));
+      return;
+    }
+
+    // Show confirm screen
+    const confirmScreen = document.getElementById('confirm-screen');
+    confirmScreen.classList.add('show');
+
+    // Update stepper
+    const steps = document.querySelectorAll('.step-item');
+    if (steps[2]) { steps[2].className = 'step-item done'; steps[2].querySelector('.step-circle').textContent = '✓'; }
+    if (steps[3]) { steps[3].className = 'step-item active'; steps[3].querySelector('.step-circle').textContent = '4'; }
+
+    // Show signing link for Gana
+    if (data.provider === 'gana' && data.signaturitUrl) {
+      const existing = confirmScreen.querySelector('.sign-link');
+      if (!existing) {
+        const link = document.createElement('a');
+        link.href = data.signaturitUrl;
+        link.target = '_blank';
+        link.className = 'sign-link';
+        link.style.cssText = 'display:inline-block;margin-top:16px;padding:12px 24px;background:var(--g);color:#fff;border-radius:10px;font-family:Sora,sans-serif;font-weight:700;text-decoration:none';
+        link.textContent = '✍ Sign your contract →';
+        confirmScreen.appendChild(link);
+      }
+    } else if (data.provider === 'nordy' || data.manual) {
+      // Nordy or manual flow
+      const title = confirmScreen.querySelector('h2,h3,[class*="title"]');
+      if (title) title.textContent = 'All done! Our team will contact you.';
+    }
+
+    // Clear session
+    sessionStorage.removeItem('sw_session');
+
+  } catch (err) {
+    loading.classList.remove('show');
+    document.getElementById('modal-form').style.display = '';
+    alert('Network error: ' + err.message);
+  }
+}
+
+function sendReport() {
+  const email = document.getElementById('email-input').value;
+  if (!email) { alert('Please enter your email address.'); return; }
+  alert('Report sent to ' + email + ' · We\'ll also send you a reminder in 48 hours.');
+}
+
+// Scroll-in animation
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
+}, { threshold: 0.1 });
+document.querySelectorAll('.scard,.dark-summary').forEach(el => { obs.observe(el); });
+</script>
+</body>
+</html>

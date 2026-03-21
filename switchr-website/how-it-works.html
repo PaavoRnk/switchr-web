@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Switchr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green: #25D366;
+    --green-dark: #128C7E;
+    --green-light: #dcf8c6;
+    --green-pale: #f0fdf4;
+    --ink: #0d1f1a;
+    --ink-secondary: #3d5450;
+    --ink-tertiary: #7a9490;
+    --border: rgba(37,211,102,0.15);
+    --surface: #f7fdf9;
+    --white: #ffffff;
+    --step-line: rgba(37,211,102,0.3);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--white);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  .logo {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700; font-size: 20px;
+    color: var(--ink); text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .logo-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--green);
+  }
+  nav a { color: var(--ink-secondary); text-decoration: none; font-size: 14px; font-weight: 400; }
+  nav a:hover { color: var(--ink); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-cta {
+    background: var(--green); color: var(--white) !important;
+    padding: 8px 20px; border-radius: 8px;
+    font-weight: 500; font-size: 14px;
+    display: flex; align-items: center; gap: 6px;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--green-dark) !important; }
+  .wa-icon { width: 16px; height: 16px; }
+
+  /* HERO */
+  .hero {
+    max-width: 780px; margin: 0 auto;
+    padding: 96px 40px 64px;
+    text-align: center;
+  }
+  .hero-kicker {
+    display: inline-block;
+    font-size: 12px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--green-dark);
+    background: var(--green-pale);
+    border: 1px solid rgba(37,211,102,0.2);
+    padding: 5px 14px; border-radius: 20px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700; line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  .hero h1 em { color: var(--green); font-style: normal; }
+  .hero-sub {
+    font-size: 18px; color: var(--ink-secondary);
+    font-weight: 300; max-width: 540px; margin: 0 auto 40px;
+    line-height: 1.65;
+  }
+  .hero-pills {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+    margin-bottom: 48px;
+  }
+  .pill {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--surface); border: 1px solid var(--border);
+    padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; color: var(--ink-secondary);
+  }
+  .pill-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+  /* STEPS */
+  .steps-wrapper {
+    max-width: 1040px; margin: 0 auto;
+    padding: 0 40px 120px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .step.visible { opacity: 1; transform: translateY(0); }
+  .step:last-child { border-bottom: none; }
+  .step.reverse { direction: rtl; }
+  .step.reverse > * { direction: ltr; }
+
+  .step-text { }
+  .step-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px; font-weight: 600; letter-spacing: .1em;
+    color: var(--green); text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .step-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(26px, 3vw, 34px);
+    font-weight: 700; line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .step-body {
+    font-size: 16px; color: var(--ink-secondary);
+    line-height: 1.7; margin-bottom: 20px;
+    font-weight: 300;
+  }
+  .step-detail {
+    font-size: 14px; color: var(--ink-tertiary);
+    line-height: 1.6;
+  }
+  .step-bullets { list-style: none; margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+  .step-bullets li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 14px; color: var(--ink-secondary);
+  }
+  .step-bullets li::before {
+    content: '';
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0; margin-top: 7px;
+  }
+  .step-tagline {
+    margin-top: 20px; padding: 12px 16px;
+    background: var(--green-pale);
+    border-left: 3px solid var(--green);
+    border-radius: 0 6px 6px 0;
+    font-size: 14px; color: var(--green-dark);
+    font-weight: 500; line-height: 1.5;
+  }
+
+  /* VISUAL CARDS */
+  .step-visual {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    min-height: 300px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .step-visual::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 70% 30%, rgba(37,211,102,0.06) 0%, transparent 60%);
+  }
+
+  /* Visual 1 — WA chat mockup */
+  .wa-mock {
+    width: 100%; max-width: 280px;
+    background: #ece5dd;
+    border-radius: 14px;
+    overflow: hidden;
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  }
+  .wa-header {
+    background: #128C7E;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .wa-avatar {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: white;
+  }
+  .wa-header-info p:first-child { font-size: 13px; font-weight: 500; color: white; }
+  .wa-header-info p:last-child { font-size: 10px; color: rgba(255,255,255,0.7); }
+  .wa-body { padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+  .wa-msg {
+    max-width: 85%;
+    padding: 7px 10px;
+    border-radius: 8px;
+    font-size: 12px; line-height: 1.45;
+  }
+  .wa-msg-in {
+    background: white;
+    border-radius: 2px 8px 8px 8px;
+    color: #111;
+    align-self: flex-start;
+  }
+  .wa-msg-out {
+    background: #dcf8c6;
+    border-radius: 8px 2px 8px 8px;
+    color: #111;
+    align-self: flex-end;
+  }
+  .wa-time { font-size: 9px; color: #999; text-align: right; margin-top: 3px; }
+  .wa-pdf-attach {
+    background: white; border-radius: 8px;
+    padding: 8px 10px;
+    display: flex; align-items: center; gap: 8px;
+    max-width: 85%; align-self: flex-end;
+    font-size: 11px; color: #333;
+  }
+  .pdf-icon {
+    width: 28px; height-font: 28px; flex-shrink: 0;
+    background: #FF3B30; border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: white; padding: 4px;
+  }
+  .typing { display: flex; gap: 3px; align-items: center; padding: 10px; background: white; border-radius: 2px 8px 8px 8px; align-self: flex-start; width: 44px; }
+  .typing span { width: 6px; height: 6px; background: #aaa; border-radius: 50%; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-5px); } }
+
+  /* Visual 2 — Bill extraction */
+  .extraction-mock {
+    width: 100%; max-width: 300px;
+  }
+  .bill-card {
+    background: white; border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    position: relative;
+  }
+  .bill-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .bill-provider { font-size: 11px; font-weight: 600; color: #e60000; }
+  .bill-period { font-size: 10px; color: #888; }
+  .bill-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 7px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 12px;
+  }
+  .bill-row:last-child { border-bottom: none; }
+  .bill-label { color: #555; }
+  .bill-val { font-weight: 500; color: var(--ink); }
+  .extracted-tag {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: var(--green-pale);
+    border: 1px solid rgba(37,211,102,0.3);
+    padding: 2px 7px; border-radius: 10px;
+    font-size: 10px; font-weight: 500; color: var(--green-dark);
+  }
+  .extracted-tag::before { content: '✓'; font-size: 9px; }
+  .scan-line {
+    position: absolute; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--green), transparent);
+    animation: scan 2s ease-in-out infinite;
+    top: 40px;
+  }
+  @keyframes scan { 0%,100% { top: 20px; opacity: 0; } 10%,90% { opacity: 1; } 50% { top: 180px; } }
+
+  /* Visual 3 — Tariff comparison */
+  .compare-mock {
+    width: 100%; max-width: 300px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .tariff-card {
+    background: white; border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 12px 16px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 13px;
+    transition: transform 0.2s;
+  }
+  .tariff-card.best {
+    border: 2px solid var(--green);
+    background: var(--green-pale);
+    transform: scale(1.02);
+  }
+  .tariff-name { font-weight: 500; color: var(--ink); }
+  .tariff-sub { font-size: 11px; color: var(--ink-tertiary); margin-top: 2px; }
+  .tariff-saving { font-weight: 700; font-size: 16px; color: var(--green); }
+  .tariff-saving.neutral { color: var(--ink-tertiary); font-size: 13px; font-weight: 400; }
+  .best-badge {
+    font-size: 10px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--green-dark); background: rgba(37,211,102,0.15);
+    padding: 2px 8px; border-radius: 10px; margin-bottom: 4px;
+  }
+  .compare-label {
+    font-size: 11px; color: var(--ink-tertiary); text-align: center;
+    margin-bottom: 4px;
+  }
+
+  /* Visual 4 — Switch result */
+  .result-mock {
+    width: 100%; max-width: 280px;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .result-card {
+    background: white; border-radius: 14px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 20px; text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  }
+  .result-saving-num {
+    font-family: 'Sora', sans-serif;
+    font-size: 40px; font-weight: 700;
+    color: var(--green); line-height: 1;
+    margin-bottom: 4px;
+  }
+  .result-saving-sub { font-size: 13px; color: var(--ink-tertiary); margin-bottom: 16px; }
+  .result-pct {
+    display: inline-flex; align-items: center; gap: 5px;
+    background: #1a1a1a; color: white;
+    padding: 5px 14px; border-radius: 20px;
+    font-size: 12px; font-weight: 500; margin-bottom: 16px;
+  }
+  .arrow-down { font-size: 10px; }
+  .switch-row {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    font-size: 12px; color: var(--ink-secondary);
+    margin-bottom: 14px;
+  }
+  .switch-provider { font-weight: 500; color: var(--ink); }
+  .switch-arrow {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--green-pale);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+  }
+  .cups-line { font-size: 10px; color: var(--ink-tertiary); font-family: monospace; }
+  .switch-btn {
+    width: 100%; padding: 10px;
+    background: var(--green); color: white;
+    border: none; border-radius: 8px;
+    font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .ticker {
+    background: white; border-radius: 8px;
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    font-size: 11px; color: var(--ink-secondary);
+    overflow: hidden; white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-block;
+    animation: ticker 12s linear infinite;
+  }
+  .ticker span { color: var(--green); font-weight: 500; }
+  @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+  /* BOTTOM CTA */
+  .bottom-cta {
+    background: var(--ink);
+    margin: 0; padding: 80px 40px;
+    text-align: center;
+  }
+  .bottom-cta h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700; color: white;
+    letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .bottom-cta p {
+    font-size: 17px; color: rgba(255,255,255,0.55);
+    font-weight: 300; max-width: 480px; margin: 0 auto 36px;
+    line-height: 1.6;
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--green); color: white;
+    padding: 14px 32px; border-radius: 10px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none; letter-spacing: -0.01em;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .cta-btn:hover { background: #1db954; transform: translateY(-1px); }
+  .cta-btn svg { width: 20px; height: 20px; }
+  .cta-trust {
+    margin-top: 20px; font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+  .cta-trust span { color: rgba(255,255,255,0.55); }
+
+  @media (max-width: 700px) {
+    .step { grid-template-columns: 1fr; gap: 32px; }
+    .step.reverse { direction: ltr; }
+    nav { padding: 0 20px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .hero, .steps-wrapper { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-dot"></div>
+    Switchr
+  </a>
+  <div class="nav-links">
+    <a href="#">How it works</a>
+    <a href="#">FAQ</a>
+    <a href="#" class="nav-cta">
+      <svg class="wa-icon" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start on WhatsApp
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-kicker">How Switchr works</div>
+  <h1>Your Spanish electricity bill —<br><em>sorted on WhatsApp.</em></h1>
+  <p class="hero-sub">No websites. No forms. No phone calls in Spanish. Just send us your bill and we handle everything — in English, in the app you already use.</p>
+  <div class="hero-pills">
+    <div class="pill"><div class="pill-dot"></div>Takes under 5 minutes</div>
+    <div class="pill"><div class="pill-dot"></div>100% free</div>
+    <div class="pill"><div class="pill-dot"></div>No power interruption</div>
+    <div class="pill"><div class="pill-dot"></div>English throughout</div>
+  </div>
+</section>
+
+<div class="steps-wrapper">
+
+  <!-- STEP 1 -->
+  <div class="step" data-step>
+    <div class="step-text">
+      <div class="step-num">Step 01</div>
+      <h2 class="step-title">Message us.<br>Send your bill.</h2>
+      <p class="step-body">Start a WhatsApp conversation with Switchr and send a photo or PDF of your latest electricity bill. That's the entire setup. No account, no login, no form.</p>
+      <ul class="step-bullets">
+        <li>PDF, photo, or screenshot — all work</li>
+        <li>Any Spanish provider: Iberdrola, Endesa, Naturgy, Octopus…</li>
+        <li>If you don't have your bill handy, just your CUPS code works too</li>
+      </ul>
+      <div class="step-tagline">You're talking to a bot that actually understands your bill — not a form pretending to.</div>
+    </div>
+    <div class="step-visual">
+      <div class="wa-mock">
+        <div class="wa-header">
+          <div class="wa-avatar">S</div>
+          <div class="wa-header-info">
+            <p>Switchr</p>
+            <p>Energy assistant</p>
+          </div>
+        </div>
+        <div class="wa-body">
+          <div class="wa-msg wa-msg-in">Hi! Send me your latest electricity bill and I'll check if you're overpaying. It takes about 5 minutes.</div>
+          <div class="wa-msg wa-msg-out">Here it is <div class="wa-time">09:14</div></div>
+          <div class="wa-pdf-attach">
+            <div class="pdf-icon">PDF</div>
+            <div>
+              <div style="font-weight:500;">factura_junio.pdf</div>
+              <div style="font-size:10px;color:#888;">248 KB</div>
+            </div>
+          </div>
+          <div class="typing"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 2 -->
+  <div class="step reverse" data-step>
+    <div class="step-text">
+      <div class="step-num">Step 02</div>
+      <h2 class="step-title">We read your bill.<br>Every line of it.</h2>
+      <p class="step-body">Our AI reads your bill the way an expert would — not just the total, but the breakdown that actually matters for calculating your real costs.</p>
+      <ul class="step-bullets">
+        <li>Consumption per time period (Punta, Llano, Valle)</li>
+        <li>Contracted power (Potencia) and what you're actually using</li>
+        <li>Your CUPS, current provider, and tariff type</li>
+        <li>Any maintenance fees or insurance you might not know you're paying</li>
+      </ul>
+      <div class="step-tagline">This is the step most services skip. We don't estimate — we calculate from your actual numbers.</div>
+    </div>
+    <div class="step-visual">
+      <div class="extraction-mock">
+        <div class="bill-card">
+          <div class="scan-line"></div>
+          <div class="bill-header">
+            <div class="bill-provider">IBERDROLA</div>
+            <div class="bill-period">01/06 – 30/06/2025</div>
+          </div>
+          <div class="bill-row">
+            <div class="bill-label">CUPS</div>
+            <div class="bill-val" style="font-size:10px;font-family:monospace;">ES0021 0000 1343 2884</div>
+          </div>
+          <div class="bill-row">
+            <div class="bill-label">Potencia (P1/P2)</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+              <div class="bill-val">3.45 kW</div>
+              <div class="extracted-tag">extracted</div>
+            </div>
+          </div>
+          <div class="bill-row">
+            <div class="bill-label">Consumo Punta (P1)</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+              <div class="bill-val">84 kWh</div>
+              <div class="extracted-tag">extracted</div>
+            </div>
+          </div>
+          <div class="bill-row">
+            <div class="bill-label">Consumo Valle (P3)</div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;">
+              <div class="bill-val">196 kWh</div>
+              <div class="extracted-tag">extracted</div>
+            </div>
+          </div>
+          <div class="bill-row">
+            <div class="bill-label">Total this bill</div>
+            <div class="bill-val" style="color:#e60000;">€82.40</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 3 -->
+  <div class="step" data-step>
+    <div class="step-text">
+      <div class="step-num">Step 03</div>
+      <h2 class="step-title">We find the tariff<br>that actually saves you money.</h2>
+      <p class="step-body">We run your real consumption numbers against all available tariff plans from our partner providers and calculate exactly what each one would have cost you last month.</p>
+      <ul class="step-bullets">
+        <li>Real comparison, not estimates — based on your kWh per period</li>
+        <li>Multiple tariff types evaluated against your usage pattern</li>
+        <li>We pick the winner, and explain why it suits your household</li>
+      </ul>
+      <p class="step-detail" style="margin-top:16px;">Most services guess your savings using averages. We use your numbers. That's why our estimates are conservative — and accurate.</p>
+    </div>
+    <div class="step-visual">
+      <div class="compare-mock">
+        <div class="compare-label">Best match for your usage profile</div>
+        <div class="tariff-card best">
+          <div>
+            <div class="best-badge">Best match</div>
+            <div class="tariff-name">Tarifa Tramos Horarios</div>
+            <div class="tariff-sub">Nordy · Variable</div>
+          </div>
+          <div>
+            <div class="tariff-saving">Save €38/mo</div>
+            <div style="font-size:10px;color:var(--green-dark);">~28% cheaper</div>
+          </div>
+        </div>
+        <div class="tariff-card">
+          <div>
+            <div class="tariff-name">Tarifa 24H</div>
+            <div class="tariff-sub">Gana Energía · Fixed</div>
+          </div>
+          <div class="tariff-saving neutral">Save €21/mo</div>
+        </div>
+        <div class="tariff-card">
+          <div>
+            <div class="tariff-name">Precio de Mercado</div>
+            <div class="tariff-sub">Gana Energía · Indexed</div>
+          </div>
+          <div class="tariff-saving neutral">Save €14/mo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STEP 4 -->
+  <div class="step reverse" data-step>
+    <div class="step-text">
+      <div class="step-num">Step 04</div>
+      <h2 class="step-title">We handle the switch.<br>You do nothing.</h2>
+      <p class="step-body">Once you say yes, we submit the contract directly to your new provider. No phone calls. No paperwork. Your electricity supply is never interrupted.</p>
+      <p class="step-body">The only thing that changes is the lower number at the bottom of your next bill.</p>
+      <ul class="step-bullets">
+        <li>Switch confirmed via WhatsApp — takes under 2 minutes</li>
+        <li>No contact with your old provider needed — we handle it</li>
+        <li>No interruption to your supply, ever</li>
+        <li>First cheaper bill typically within 3–4 weeks</li>
+      </ul>
+    </div>
+    <div class="step-visual">
+      <div class="result-mock">
+        <div class="result-card">
+          <div style="font-size:11px;color:var(--ink-tertiary);margin-bottom:8px;">#1 of 3 plans compared</div>
+          <div class="result-saving-num">€456</div>
+          <div class="result-saving-sub">estimated annual saving</div>
+          <div class="result-pct"><span class="arrow-down">↓</span> 28% less than your current bill</div>
+          <div class="switch-row">
+            <span class="switch-provider">Iberdrola</span>
+            <div class="switch-arrow">→</div>
+            <span class="switch-provider">Nordy</span>
+          </div>
+          <div class="cups-line">ES0021 0000 1343 2884 RF · Tramos Horarios</div>
+          <button class="switch-btn" style="margin-top:14px;">
+            <svg viewBox="0 0 24 24" fill="white" width="14" height="14"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Yes, switch me now
+          </button>
+        </div>
+        <div class="ticker">
+          <div class="ticker-inner">
+            <span>Emma saved €441/yr</span> · Costa Blanca · 2 days ago &nbsp;&nbsp;&nbsp;
+            <span>James saved €318/yr</span> · Murcia · 5 days ago &nbsp;&nbsp;&nbsp;
+            <span>Sarah saved €503/yr</span> · Alicante · 1 week ago &nbsp;&nbsp;&nbsp;
+            <span>Emma saved €441/yr</span> · Costa Blanca · 2 days ago &nbsp;&nbsp;&nbsp;
+            <span>James saved €318/yr</span> · Murcia · 5 days ago &nbsp;&nbsp;&nbsp;
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="bottom-cta">
+  <h2>Ready to stop overpaying?</h2>
+  <p>Join expats across Spain who've already switched. Takes 5 minutes, costs nothing.</p>
+  <a href="https://wa.me/34662403660" class="cta-btn">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Start on WhatsApp — it's free
+  </a>
+  <div class="cta-trust">100% free · <span>No power interruption</span> · English throughout · Murcia & beyond</div>
+</section>
+
+<script>
+const steps = document.querySelectorAll('[data-step]');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.15 });
+steps.forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
