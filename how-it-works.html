@@ -399,6 +399,8 @@ footer{background:#060f0c;padding:48px 40px 32px}
 .final-btn-web:hover{background:rgba(139,92,246,0.25)}
 .final-trust{font-size:12px;color:rgba(255,255,255,0.2)}
 .final-trust span{color:rgba(255,255,255,0.35)}
+#copy-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:#1a1a1a;color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;font-family:Sora,sans-serif;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999;white-space:nowrap}
+#copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -483,7 +485,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
             <div class="channel-card-steps">
               <span>Forward bill →</span><span>Receive report →</span><span>Confirm on WhatsApp</span>
             </div>
-            <a href="mailto:audit@switchr.es" class="channel-card-cta cta-em">audit@switchr.es →</a>
+            <button onclick="copyEmail()" class="channel-card-cta cta-em" style="cursor:pointer;border:none;font-family:inherit;">audit@switchr.es →</button>
           </div>
         </div>
 
@@ -700,6 +702,15 @@ const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
 }, {threshold:0.12});
 document.querySelectorAll('.step-block').forEach(el => obs.observe(el));
+
+function copyEmail() {
+  navigator.clipboard.writeText('audit@switchr.es').then(() => {
+    const t = document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  });
+}
 </script>
+<div id="copy-toast">📋 Email copied — paste it in the To field</div>
 </body>
 </html>
