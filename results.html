@@ -464,11 +464,11 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     <div class="save-period">estimated annual saving</div>
     <div class="pct-badge">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
-      28% less than your current bill
+      <span id="pct-text">28% less than your current bill</span>
     </div>
     <div class="switch-from-to">Switch from <strong>Iberdrola</strong> to <strong>Nordy — Tarifa Tramos</strong></div>
     <div style="margin-bottom:8px"><span class="tag tag-green">Fixed price · No exit fees · No minimum stay</span></div>
-    <div class="meta-line">CUPS: ES 0021 0000 1343 2884 RF &nbsp;·&nbsp; Period: 04/07/2025 – 24/07/2025 (30 days)</div>
+    <div class="meta-line" id="meta-line">CUPS: ES 0021 0000 1343 2884 RF &nbsp;·&nbsp; Period: 04/07/2025 – 24/07/2025 (30 days)</div>
   </div>
 
   <!-- TICKER -->
@@ -495,43 +495,39 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
         <div class="scard-sub">Your actual kWh per period vs. new rates</div>
       </div>
     </div>
-    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">We applied your real P1/P2/P3 consumption to both your current Iberdrola rates and the recommended tariff rates. Every figure comes from your bill — nothing estimated.</p>
+    <p id="s1-desc" style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">We applied your actual P1/P2/P3 consumption to the new tariff rates. Every kWh figure comes directly from your bill.</p>
 
     <table class="comp-table">
       <thead>
         <tr>
           <th style="text-align:left">Time period</th>
           <th>Annual usage</th>
-          <th>Current rate</th>
           <th>New rate</th>
-          <th>Annual saving</th>
+          <th>New annual cost</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Punta (P1)</td>
-          <td class="current-val">1,008 kWh</td>
-          <td class="current-val" style="color:var(--red)">€0.2156</td>
-          <td class="new-val">€0.1020</td>
-          <td class="current-val">€116.46<span class="saving-pill">−53%</span></td>
+          <td class="current-val" id="s1-p1-kwh">—</td>
+          <td class="new-val" id="s1-p1-rate">—</td>
+          <td class="current-val" id="s1-p1-cost">—</td>
         </tr>
         <tr>
           <td>Llano (P2)</td>
-          <td class="current-val">1,344 kWh</td>
-          <td class="current-val" style="color:var(--red)">€0.1890</td>
-          <td class="new-val">€0.0890</td>
-          <td class="current-val">€134.40<span class="saving-pill">−53%</span></td>
+          <td class="current-val" id="s1-p2-kwh">—</td>
+          <td class="new-val" id="s1-p2-rate">—</td>
+          <td class="current-val" id="s1-p2-cost">—</td>
         </tr>
         <tr>
           <td>Valle (P3)</td>
-          <td class="current-val">2,352 kWh</td>
-          <td class="current-val" style="color:var(--red)">€0.1240</td>
-          <td class="new-val">€0.0480</td>
-          <td class="current-val">€178.75<span class="saving-pill">−61%</span></td>
+          <td class="current-val" id="s1-p3-kwh">—</td>
+          <td class="new-val" id="s1-p3-rate">—</td>
+          <td class="current-val" id="s1-p3-cost">—</td>
         </tr>
         <tr class="you-save-row">
-          <td colspan="4" class="you-save-label">Energy saving total</td>
-          <td class="you-save-val" style="font-size:18px">€429.61/yr</td>
+          <td colspan="3" class="you-save-label">New annual energy cost</td>
+          <td class="you-save-val" id="s1-total-energy" style="font-size:18px">—</td>
         </tr>
       </tbody>
     </table>
@@ -543,62 +539,39 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
       <div class="scard-num-badge amber">2</div>
       <div>
         <div class="scard-title">Potencia (contracted power)</div>
-        <div class="scard-sub">Fixed daily charges comparison</div>
+        <div class="scard-sub">Fixed daily charges with new tariff</div>
       </div>
     </div>
-    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Your contracted power is 3.45kW on both P1 and P2. These are the fixed daily charges you pay regardless of consumption. The new provider's rates here are slightly higher — we've included this in the total calculation.</p>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">These are the fixed daily charges based on your contracted power — paid regardless of how much electricity you use. Shown here at the new provider's rates.</p>
 
-    <div class="rate-grid">
-      <div class="rate-card current">
-        <div class="rate-card-label">Current Iberdrola</div>
-        <div class="rate-card-period">P1 (punta)</div>
-        <div class="rate-card-val">€0.1137<span style="font-size:13px;font-weight:400">/kW·day</span></div>
-      </div>
-      <div class="rate-card new">
-        <div class="rate-card-label">Nordy Tarifa Tramos</div>
-        <div class="rate-card-period">P1 (punta)</div>
-        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
-      </div>
-      <div class="rate-card current">
-        <div class="rate-card-label">Current Iberdrola</div>
-        <div class="rate-card-period">P2 (llano/valle)</div>
-        <div class="rate-card-val">€0.0465<span style="font-size:13px;font-weight:400">/kW·day</span></div>
-      </div>
-      <div class="rate-card new">
-        <div class="rate-card-label">Nordy Tarifa Tramos</div>
-        <div class="rate-card-period">P2 (llano/valle)</div>
-        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
-      </div>
-    </div>
-
-    <div style="background:#fafafa;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:13px;color:var(--ink2)">Net potencia difference (annual)</div>
-      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--amber)">+€47.58 <span style="font-size:12px;font-weight:400;color:var(--ink4)">(slightly higher)</span></div>
-    </div>
-  </div>
-
-  <!-- SECTION 3: OPTIONAL SERVICES -->
-  <div class="scard" style="animation-delay:.3s">
-    <div class="scard-header">
-      <div class="scard-num-badge blue">3</div>
-      <div>
-        <div class="scard-title">Optional service on your bill</div>
-        <div class="scard-sub">Audit result · charges you may not know about</div>
-      </div>
-    </div>
-    <p style="font-size:14px;color:var(--ink3);margin-bottom:16px;line-height:1.6">We found an optional maintenance service bundled into your current bill. This is not required by law and is not included in the new provider's contract.</p>
-    <div class="audit-highlight">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <div>
-          <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#92400e;margin-bottom:4px">Pack Iberdrola Hogar</div>
-          <p>You are currently paying for an optional maintenance service. <strong>It is not required by the new provider.</strong> Switching automatically removes this charge.</p>
-        </div>
-        <div style="text-align:right;flex-shrink:0;margin-left:20px">
-          <div style="font-size:11px;color:#92400e;font-weight:600;text-transform:uppercase">Annual cost</div>
-          <div class="audit-amount">€129</div>
-        </div>
-      </div>
-    </div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Period</th>
+          <th>Contracted power</th>
+          <th>New rate</th>
+          <th>Annual cost</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P1 (Punta)</td>
+          <td class="current-val" id="s2-power-p1">—</td>
+          <td class="new-val" id="s2-pp1-rate">—</td>
+          <td class="current-val" id="s2-p1-cost">—</td>
+        </tr>
+        <tr>
+          <td>P2 (Llano/Valle)</td>
+          <td class="current-val" id="s2-power-p2">—</td>
+          <td class="new-val" id="s2-pp2-rate">—</td>
+          <td class="current-val" id="s2-p2-cost">—</td>
+        </tr>
+        <tr class="you-save-row">
+          <td colspan="3" class="you-save-label">New annual potencia cost</td>
+          <td class="you-save-val" id="s2-potencia-total" style="font-size:18px">—</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <!-- DARK SUMMARY -->
@@ -610,26 +583,26 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
       <div class="ds-costs">
         <div class="ds-cost-row">
           <div class="ds-cost-label">Your current annual cost</div>
-          <div class="ds-cost-val">€1,632</div>
+          <div class="ds-cost-val" id="ds-current-annual">€1,632</div>
         </div>
         <div class="ds-cost-row">
           <div class="ds-cost-label">New estimated annual cost</div>
-          <div class="ds-cost-val" style="color:var(--g)">€1,176</div>
+          <div class="ds-cost-val" id="ds-new-annual" style="color:var(--g)">€1,176</div>
         </div>
         <div class="ds-cost-row divider">
           <div class="ds-cost-label" style="color:var(--g);font-weight:600">You save</div>
-          <div class="ds-cost-val" style="color:var(--g);font-size:18px;font-weight:700">€456 / year</div>
+          <div class="ds-cost-val" id="ds-saving-amount" style="color:var(--g);font-size:18px;font-weight:700">€456 / year</div>
         </div>
       </div>
     </div>
     <div class="ds-right">
       <div class="ds-est-label">Estimated first year saving</div>
-      <div class="ds-big-num">€456</div>
-      <div class="ds-per-month">≈ €38 per month</div>
+      <div class="ds-big-num" id="ds-big-num">€456</div>
+      <div class="ds-per-month" id="ds-per-month">≈ €38 per month</div>
       <div class="ds-new-cost">
         <div class="ds-new-cost-label">Your new annual cost</div>
-        <div class="ds-new-cost-val">€1,176</div>
-        <div class="ds-new-cost-from">Down from €1,632</div>
+        <div class="ds-new-cost-val" id="ds-new-cost-val">€1,176</div>
+        <div class="ds-new-cost-from" id="ds-new-cost-from">Down from €1,632</div>
       </div>
       <div class="ds-trust">
         <div class="ds-trust-item">
@@ -658,16 +631,15 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
       <svg id="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="calc-body" id="calc-body">
-      <p>All figures are calculated using your actual metered consumption from the bill you submitted, your billing dates, and your currently contracted power (potencia).</p>
+      <p>All figures are calculated using your actual metered consumption from the bill you submitted, your billing dates, and your currently contracted power.</p>
       <ul>
-        <li>Annual totals are estimated using your supplier's stated yearly usage and today's published tariff rates</li>
+        <li>Annual totals are scaled from your billing period to 365 days using today's published tariff rates</li>
         <li>Energy prices include IEE (5.11%) and IVA (21%) as required by Spanish law</li>
-        <li>Potencia charges are based on your current contracted 3.45kW on both P1 and P2 — we do not assume a power reduction</li>
-        <li>Optional services (Pack Iberdrola Hogar) are included in your current cost and excluded from the new cost, as they are not part of the new provider's offer</li>
-        <li>No change to your electricity consumption habits is assumed — we use your actual P1/P2/P3 split</li>
+        <li>Potencia charges are based on your contracted <span id="calc-potencia-kw">power</span> — no change to contracted power is assumed</li>
+        <li>No change to your electricity consumption habits is assumed — we use your actual P1/P2/P3 split where available</li>
       </ul>
       <div style="margin-top:12px;padding:10px 12px;background:var(--gp);border-radius:8px;font-size:12px;color:var(--gd)">
-        ALL CONTRACTS ARE DIRECT WITH GANA ENERGÍA. NO EXIT FEES. NO MINIMUM STAY.
+        ALL CONTRACTS ARE DIRECT WITH THE PROVIDER. NO EXIT FEES. NO MINIMUM STAY.
       </div>
     </div>
   </div>
@@ -695,7 +667,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 <div class="sticky-footer">
   <div class="sf-saving">
     <div class="sf-saving-label">Estimated saving</div>
-    <div class="sf-saving-val">€456 / year</div>
+    <div class="sf-saving-val" id="sf-saving-val">€456 / year</div>
   </div>
   <div class="sf-trust">
     <div class="sf-trust-item">
@@ -709,8 +681,8 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   </div>
   <button class="switch-cta" onclick="openModal()">
     <div>
-      <div>Switch to Tarifa Tramos</div>
-      <div class="switch-cta-sub">Save €456 per year →</div>
+      <div id="sf-tariff-name">Switch to Tarifa Tramos</div>
+      <div class="switch-cta-sub" id="sf-saving-sub">Save €456 per year →</div>
     </div>
   </button>
 </div>
@@ -736,7 +708,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     <div class="confirm-screen" id="confirm-screen">
       <div class="confirm-icon">✅</div>
       <div class="confirm-title">Switch confirmed!</div>
-      <div class="confirm-sub">Your switch to Nordy — Tarifa Tramos has been submitted. You'll receive a confirmation email shortly.</div>
+      <div class="confirm-sub">Your switch to <span id="confirm-tariff">Nordy — Tarifa Tramos</span> has been submitted. You'll receive a confirmation email shortly.</div>
       <div class="confirm-steps">
         <div class="confirm-step"><div class="confirm-step-num">1</div><div>Your new provider will contact your current supplier within 24 hours</div></div>
         <div class="confirm-step"><div class="confirm-step-num">2</div><div>Switch completes in 3–4 working days — no interruption to your supply</div></div>
@@ -757,11 +729,11 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
         <div style="background:var(--gp);border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center">
           <div>
             <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gd);margin-bottom:2px">Switching to</div>
-            <div style="font-size:14px;font-weight:500;color:var(--ink)">Nordy · Tarifa Tramos</div>
+            <div id="modal-tariff-name" style="font-size:14px;font-weight:500;color:var(--ink)">Nordy · Tarifa Tramos</div>
           </div>
           <div style="text-align:right">
             <div style="font-size:11px;color:var(--gd);font-weight:600;text-transform:uppercase">Saving</div>
-            <div style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--g)">€456/yr</div>
+            <div id="modal-saving-amount" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--g)">€456/yr</div>
           </div>
         </div>
 
@@ -875,61 +847,147 @@ let _selectedTariffName = null;
 (function init() {
   const raw = sessionStorage.getItem('sw_session');
   if (!raw) {
-    if (!sessionId) { document.body.innerHTML = '<div style="padding:40px;text-align:center"><h2>Session not found</h2><p>Please <a href="index.html">upload your bill again</a>.</p></div>'; return; }
-    // Session ID in URL but no sessionStorage — user refreshed or came back
-    // Show a minimal message (could fetch from API in future)
+    if (!sessionId) { document.body.innerHTML = '<div style="padding:40px;text-align:center"><h2>Session not found</h2><p>Please <a href="index.html">upload your bill again</a>.</p></div>'; }
     return;
   }
-  try { _session = JSON.parse(raw); } catch (_) {}
+  try { _session = JSON.parse(raw); } catch (e) { return; }
   if (!_session) return;
 
-  const ext = _session.extracted_data || {};
+  const ext  = _session.extracted_data  || {};
   const comp = _session.comparison_result;
-
-  // Pick default tariff: bestTariff
   const best = comp?.bestTariff;
-  if (best) {
-    _selectedTariffId = best.id;
-    _selectedProvider = best.provider;
-    _selectedTariffName = best.name;
-  }
+  if (!best || !comp) return;
 
-  // ── Update hero ──
-  if (best && comp) {
-    const saveNum = document.querySelector('.save-num');
-    if (saveNum) saveNum.textContent = '€' + Math.round(best.annualSaving);
+  _selectedTariffId   = best.id;
+  _selectedProvider   = best.provider;
+  _selectedTariffName = best.name;
 
-    const saveFrom = document.querySelector('.switch-from-to');
-    if (saveFrom) saveFrom.innerHTML = 'Switch from <strong>' + (ext.current_provider || 'your current provider') + '</strong> to <strong>' + best.name + '</strong>';
+  const TAX   = 1.0511 * 1.21;
+  const days  = Number(ext.billing_period_days) || 30;
+  const scale = 365 / days;
 
-    // Update percentage badge if present
-    const pct = comp.currentMonthly > 0 ? Math.round((best.monthlySaving / comp.currentMonthly) * 100) : 0;
-    const badge = document.querySelector('.save-badge');
-    if (badge) badge.textContent = pct + '% less than now';
-  }
+  // Annualised kWh
+  const p1Ann = Math.round((Number(ext.punta_kwh) || 0) * scale);
+  const p2Ann = Math.round((Number(ext.llano_kwh) || 0) * scale);
+  const p3Ann = Math.round((Number(ext.valle_kwh) || 0) * scale);
 
-  // ── Update modal summary strip ──
-  const modalTariffLine = document.querySelector('#modal-form [style*="font-weight:500;color:var(--ink)"]');
-  if (modalTariffLine && best) modalTariffLine.textContent = (best.provider === 'nordy' ? 'Nordy' : 'Gana') + ' · ' + best.name;
-  const modalSavingLine = document.querySelector('#modal-form [style*="font-family:\'Sora\'"][style*="font-size:20px"]');
-  if (modalSavingLine && best) modalSavingLine.textContent = '€' + Math.round(best.annualSaving) + '/yr';
+  // New tariff rates
+  const ep  = best.ep  || 0;
+  const el  = best.el  || 0;
+  const ev  = best.ev  || 0;
+  const pp1 = best.pp1 || 0;
+  const pp2 = best.pp2 || 0;
+  const p1kw = Number(ext.power_p1) || 4.4;
+  const p2kw = Number(ext.power_p2) || p1kw;
+
+  // Annual energy costs (inc tax)
+  const p1Cost     = Math.round(p1Ann * ep * TAX);
+  const p2Cost     = Math.round(p2Ann * el * TAX);
+  const p3Cost     = Math.round(p3Ann * ev * TAX);
+  const totalEnergy = p1Cost + p2Cost + p3Cost;
+
+  // Annual potencia costs (inc tax)
+  const pot1Cost = Math.round(p1kw * pp1 * 365 * TAX);
+  const pot2Cost = Math.round(p2kw * pp2 * 365 * TAX);
+  const potTotal = pot1Cost + pot2Cost;
+
+  // Overall financials
+  const currentAnnual = Math.round(comp.currentMonthly * 12);
+  const newAnnual     = Math.round(best.estimatedMonthly * 12);
+  const annualSaving  = Math.round(best.annualSaving);
+  const monthlySaving = Math.round(best.monthlySaving);
+  const pct = currentAnnual > 0 ? Math.round((annualSaving / currentAnnual) * 100) : 0;
+
+  const tariffLabel     = best.name;
+  const tariffShort     = tariffLabel.includes(' — ') ? tariffLabel.split(' — ')[1] : tariffLabel;
+  const currentProvider = ext.current_provider || 'your current provider';
+
+  const fmt     = n => '€' + Math.round(n).toLocaleString('en-GB');
+  const fmtRate = r => '€' + Number(r).toFixed(4);
+
+  function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+
+  // ── Hero ──
+  const saveNumEl = document.querySelector('.save-num');
+  if (saveNumEl) saveNumEl.textContent = fmt(annualSaving);
+  const switchFromTo = document.querySelector('.switch-from-to');
+  if (switchFromTo) switchFromTo.innerHTML = 'Switch from <strong>' + currentProvider + '</strong> to <strong>' + tariffLabel + '</strong>';
+  set('pct-text', pct + '% less than your current bill');
+
+  // ── Meta line ──
+  const cupsFormatted = (ext.cups || '').replace(/(.{4})/g, '$1 ').trim();
+  const metaParts = [];
+  if (cupsFormatted) metaParts.push('CUPS: ' + cupsFormatted);
+  metaParts.push('Based on ' + days + '-day billing period');
+  set('meta-line', metaParts.join('  ·  '));
+
+  // ── Section 1 ──
+  set('s1-desc', comp.hasTramosData
+    ? 'We applied your actual P1/P2/P3 consumption to the new tariff rates. Every kWh figure comes directly from your bill.'
+    : 'Your bill did not include a full P1/P2/P3 breakdown — the figures below use a typical usage split as an estimate.');
+  set('s1-p1-kwh',      p1Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p2-kwh',      p2Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p3-kwh',      p3Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p1-rate',     fmtRate(ep));
+  set('s1-p2-rate',     fmtRate(el));
+  set('s1-p3-rate',     fmtRate(ev));
+  set('s1-p1-cost',     fmt(p1Cost));
+  set('s1-p2-cost',     fmt(p2Cost));
+  set('s1-p3-cost',     fmt(p3Cost));
+  set('s1-total-energy', fmt(totalEnergy) + '/yr');
+
+  // ── Section 2 ──
+  set('s2-power-p1',      p1kw + ' kW');
+  set('s2-power-p2',      p2kw + ' kW');
+  set('s2-pp1-rate',      fmtRate(pp1) + '/kW·day');
+  set('s2-pp2-rate',      fmtRate(pp2) + '/kW·day');
+  set('s2-p1-cost',       fmt(pot1Cost));
+  set('s2-p2-cost',       fmt(pot2Cost));
+  set('s2-potencia-total', fmt(potTotal) + '/yr');
+
+  // ── Dark summary ──
+  const dsSubEl = document.querySelector('.ds-subtitle');
+  if (dsSubEl) dsSubEl.textContent = 'Based on ' + comp.annualKwh.toLocaleString('en-GB') + ' kWh annual consumption';
+  set('ds-current-annual', fmt(currentAnnual));
+  set('ds-new-annual',     fmt(newAnnual));
+  set('ds-saving-amount',  fmt(annualSaving) + ' / year');
+  set('ds-big-num',        fmt(annualSaving));
+  set('ds-per-month',      '≈ ' + fmt(monthlySaving) + ' per month');
+  set('ds-new-cost-val',   fmt(newAnnual));
+  set('ds-new-cost-from',  'Down from ' + fmt(currentAnnual));
+
+  // ── How calculated ──
+  set('calc-potencia-kw', p1kw + ' kW (P1) and ' + p2kw + ' kW (P2)');
+
+  // ── Sticky footer ──
+  set('sf-saving-val',  fmt(annualSaving) + ' / year');
+  set('sf-tariff-name', 'Switch to ' + tariffShort);
+  set('sf-saving-sub',  'Save ' + fmt(annualSaving) + ' per year →');
+
+  // ── Confirm screen ──
+  set('confirm-tariff', tariffLabel);
+
+  // ── Modal summary strip ──
+  const providerLabel = best.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+  set('modal-tariff-name',   providerLabel + ' · ' + tariffLabel);
+  set('modal-saving-amount', fmt(annualSaving) + '/yr');
 
   // ── Pre-fill form ──
-  function set(id, val) { const el = document.getElementById(id); if (el && val) { el.value = val; el.classList.add('prefilled'); } }
-  set('f-name', ext.name);
-  set('f-surname1', ext.surname1);
-  set('f-surname2', ext.surname2);
-  set('f-nie', ext.dni);
-  set('f-email', ext.email);
-  set('f-phone', ext.phone);
-  set('f-address', ext.address);
-  set('f-postal', ext.postal_code);
-  set('f-municipality', ext.municipality);
-  set('f-province', ext.province);
-  set('f-cups', ext.cups);
+  function fillField(id, val) { const el = document.getElementById(id); if (el && val) { el.value = val; el.classList.add('prefilled'); } }
+  fillField('f-name',         ext.name);
+  fillField('f-surname1',     ext.surname1);
+  fillField('f-surname2',     ext.surname2);
+  fillField('f-nie',          ext.dni);
+  fillField('f-email',        ext.email);
+  fillField('f-phone',        ext.phone);
+  fillField('f-address',      ext.address);
+  fillField('f-postal',       ext.postal_code);
+  fillField('f-municipality', ext.municipality);
+  fillField('f-province',     ext.province);
+  fillField('f-cups',         ext.cups);
   if (ext.iban_prefix) {
     const ibanEl = document.getElementById('f-iban');
-    if (ibanEl) { ibanEl.placeholder = ext.iban_prefix + ' (enter full IBAN)'; }
+    if (ibanEl) ibanEl.placeholder = ext.iban_prefix + ' (enter full IBAN)';
   }
 })();
 
