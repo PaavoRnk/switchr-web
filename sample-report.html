@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZF2VXXL0FP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample Savings Report — Switchr</title>
+<meta name="description" content="See what a Switchr electricity savings report looks like. Sample analysis switching from Endesa to Nordy, saving €392/year.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--gp:#f0fdf4;--gb:rgba(37,211,102,0.12);
+  --ink:#0a1a15;--ink2:#2d4a3e;--ink3:#6b8c7e;--ink4:#a8c4b8;
+  --bg:#f8fdfb;--white:#fff;
+  --red:#e53e3e;--amber:#d97706;
+  --border:rgba(37,211,102,0.15);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 40px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Sora',sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:14px;color:var(--ink2);text-decoration:none;font-weight:400;transition:color .15s}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--g);color:#fff;padding:8px 18px;
+  border-radius:8px;font-size:13px;font-weight:600;
+  font-family:'Sora',sans-serif;text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--gd);color:#fff}
+
+/* ── SAMPLE BANNER ── */
+.sample-banner{
+  background:#fffbeb;border-bottom:1px solid #fde68a;
+  padding:10px 32px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  font-size:13px;color:#78350f;font-weight:500;
+}
+.sample-badge{
+  display:inline-flex;align-items:center;gap:4px;
+  background:#fef3c7;border:1px solid #fbbf24;border-radius:6px;
+  padding:2px 8px;font-size:11px;font-weight:700;
+  letter-spacing:.06em;text-transform:uppercase;color:#92400e;
+  flex-shrink:0;
+}
+
+/* ── MAIN ── */
+main{max-width:900px;margin:0 auto;padding:0 32px 120px}
+
+/* ── RESULTS HERO ── */
+.results-hero{
+  text-align:center;
+  padding:40px 0 32px;
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.analyzed-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gp);border:1px solid var(--border);
+  padding:5px 14px;border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--gd);
+  margin-bottom:20px;
+}
+.save-num{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(64px,10vw,96px);
+  font-weight:800;line-height:.95;
+  color:var(--g);letter-spacing:-0.03em;
+  margin-bottom:4px;
+}
+.save-period{font-size:18px;color:var(--ink3);font-weight:300;margin-bottom:16px}
+.pct-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--ink);color:#fff;
+  padding:7px 18px;border-radius:24px;
+  font-size:13px;font-weight:500;
+  margin-bottom:20px;
+}
+.switch-from-to{font-size:15px;color:var(--ink2);margin-bottom:8px}
+.switch-from-to strong{color:var(--ink);font-weight:500}
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
+.tag-green{background:var(--gp);color:var(--gd)}
+.meta-line{font-size:12px;color:var(--ink4);font-family:monospace}
+
+/* ── TICKER ── */
+.ticker-wrap{
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:10px 0;margin:0 -32px 32px;background:var(--white);
+}
+.ticker-inner{
+  display:inline-flex;gap:40px;white-space:nowrap;
+  animation:tick 18s linear infinite;
+}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3)}
+.tick-item strong{color:var(--g)}
+.tick-dot{width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0}
+
+/* ── SECTION CARD ── */
+.scard{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:28px;margin-bottom:16px;
+  animation:fadeUp .5s ease both;
+}
+.scard-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.scard-num-badge{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#fff;flex-shrink:0;margin-top:6px;
+}
+.scard-num-badge.green{background:var(--g)}
+.scard-num-badge.amber{background:#d97706}
+.scard-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.scard-sub{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4)}
+
+/* ── COMPARISON TABLE ── */
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table th{
+  font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink4);padding:8px 0;text-align:right;
+}
+.comp-table th:first-child{text-align:left}
+.comp-table td{padding:14px 0;border-bottom:1px solid #f0f7f3;font-size:14px;text-align:right;vertical-align:middle}
+.comp-table td:first-child{text-align:left;color:var(--ink2);font-weight:400}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table .current-val{color:var(--ink);font-weight:500}
+.comp-table .new-val{color:var(--g);font-weight:700;font-size:16px}
+.comp-table .saving-pill{
+  display:inline-block;
+  background:var(--gp);color:var(--gd);
+  padding:2px 8px;border-radius:10px;
+  font-size:11px;font-weight:600;margin-left:6px;
+}
+.you-save-row td{padding:18px 12px!important;border-bottom:none!important}
+.you-save-label{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--gd);text-transform:uppercase;letter-spacing:.06em}
+.you-save-val{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--g)}
+.you-save-row{background:var(--gp)}
+
+/* ── RATE GRID ── */
+.rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.rate-card{border-radius:10px;padding:14px 16px}
+.rate-card.current{background:#fafafa;border:1px solid #eee}
+.rate-card.new{background:var(--gp);border:1px solid var(--border)}
+.rate-card-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.rate-card.current .rate-card-label{color:var(--ink4)}
+.rate-card.new .rate-card-label{color:var(--gd)}
+.rate-card-period{font-size:12px;color:var(--ink3);margin-bottom:8px}
+.rate-card-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:700}
+.rate-card.current .rate-card-val{color:var(--red)}
+.rate-card.new .rate-card-val{color:var(--g)}
+
+/* ── DARK SUMMARY ── */
+.dark-summary{
+  background:var(--ink);border-radius:var(--r2);
+  padding:32px;margin-bottom:16px;
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  align-items:start;
+  animation:fadeUp .5s ease both;
+}
+.ds-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.ds-subtitle{font-size:13px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px}
+.ds-body{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7}
+.ds-costs{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.ds-cost-row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.ds-cost-label{color:rgba(255,255,255,0.5)}
+.ds-cost-val{font-weight:500;color:#fff}
+.ds-cost-row.divider{border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;margin-top:4px}
+.ds-right{
+  background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.2);
+  border-radius:16px;padding:24px;text-align:center;
+}
+.ds-est-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px}
+.ds-big-num{font-family:'Sora',sans-serif;font-size:52px;font-weight:800;color:var(--g);line-height:1;margin-bottom:4px}
+.ds-per-month{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.ds-new-cost{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px;margin-bottom:16px}
+.ds-new-cost-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.4);margin-bottom:4px}
+.ds-new-cost-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#fff}
+.ds-new-cost-from{font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px}
+.ds-trust{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.ds-trust-item{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,0.4)}
+
+/* ── HOW CALCULATED ── */
+.calc-accordion{
+  border:1px solid var(--border2);border-radius:10px;
+  overflow:hidden;margin-top:8px;
+}
+.calc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;cursor:pointer;
+  background:#fafafa;
+  font-size:13px;font-weight:500;color:var(--ink2);
+  user-select:none;
+}
+.calc-header:hover{background:#f5f5f5}
+.calc-body{
+  display:none;padding:16px 18px;font-size:13px;color:var(--ink3);line-height:1.7;
+  border-top:1px solid var(--border2);background:#fff;
+}
+.calc-body.open{display:block}
+.calc-body ul{padding-left:18px;margin-top:8px}
+.calc-body li{margin-bottom:4px}
+
+/* ── CTA CARD ── */
+.cta-card{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:36px 28px;text-align:center;margin-bottom:16px;
+}
+.cta-card-icon{font-size:36px;margin-bottom:14px}
+.cta-card h3{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.cta-card p{font-size:15px;color:var(--ink3);margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.6}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-wa{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--g);color:#fff;padding:13px 26px;
+  border-radius:10px;font-family:'Sora',sans-serif;
+  font-size:14px;font-weight:700;text-decoration:none;
+  transition:background .2s;
+}
+.btn-wa:hover{background:var(--gd)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#fff;color:var(--ink2);padding:13px 22px;
+  border-radius:10px;border:1px solid var(--border2);
+  font-size:14px;font-weight:500;text-decoration:none;
+  transition:background .15s;
+}
+.btn-secondary:hover{background:#f5f5f5}
+.cta-trust{margin-top:14px;font-size:12px;color:var(--ink4);display:flex;align-items:center;justify-content:center;gap:16px}
+.cta-trust-item{display:flex;align-items:center;gap:4px}
+
+/* ── STICKY FOOTER ── */
+.sticky-footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(248,253,251,0.95);backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  padding:12px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.sf-saving{display:flex;flex-direction:column}
+.sf-saving-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);font-weight:600}
+.sf-saving-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--g)}
+.sf-trust{display:flex;gap:20px;font-size:12px;color:var(--ink3)}
+.sf-trust-item{display:flex;align-items:center;gap:5px}
+.switch-cta{
+  display:flex;align-items:center;gap:10px;
+  background:var(--g);color:#fff;
+  padding:12px 24px;border-radius:10px;
+  border:none;font-family:'Sora',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;
+  white-space:nowrap;transition:background .2s;
+  text-decoration:none;
+}
+.switch-cta:hover{background:var(--gd)}
+.switch-cta-sub{font-size:11px;opacity:.75;font-weight:400;margin-top:1px}
+
+/* ── FOOTER ── */
+footer{background:#060f0c;padding:48px 40px 32px}
+.footer-inner{max-width:1040px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.65;max-width:240px}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;margin-bottom:7px}
+.footer-col a:hover{color:rgba(255,255,255,0.75)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.18)}
+
+/* ── COPY TOAST ── */
+#copy-toast{
+  position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(10px);
+  background:var(--ink);color:#fff;padding:9px 18px;border-radius:8px;
+  font-size:13px;font-weight:500;opacity:0;transition:opacity .25s,transform .25s;z-index:500;pointer-events:none;
+}
+#copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  nav{padding:0 16px}
+  .nav-links a:not(.nav-cta){display:none}
+  main{padding:0 16px 120px}
+  .dark-summary{grid-template-columns:1fr}
+  .rate-grid{grid-template-columns:1fr}
+  .sticky-footer{padding:12px 16px}
+  .sf-trust{display:none}
+  .sample-banner{padding:10px 16px;font-size:12px}
+  .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .footer-top{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV:START -->
+<nav>
+  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <div class="nav-links">
+    <a href="index.html#how-it-works">How it works</a>
+    <a href="how-it-works.html">Full explainer</a>
+    <a href="index.html#market-watch">Market watch</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/34662403660" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start now
+    </a>
+  </div>
+</nav>
+<!-- NAV:END -->
+
+<!-- SAMPLE BANNER -->
+<div class="sample-banner">
+  <span class="sample-badge">Sample</span>
+  This is an example report — all figures are based on fictional customer data for illustration purposes only.
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="results-hero">
+    <div class="analyzed-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Best tariff match · calculated from actual usage
+    </div>
+    <div class="save-num">€392</div>
+    <div class="save-period">estimated annual saving</div>
+    <div class="pct-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      27% less than current bill
+    </div>
+    <div class="switch-from-to">Switch from <strong>Endesa</strong> to <strong>Nordy — Tarifa Luz</strong></div>
+    <div style="margin-bottom:8px"><span class="tag tag-green">Fixed price · No exit fees · No minimum stay</span></div>
+    <div class="meta-line">CUPS: ES 0023 0100 2187 6541 JK &nbsp;·&nbsp; Period: 15/01/2025 – 14/02/2025 (30 days)</div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> switching to Nordy &nbsp;·&nbsp; Costa Blanca · 2 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> switching to Nordy &nbsp;·&nbsp; Costa Blanca · 2 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: CONSUMPTION & RATES -->
+  <div class="scard" style="animation-delay:.1s">
+    <div class="scard-header">
+      <div class="scard-num-badge green">1</div>
+      <div>
+        <div class="scard-title">Consumption & rates</div>
+        <div class="scard-sub">Actual kWh per period vs. new rates</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">We applied your real P1/P2/P3 consumption to both your current Endesa rates and the recommended tariff rates. Every figure comes from your bill — nothing estimated.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Time period</th>
+          <th>Annual usage</th>
+          <th>Current rate</th>
+          <th>New rate</th>
+          <th>Annual saving</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Punta (P1)</td>
+          <td class="current-val">780 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0.2280</td>
+          <td class="new-val">€0.1078</td>
+          <td class="current-val">€121<span class="saving-pill">−53%</span></td>
+        </tr>
+        <tr>
+          <td>Llano (P2)</td>
+          <td class="current-val">1,170 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0.1890</td>
+          <td class="new-val">€0.0890</td>
+          <td class="current-val">€137<span class="saving-pill">−53%</span></td>
+        </tr>
+        <tr>
+          <td>Valle (P3)</td>
+          <td class="current-val">2,250 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0.1180</td>
+          <td class="new-val">€0.0470</td>
+          <td class="current-val">€159<span class="saving-pill">−60%</span></td>
+        </tr>
+        <tr class="you-save-row">
+          <td colspan="4" class="you-save-label">Energy saving total</td>
+          <td class="you-save-val" style="font-size:18px">€417/yr</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 2: POTENCIA -->
+  <div class="scard" style="animation-delay:.2s">
+    <div class="scard-header">
+      <div class="scard-num-badge amber">2</div>
+      <div>
+        <div class="scard-title">Potencia (contracted power)</div>
+        <div class="scard-sub">Fixed daily charges comparison</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Contracted power is 5.75 kW on both P1 and P2. These are the fixed daily charges paid regardless of consumption. The new provider's P2 rate is slightly higher — this is included in the net total calculation.</p>
+
+    <div class="rate-grid">
+      <div class="rate-card current">
+        <div class="rate-card-label">Current Endesa</div>
+        <div class="rate-card-period">P1 (punta)</div>
+        <div class="rate-card-val">€0.1280<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+      <div class="rate-card new">
+        <div class="rate-card-label">Nordy Tarifa Luz</div>
+        <div class="rate-card-period">P1 (punta)</div>
+        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+      <div class="rate-card current">
+        <div class="rate-card-label">Current Endesa</div>
+        <div class="rate-card-period">P2 (llano/valle)</div>
+        <div class="rate-card-val">€0.0640<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+      <div class="rate-card new">
+        <div class="rate-card-label">Nordy Tarifa Luz</div>
+        <div class="rate-card-period">P2 (llano/valle)</div>
+        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+      </div>
+    </div>
+
+    <div style="background:#fafafa;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
+      <div style="font-size:13px;color:var(--ink2)">Net potencia difference (annual)</div>
+      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--amber)">+€25 <span style="font-size:12px;font-weight:400;color:var(--ink4)">(slightly higher)</span></div>
+    </div>
+  </div>
+
+  <!-- DARK SUMMARY -->
+  <div class="dark-summary" style="animation-delay:.3s">
+    <div class="ds-left">
+      <div class="ds-title">Financial summary</div>
+      <div class="ds-subtitle">Based on 4,200 kWh annual consumption</div>
+      <div class="ds-body">Actual metered usage applied to today's published tariff rates. All figures include IEE (5.11%) and IVA (21%). No change to electricity habits assumed.</div>
+      <div class="ds-costs">
+        <div class="ds-cost-row">
+          <div class="ds-cost-label">Current annual cost</div>
+          <div class="ds-cost-val">€1,428</div>
+        </div>
+        <div class="ds-cost-row">
+          <div class="ds-cost-label">New estimated annual cost</div>
+          <div class="ds-cost-val" style="color:var(--g)">€1,036</div>
+        </div>
+        <div class="ds-cost-row divider">
+          <div class="ds-cost-label" style="color:var(--g);font-weight:600">You save</div>
+          <div class="ds-cost-val" style="color:var(--g);font-size:18px;font-weight:700">€392 / year</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-right">
+      <div class="ds-est-label">Estimated first year saving</div>
+      <div class="ds-big-num">€392</div>
+      <div class="ds-per-month">≈ €33 per month</div>
+      <div class="ds-new-cost">
+        <div class="ds-new-cost-label">New annual cost</div>
+        <div class="ds-new-cost-val">€1,036</div>
+        <div class="ds-new-cost-from">Down from €1,428</div>
+      </div>
+      <div class="ds-trust">
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Switches in 48–72h
+        </div>
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          No power interruption
+        </div>
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          100% free to you
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW CALCULATED -->
+  <div class="calc-accordion">
+    <div class="calc-header" onclick="toggleCalc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        How we calculate your saving — audit proof & tariff logic
+      </span>
+      <svg id="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="calc-body" id="calc-body">
+      <p>All figures are calculated using actual metered consumption from the submitted bill, billing dates, and contracted power (potencia).</p>
+      <ul>
+        <li>Annual totals are estimated using the supplier's stated yearly usage and today's published tariff rates</li>
+        <li>Energy prices include IEE (5.11%) and IVA (21%) as required by Spanish law</li>
+        <li>Potencia charges are based on the contracted 5.75 kW on both P1 and P2 — no power reduction is assumed</li>
+        <li>No change to electricity consumption habits is assumed — actual P1/P2/P3 split is used throughout</li>
+        <li>The net saving of €392 accounts for the slightly higher potencia rate on the new tariff (−€417 energy + €25 potencia)</li>
+      </ul>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--gp);border-radius:8px;font-size:12px;color:var(--gd)">
+        ALL CONTRACTS ARE DIRECT WITH THE PROVIDER. NO EXIT FEES. NO MINIMUM STAY.
+      </div>
+    </div>
+  </div>
+
+  <div style="height:24px"></div>
+
+  <!-- CTA CARD -->
+  <div class="cta-card">
+    <div class="cta-card-icon">⚡</div>
+    <h3>Get your own savings report</h3>
+    <p>Send us a photo or PDF of your latest electricity bill on WhatsApp — we'll analyse it and send back your personalised report within a few hours. Free, no commitment.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/34662403660" class="btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp your bill
+      </a>
+      <a href="how-it-works.html" class="btn-secondary">How it works →</a>
+    </div>
+    <div class="cta-trust">
+      <div class="cta-trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        GDPR compliant
+      </div>
+      <div class="cta-trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        Free — no hidden fees
+      </div>
+      <div class="cta-trust-item">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Report in a few hours
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- STICKY FOOTER -->
+<div class="sticky-footer">
+  <div class="sf-saving">
+    <div class="sf-saving-label">Customers save on average</div>
+    <div class="sf-saving-val">€400+ / year</div>
+  </div>
+  <div class="sf-trust">
+    <div class="sf-trust-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      No exit fees
+    </div>
+    <div class="sf-trust-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Switches in 48h
+    </div>
+  </div>
+  <a href="https://wa.me/34662403660" class="switch-cta">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <div>
+      <div>Get your free report</div>
+      <div class="switch-cta-sub">WhatsApp us your bill →</div>
+    </div>
+  </a>
+</div>
+
+<!-- FOOTER:START -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="how-it-works.html">Full explainer</a>
+        <a href="sample-report.html">Sample report</a>
+      </div>
+      <div class="footer-col">
+        <h4>Start</h4>
+        <a href="https://wa.me/34662403660">WhatsApp</a>
+        <a href="#" onclick="copyEmail();return false">Email</a>
+        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Upload PDF</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="index.html#faq">FAQ</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="terms-and-conditions.html">Terms & conditions</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Switchr · Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
+      <p>Made for expats in Spain</p>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+
+<div id="copy-toast">Email copied to clipboard</div>
+
+<script>
+function toggleCalc(el) {
+  const body = document.getElementById('calc-body');
+  const chevron = document.getElementById('calc-chevron');
+  body.classList.toggle('open');
+  chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+
+function copyEmail() {
+  navigator.clipboard.writeText('audit@switchr.es').then(() => {
+    const t = document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  });
+}
+</script>
+</body>
+</html>
