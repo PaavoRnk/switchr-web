@@ -149,8 +149,9 @@ footer{background:#060f0c;padding:48px 40px 32px}
 </head>
 <body>
 
+<!-- NAV:START -->
 <nav>
-  <a href="index.html"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
   <div class="nav-links">
     <a href="index.html#how-it-works">How it works</a>
     <a href="how-it-works.html">Full explainer</a>
@@ -167,6 +168,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
     </div>
   </div>
 </nav>
+<!-- NAV:END -->
 
 <!-- PAGE HERO -->
 <div class="page-hero">
@@ -365,11 +367,12 @@ footer{background:#060f0c;padding:48px 40px 32px}
 </div>
 </div>
 
+<!-- FOOTER:START -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-                <a href="#" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
         <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
       </div>
       <div class="footer-col">
@@ -382,12 +385,13 @@ footer{background:#060f0c;padding:48px 40px 32px}
         <h4>Start</h4>
         <a href="https://wa.me/34662403660">WhatsApp</a>
         <a href="#" onclick="copyEmail();return false">Email</a>
-        <a href="#" onclick="openUploadModal()">Upload PDF</a>
+        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Upload PDF</a>
       </div>
       <div class="footer-col">
         <h4>Help</h4>
         <a href="index.html#faq">FAQ</a>
         <a href="privacy-policy.html">Privacy policy</a>
+        <a href="terms-and-conditions.html">Terms & conditions</a>
         <a href="contact.html">Contact</a>
       </div>
     </div>
@@ -397,6 +401,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
     </div>
   </div>
 </footer>
+<!-- FOOTER:END -->
 
 <style>
 #copy-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:#1a1a1a;color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;font-family:Sora,sans-serif;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999;white-space:nowrap}

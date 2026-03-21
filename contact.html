@@ -197,6 +197,7 @@ footer{background:var(--ink);padding:56px 40px 32px;}
 </head>
 <body>
 
+<!-- NAV:START -->
 <nav>
   <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
   <div class="nav-links">
@@ -211,6 +212,7 @@ footer{background:var(--ink);padding:56px 40px 32px;}
     </a>
   </div>
 </nav>
+<!-- NAV:END -->
 
 <section class="page-hero">
   <div class="page-hero-ghost">Contact</div>
@@ -266,6 +268,7 @@ footer{background:var(--ink);padding:56px 40px 32px;}
 
 </div>
 
+<!-- FOOTER:START -->
 <footer>
   <div class="footer-inner">
     <div class="footer-top">
@@ -273,26 +276,24 @@ footer{background:var(--ink);padding:56px 40px 32px;}
         <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
         <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
       </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Product</h4>
-          <a href="index.html#how-it-works">How it works</a>
-          <a href="how-it-works.html">Full explainer</a>
-          <a href="results.html">Sample report</a>
-        </div>
-        <div class="footer-col">
-          <h4>Start</h4>
-          <a href="https://wa.me/34662403660">WhatsApp</a>
-          <a href="#" onclick="copyAuditEmail();return false">Email</a>
-          <a href="#" onclick="openUploadModal()">Upload PDF</a>
-        </div>
-        <div class="footer-col">
-          <h4>Help</h4>
-          <a href="index.html#faq">FAQ</a>
-          <a href="privacy-policy.html">Privacy policy</a>
-          <a href="terms-and-conditions.html">Terms & conditions</a>
-          <a href="contact.html">Contact</a>
-        </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="how-it-works.html">Full explainer</a>
+        <a href="results.html">Sample report</a>
+      </div>
+      <div class="footer-col">
+        <h4>Start</h4>
+        <a href="https://wa.me/34662403660">WhatsApp</a>
+        <a href="#" onclick="copyEmail();return false">Email</a>
+        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Upload PDF</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="index.html#faq">FAQ</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="terms-and-conditions.html">Terms & conditions</a>
+        <a href="contact.html">Contact</a>
       </div>
     </div>
     <div class="footer-bottom">
@@ -301,6 +302,7 @@ footer{background:var(--ink);padding:56px 40px 32px;}
     </div>
   </div>
 </footer>
+<!-- FOOTER:END -->
 
 <div id="copy-toast">📋 Email copied — paste it in the To field</div>
 
