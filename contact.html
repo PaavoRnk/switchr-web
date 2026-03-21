@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-ZF2VXXL0FP');
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Switchr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--sw:#0f7a45;
+  --gp:#f0fdf4;--gb:rgba(37,211,102,0.12);
+  --ink:#0a1a15;--ink2:#253d35;--ink3:#4e7265;--ink4:#8aada3;
+  --bg:#f8fdfb;--white:#fff;
+  --border:rgba(37,211,102,0.18);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 40px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.logo{font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-links a{font-size:14px;color:var(--ink2);text-decoration:none;font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--g);color:#fff;padding:8px 18px;
+  border-radius:8px;font-size:13px;font-weight:600;
+  font-family:'Sora',sans-serif;text-decoration:none;
+  transition:background .2s;
+}
+.nav-cta:hover{background:var(--gd);color:#fff;}
+
+/* ── PAGE HERO ── */
+.page-hero{
+  background:var(--ink);
+  padding:80px 40px 72px;
+  position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 100%, rgba(15,122,69,0.35) 0%, transparent 70%);
+  pointer-events:none;
+}
+.page-hero-ghost{
+  position:absolute;right:-20px;top:-20px;
+  font-family:'Sora',sans-serif;font-size:200px;font-weight:900;
+  color:rgba(37,211,102,0.04);line-height:1;
+  pointer-events:none;user-select:none;white-space:nowrap;
+}
+.page-hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1;}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:7px;
+  background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);
+  padding:5px 14px;border-radius:20px;
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:rgba(255,255,255,0.55);margin-bottom:20px;
+}
+.kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--g);}
+.page-hero h1{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(32px,4.5vw,54px);font-weight:800;
+  line-height:1.1;letter-spacing:-.025em;
+  color:#fff;margin-bottom:16px;
+}
+.page-hero h1 em{color:var(--g);font-style:normal;}
+.page-hero p{
+  font-size:17px;color:rgba(255,255,255,0.55);
+  font-weight:300;line-height:1.65;
+  max-width:520px;
+}
+
+/* ── CONTACT SECTION ── */
+.contact-section{
+  max-width:640px;margin:0 auto;
+  padding:72px 40px 96px;
+}
+
+/* form */
+.contact-form{
+  background:#fff;border:1px solid var(--border2);
+  border-radius:var(--r2);padding:40px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.05);
+  margin-bottom:32px;
+}
+.contact-form h2{
+  font-family:'Sora',sans-serif;font-size:20px;font-weight:700;
+  color:var(--ink);margin-bottom:6px;
+}
+.contact-form .form-sub{
+  font-size:14px;color:var(--ink3);margin-bottom:28px;line-height:1.5;
+}
+.field{margin-bottom:20px;}
+.field label{
+  display:block;font-size:13px;font-weight:500;color:var(--ink2);margin-bottom:6px;
+}
+.field input,.field textarea{
+  width:100%;padding:12px 16px;
+  border:1px solid var(--border2);border-radius:var(--r);
+  font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);
+  background:#fff;outline:none;transition:border-color .15s;
+  resize:none;
+}
+.field input:focus,.field textarea:focus{border-color:var(--g);}
+.field textarea{height:130px;}
+.submit-btn{
+  width:100%;padding:14px;
+  background:var(--g);color:#fff;
+  border:none;border-radius:var(--r);
+  font-family:'Sora',sans-serif;font-size:15px;font-weight:600;
+  cursor:pointer;transition:background .2s;
+}
+.submit-btn:hover{background:var(--gd);}
+
+/* or email divider */
+.or-divider{
+  display:flex;align-items:center;gap:14px;
+  color:var(--ink4);font-size:13px;margin-bottom:28px;
+}
+.or-divider::before,.or-divider::after{
+  content:'';flex:1;height:1px;background:var(--border2);
+}
+
+/* email card */
+.email-alt{
+  background:#fff;border:1px solid var(--border2);
+  border-radius:var(--r2);padding:28px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  box-shadow:0 2px 16px rgba(0,0,0,0.05);
+}
+.email-alt-text p{font-size:13px;color:var(--ink3);margin-bottom:4px;}
+.email-alt-text strong{font-family:'Sora',sans-serif;font-size:16px;color:var(--ink);}
+.copy-email-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--gb);border:1px solid var(--border);
+  color:var(--sw);padding:9px 18px;border-radius:9px;
+  font-size:13px;font-weight:600;font-family:'Sora',sans-serif;
+  cursor:pointer;white-space:nowrap;transition:background .15s;
+  border-style:solid;
+}
+.copy-email-btn:hover{background:rgba(37,211,102,0.2);}
+
+/* success message */
+.form-success{
+  display:none;text-align:center;padding:32px;
+  background:#fff;border:1px solid var(--border);
+  border-radius:var(--r2);
+}
+.form-success .success-icon{font-size:36px;margin-bottom:12px;}
+.form-success h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.form-success p{font-size:14px;color:var(--ink3);}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:56px 40px 32px;}
+.footer-inner{max-width:1040px;margin:0 auto;}
+.footer-top{display:flex;gap:48px;flex-wrap:wrap;margin-bottom:40px;}
+.footer-brand{flex:1;min-width:200px;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.6;margin-top:12px;max-width:220px;}
+.footer-cols{display:flex;gap:48px;flex-wrap:wrap;}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;margin-bottom:7px}
+.footer-col a:hover{color:rgba(255,255,255,0.75)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.2);}
+
+/* toast */
+#copy-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:#1a1a1a;color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;font-family:Sora,sans-serif;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999;white-space:nowrap}
+#copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:600px){
+  nav{padding:0 20px;}
+  .nav-links a:not(.nav-cta){display:none;}
+  .page-hero{padding:60px 20px 48px;}
+  .contact-section{padding:48px 20px 72px;}
+  .contact-form{padding:28px 20px;}
+  .email-alt{flex-direction:column;align-items:flex-start;}
+  footer{padding:40px 20px 24px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <div class="nav-links">
+    <a href="index.html#how-it-works">How it works</a>
+    <a href="how-it-works.html">Full explainer</a>
+    <a href="index.html#market-watch">Market watch</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/34662403660" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start now
+    </a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-ghost">Contact</div>
+  <div class="page-hero-inner">
+    <div class="hero-kicker"><span class="kicker-dot"></span>Get in touch</div>
+    <h1>We're here to <em>help</em></h1>
+    <p>Questions about switching, your bill, or anything else — send us a message and we'll get back to you.</p>
+  </div>
+</section>
+
+<div class="contact-section">
+
+  <!-- Contact form -->
+  <!-- ⚠️ To receive form submissions: sign up free at formspree.io, create a form, then replace YOUR_FORM_ID below -->
+  <div class="contact-form" id="contact-form-wrap">
+    <h2>Send us a message</h2>
+    <p class="form-sub">We reply within one business day.</p>
+    <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" onsubmit="handleSubmit(event)">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+      </div>
+      <div class="field">
+        <label for="email">Your email</label>
+        <input type="email" id="email" name="email" placeholder="jane@example.com" required>
+      </div>
+      <div class="field">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="What can we help you with?" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Send message</button>
+    </form>
+    <div class="form-success" id="form-success">
+      <div class="success-icon">✅</div>
+      <h3>Message sent!</h3>
+      <p>Thanks for reaching out. We'll reply to your email within one business day.</p>
+    </div>
+  </div>
+
+  <div class="or-divider">or</div>
+
+  <!-- Email alternative -->
+  <div class="email-alt">
+    <div class="email-alt-text">
+      <p>Prefer email?</p>
+      <strong>hola@switchr.es</strong>
+    </div>
+    <button class="copy-email-btn" onclick="copyContactEmail()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span id="contact-copy-label">Copy address</span>
+    </button>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Product</h4>
+          <a href="index.html#how-it-works">How it works</a>
+          <a href="how-it-works.html">Full explainer</a>
+          <a href="results.html">Sample report</a>
+        </div>
+        <div class="footer-col">
+          <h4>Start</h4>
+          <a href="https://wa.me/34662403660">WhatsApp</a>
+          <a href="#" onclick="copyAuditEmail();return false">Email</a>
+          <a href="#" onclick="openUploadModal()">Upload PDF</a>
+        </div>
+        <div class="footer-col">
+          <h4>Help</h4>
+          <a href="index.html#faq">FAQ</a>
+          <a href="privacy-policy.html">Privacy policy</a>
+          <a href="terms-and-conditions.html">Terms & conditions</a>
+          <a href="contact.html">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Switchr · Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
+      <p>Made for expats in Spain</p>
+    </div>
+  </div>
+</footer>
+
+<div id="copy-toast">📋 Email copied — paste it in the To field</div>
+
+<script>
+function copyContactEmail() {
+  navigator.clipboard.writeText('hola@switchr.es').then(() => {
+    const label = document.getElementById('contact-copy-label');
+    label.textContent = 'Copied!';
+    setTimeout(() => label.textContent = 'Copy address', 2000);
+    const t = document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  });
+}
+
+function copyAuditEmail() {
+  navigator.clipboard.writeText('audit@switchr.es').then(() => {
+    const t = document.getElementById('copy-toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  });
+}
+
+function handleSubmit(e) {
+  const form = e.target;
+  // If Formspree ID is still placeholder, just show success (dev mode)
+  if (form.action.includes('YOUR_FORM_ID')) {
+    e.preventDefault();
+    form.style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+    return;
+  }
+  // Real submission — let Formspree handle it, show success on return
+  e.preventDefault();
+  fetch(form.action, {
+    method: 'POST',
+    body: new FormData(form),
+    headers: { 'Accept': 'application/json' }
+  }).then(r => {
+    if (r.ok) {
+      form.style.display = 'none';
+      document.getElementById('form-success').style.display = 'block';
+    }
+  });
+}
+</script>
+</body>
+</html>
