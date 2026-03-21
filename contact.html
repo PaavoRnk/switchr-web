@@ -305,6 +305,42 @@ footer{background:var(--ink);padding:56px 40px 32px;}
 <!-- FOOTER:END -->
 
 <div id="copy-toast">📋 Email copied — paste it in the To field</div>
+<script>
+/* ── REFERRAL TRACKING ── */
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var refParam = params.get('ref');
+  if (refParam && !localStorage.getItem('sw_ref')) {
+    localStorage.setItem('sw_ref', refParam.toUpperCase());
+  }
+  var ref = localStorage.getItem('sw_ref');
+  if (!ref) return;
+  var auditEmail = 'audit+ref' + ref + '@switchr.es';
+
+  function applyRef() {
+    document.querySelectorAll('a[href*="wa.me/34662403660"]').forEach(function (a) {
+      try {
+        var url = new URL(a.href);
+        var existing = url.searchParams.get('text') || '';
+        url.searchParams.set('text', existing ? 'ref:' + ref + ' ' + existing : 'ref:' + ref);
+        a.href = url.toString();
+      } catch (e) {}
+    });
+    window.copyEmail = function () {
+      navigator.clipboard.writeText(auditEmail).then(function () {
+        var t = document.getElementById('copy-toast');
+        if (t) { t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 2800); }
+      });
+    };
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', applyRef);
+  } else {
+    applyRef();
+  }
+}());
+</script>
 
 <script>
 function copyContactEmail() {
