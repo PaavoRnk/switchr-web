@@ -835,6 +835,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 <script>
 const SUPABASE_URL = 'https://ufyindkuuvsberajyiar.supabase.co';
 const SUBMIT_URL = SUPABASE_URL + '/functions/v1/website-submit-contract';
+const SEND_REPORT_URL = SUPABASE_URL + '/functions/v1/send-website-report';
 
 /* ── Load session data ── */
 const params = new URLSearchParams(location.search);
@@ -847,7 +848,7 @@ let _selectedTariffName = null;
 (function init() {
   const raw = sessionStorage.getItem('sw_session');
   if (!raw) {
-    if (!sessionId) { document.body.innerHTML = '<div style="padding:40px;text-align:center"><h2>Session not found</h2><p>Please <a href="index.html">upload your bill again</a>.</p></div>'; }
+    document.body.innerHTML = '<div style="padding:60px 40px;text-align:center;font-family:sans-serif"><h2 style="margin-bottom:12px">Session expired</h2><p style="color:#666;margin-bottom:24px">Your session data is no longer available. Please upload your bill again to see your results.</p><a href="index.html" style="background:#25D366;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Upload your bill</a></div>';
     return;
   }
   try { _session = JSON.parse(raw); } catch (e) { return; }
@@ -1097,10 +1098,41 @@ async function submitSwitch() {
   }
 }
 
-function sendReport() {
-  const email = document.getElementById('email-input').value;
-  if (!email) { alert('Please enter your email address.'); return; }
-  alert('Report sent to ' + email + ' · We\'ll also send you a reminder in 48 hours.');
+async function sendReport() {
+  const emailEl = document.getElementById('email-input');
+  const btn = document.querySelector('.email-send-btn');
+  const email = emailEl ? emailEl.value.trim() : '';
+  if (!email || !email.includes('@')) {
+    emailEl.style.borderColor = '#ef4444';
+    emailEl.focus();
+    return;
+  }
+  emailEl.style.borderColor = '';
+  const sid = _session?.session_id || sessionId;
+  if (!sid) { alert('No session ID — please upload your bill again.'); return; }
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  try {
+    const res = await fetch(SEND_REPORT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_id: sid, email }),
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) {
+      btn.textContent = 'Error — try again';
+      btn.disabled = false;
+      console.error('sendReport error:', data.error);
+    } else {
+      btn.textContent = '✓ Sent!';
+      btn.style.background = '#16a34a';
+      emailEl.disabled = true;
+    }
+  } catch (err) {
+    btn.textContent = 'Error — try again';
+    btn.disabled = false;
+    console.error('sendReport fetch error:', err);
+  }
 }
 
 // Scroll-in animation
