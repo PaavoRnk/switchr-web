@@ -459,6 +459,56 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   .step-label{font-size:9px}
   .tariff-options-grid{grid-template-columns:1fr 1fr}
 }
+
+/* TARIFF INFO SHEET */
+.info-sheet-overlay{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(10,26,21,0.5);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.info-sheet-overlay.open{display:flex}
+.info-sheet{
+  background:#fff;border-radius:20px 20px 0 0;
+  width:100%;max-height:82vh;overflow-y:auto;
+  padding:0 24px 32px;
+  animation:sheetUp .25s ease both;
+}
+@keyframes sheetUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.info-handle{width:40px;height:4px;background:var(--border2);border-radius:2px;margin:14px auto 20px;flex-shrink:0}
+.info-provider-tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.info-vibe{
+  background:var(--gp);border-left:3px solid var(--g);
+  border-radius:0 8px 8px 0;padding:12px 16px;
+  margin:14px 0;font-size:14px;font-style:italic;
+  color:var(--ink2);line-height:1.55;
+}
+.info-who-text{font-size:14px;color:var(--ink3);margin-bottom:16px;line-height:1.6}
+.info-notes-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.info-notes-list li{display:flex;gap:10px;font-size:13px;color:var(--ink2);line-height:1.5}
+.info-notes-list li::before{content:'✦';color:var(--g);font-size:10px;flex-shrink:0;margin-top:3px}
+.info-no-perm{padding:10px 14px;background:var(--gp);border-radius:8px;font-size:12px;font-weight:600;color:var(--gd);display:flex;align-items:center;gap:8px}
+.tariff-name-info{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:17px;height:17px;border-radius:50%;
+  border:1px solid var(--border2);color:var(--ink3);
+  font-size:10px;font-weight:700;cursor:pointer;vertical-align:middle;
+  margin-left:5px;flex-shrink:0;font-family:'Sora',sans-serif;
+  transition:border-color .15s,color .15s,background .15s;font-style:normal;
+}
+.tariff-name-info:hover{border-color:var(--g);color:var(--gd);background:var(--gp)}
+.tariff-about-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:#fff;border:1px solid var(--border2);
+  padding:5px 14px;border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--ink3);
+  cursor:pointer;transition:border-color .15s,color .15s;
+}
+.tariff-about-pill:hover{border-color:var(--g);color:var(--gd)}
+@media(min-width:641px){
+  .info-sheet-overlay{align-items:center}
+  .info-sheet{border-radius:20px;max-width:480px;margin:20px;padding:24px 28px 32px}
+  .info-handle{display:none}
+}
 </style>
 </head>
 <body>
@@ -516,6 +566,12 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     </div>
     <div class="switch-from-to">Switch from <strong>Iberdrola</strong> to <strong>Nordy — Tarifa Tramos</strong></div>
     <div style="margin-bottom:8px"><span class="tag tag-green">Fixed price · No exit fees · No minimum stay</span></div>
+    <div style="margin-bottom:16px">
+      <span class="tariff-about-pill" onclick="showSelectedTariffInfo()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        About this tariff
+      </span>
+    </div>
     <div class="meta-line" id="meta-line">CUPS: ES 0021 0000 1343 2884 RF &nbsp;·&nbsp; Period: 04/07/2025 – 24/07/2025 (30 days)</div>
   </div>
 
@@ -758,6 +814,27 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   </button>
 </div>
 
+<!-- TARIFF INFO SHEET -->
+<div class="info-sheet-overlay" id="info-sheet-overlay" onclick="closeInfoSheetOutside(event)">
+  <div class="info-sheet">
+    <div class="info-handle"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <span id="info-provider-tag" class="info-provider-tag"></span>
+      <button class="modal-close" onclick="closeInfoSheet()">✕</button>
+    </div>
+    <div id="info-tariff-title" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.25"></div>
+    <div id="info-vibe" class="info-vibe"></div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Who it's for</div>
+    <p id="info-who" class="info-who-text"></p>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:10px">Cliff Notes</div>
+    <ul id="info-notes" class="info-notes-list"></ul>
+    <div class="info-no-perm">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      No stay requirements (sin permanencia) — cancel any time.
+    </div>
+  </div>
+</div>
+
 <!-- SWITCH MODAL -->
 <div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
   <div class="modal" id="modal-inner">
@@ -909,6 +986,123 @@ const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFz
 const SUBMIT_URL    = SUPABASE_URL + '/functions/v1/website-submit-contract';
 const SEND_REPORT_URL = SUPABASE_URL + '/functions/v1/send-website-report';
 
+/* ── Tariff info data ── */
+const TARIFF_INFO = {
+  gana_mercado: {
+    vibe: 'Buy energy at cost, like buying oranges directly from the farmer.',
+    who: "Savvy savers who don't mind market fluctuations to get the lowest average price.",
+    notes: [
+      'No profit margin on your energy — you pay the wholesale price.',
+      'Switchr only charges a tiny management fee of €0.167/day.',
+      'Total flexibility: no stay requirements (sin permanencia).',
+      'Includes a €5/month fuel discount (check local availability).',
+    ],
+  },
+  gana_24h: {
+    vibe: 'Set it and forget it. Total peace of mind.',
+    who: 'Households with high daytime usage, or people who hate watching the clock.',
+    notes: [
+      'One single price for energy all day and night.',
+      'Put the washing machine on whenever you want — no app-checking needed.',
+      'Ideal for families or home offices with steady power needs.',
+    ],
+  },
+  gana_tramos: {
+    vibe: 'Efficiency-first. Savings for the disciplined.',
+    who: 'People who can shift heavy usage (laundry, dishwasher) to nights or weekends.',
+    notes: [
+      'Standard Spanish 3-period billing: Punta, Llano, Valle.',
+      'Deep savings during Valle hours — nights and weekends.',
+      'Fixed prices for each time slot, so you can predict your bill.',
+    ],
+  },
+  nordy_24h: {
+    vibe: 'Premium stability at a lower base price.',
+    who: 'The modern expat who wants a digital-first experience with a flat rate.',
+    notes: [
+      'Fixed energy at €0.099/kWh — one of the most stable rates in the 2026 market.',
+      'No time discrimination: same price at 2 PM and 2 AM.',
+      'Designed for households consuming up to 8,000 kWh/year.',
+    ],
+  },
+  nordy_3p: {
+    vibe: 'The "Smart Saver" hybrid.',
+    who: 'Users who want off-peak savings with the security of a fully fixed contract.',
+    notes: [
+      'Three fixed prices: Peak (€0.139/kWh), Flat (€0.099), and Valley (€0.079).',
+      '"Control Real" over your bill — see exactly when energy is cheapest.',
+      'No penalties for switching or leaving.',
+    ],
+  },
+  nordy_mercado: {
+    vibe: 'Pure transparency.',
+    who: 'Flexible users who want the absolute cheapest energy during off-peak market drops.',
+    notes: [
+      'Energy at cost + a small €0.015/kWh management fee.',
+      'Monthly platform fee of €3.90.',
+      'Perfect for those who track the market for "Free Energy" windows on weekends.',
+    ],
+  },
+  nordy_1p: {
+    vibe: 'Heavy Duty / High Consumption.',
+    who: 'Larger homes (over 8,000 kWh/year) or high-power needs — A/C, electric heating.',
+    notes: [
+      'A slightly higher rate (€0.129/kWh) optimised for higher consumption levels.',
+      'Total "Freedom of Use" — no bill shock however many appliances are running.',
+    ],
+  },
+};
+
+function getTariffInfo(tariff) {
+  const p = (tariff.provider || '').toLowerCase();
+  const n = (tariff.name || '').toLowerCase();
+  if (p.includes('gana')) {
+    if (tariff.isMercado || n.includes('mercado')) return TARIFF_INFO.gana_mercado;
+    if (n.includes('tramos') || n.includes('horario')) return TARIFF_INFO.gana_tramos;
+    return TARIFF_INFO.gana_24h;
+  }
+  if (p.includes('nordy')) {
+    if (tariff.isMercado || n.includes('mercado')) return TARIFF_INFO.nordy_mercado;
+    if (n.includes('3p')) return TARIFF_INFO.nordy_3p;
+    if (n.includes('1p')) return TARIFF_INFO.nordy_1p;
+    return TARIFF_INFO.nordy_24h;
+  }
+  return null;
+}
+
+function showTariffInfo(tariffId) {
+  const tariff = _allTariffs.find(t => t.id === tariffId);
+  if (!tariff) return;
+  const info = getTariffInfo(tariff);
+  if (!info) return;
+  const provLabel = tariff.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+  const provColor = tariff.provider === 'nordy' ? '#7c3aed' : '#ea580c';
+  const provBg    = tariff.provider === 'nordy' ? '#f5f3ff' : '#fff7ed';
+  const tag = document.getElementById('info-provider-tag');
+  tag.textContent = provLabel;
+  tag.style.background = provBg;
+  tag.style.color = provColor;
+  document.getElementById('info-tariff-title').textContent = tariff.name;
+  document.getElementById('info-vibe').textContent = '✦  ' + info.vibe;
+  document.getElementById('info-who').textContent = info.who;
+  document.getElementById('info-notes').innerHTML = info.notes.map(n => '<li>' + n + '</li>').join('');
+  document.getElementById('info-sheet-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showSelectedTariffInfo() {
+  if (_selectedTariffId) showTariffInfo(_selectedTariffId);
+}
+
+function closeInfoSheet() {
+  document.getElementById('info-sheet-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeInfoSheetOutside(e) {
+  if (e.target === document.getElementById('info-sheet-overlay')) closeInfoSheet();
+}
+
 /* ── State ── */
 const params    = new URLSearchParams(location.search);
 const sessionId = params.get('session');
@@ -937,14 +1131,15 @@ function renderTariffOptions() {
     const provLabel  = t.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
     const provColor  = t.provider === 'nordy' ? '#7c3aed' : '#ea580c';
     const mercTag    = t.isMercado ? ' <span style="font-size:10px;color:#d97706;font-weight:600">⚡ market</span>' : '';
-    return '<button class="tariff-option' + (isSelected ? ' selected' : '') + '" onclick="selectTariff(\'' + t.id + '\')">' +
+    const infoIcon   = getTariffInfo(t) ? '<span class="tariff-name-info" onclick="event.stopPropagation();showTariffInfo(\'' + t.id + '\')" title="About this tariff" aria-label="About this tariff">ⓘ</span>' : '';
+    return '<div class="tariff-option' + (isSelected ? ' selected' : '') + '" role="button" tabindex="0" onclick="selectTariff(\'' + t.id + '\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();selectTariff(\'' + t.id + '\')}">' +
       (isSelected ? '<div class="tariff-option-check">✓</div>' : '') +
       '<div class="tariff-option-provider" style="color:' + provColor + '">' + provLabel + '</div>' +
-      '<div class="tariff-option-name">' + t.name + mercTag + '</div>' +
+      '<div class="tariff-option-name">' + t.name + mercTag + infoIcon + '</div>' +
       '<div class="tariff-option-cost">€' + t.estimatedMonthly.toFixed(2) + '<span class="tariff-option-mo">/mo</span></div>' +
       '<div class="tariff-option-saving">Save €' + Math.round(t.annualSaving) + '/yr</div>' +
       (isBest ? '<span class="tariff-option-best">Best match</span>' : '') +
-      '</button>';
+      '</div>';
   }).join('');
 }
 
