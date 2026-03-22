@@ -336,8 +336,7 @@ footer{background:var(--ink);padding:56px 40px 32px;}
     document.querySelectorAll('a[href*="wa.me/34662403660"]').forEach(function (a) {
       try {
         var url = new URL(a.href);
-        var existing = url.searchParams.get('text') || '';
-        url.searchParams.set('text', existing ? 'ref:' + ref + ' ' + existing : 'ref:' + ref);
+        url.searchParams.set('text', 'Hello, please audit my invoice (Ref:' + ref + ')');
         a.href = url.toString();
       } catch (e) {}
     });
