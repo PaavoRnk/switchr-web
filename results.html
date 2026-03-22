@@ -728,7 +728,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     </div>
     <div class="reminder-check">
       <input type="checkbox" id="remind" checked>
-      <label for="remind">Also send me a reminder in 48 hours if I haven't switched yet</label>
+      <label for="remind">Also send me a reminder in 24 hours if I haven't switched yet</label>
     </div>
   </div>
 
@@ -1255,7 +1255,8 @@ async function sendReport() {
   if (!sid) { alert('No session ID — please upload your bill again.'); return; }
   btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    const res  = await fetch(SEND_REPORT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ session_id: sid, email }) });
+    const remind = document.getElementById('remind')?.checked !== false;
+    const res  = await fetch(SEND_REPORT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ session_id: sid, email, remind }) });
     const data = await res.json();
     if (!res.ok || data.error) { btn.textContent = 'Error — try again'; btn.disabled = false; }
     else { btn.textContent = '✓ Sent!'; btn.style.background = '#16a34a'; emailEl.disabled = true; }
