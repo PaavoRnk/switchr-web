@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) — Consent Mode v2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
   gtag('js', new Date());
   gtag('config', 'G-ZF2VXXL0FP');
+  if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
 </script>
+<script defer src="cookie-consent.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Switchr — Cut your Spanish electricity bill</title>
@@ -1712,6 +1715,7 @@ nav.scrolled .hamburger span{background:var(--ink)}
     <div class="footer-bottom">
       <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Proudly based in Murcia, Spain</p>
       <p>Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
+      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Cookie preferences</a></p>
     </div>
   </div>
 </footer>

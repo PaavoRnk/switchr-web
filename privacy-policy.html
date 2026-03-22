@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
+<!-- Google tag (gtag.js) — Consent Mode v2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
   gtag('js', new Date());
   gtag('config', 'G-ZF2VXXL0FP');
+  if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
 </script>
+<script defer src="cookie-consent.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Switchr</title>
@@ -224,6 +227,8 @@ footer{background:#060f0c;padding:48px 40px 32px}
       <li><strong>Supabase Inc.</strong> — our database, hosted in the EU (Paris) under GDPR-compliant terms</li>
       <li><strong>Anthropic PBC</strong> — AI used to read your bill. Data is not retained for model training</li>
       <li><strong>Meta Platforms</strong> — WhatsApp Business API for message delivery</li>
+      <li><strong>Google LLC</strong> — Google Analytics 4 (website analytics, only with your consent) and Google Fonts (font delivery via CDN)</li>
+      <li><strong>Cloudflare Inc.</strong> — CDN delivery of third-party libraries (e.g. Chart.js)</li>
     </ul>
     <p>We do <strong>not</strong> sell your data or share it with advertisers.</p>
   </div>
@@ -258,6 +263,29 @@ footer{background:#060f0c;padding:48px 40px 32px}
   <div class="sec">
     <h2><span class="num">9</span>Changes</h2>
     <p>We may update this policy periodically. We will notify you of significant changes via WhatsApp or email. The current version is always at this URL.</p>
+  </div>
+
+  <div class="sec">
+    <h2><span class="num">10</span>Cookies &amp; Tracking</h2>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Essential storage</h3>
+    <p>Switchr does not set any essential cookies. We use <code>sessionStorage</code> temporarily during the bill-upload flow (cleared when you close the tab) and <code>localStorage</code> for your cookie preference (<code>sw_cookie_consent</code>). Neither contains personal data.</p>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Analytics cookies (Google Analytics 4)</h3>
+    <p>With your consent, we use Google Analytics 4 to understand how visitors use our site. GA4 sets the following cookies:</p>
+    <ul>
+      <li><strong>_ga</strong> — distinguishes users (expires 2 years)</li>
+      <li><strong>_gid</strong> — distinguishes users (expires 24 hours)</li>
+      <li><strong>_gat</strong> — throttles request rate (expires 1 minute)</li>
+    </ul>
+    <p>GA4 collects anonymised data including pages visited, time on site, and general location (country/region). IP addresses are anonymised before storage. We do not use GA4 for advertising. Google Analytics opt-out: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">tools.google.com/dlpage/gaoptout</a>.</p>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Third-party processors</h3>
+    <ul>
+      <li><strong>Google Fonts</strong> — fonts are loaded from Google's CDN. Google may log your IP address per their privacy policy.</li>
+      <li><strong>Cloudflare CDN</strong> — used to deliver third-party libraries (e.g. Chart.js). Cloudflare may process request metadata.</li>
+    </ul>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Referral tracking</h3>
+    <p>If you arrive via a referral link, we store a referral code in <code>localStorage</code> under the key <code>sw_ref</code>. This contains only a short alphanumeric code — no personal data. No expiry is set; you can clear it by clearing your browser's local storage.</p>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">How to change your preference</h3>
+    <p>You can update your cookie preference at any time by clicking <strong>Cookie preferences</strong> in the footer of any page.</p>
   </div>
 
 </div>
@@ -305,6 +333,8 @@ footer{background:#060f0c;padding:48px 40px 32px}
       <li><strong>Supabase Inc.</strong> — nuestra base de datos, alojada en la UE (París) bajo condiciones conformes al RGPD</li>
       <li><strong>Anthropic PBC</strong> — IA para leer tu factura. Los datos no se retienen para entrenamiento de modelos</li>
       <li><strong>Meta Platforms</strong> — API de WhatsApp Business para la entrega de mensajes</li>
+      <li><strong>Google LLC</strong> — Google Analytics 4 (analítica web, solo con tu consentimiento) y Google Fonts (entrega de fuentes vía CDN)</li>
+      <li><strong>Cloudflare Inc.</strong> — entrega CDN de librerías de terceros (p. ej. Chart.js)</li>
     </ul>
     <p><strong>No</strong> vendemos tus datos ni los compartimos con anunciantes.</p>
   </div>
@@ -339,6 +369,29 @@ footer{background:#060f0c;padding:48px 40px 32px}
   <div class="sec">
     <h2><span class="num">9</span>Cambios</h2>
     <p>Podemos actualizar esta política periódicamente. Te notificaremos los cambios significativos por WhatsApp o email. La versión vigente siempre está disponible en esta URL.</p>
+  </div>
+
+  <div class="sec">
+    <h2><span class="num">10</span>Cookies y seguimiento</h2>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Almacenamiento esencial</h3>
+    <p>Switchr no instala cookies esenciales. Usamos <code>sessionStorage</code> temporalmente durante el flujo de carga de factura (se borra al cerrar la pestaña) y <code>localStorage</code> para tu preferencia de cookies (<code>sw_cookie_consent</code>). Ninguno contiene datos personales.</p>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Cookies analíticas (Google Analytics 4)</h3>
+    <p>Con tu consentimiento, utilizamos Google Analytics 4 para entender cómo usan los visitantes nuestro sitio. GA4 instala las siguientes cookies:</p>
+    <ul>
+      <li><strong>_ga</strong> — distingue usuarios (caduca 2 años)</li>
+      <li><strong>_gid</strong> — distingue usuarios (caduca 24 horas)</li>
+      <li><strong>_gat</strong> — limita la tasa de solicitudes (caduca 1 minuto)</li>
+    </ul>
+    <p>GA4 recoge datos anonimizados como páginas visitadas, tiempo en el sitio y ubicación general (país/región). Las direcciones IP se anonimiza antes de su almacenamiento. No utilizamos GA4 para publicidad. Exclusión de Google Analytics: <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">tools.google.com/dlpage/gaoptout</a>.</p>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Procesadores de terceros</h3>
+    <ul>
+      <li><strong>Google Fonts</strong> — las fuentes se cargan desde la CDN de Google. Google puede registrar tu IP según su política de privacidad.</li>
+      <li><strong>Cloudflare CDN</strong> — se usa para entregar librerías de terceros (p. ej. Chart.js). Cloudflare puede procesar metadatos de solicitudes.</li>
+    </ul>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Seguimiento de referidos</h3>
+    <p>Si llegas a través de un enlace de referido, guardamos un código de referido en <code>localStorage</code> bajo la clave <code>sw_ref</code>. Contiene únicamente un código alfanumérico corto, sin datos personales. No tiene fecha de caducidad; puedes eliminarlo borrando el almacenamiento local de tu navegador.</p>
+    <h3 style="font-size:15px;font-weight:600;margin:16px 0 6px">Cómo cambiar tu preferencia</h3>
+    <p>Puedes actualizar tu preferencia de cookies en cualquier momento haciendo clic en <strong>Preferencias de cookies</strong> en el pie de página de cualquier página.</p>
   </div>
 
 </div>
@@ -382,6 +435,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
     <div class="footer-bottom">
       <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Proudly based in Murcia, Spain</p>
       <p>Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
+      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Cookie preferences</a></p>
     </div>
   </div>
 </footer>
