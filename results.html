@@ -904,8 +904,9 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 </div>
 
 <script>
-const SUPABASE_URL = 'https://ufyindkuuvsberajyiar.supabase.co';
-const SUBMIT_URL   = SUPABASE_URL + '/functions/v1/website-submit-contract';
+const SUPABASE_URL  = 'https://ufyindkuuvsberajyiar.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmeWluZGt1dXZzYmVyYWp5aWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MTQsImV4cCI6MjA4ODA4ODgxNH0.pLEsg5bLGugkaodUDLdj-zt6YKWzGYXVd7V5-wVt7TI';
+const SUBMIT_URL    = SUPABASE_URL + '/functions/v1/website-submit-contract';
 const SEND_REPORT_URL = SUPABASE_URL + '/functions/v1/send-website-report';
 
 /* ── State ── */
@@ -1063,6 +1064,18 @@ function renderForTariff(tariff) {
 
 /* ── Init ── */
 (function init() {
+  const urlSession = new URLSearchParams(location.search).get('session');
+  if (urlSession) {
+    fetch(`${SUPABASE_URL}/rest/v1/website_sessions?session_id=eq.${urlSession}&select=session_id,extracted_data,comparison_result,selected_provider,selected_tariff`, {
+      headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON }
+    }).then(r => r.json()).then(rows => {
+      const ws = rows?.[0];
+      if (!ws) { location.href = 'index.html'; return; }
+      _session = { session_id: ws.session_id, extracted_data: ws.extracted_data, comparison_result: ws.comparison_result };
+      _initFromSession();
+    }).catch(() => { location.href = 'index.html'; });
+    return;
+  }
   const raw = sessionStorage.getItem('sw_session');
   if (!raw) {
     document.body.innerHTML = '<div style="padding:60px 40px;text-align:center;font-family:sans-serif"><h2 style="margin-bottom:12px">Session expired</h2><p style="color:#666;margin-bottom:24px">Your session data is no longer available. Please upload your bill again to see your results.</p><a href="index.html" style="background:#25D366;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Upload your bill</a></div>';
@@ -1070,7 +1083,10 @@ function renderForTariff(tariff) {
   }
   try { _session = JSON.parse(raw); } catch (e) { return; }
   if (!_session) return;
+  _initFromSession();
+})();
 
+function _initFromSession() {
   _ext  = _session.extracted_data   || {};
   _comp = _session.comparison_result;
   const best = _comp?.bestTariff;
@@ -1124,7 +1140,7 @@ function renderForTariff(tariff) {
 
   renderForTariff(best);
   renderTariffOptions();
-})();
+}
 
 /* ── Modal helpers ── */
 function toggleCalc(el) {
