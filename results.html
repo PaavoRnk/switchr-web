@@ -168,6 +168,20 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   padding:2px 8px;border-radius:10px;
   font-size:11px;font-weight:600;margin-left:6px;
 }
+.old-cost{color:var(--red);text-decoration:line-through;opacity:.65;font-size:13px;font-weight:400}
+.old-cost-total{color:var(--red);text-decoration:line-through;opacity:.65;font-size:14px;font-weight:500}
+.provider-badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:600;vertical-align:middle;margin-left:5px}
+.tariff-options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.tariff-option{border:2px solid var(--border2);border-radius:12px;padding:14px 16px 28px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;text-align:left;background:#fff;position:relative;width:100%;font-family:'DM Sans',sans-serif}
+.tariff-option:hover{border-color:rgba(37,211,102,0.45);background:var(--gp);box-shadow:0 2px 8px rgba(37,211,102,.1)}
+.tariff-option.selected{border-color:var(--g);background:var(--gp)}
+.tariff-option-provider{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
+.tariff-option-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3;padding-right:26px}
+.tariff-option-cost{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--g)}
+.tariff-option-mo{font-size:12px;font-weight:400;color:var(--ink3)}
+.tariff-option-saving{font-size:11px;color:var(--ink3);margin-top:2px}
+.tariff-option-best{position:absolute;bottom:10px;right:10px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--g);color:#fff;padding:2px 7px;border-radius:8px}
+.tariff-option-check{position:absolute;top:10px;right:10px;width:18px;height:18px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700}
 .totals-row td{font-weight:700!important;font-size:15px!important;background:var(--gp);padding:16px 12px!important;border-radius:8px}
 .totals-row td:first-child{border-radius:8px 0 0 8px}
 .totals-row td:last-child{border-radius:0 8px 8px 0}
@@ -428,6 +442,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   .ticker-wrap{margin:0 -16px 32px}
   .modal{margin:12px}
   .step-label{font-size:9px}
+  .tariff-options-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -492,8 +507,20 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     </div>
   </div>
 
+  <!-- TARIFF SELECTOR -->
+  <div class="scard" style="animation-delay:.07s">
+    <div class="scard-header">
+      <div class="scard-num-badge blue">☆</div>
+      <div>
+        <div class="scard-title">Choose your tariff</div>
+        <div class="scard-sub">Best match pre-selected · click any plan to compare</div>
+      </div>
+    </div>
+    <div id="tariff-options" class="tariff-options-grid"></div>
+  </div>
+
   <!-- SECTION 1: CONSUMPTION & RATES -->
-  <div class="scard" style="animation-delay:.1s">
+  <div class="scard" id="section-1" style="animation-delay:.1s">
     <div class="scard-header">
       <div class="scard-num-badge green">1</div>
       <div>
@@ -510,6 +537,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
           <th style="text-align:left">Time period</th>
           <th>Annual usage</th>
           <th>New rate</th>
+          <th>Current cost*</th>
           <th>New annual cost</th>
         </tr>
       </thead>
@@ -518,38 +546,43 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
           <td>Punta (P1)</td>
           <td class="current-val" id="s1-p1-kwh">—</td>
           <td class="new-val" id="s1-p1-rate">—</td>
+          <td class="old-cost" id="s1-p1-old">—</td>
           <td class="current-val" id="s1-p1-cost">—</td>
         </tr>
         <tr>
           <td>Llano (P2)</td>
           <td class="current-val" id="s1-p2-kwh">—</td>
           <td class="new-val" id="s1-p2-rate">—</td>
+          <td class="old-cost" id="s1-p2-old">—</td>
           <td class="current-val" id="s1-p2-cost">—</td>
         </tr>
         <tr>
           <td>Valle (P3)</td>
           <td class="current-val" id="s1-p3-kwh">—</td>
           <td class="new-val" id="s1-p3-rate">—</td>
+          <td class="old-cost" id="s1-p3-old">—</td>
           <td class="current-val" id="s1-p3-cost">—</td>
         </tr>
         <tr class="you-save-row">
-          <td colspan="3" class="you-save-label">New annual energy cost</td>
+          <td colspan="3" class="you-save-label">Annual energy cost</td>
+          <td class="old-cost-total" id="s1-old-energy">—</td>
           <td class="you-save-val" id="s1-total-energy" style="font-size:18px">—</td>
         </tr>
       </tbody>
     </table>
+    <p style="font-size:11px;color:var(--ink4);margin-top:10px">* Current cost estimated proportionally from your actual bill amount</p>
   </div>
 
   <!-- SECTION 2: POTENCIA -->
-  <div class="scard" style="animation-delay:.2s">
+  <div class="scard" id="section-2" style="animation-delay:.2s">
     <div class="scard-header">
       <div class="scard-num-badge amber">2</div>
       <div>
         <div class="scard-title">Potencia (contracted power)</div>
-        <div class="scard-sub">Fixed daily charges with new tariff</div>
+        <div class="scard-sub">Fixed daily charges — current vs new tariff</div>
       </div>
     </div>
-    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">These are the fixed daily charges based on your contracted power — paid regardless of how much electricity you use. Shown here at the new provider's rates.</p>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">These are the fixed daily charges based on your contracted power — paid regardless of how much electricity you use. Shown here comparing current vs new provider's rates.</p>
 
     <table class="comp-table">
       <thead>
@@ -557,7 +590,8 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
           <th style="text-align:left">Period</th>
           <th>Contracted power</th>
           <th>New rate</th>
-          <th>Annual cost</th>
+          <th>Current cost*</th>
+          <th>New annual cost</th>
         </tr>
       </thead>
       <tbody>
@@ -565,20 +599,24 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
           <td>P1 (Punta)</td>
           <td class="current-val" id="s2-power-p1">—</td>
           <td class="new-val" id="s2-pp1-rate">—</td>
+          <td class="old-cost" id="s2-p1-old">—</td>
           <td class="current-val" id="s2-p1-cost">—</td>
         </tr>
         <tr>
           <td>P2 (Llano/Valle)</td>
           <td class="current-val" id="s2-power-p2">—</td>
           <td class="new-val" id="s2-pp2-rate">—</td>
+          <td class="old-cost" id="s2-p2-old">—</td>
           <td class="current-val" id="s2-p2-cost">—</td>
         </tr>
         <tr class="you-save-row">
-          <td colspan="3" class="you-save-label">New annual potencia cost</td>
+          <td colspan="3" class="you-save-label">Annual potencia cost</td>
+          <td class="old-cost-total" id="s2-old-potencia">—</td>
           <td class="you-save-val" id="s2-potencia-total" style="font-size:18px">—</td>
         </tr>
       </tbody>
     </table>
+    <p style="font-size:11px;color:var(--ink4);margin-top:10px">* Current cost estimated proportionally from your actual bill amount</p>
   </div>
 
   <!-- DARK SUMMARY -->
@@ -841,17 +879,163 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 
 <script>
 const SUPABASE_URL = 'https://ufyindkuuvsberajyiar.supabase.co';
-const SUBMIT_URL = SUPABASE_URL + '/functions/v1/website-submit-contract';
+const SUBMIT_URL   = SUPABASE_URL + '/functions/v1/website-submit-contract';
 const SEND_REPORT_URL = SUPABASE_URL + '/functions/v1/send-website-report';
 
-/* ── Load session data ── */
-const params = new URLSearchParams(location.search);
+/* ── State ── */
+const params    = new URLSearchParams(location.search);
 const sessionId = params.get('session');
 let _session = null;
-let _selectedTariffId = null;
-let _selectedProvider = null;
+let _selectedTariffId   = null;
+let _selectedProvider   = null;
 let _selectedTariffName = null;
+let _allTariffs  = [];
+let _bestTariffId = null;
+// Bill-level constants (don't change when tariff changes)
+let _ext, _comp, _days, _p1Ann, _p2Ann, _p3Ann, _p1kw, _p2kw, _currentAnnual;
 
+/* ── Helpers ── */
+function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+const fmt     = n => '€' + Math.round(n).toLocaleString('en-GB');
+const fmtRate = r => '€' + Number(r).toFixed(4);
+
+/* ── Tariff selector ── */
+function renderTariffOptions() {
+  const grid = document.getElementById('tariff-options');
+  if (!grid || !_allTariffs.length) return;
+  const sorted = [..._allTariffs].sort((a, b) => b.annualSaving - a.annualSaving);
+  grid.innerHTML = sorted.map(t => {
+    const isSelected = t.id === _selectedTariffId;
+    const isBest     = t.id === _bestTariffId;
+    const provLabel  = t.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+    const provColor  = t.provider === 'nordy' ? '#7c3aed' : '#ea580c';
+    const mercTag    = t.isMercado ? ' <span style="font-size:10px;color:#d97706;font-weight:600">⚡ market</span>' : '';
+    return '<button class="tariff-option' + (isSelected ? ' selected' : '') + '" onclick="selectTariff(\'' + t.id + '\')">' +
+      (isSelected ? '<div class="tariff-option-check">✓</div>' : '') +
+      '<div class="tariff-option-provider" style="color:' + provColor + '">' + provLabel + '</div>' +
+      '<div class="tariff-option-name">' + t.name + mercTag + '</div>' +
+      '<div class="tariff-option-cost">€' + t.estimatedMonthly.toFixed(2) + '<span class="tariff-option-mo">/mo</span></div>' +
+      '<div class="tariff-option-saving">Save €' + Math.round(t.annualSaving) + '/yr</div>' +
+      (isBest ? '<span class="tariff-option-best">Best match</span>' : '') +
+      '</button>';
+  }).join('');
+}
+
+function selectTariff(id) {
+  const tariff = _allTariffs.find(t => t.id === id);
+  if (!tariff) return;
+  _selectedTariffId   = tariff.id;
+  _selectedProvider   = tariff.provider;
+  _selectedTariffName = tariff.name;
+  renderForTariff(tariff);
+  renderTariffOptions();
+}
+
+/* ── Main render (called on init + every tariff change) ── */
+function renderForTariff(tariff) {
+  const TAX = 1.0511 * 1.21;
+  const ep  = tariff.ep  || 0;
+  const el  = tariff.el  || 0;
+  const ev  = tariff.ev  || 0;
+  const pp1 = tariff.pp1 || 0;
+  const pp2 = tariff.pp2 || 0;
+
+  // New energy costs
+  const p1Cost      = Math.round(_p1Ann * ep * TAX);
+  const p2Cost      = Math.round(_p2Ann * el * TAX);
+  const p3Cost      = Math.round(_p3Ann * ev * TAX);
+  const totalEnergy = p1Cost + p2Cost + p3Cost;
+
+  // New potencia costs
+  const pot1Cost = Math.round(_p1kw * pp1 * 365 * TAX);
+  const pot2Cost = Math.round(_p2kw * pp2 * 365 * TAX);
+  const potTotal = pot1Cost + pot2Cost;
+
+  // Financials
+  const newAnnual     = Math.round(tariff.estimatedMonthly * 12);
+  const annualSaving  = Math.round(tariff.annualSaving);
+  const monthlySaving = Math.round(tariff.monthlySaving);
+  const pct = _currentAnnual > 0 ? Math.round((annualSaving / _currentAnnual) * 100) : 0;
+
+  // Old cost estimates — proportionally split from current bill total
+  const newAnnualTotal  = totalEnergy + potTotal;
+  const oldEnergyAnnual = newAnnualTotal > 0 ? Math.round(_currentAnnual * totalEnergy / newAnnualTotal) : 0;
+  const oldPotAnnual    = _currentAnnual - oldEnergyAnnual;
+  const totalAnn = _p1Ann + _p2Ann + _p3Ann;
+  const oldP1Cost  = totalAnn > 0 ? Math.round(oldEnergyAnnual * _p1Ann / totalAnn) : 0;
+  const oldP2Cost  = totalAnn > 0 ? Math.round(oldEnergyAnnual * _p2Ann / totalAnn) : 0;
+  const oldP3Cost  = oldEnergyAnnual - oldP1Cost - oldP2Cost;
+  const oldPot1Cost = potTotal > 0 ? Math.round(oldPotAnnual * pot1Cost / potTotal) : 0;
+  const oldPot2Cost = oldPotAnnual - oldPot1Cost;
+
+  const provLabel   = tariff.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+  const provColor   = tariff.provider === 'nordy' ? '#7c3aed' : '#ea580c';
+  const provBg      = tariff.provider === 'nordy' ? '#f5f3ff' : '#fff7ed';
+  const tariffLabel = tariff.name;
+  const tariffShort = tariffLabel.includes(' — ') ? tariffLabel.split(' — ')[1] : tariffLabel;
+  const currProv    = (_ext.current_provider || 'your current provider').replace(', S.A.U.','').replace(', S.A.','').trim();
+
+  // ── Hero ──
+  const saveNumEl = document.querySelector('.save-num');
+  if (saveNumEl) saveNumEl.textContent = fmt(annualSaving);
+  const switchFromTo = document.querySelector('.switch-from-to');
+  if (switchFromTo) switchFromTo.innerHTML = 'Switch from <strong>' + currProv + '</strong> to <strong>' + tariffLabel + '</strong>&nbsp;<span class="provider-badge" style="background:' + provBg + ';color:' + provColor + '">' + provLabel + '</span>';
+  set('pct-text', pct + '% less than your current bill');
+
+  // ── Section 1 ──
+  set('s1-p1-kwh',      _p1Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p2-kwh',      _p2Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p3-kwh',      _p3Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p1-rate',     fmtRate(ep));
+  set('s1-p2-rate',     fmtRate(el));
+  set('s1-p3-rate',     fmtRate(ev));
+  set('s1-p1-old',      fmt(oldP1Cost));
+  set('s1-p2-old',      fmt(oldP2Cost));
+  set('s1-p3-old',      fmt(oldP3Cost));
+  set('s1-p1-cost',     fmt(p1Cost));
+  set('s1-p2-cost',     fmt(p2Cost));
+  set('s1-p3-cost',     fmt(p3Cost));
+  set('s1-old-energy',  fmt(oldEnergyAnnual) + '/yr');
+  set('s1-total-energy', fmt(totalEnergy) + '/yr');
+
+  // ── Section 2 ──
+  set('s2-power-p1',       _p1kw + ' kW');
+  set('s2-power-p2',       _p2kw + ' kW');
+  set('s2-pp1-rate',       fmtRate(pp1) + '/kW·day');
+  set('s2-pp2-rate',       fmtRate(pp2) + '/kW·day');
+  set('s2-p1-old',         fmt(oldPot1Cost));
+  set('s2-p2-old',         fmt(oldPot2Cost));
+  set('s2-p1-cost',        fmt(pot1Cost));
+  set('s2-p2-cost',        fmt(pot2Cost));
+  set('s2-old-potencia',   fmt(oldPotAnnual) + '/yr');
+  set('s2-potencia-total', fmt(potTotal) + '/yr');
+
+  // ── Dark summary ──
+  const dsSubEl = document.querySelector('.ds-subtitle');
+  if (dsSubEl) dsSubEl.textContent = 'Based on ' + _comp.annualKwh.toLocaleString('en-GB') + ' kWh annual consumption';
+  set('ds-current-annual', fmt(_currentAnnual));
+  set('ds-new-annual',     fmt(newAnnual));
+  set('ds-saving-amount',  fmt(annualSaving) + ' / year');
+  set('ds-big-num',        fmt(annualSaving));
+  set('ds-per-month',      '≈ ' + fmt(monthlySaving) + ' per month');
+  set('ds-new-cost-val',   fmt(newAnnual));
+  set('ds-new-cost-from',  'Down from ' + fmt(_currentAnnual));
+
+  // ── How calculated ──
+  set('calc-potencia-kw', _p1kw + ' kW (P1) and ' + _p2kw + ' kW (P2)');
+
+  // ── Sticky footer ──
+  set('sf-saving-val',  fmt(annualSaving) + ' / year');
+  set('sf-tariff-name', 'Switch to ' + tariffShort);
+  set('sf-saving-sub',  'Save ' + fmt(annualSaving) + ' per year →');
+
+  // ── Modal / confirm ──
+  set('confirm-tariff',      tariffLabel);
+  set('modal-tariff-name',   provLabel + ' · ' + tariffLabel);
+  set('modal-saving-amount', fmt(annualSaving) + '/yr');
+}
+
+/* ── Init ── */
 (function init() {
   const raw = sessionStorage.getItem('sw_session');
   if (!raw) {
@@ -861,152 +1045,68 @@ let _selectedTariffName = null;
   try { _session = JSON.parse(raw); } catch (e) { return; }
   if (!_session) return;
 
-  const ext  = _session.extracted_data  || {};
-  const comp = _session.comparison_result;
-  const best = comp?.bestTariff;
-  if (!best || !comp) return;
+  _ext  = _session.extracted_data   || {};
+  _comp = _session.comparison_result;
+  const best = _comp?.bestTariff;
+  if (!best || !_comp) return;
 
-  _selectedTariffId   = best.id;
-  _selectedProvider   = best.provider;
+  // Tariff state
+  _allTariffs       = _comp.allResults || [];
+  _bestTariffId     = best.id;
+  _selectedTariffId = best.id;
+  _selectedProvider = best.provider;
   _selectedTariffName = best.name;
 
-  const TAX   = 1.0511 * 1.21;
-  const days  = Number(ext.billing_period_days) || 30;
-  const scale = 365 / days;
+  // Pre-compute bill-level constants
+  _days         = Number(_ext.billing_period_days) || 30;
+  const scale   = 365 / _days;
+  _p1Ann        = Math.round((Number(_ext.punta_kwh) || 0) * scale);
+  _p2Ann        = Math.round((Number(_ext.llano_kwh) || 0) * scale);
+  _p3Ann        = Math.round((Number(_ext.valle_kwh) || 0) * scale);
+  _p1kw         = Number(_ext.power_p1) || 4.4;
+  _p2kw         = Number(_ext.power_p2) || _p1kw;
+  _currentAnnual = Math.round(_comp.currentMonthly * 12);
 
-  // Annualised kWh
-  const p1Ann = Math.round((Number(ext.punta_kwh) || 0) * scale);
-  const p2Ann = Math.round((Number(ext.llano_kwh) || 0) * scale);
-  const p3Ann = Math.round((Number(ext.valle_kwh) || 0) * scale);
-
-  // New tariff rates
-  const ep  = best.ep  || 0;
-  const el  = best.el  || 0;
-  const ev  = best.ev  || 0;
-  const pp1 = best.pp1 || 0;
-  const pp2 = best.pp2 || 0;
-  const p1kw = Number(ext.power_p1) || 4.4;
-  const p2kw = Number(ext.power_p2) || p1kw;
-
-  // Annual energy costs (inc tax)
-  const p1Cost     = Math.round(p1Ann * ep * TAX);
-  const p2Cost     = Math.round(p2Ann * el * TAX);
-  const p3Cost     = Math.round(p3Ann * ev * TAX);
-  const totalEnergy = p1Cost + p2Cost + p3Cost;
-
-  // Annual potencia costs (inc tax)
-  const pot1Cost = Math.round(p1kw * pp1 * 365 * TAX);
-  const pot2Cost = Math.round(p2kw * pp2 * 365 * TAX);
-  const potTotal = pot1Cost + pot2Cost;
-
-  // Overall financials
-  const currentAnnual = Math.round(comp.currentMonthly * 12);
-  const newAnnual     = Math.round(best.estimatedMonthly * 12);
-  const annualSaving  = Math.round(best.annualSaving);
-  const monthlySaving = Math.round(best.monthlySaving);
-  const pct = currentAnnual > 0 ? Math.round((annualSaving / currentAnnual) * 100) : 0;
-
-  const tariffLabel     = best.name;
-  const tariffShort     = tariffLabel.includes(' — ') ? tariffLabel.split(' — ')[1] : tariffLabel;
-  const currentProvider = ext.current_provider || 'your current provider';
-
-  const fmt     = n => '€' + Math.round(n).toLocaleString('en-GB');
-  const fmtRate = r => '€' + Number(r).toFixed(4);
-
-  function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
-
-  // ── Hero ──
-  const saveNumEl = document.querySelector('.save-num');
-  if (saveNumEl) saveNumEl.textContent = fmt(annualSaving);
-  const switchFromTo = document.querySelector('.switch-from-to');
-  if (switchFromTo) switchFromTo.innerHTML = 'Switch from <strong>' + currentProvider + '</strong> to <strong>' + tariffLabel + '</strong>';
-  set('pct-text', pct + '% less than your current bill');
-
-  // ── Meta line ──
-  const cupsFormatted = (ext.cups || '').replace(/(.{4})/g, '$1 ').trim();
+  // Static elements
+  const cupsFormatted = (_ext.cups || '').replace(/(.{4})/g, '$1 ').trim();
   const metaParts = [];
   if (cupsFormatted) metaParts.push('CUPS: ' + cupsFormatted);
-  metaParts.push('Based on ' + days + '-day billing period');
+  metaParts.push('Based on ' + _days + '-day billing period');
   set('meta-line', metaParts.join('  ·  '));
 
-  // ── Section 1 ──
-  set('s1-desc', comp.hasTramosData
+  set('s1-desc', _comp.hasTramosData
     ? 'We applied your actual P1/P2/P3 consumption to the new tariff rates. Every kWh figure comes directly from your bill.'
     : 'Your bill did not include a full P1/P2/P3 breakdown — the figures below use a typical usage split as an estimate.');
-  set('s1-p1-kwh',      p1Ann.toLocaleString('en-GB') + ' kWh');
-  set('s1-p2-kwh',      p2Ann.toLocaleString('en-GB') + ' kWh');
-  set('s1-p3-kwh',      p3Ann.toLocaleString('en-GB') + ' kWh');
-  set('s1-p1-rate',     fmtRate(ep));
-  set('s1-p2-rate',     fmtRate(el));
-  set('s1-p3-rate',     fmtRate(ev));
-  set('s1-p1-cost',     fmt(p1Cost));
-  set('s1-p2-cost',     fmt(p2Cost));
-  set('s1-p3-cost',     fmt(p3Cost));
-  set('s1-total-energy', fmt(totalEnergy) + '/yr');
 
-  // ── Section 2 ──
-  set('s2-power-p1',      p1kw + ' kW');
-  set('s2-power-p2',      p2kw + ' kW');
-  set('s2-pp1-rate',      fmtRate(pp1) + '/kW·day');
-  set('s2-pp2-rate',      fmtRate(pp2) + '/kW·day');
-  set('s2-p1-cost',       fmt(pot1Cost));
-  set('s2-p2-cost',       fmt(pot2Cost));
-  set('s2-potencia-total', fmt(potTotal) + '/yr');
-
-  // ── Dark summary ──
-  const dsSubEl = document.querySelector('.ds-subtitle');
-  if (dsSubEl) dsSubEl.textContent = 'Based on ' + comp.annualKwh.toLocaleString('en-GB') + ' kWh annual consumption';
-  set('ds-current-annual', fmt(currentAnnual));
-  set('ds-new-annual',     fmt(newAnnual));
-  set('ds-saving-amount',  fmt(annualSaving) + ' / year');
-  set('ds-big-num',        fmt(annualSaving));
-  set('ds-per-month',      '≈ ' + fmt(monthlySaving) + ' per month');
-  set('ds-new-cost-val',   fmt(newAnnual));
-  set('ds-new-cost-from',  'Down from ' + fmt(currentAnnual));
-
-  // ── How calculated ──
-  set('calc-potencia-kw', p1kw + ' kW (P1) and ' + p2kw + ' kW (P2)');
-
-  // ── Sticky footer ──
-  set('sf-saving-val',  fmt(annualSaving) + ' / year');
-  set('sf-tariff-name', 'Switch to ' + tariffShort);
-  set('sf-saving-sub',  'Save ' + fmt(annualSaving) + ' per year →');
-
-  // ── Confirm screen ──
-  set('confirm-tariff', tariffLabel);
-
-  // ── Modal summary strip ──
-  const providerLabel = best.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
-  set('modal-tariff-name',   providerLabel + ' · ' + tariffLabel);
-  set('modal-saving-amount', fmt(annualSaving) + '/yr');
-
-  // ── Pre-fill form ──
+  // Pre-fill form
   function fillField(id, val) { const el = document.getElementById(id); if (el && val) { el.value = val; el.classList.add('prefilled'); } }
-  fillField('f-name',         ext.name);
-  fillField('f-surname1',     ext.surname1);
-  fillField('f-surname2',     ext.surname2);
-  fillField('f-nie',          ext.dni);
-  fillField('f-email',        ext.email);
-  fillField('f-phone',        ext.phone);
-  fillField('f-address',      ext.address);
-  fillField('f-postal',       ext.postal_code);
-  fillField('f-municipality', ext.municipality);
-  fillField('f-province',     ext.province);
-  fillField('f-cups',         ext.cups);
-  if (ext.iban_prefix) {
+  fillField('f-name',         _ext.name);
+  fillField('f-surname1',     _ext.surname1);
+  fillField('f-surname2',     _ext.surname2);
+  fillField('f-nie',          _ext.dni);
+  fillField('f-email',        _ext.email);
+  fillField('f-phone',        _ext.phone);
+  fillField('f-address',      _ext.address);
+  fillField('f-postal',       _ext.postal_code);
+  fillField('f-municipality', _ext.municipality);
+  fillField('f-province',     _ext.province);
+  fillField('f-cups',         _ext.cups);
+  if (_ext.iban_prefix) {
     const ibanEl = document.getElementById('f-iban');
-    if (ibanEl) ibanEl.placeholder = ext.iban_prefix + ' (enter full IBAN)';
+    if (ibanEl) ibanEl.placeholder = _ext.iban_prefix + ' (enter full IBAN)';
   }
+
+  renderForTariff(best);
+  renderTariffOptions();
 })();
 
 /* ── Modal helpers ── */
 function toggleCalc(el) {
-  const body = document.getElementById('calc-body');
+  const body    = document.getElementById('calc-body');
   const chevron = document.getElementById('calc-chevron');
   body.classList.toggle('open');
   chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
 }
-
 function openModal() {
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1035,31 +1135,24 @@ async function submitSwitch() {
     address: g('f-address'), postal_code: g('f-postal'),
     municipality: g('f-municipality'), province: g('f-province'),
     cups: g('f-cups'),
-    power_p1: _session?.extracted_data?.power_p1 || 4.4,
-    power_p2: _session?.extracted_data?.power_p2 || 4.4,
-    selected_tariff_id: _selectedTariffId,
+    power_p1: _ext?.power_p1 || 4.4,
+    power_p2: _ext?.power_p2 || 4.4,
+    selected_tariff_id:   _selectedTariffId,
     selected_tariff_name: _selectedTariffName,
-    selected_provider: _selectedProvider,
+    selected_provider:    _selectedProvider,
   };
 
-  // Basic validation
   const required = ['name','surname1','nie','email','phone','iban','cups','address','postal_code','municipality','province'];
-  const missing = required.filter(k => !payload[k]);
+  const missing  = required.filter(k => !payload[k]);
   if (missing.length) { alert('Please fill in: ' + missing.join(', ')); return; }
 
-  // Show loading
   document.getElementById('modal-form').style.display = 'none';
   const loading = document.getElementById('modal-loading');
   loading.classList.add('show');
 
   try {
-    const res = await fetch(SUBMIT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
+    const res  = await fetch(SUBMIT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
     const data = await res.json();
-
     loading.classList.remove('show');
 
     if (!res.ok || !data.success) {
@@ -1068,36 +1161,26 @@ async function submitSwitch() {
       return;
     }
 
-    // Show confirm screen
     const confirmScreen = document.getElementById('confirm-screen');
     confirmScreen.classList.add('show');
-
-    // Update stepper
     const steps = document.querySelectorAll('.step-item');
     if (steps[2]) { steps[2].className = 'step-item done'; steps[2].querySelector('.step-circle').textContent = '✓'; }
     if (steps[3]) { steps[3].className = 'step-item active'; steps[3].querySelector('.step-circle').textContent = '4'; }
 
-    // Show signing link for Gana
     if (data.provider === 'gana' && data.signaturitUrl) {
       const existing = confirmScreen.querySelector('.sign-link');
       if (!existing) {
         const link = document.createElement('a');
-        link.href = data.signaturitUrl;
-        link.target = '_blank';
-        link.className = 'sign-link';
+        link.href = data.signaturitUrl; link.target = '_blank'; link.className = 'sign-link';
         link.style.cssText = 'display:inline-block;margin-top:16px;padding:12px 24px;background:var(--g);color:#fff;border-radius:10px;font-family:Sora,sans-serif;font-weight:700;text-decoration:none';
         link.textContent = '✍ Sign your contract →';
         confirmScreen.appendChild(link);
       }
     } else if (data.provider === 'nordy' || data.manual) {
-      // Nordy or manual flow
-      const title = confirmScreen.querySelector('h2,h3,[class*="title"]');
+      const title = confirmScreen.querySelector('[class*="title"]');
       if (title) title.textContent = 'All done! Our team will contact you.';
     }
-
-    // Clear session
     sessionStorage.removeItem('sw_session');
-
   } catch (err) {
     loading.classList.remove('show');
     document.getElementById('modal-form').style.display = '';
@@ -1107,39 +1190,19 @@ async function submitSwitch() {
 
 async function sendReport() {
   const emailEl = document.getElementById('email-input');
-  const btn = document.querySelector('.email-send-btn');
-  const email = emailEl ? emailEl.value.trim() : '';
-  if (!email || !email.includes('@')) {
-    emailEl.style.borderColor = '#ef4444';
-    emailEl.focus();
-    return;
-  }
+  const btn     = document.querySelector('.email-send-btn');
+  const email   = emailEl ? emailEl.value.trim() : '';
+  if (!email || !email.includes('@')) { emailEl.style.borderColor = '#ef4444'; emailEl.focus(); return; }
   emailEl.style.borderColor = '';
   const sid = _session?.session_id || sessionId;
   if (!sid) { alert('No session ID — please upload your bill again.'); return; }
-  btn.textContent = 'Sending…';
-  btn.disabled = true;
+  btn.textContent = 'Sending…'; btn.disabled = true;
   try {
-    const res = await fetch(SEND_REPORT_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ session_id: sid, email }),
-    });
+    const res  = await fetch(SEND_REPORT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ session_id: sid, email }) });
     const data = await res.json();
-    if (!res.ok || data.error) {
-      btn.textContent = 'Error — try again';
-      btn.disabled = false;
-      console.error('sendReport error:', data.error);
-    } else {
-      btn.textContent = '✓ Sent!';
-      btn.style.background = '#16a34a';
-      emailEl.disabled = true;
-    }
-  } catch (err) {
-    btn.textContent = 'Error — try again';
-    btn.disabled = false;
-    console.error('sendReport fetch error:', err);
-  }
+    if (!res.ok || data.error) { btn.textContent = 'Error — try again'; btn.disabled = false; }
+    else { btn.textContent = '✓ Sent!'; btn.style.background = '#16a34a'; emailEl.disabled = true; }
+  } catch (err) { btn.textContent = 'Error — try again'; btn.disabled = false; }
 }
 
 // Scroll-in animation
