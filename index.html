@@ -592,6 +592,11 @@ footer{background:#060f0c;padding:48px 40px 32px}
 .rec-mobile-panel{background:rgba(255,255,255,0.2);color:#fff;}
 .rec-email-panel{background:rgba(255,255,255,0.2);color:#fff;}
 .rec-web-panel{background:rgba(255,255,255,0.2);color:#fff;}
+/* Hamburger button — must be before mobile breakpoints */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:201;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:rgba(255,255,255,0.9);transition:background .3s}
+nav.scrolled .hamburger span{background:var(--ink)}
+
 @media(max-width:860px){
   .channel-tabs .ctab-label{display:none}
   .ctab-rec{display:none}
@@ -610,8 +615,20 @@ footer{background:#060f0c;padding:48px 40px 32px}
   .wa-panel-bottom,.email-panel-bottom,.web-panel-bottom{padding:16px 20px}
   .wa-chat-preview,.email-mock,.web-preview,.rps-body{padding:14px 20px 16px}
   .steps-row{grid-template-columns:1fr}
-  .nav-links a:not(.nav-cta){display:none}
   .email-panel-top{grid-template-columns:1fr}
+  /* Hamburger: hide nav-links, show button */
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:64px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:199}
+  nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px}
+  nav.menu-open .nav-links a:hover{background:var(--gp)}
+  nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px}
+  /* Market Watch: reduce padding + collapse plan cards to 1 col */
+  #market-watch{padding-left:20px!important;padding-right:20px!important;padding-top:60px!important}
+  .mw-cards{grid-template-columns:1fr!important}
+  /* Footer: single column */
+  .footer-top{grid-template-columns:1fr!important}
+  footer{padding-left:20px!important;padding-right:20px!important}
 }
 
 /* Orb float animations */
@@ -636,6 +653,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
       Start now
     </a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <!-- NAV:END -->
 
@@ -1044,7 +1062,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
     <p style="font-size:17px;color:#a8c4d8;font-weight:300;max-width:580px;line-height:1.65;margin-bottom:48px;">One stayed flat. One swung 148%. Which worked better depends entirely on how you live — and the quiz below will tell you which fits you.</p>
 
     <!-- Plan Cards -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
+    <div class="mw-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
 
       <!-- Plan A: Set & Forget — emerald -->
       <div onclick="mwSelect('sf')" id="mw-card-sf"
@@ -1730,6 +1748,14 @@ footer{background:#060f0c;padding:48px 40px 32px}
 // Nav scroll
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40));
 
+// Hamburger menu
+function toggleMenu(){document.getElementById('nav').classList.toggle('menu-open')}
+document.addEventListener('click',function(e){
+  var nav=document.getElementById('nav');
+  if(nav.classList.contains('menu-open')&&!nav.contains(e.target))nav.classList.remove('menu-open');
+});
+document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('nav').classList.remove('menu-open')})});
+
 // Reveal
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
@@ -1887,6 +1913,7 @@ function startAnalysis(){
   updatePrice();
   // Update every 4 seconds to feel live
   setInterval(updatePrice, 4000);
+})();
 </script>
 <div id="copy-toast">📋 Email copied — paste it in the To field</div>
 <script>

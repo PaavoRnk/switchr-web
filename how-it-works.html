@@ -359,6 +359,10 @@ nav{
 .cta-em{background:rgba(59,130,246,0.1);color:#1d4ed8;border:1px solid rgba(59,130,246,0.2);}
 .cta-web{background:rgba(139,92,246,0.1);color:#6d28d9;border:1px solid rgba(139,92,246,0.2);}
 
+/* Hamburger button */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:101;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--ink)}
+
 /* ── FOOTER ── */
 /* ── RESPONSIVE ── */
 @media(max-width:760px){
@@ -371,6 +375,16 @@ nav{
   .step-num-line{display:none;}
   .step-ghost-num{display:none;}
   .footer-top{grid-template-columns:1fr 1fr}
+}
+@media(max-width:580px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:99}
+  nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px}
+  nav.menu-open .nav-links a:hover{background:var(--gp)}
+  nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px}
+  .footer-top{grid-template-columns:1fr!important}
+  footer{padding-left:20px!important;padding-right:20px!important}
 }
 footer{background:#060f0c;padding:48px 40px 32px}
 .footer-inner{max-width:1040px;margin:0 auto}
@@ -419,6 +433,7 @@ footer{background:#060f0c;padding:48px 40px 32px}
       Start now
     </a>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 <!-- NAV:END -->
 
@@ -704,6 +719,11 @@ footer{background:#060f0c;padding:48px 40px 32px}
 <!-- FOOTER:END -->
 
 <script>
+// Hamburger menu
+function toggleMenu(){document.querySelector('nav').classList.toggle('menu-open')}
+document.addEventListener('click',function(e){var n=document.querySelector('nav');if(n.classList.contains('menu-open')&&!n.contains(e.target))n.classList.remove('menu-open')});
+document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('menu-open')})});
+
 // Scroll reveal
 const obs = new IntersectionObserver((entries) => {
   entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
