@@ -1111,12 +1111,15 @@ function openModal() {
   document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
+let _submitted = false;
 function closeModal() {
   document.getElementById('modal').classList.remove('open');
   document.body.style.overflow = '';
-  document.getElementById('modal-loading').classList.remove('show');
-  document.getElementById('confirm-screen').classList.remove('show');
-  document.getElementById('modal-form').style.display = '';
+  if (!_submitted) {
+    document.getElementById('modal-loading').classList.remove('show');
+    document.getElementById('confirm-screen').classList.remove('show');
+    document.getElementById('modal-form').style.display = '';
+  }
 }
 function closeModalOutside(e) {
   if (e.target === document.getElementById('modal')) closeModal();
@@ -1161,11 +1164,23 @@ async function submitSwitch() {
       return;
     }
 
+    _submitted = true;
     const confirmScreen = document.getElementById('confirm-screen');
     confirmScreen.classList.add('show');
     const steps = document.querySelectorAll('.step-item');
     if (steps[2]) { steps[2].className = 'step-item done'; steps[2].querySelector('.step-circle').textContent = '✓'; }
-    if (steps[3]) { steps[3].className = 'step-item active'; steps[3].querySelector('.step-circle').textContent = '4'; }
+    if (steps[3]) { steps[3].className = 'step-item done'; steps[3].querySelector('.step-circle').textContent = '✓'; steps[3].querySelector('.step-label').textContent = 'Switched'; }
+
+    // Disable sticky footer CTA
+    const sfBtn = document.querySelector('.switch-cta');
+    if (sfBtn) {
+      sfBtn.disabled = true;
+      sfBtn.style.cssText += ';background:#a8c4d8;cursor:default;pointer-events:none';
+      const nameEl = document.getElementById('sf-tariff-name');
+      const subEl  = document.getElementById('sf-saving-sub');
+      if (nameEl) nameEl.textContent = 'Switch submitted ✓';
+      if (subEl)  subEl.textContent  = 'We\'ll be in touch shortly';
+    }
 
     if (data.provider === 'gana' && data.signaturitUrl) {
       const existing = confirmScreen.querySelector('.sign-link');
