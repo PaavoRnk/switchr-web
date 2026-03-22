@@ -1925,7 +1925,7 @@ function startAnalysis(){
 (function () {
   var params = new URLSearchParams(window.location.search);
   var refParam = params.get('ref');
-  if (refParam && !localStorage.getItem('sw_ref')) {
+  if (refParam) {
     localStorage.setItem('sw_ref', refParam.toUpperCase());
   }
   var ref = localStorage.getItem('sw_ref');
