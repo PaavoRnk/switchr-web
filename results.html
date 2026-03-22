@@ -33,13 +33,28 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line
 /* NAV */
 nav{
   position:sticky;top:0;z-index:200;
-  background:rgba(248,253,251,0.9);backdrop-filter:blur(16px);
+  background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);
   border-bottom:1px solid var(--border);
-  padding:0 32px;height:60px;
+  padding:0 40px;height:60px;
   display:flex;align-items:center;justify-content:space-between;
 }
-.logo{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:var(--ink);display:flex;align-items:center;gap:7px;text-decoration:none}
-.logo-dot{width:9px;height:9px;border-radius:50%;background:var(--g)}
+.logo{font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-size:14px;color:var(--ink2);text-decoration:none;font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--ink);}
+.logo:hover{text-decoration:none;}
+.nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--gd);color:#fff;}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:101;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--ink)}
+@media(max-width:580px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:99}
+  nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px}
+  nav.menu-open .nav-links a:hover{background:var(--gp)}
+  nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px}
+}
 
 /* PROGRESS STEPPER */
 .stepper{display:flex;align-items:center;gap:0;padding:20px 32px 0;max-width:900px;margin:0 auto}
@@ -450,8 +465,19 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="logo"><div class="logo-dot"></div>Switchr</a>
-  <div style="font-size:13px;color:var(--ink3)">Your savings report</div>
+  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <div class="nav-links">
+    <a href="index.html#how-it-works">How it works</a>
+    <a href="how-it-works.html">Full explainer</a>
+    <a href="index.html#market-watch">Market watch</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/34662403660" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start now
+    </a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- STEPPER -->
@@ -1219,6 +1245,11 @@ async function sendReport() {
     else { btn.textContent = '✓ Sent!'; btn.style.background = '#16a34a'; emailEl.disabled = true; }
   } catch (err) { btn.textContent = 'Error — try again'; btn.disabled = false; }
 }
+
+// Hamburger menu
+function toggleMenu(){document.querySelector('nav').classList.toggle('menu-open')}
+document.addEventListener('click',function(e){var n=document.querySelector('nav');if(n.classList.contains('menu-open')&&!n.contains(e.target))n.classList.remove('menu-open')});
+document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('menu-open')})});
 
 // Scroll-in animation
 const obs = new IntersectionObserver(entries => {
