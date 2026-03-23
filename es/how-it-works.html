@@ -308,6 +308,37 @@ nav{
 .hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:101;flex-shrink:0}
 .hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--ink)}
 
+/* ── PROVIDERS SECTION ── */
+.providers-section{background:var(--ink);padding:80px 40px;text-align:center}
+.providers-inner{max-width:860px;margin:0 auto}
+.providers-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:12px}
+.providers-title{font-family:'Sora',sans-serif;font-size:clamp(22px,3vw,34px);font-weight:700;color:#fff;letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}
+.providers-sub{font-size:15px;color:rgba(255,255,255,0.45);font-weight:300;line-height:1.65;margin-bottom:40px;max-width:560px;margin-left:auto;margin-right:auto}
+.provider-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left}
+.provider-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 30px}
+.provider-name{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.provider-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:6px;background:rgba(37,211,102,0.15);color:var(--g);margin-bottom:14px}
+.provider-desc{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;font-weight:300;margin-bottom:16px}
+.provider-tags{display:flex;gap:6px;flex-wrap:wrap}
+.provider-tag{font-size:11px;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.12);padding:3px 10px;border-radius:20px}
+
+/* ── FAQ SECTION ── */
+.faq-section{padding:80px 40px;max-width:780px;margin:0 auto}
+.faq-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sw);margin-bottom:12px}
+.faq-title{font-family:'Sora',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}
+.faq-sub{font-size:16px;color:var(--ink3);font-weight:300;line-height:1.65;margin-bottom:44px;max-width:520px}
+.faq-item{border-bottom:1px solid var(--border2)}
+.faq-item:first-child{border-top:1px solid var(--border2)}
+.faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:inherit}
+.faq-q-text{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4;text-align:left}
+.faq-icon{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.faq-item.open .faq-icon{background:var(--g);border-color:var(--g)}
+.faq-icon svg{transition:transform .25s}
+.faq-item.open .faq-icon svg{transform:rotate(45deg)}
+.faq-a{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.faq-a-inner{font-size:14px;color:var(--ink3);line-height:1.8;font-weight:300;padding-bottom:22px}
+.faq-a-inner strong{color:var(--ink);font-weight:600}
+
 /* ── RESPONSIVE ── */
 @media(max-width:760px){
   nav{padding:0 20px;}
@@ -319,6 +350,9 @@ nav{
   .step-num-line{display:none;}
   .step-ghost-num{display:none;}
   .footer-top{grid-template-columns:1fr 1fr}
+  .provider-cards{grid-template-columns:1fr}
+  .providers-section{padding:60px 20px}
+  .faq-section{padding:60px 20px}
 }
 @media(max-width:580px){
   .nav-links{display:none}
@@ -603,6 +637,121 @@ footer{background:#060f0c;padding:48px 40px 32px}
 
 </div>
 
+<!-- PROVIDERS -->
+<section class="providers-section">
+  <div class="providers-inner">
+    <div class="providers-kicker">Con quién trabajamos</div>
+    <h2 class="providers-title">Dos comercializadoras españolas licenciadas.<br>Competitivas. 100% online.</h2>
+    <p class="providers-sub">Tenemos acuerdos comerciales directos con Gana Energía y Nordy — ambas reguladas por la CNMC. Te mostramos las dos y tú eliges la que mejor te conviene.</p>
+    <div class="provider-cards">
+      <div class="provider-card">
+        <div class="provider-name">Gana Energía</div>
+        <div class="provider-badge">Comercializadora licenciada · Península</div>
+        <p class="provider-desc">Comercializadora española con tarifas de precio fijo e indexadas al mercado. Contratos firmados digitalmente por enlace de email — sin llamadas, sin papeleo. Domiciliación totalmente automatizada.</p>
+        <div class="provider-tags">
+          <span class="provider-tag">Tarifa fija</span>
+          <span class="provider-tag">Precio mercado</span>
+          <span class="provider-tag">Firma digital</span>
+          <span class="provider-tag">Península</span>
+        </div>
+      </div>
+      <div class="provider-card">
+        <div class="provider-name">Nordy</div>
+        <div class="provider-badge">Comercializadora licenciada · Toda España</div>
+        <p class="provider-desc">Comercializadora española con tarifas planas y por tramos horarios competitivas. Disponible en península e islas. Conocida por su precio transparente y contratos sencillos.</p>
+        <div class="provider-tags">
+          <span class="provider-tag">Tarifa fija</span>
+          <span class="provider-tag">Por tramos</span>
+          <span class="provider-tag">Toda España</span>
+          <span class="provider-tag">Islas incluidas</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-kicker">Preguntas frecuentes</div>
+  <h2 class="faq-title">Respuestas claras a<br>las dudas más comunes.</h2>
+  <p class="faq-sub">Si tienes dudas, probablemente estén aquí. Preferimos responderlas antes de que te quedes con la pregunta.</p>
+  <div class="faq-list" id="faqList">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Me van a cortar la luz al cambiar de compañía?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Nunca. Cambiar de comercializadora en España es un trámite <strong>puramente administrativo</strong>. Tu suministro eléctrico viene de la red nacional (Red Eléctrica) y no se ve afectado. El cambio solo modifica quién te manda la factura. La mayoría de clientes no nota nada hasta que llega una factura más barata.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Para qué necesitáis mi IBAN?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Tu nueva comercializadora necesita el IBAN para configurar la <strong>domiciliación bancaria de tus facturas mensuales</strong> — exactamente igual que con tu compañía actual. Switchr no te cobra nada y no guarda tu IBAN completo una vez enviado a la comercializadora.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Cuánto me cuesta usar Switchr?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><strong>Nada.</strong> Switchr es completamente gratuito para los clientes. Cobramos una comisión a la comercializadora cuando haces el cambio — igual que un bróker hipotecario o un comparador de seguros. Esta comisión no afecta al precio de la tarifa que pagas.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Puedo arrepentirme después de cambiar?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Puedes <strong>cancelar durante el primer año sin penalización</strong>. Contacta con tu nueva comercializadora y lo gestionan ellos. Puedes cambiar a otra compañía en cualquier momento — incluyendo volver a la anterior si lo prefieres.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Cuánto tarda todo el proceso?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Rellenar el formulario lleva unos <strong>2 minutos</strong>. Una vez enviado, tu nueva comercializadora notifica a tu actual suministradora en 24 horas. El cambio técnico se completa en 3–4 días laborables sin interrupciones. La primera factura de la nueva compañía suele llegar entre 30 y 40 días después.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿De qué compañías podéis sacarme?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">De cualquier comercializadora española autorizada: <strong>Iberdrola, Endesa, Naturgy, Repsol, Octopus, EDP, Holaluz</strong> y todas las demás. Si tienes una tarifa doméstica estándar 2.0TD, podemos comparar y gestionar el cambio.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Están seguros mis datos personales?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Sí. Solo recogemos lo necesario para tramitar el cambio — nombre, dirección, DNI/NIE, email e IBAN. Estos datos se tratan conforme al <strong>RGPD</strong>, se comparten únicamente con la comercializadora que elijas y nunca se venden ni se usan para marketing. Consulta nuestra <a href="../privacy-policy.html" style="color:var(--sw);">política de privacidad</a> para más detalles.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Operáis en toda España?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Sí, en la mayor parte de España. Algunas tarifas están limitadas a la península por la red eléctrica independiente de Canarias, Baleares, Ceuta y Melilla. Siempre te mostramos <strong>solo las tarifas disponibles para tu dirección de suministro</strong>.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">¿Quién está detrás de Switchr?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Switchr es un equipo pequeño <strong>con base en España</strong>, creado para ayudar a la comunidad expatriada de habla inglesa a entender el mercado energético español. Tenemos acuerdos comerciales directos con Gana Energía y Nordy, lo que nos permite ofrecer tarifas competitivas y un proceso de cambio 100% online — sin llamadas, sin burocracia.</div></div>
+    </div>
+
+  </div>
+</div>
+
 <!-- FINAL CTA -->
 <section class="final">
   <div class="final-inner">
@@ -681,6 +830,20 @@ function copyEmail() {
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2800);
   });
+}
+
+function toggleFaq(btn) {
+  var item = btn.closest('.faq-item');
+  var answer = item.querySelector('.faq-a');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.faq-a').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
 }
 </script>
 <div id="copy-toast">📋 Email copiado — pégalo en el campo Para</div>

@@ -420,6 +420,43 @@ footer{background:#060f0c;padding:48px 40px 32px}
 .final-btn-web:hover{background:rgba(139,92,246,0.25)}
 .final-trust{font-size:12px;color:rgba(255,255,255,0.2)}
 .final-trust span{color:rgba(255,255,255,0.35)}
+
+/* ── PROVIDERS SECTION ── */
+.providers-section{background:var(--ink);padding:80px 40px;text-align:center}
+.providers-inner{max-width:780px;margin:0 auto}
+.providers-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:14px}
+.providers-title{font-family:'Sora',sans-serif;font-size:clamp(22px,3vw,32px);font-weight:700;color:#fff;letter-spacing:-.02em;margin-bottom:10px}
+.providers-sub{font-size:15px;color:rgba(255,255,255,0.4);font-weight:300;line-height:1.65;margin-bottom:44px;max-width:520px;margin-left:auto;margin-right:auto}
+.provider-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:left}
+.provider-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:28px 30px}
+.provider-name{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:#fff;margin-bottom:6px}
+.provider-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:6px;background:rgba(37,211,102,0.15);color:var(--g);margin-bottom:14px}
+.provider-desc{font-size:14px;color:rgba(255,255,255,0.45);line-height:1.7;font-weight:300;margin-bottom:16px}
+.provider-tags{display:flex;gap:6px;flex-wrap:wrap}
+.provider-tag{font-size:11px;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.12);padding:3px 10px;border-radius:20px}
+
+/* ── FAQ SECTION ── */
+.faq-section{padding:80px 40px;max-width:780px;margin:0 auto}
+.faq-kicker{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--sw);margin-bottom:12px}
+.faq-title{font-family:'Sora',sans-serif;font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.15;margin-bottom:10px}
+.faq-sub{font-size:16px;color:var(--ink3);font-weight:300;line-height:1.65;margin-bottom:44px;max-width:520px}
+.faq-item{border-bottom:1px solid var(--border2)}
+.faq-item:first-child{border-top:1px solid var(--border2)}
+.faq-q{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;font-family:inherit}
+.faq-q-text{font-size:15px;font-weight:600;color:var(--ink);line-height:1.4;text-align:left}
+.faq-icon{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:background .2s,border-color .2s}
+.faq-item.open .faq-icon{background:var(--g);border-color:var(--g)}
+.faq-icon svg{transition:transform .25s}
+.faq-item.open .faq-icon svg{transform:rotate(45deg)}
+.faq-a{overflow:hidden;max-height:0;transition:max-height .35s ease}
+.faq-a-inner{font-size:14px;color:var(--ink3);line-height:1.8;font-weight:300;padding-bottom:22px}
+.faq-a-inner strong{color:var(--ink);font-weight:600}
+@media(max-width:760px){
+  .provider-cards{grid-template-columns:1fr}
+  .providers-section{padding:60px 20px}
+  .faq-section{padding:60px 20px}
+}
+
 #copy-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:#1a1a1a;color:#fff;padding:11px 20px;border-radius:10px;font-size:14px;font-family:Sora,sans-serif;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999;white-space:nowrap}
 #copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -667,6 +704,121 @@ footer{background:#060f0c;padding:48px 40px 32px}
 
 </div>
 
+<!-- PROVIDERS -->
+<section class="providers-section">
+  <div class="providers-inner">
+    <div class="providers-kicker">Who we work with</div>
+    <h2 class="providers-title">Two licensed Spanish providers.<br>Both competitive. Both fully online.</h2>
+    <p class="providers-sub">We have direct commercial agreements with Gana Energía and Nordy — both licensed by the Spanish energy regulator. We show you both, and you pick the one that suits you best.</p>
+    <div class="provider-cards">
+      <div class="provider-card">
+        <div class="provider-name">Gana Energía</div>
+        <div class="provider-badge">Licensed provider · Peninsula</div>
+        <p class="provider-desc">Spanish electricity provider offering fixed-rate and market-indexed tariffs. Contracts signed digitally via email link — no calls, no paperwork. Direct debit setup is fully automated.</p>
+        <div class="provider-tags">
+          <span class="provider-tag">Fixed tariffs</span>
+          <span class="provider-tag">Market-indexed</span>
+          <span class="provider-tag">Digital signing</span>
+          <span class="provider-tag">Peninsula</span>
+        </div>
+      </div>
+      <div class="provider-card">
+        <div class="provider-name">Nordy</div>
+        <div class="provider-badge">Licensed provider · All Spain</div>
+        <p class="provider-desc">Spanish electricity provider with competitive flat-rate and time-of-use tariffs. Available across the peninsula and islands. Known for transparent pricing and straightforward contracts.</p>
+        <div class="provider-tags">
+          <span class="provider-tag">Fixed tariffs</span>
+          <span class="provider-tag">Time-of-use</span>
+          <span class="provider-tag">All Spain</span>
+          <span class="provider-tag">Islands included</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="faq-kicker">Common questions</div>
+  <h2 class="faq-title">Straight answers to<br>the obvious questions.</h2>
+  <p class="faq-sub">If you are hesitating, it is probably one of these. We would rather answer them upfront than have you wonder.</p>
+  <div class="faq-list" id="faqList">
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Will my electricity be cut off when I switch?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Never. Switching provider in Spain is a purely <strong>administrative process</strong>. Your physical electricity supply comes from the national grid (Red Eléctrica) and is completely unaffected. The switch simply changes who sends you a bill. Most customers don't notice anything until a cheaper invoice arrives.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Why do you need my IBAN?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Your new provider needs your IBAN to set up the <strong>direct debit for your monthly bills</strong> — exactly the same arrangement you have with your current provider right now. Switchr never charges you anything and does not store your full IBAN after it is submitted to the provider.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What does Switchr cost me?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner"><strong>Nothing.</strong> Switchr is completely free for customers. We earn a commission from the provider when you switch — similar to how a mortgage broker or insurance comparison site works. This commission has no effect on the tariff price you pay.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">What if I change my mind after switching?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">You can <strong>cancel within your first year with no penalty</strong>. Just contact your new provider and they will process it. You can switch to another provider at any time — including back to your previous one if you prefer.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">How long does the whole thing actually take?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Filling in the form takes about <strong>2 minutes</strong>. Once submitted, your new provider notifies your current supplier within 24 hours. The technical switch completes in 3–4 working days with no interruption. Your first bill from the new provider usually arrives 30–40 days later.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Which providers can you switch me away from?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Any licensed Spanish electricity provider: <strong>Iberdrola, Endesa, Naturgy, Repsol, Octopus, EDP, Holaluz</strong>, and all others. As long as you have a standard domestic 2.0TD tariff, we can compare and switch.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Is my personal data safe?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Yes. We collect only what is needed to process your switch — name, address, DNI/NIE, email, and IBAN. This data is handled in line with <strong>GDPR</strong>, shared only with the provider you choose, and never sold or used for marketing. See our <a href="privacy-policy.html" style="color:var(--sw);">privacy policy</a> for full details.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Do you cover the whole of Spain?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Yes, for most of Spain. Some tariffs are limited to the peninsula due to the separate electricity grid in the Canary Islands, Balearic Islands, Ceuta, and Melilla. We always show you <strong>only the tariffs you are eligible for</strong> based on your supply address.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text">Who exactly is Switchr?</span>
+        <span class="faq-icon"><svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="5" y1="1" x2="5" y2="9"/><line x1="1" y1="5" x2="9" y2="5"/></svg></span>
+      </button>
+      <div class="faq-a"><div class="faq-a-inner">Switchr is a small team <strong>based in Spain</strong>, built to help the English-speaking expat community navigate the Spanish energy market. We have direct commercial agreements with Gana Energía and Nordy, which lets us offer competitive tariffs and a fully online switching process — no phone calls, no Spanish bureaucracy.</div></div>
+    </div>
+
+  </div>
+</div>
+
 <!-- FINAL CTA -->
 <section class="final">
   <div class="final-inner">
@@ -745,6 +897,20 @@ function copyEmail() {
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2800);
   });
+}
+
+function toggleFaq(btn) {
+  var item = btn.closest('.faq-item');
+  var answer = item.querySelector('.faq-a');
+  var isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(function(el) {
+    el.classList.remove('open');
+    el.querySelector('.faq-a').style.maxHeight = '0';
+  });
+  if (!isOpen) {
+    item.classList.add('open');
+    answer.style.maxHeight = answer.scrollHeight + 'px';
+  }
 }
 </script>
 <div id="copy-toast">📋 Email copied — paste it in the To field</div>
