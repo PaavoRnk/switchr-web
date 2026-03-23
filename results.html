@@ -938,6 +938,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
             <div class="form-group full">
               <label class="form-label">CUPS number</label>
               <input id="f-cups" class="form-input" placeholder="ES0021000013432884RF">
+              <div id="cups-warn" style="display:none;margin-top:6px;padding:8px 12px;background:#fffbeb;border:1px solid #fde68a;border-radius:6px;font-size:13px;color:#92400e;line-height:1.5;">⚠️ We couldn't detect your CUPS automatically. Find it on your bill — it starts with <strong>ES</strong> and has 20 characters.</div>
               <div class="form-hint">Extracted from your bill · 20–22 characters starting ES</div>
             </div>
           </div>
@@ -1261,12 +1262,12 @@ function renderForTariff(tariff) {
 (function init() {
   const urlSession = new URLSearchParams(location.search).get('session');
   if (urlSession) {
-    fetch(`${SUPABASE_URL}/rest/v1/website_sessions?session_id=eq.${urlSession}&select=session_id,extracted_data,comparison_result,selected_provider,selected_tariff`, {
+    fetch(`${SUPABASE_URL}/rest/v1/website_sessions?session_id=eq.${urlSession}&select=session_id,status,extracted_data,comparison_result,selected_provider,selected_tariff`, {
       headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON }
     }).then(r => r.json()).then(rows => {
       const ws = rows?.[0];
       if (!ws) { location.href = 'index.html'; return; }
-      _session = { session_id: ws.session_id, extracted_data: ws.extracted_data, comparison_result: ws.comparison_result };
+      _session = { session_id: ws.session_id, status: ws.status, extracted_data: ws.extracted_data, comparison_result: ws.comparison_result };
       _initFromSession();
     }).catch(() => { location.href = 'index.html'; });
     return;
@@ -1281,11 +1282,31 @@ function renderForTariff(tariff) {
   _initFromSession();
 })();
 
+function _showExtractionError() {
+  document.querySelector('main')?.remove();
+  document.querySelector('footer')?.remove();
+  document.body.insertAdjacentHTML('beforeend', `
+    <div style="min-height:70vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;">
+      <div style="max-width:480px;text-align:center;font-family:'DM Sans',sans-serif;">
+        <div style="font-size:48px;margin-bottom:16px;">😔</div>
+        <h2 style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;margin-bottom:12px;color:#0a1a15;">We couldn't read your bill</h2>
+        <p style="color:#6b8c7e;font-size:15px;line-height:1.6;margin-bottom:28px;">The scan failed — this can happen with low-quality photos or certain bill formats. You can try again with a clearer image or PDF, or send it to us on WhatsApp and we'll handle it manually.</p>
+        <div style="display:flex;flex-direction:column;gap:12px;align-items:center;">
+          <a href="index.html" style="display:inline-block;background:#25D366;color:#fff;padding:14px 36px;border-radius:8px;font-weight:700;font-size:15px;text-decoration:none;">Try again with a better image</a>
+          <a href="https://wa.me/34662403660?text=Hola%21%20Quiero%20analizar%20mi%20factura%20de%20luz" style="display:inline-block;background:#1a1a2e;color:#fff;padding:12px 32px;border-radius:6px;font-weight:600;font-size:14px;text-decoration:none;">💬 Send via WhatsApp instead</a>
+        </div>
+      </div>
+    </div>`);
+}
+
 function _initFromSession() {
   _ext  = _session.extracted_data   || {};
   _comp = _session.comparison_result;
   const best = _comp?.bestTariff;
-  if (!best || !_comp) return;
+  if (!best || !_comp) { _showExtractionError(); return; }
+  if (_session.status === 'needs_cups' || (!_ext.cups && _session.status !== 'ready')) {
+    const w = document.getElementById('cups-warn'); if (w) w.style.display = 'block';
+  }
 
   // Tariff state
   _allTariffs       = _comp.allResults || [];
