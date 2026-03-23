@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <!-- Google tag (gtag.js) — Consent Mode v2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
@@ -11,14 +11,13 @@
   gtag('config', 'G-ZF2VXXL0FP');
   if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
 </script>
-<script defer src="cookie-consent.js"></script>
-<script src="language.js"></script>
+<script defer src="../cookie-consent.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="alternate" hreflang="en" href="https://switchr.es/contact.html">
+<title>Contacto — Switchr</title>
 <link rel="alternate" hreflang="es" href="https://switchr.es/es/contact.html">
+<link rel="alternate" hreflang="en" href="https://switchr.es/contact.html">
 <link rel="alternate" hreflang="x-default" href="https://switchr.es/contact.html">
-<title>Contact — Switchr</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
@@ -216,72 +215,69 @@ footer{background:var(--ink);padding:56px 40px 32px;}
 
 <!-- NAV:START -->
 <nav>
-  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <a href="index.html" class="logo"><img src="../switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
   <div class="nav-links">
-    <a href="index.html#how-it-works">How it works</a>
-    <a href="how-it-works.html">Full explainer</a>
-    <a href="index.html#market-watch">Market watch</a>
+    <a href="index.html#como-funciona">Cómo funciona</a>
+    <a href="how-it-works.html">Guía completa</a>
+    <a href="index.html#observatorio">Observatorio</a>
     <a href="index.html#faq">FAQ</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html">Contacto</a>
     <a href="https://wa.me/34662403660" class="nav-cta">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Start now
+      Empezar ahora
     </a>
-    <span style="font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:4px;margin-left:4px"><b>EN</b><span style="opacity:.3">·</span><a href="#" onclick="if(typeof switchLang==='function')switchLang('es');return false" style="color:inherit;text-decoration:none;opacity:.55">ES</a></span>
+    <span style="font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:4px;margin-left:4px"><a href="#" onclick="(function(){var m={'/es/index.html':'/index.html','/es/how-it-works.html':'/how-it-works.html','/es/contact.html':'/contact.html','/es/sample-report.html':'/sample-report.html'};localStorage.setItem('sw_lang','en');window.location.href=m[window.location.pathname]||'/index.html'})();return false" style="color:inherit;text-decoration:none;opacity:.55">EN</a><span style="opacity:.3">·</span><b>ES</b></span>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <!-- NAV:END -->
 
 <section class="page-hero">
-  <div class="page-hero-ghost">Contact</div>
+  <div class="page-hero-ghost">Contacto</div>
   <div class="page-hero-inner">
-    <div class="hero-kicker"><span class="kicker-dot"></span>Get in touch</div>
-    <h1>We're here to <em>help</em></h1>
-    <p>Questions about switching, your bill, or anything else — send us a message and we'll get back to you.</p>
+    <div class="hero-kicker"><span class="kicker-dot"></span>Ponte en contacto</div>
+    <h1>Estamos aquí para <em>ayudar</em></h1>
+    <p>Preguntas sobre el cambio, tu factura o cualquier otra cosa — envíanos un mensaje y te responderemos.</p>
   </div>
 </section>
 
 <div class="contact-section">
 
-  <!-- Contact form -->
-  <!-- ⚠️ To receive form submissions: sign up free at formspree.io, create a form, then replace YOUR_FORM_ID below -->
   <div class="contact-form" id="contact-form-wrap">
-    <h2>Send us a message</h2>
-    <p class="form-sub">We reply within one business day.</p>
+    <h2>Envíanos un mensaje</h2>
+    <p class="form-sub">Respondemos en un día laborable.</p>
     <form onsubmit="handleSubmit(event)">
       <div class="field">
-        <label for="name">Your name</label>
+        <label for="name">Tu nombre</label>
         <input type="text" id="name" name="name" placeholder="Jane Smith" required>
       </div>
       <div class="field">
-        <label for="email">Your email</label>
+        <label for="email">Tu email</label>
         <input type="email" id="email" name="email" placeholder="jane@example.com" required>
       </div>
       <div class="field">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" placeholder="What can we help you with?" required></textarea>
+        <label for="message">Mensaje</label>
+        <textarea id="message" name="message" placeholder="¿En qué podemos ayudarte?" required></textarea>
       </div>
-      <button type="submit" class="submit-btn">Send message</button>
+      <button type="submit" class="submit-btn">Enviar mensaje</button>
     </form>
     <div class="form-success" id="form-success">
       <div class="success-icon">✅</div>
-      <h3>Message sent!</h3>
-      <p>Thanks for reaching out. We'll reply to your email within one business day.</p>
+      <h3>¡Mensaje enviado!</h3>
+      <p>Gracias por escribirnos. Te responderemos en un día laborable.</p>
     </div>
   </div>
 
-  <div class="or-divider">or</div>
+  <div class="or-divider">o</div>
 
-  <!-- Email alternative -->
   <div class="email-alt">
     <div class="email-alt-text">
-      <p>Prefer email?</p>
+      <p>¿Prefieres el email?</p>
       <strong>hola@switchr.es</strong>
     </div>
     <button class="copy-email-btn" onclick="copyContactEmail()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-      <span id="contact-copy-label">Copy address</span>
+      <span id="contact-copy-label">Copiar dirección</span>
     </button>
   </div>
 
@@ -292,39 +288,39 @@ footer{background:var(--ink);padding:56px 40px 32px;}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
-        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="../switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <p>Cambio de comercializadora de luz por WhatsApp, email o web para particulares en España. Trabajamos con los mejores proveedores del mercado libre.</p>
       </div>
       <div class="footer-col">
-        <h4>Product</h4>
-        <a href="index.html#how-it-works">How it works</a>
-        <a href="how-it-works.html">Full explainer</a>
-        <a href="sample-report.html">Sample report</a>
+        <h4>Producto</h4>
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="how-it-works.html">Guía completa</a>
+        <a href="sample-report.html">Informe de muestra</a>
       </div>
       <div class="footer-col">
-        <h4>Start</h4>
+        <h4>Empezar</h4>
         <a href="https://wa.me/34662403660">WhatsApp</a>
         <a href="#" onclick="copyEmail();return false">Email</a>
-        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Upload PDF</a>
+        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Subir PDF</a>
       </div>
       <div class="footer-col">
-        <h4>Help</h4>
+        <h4>Ayuda</h4>
         <a href="index.html#faq">FAQ</a>
-        <a href="privacy-policy.html">Privacy policy</a>
-        <a href="terms-and-conditions.html">Terms & conditions</a>
-        <a href="contact.html">Contact</a>
+        <a href="../privacy-policy.html">Política de privacidad</a>
+        <a href="../terms-and-conditions.html">Términos y condiciones</a>
+        <a href="contact.html">Contacto</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Proudly based in Murcia, Spain</p>
-      <p>Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
-      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Cookie preferences</a></p>
+      <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Hecho en España</p>
+      <p>Cambio multi-proveedor · Contratos directos con la compañía · RGPD</p>
+      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Preferencias de cookies</a></p>
     </div>
   </div>
 </footer>
 <!-- FOOTER:END -->
 
-<div id="copy-toast">📋 Email copied — paste it in the To field</div>
+<div id="copy-toast">📋 Email copiado — pégalo en el campo Para</div>
 <script>
 /* ── REFERRAL TRACKING ── */
 (function () {
@@ -335,22 +331,15 @@ footer{background:var(--ink);padding:56px 40px 32px;}
   }
   var ref = localStorage.getItem('sw_ref');
   if (!ref) return;
-  var auditEmail = 'audit+ref' + ref + '@switchr.es';
 
   function applyRef() {
     document.querySelectorAll('a[href*="wa.me/34662403660"]').forEach(function (a) {
       try {
         var url = new URL(a.href);
-        url.searchParams.set('text', 'Hello, please audit my invoice (Ref:' + ref + ')');
+        url.searchParams.set('text', 'Hola, por favor audita mi factura (Ref:' + ref + ')');
         a.href = url.toString();
       } catch (e) {}
     });
-    window.copyEmail = function () {
-      navigator.clipboard.writeText(auditEmail).then(function () {
-        var t = document.getElementById('copy-toast');
-        if (t) { t.classList.add('show'); setTimeout(function () { t.classList.remove('show'); }, 2800); }
-      });
-    };
   }
 
   if (document.readyState === 'loading') {
@@ -370,16 +359,8 @@ document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener
 function copyContactEmail() {
   navigator.clipboard.writeText('hola@switchr.es').then(() => {
     const label = document.getElementById('contact-copy-label');
-    label.textContent = 'Copied!';
-    setTimeout(() => label.textContent = 'Copy address', 2000);
-    const t = document.getElementById('copy-toast');
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2800);
-  });
-}
-
-function copyAuditEmail() {
-  navigator.clipboard.writeText('audit@switchr.es').then(() => {
+    label.textContent = '¡Copiado!';
+    setTimeout(() => label.textContent = 'Copiar dirección', 2000);
     const t = document.getElementById('copy-toast');
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2800);
@@ -391,7 +372,7 @@ function handleSubmit(e) {
   e.preventDefault();
   const form = e.target;
   const btn = form.querySelector(".submit-btn");
-  btn.disabled = true; btn.textContent = "Sending...";
+  btn.disabled = true; btn.textContent = "Enviando...";
   fetch(CONTACT_FN, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -405,12 +386,12 @@ function handleSubmit(e) {
       form.style.display = "none";
       document.getElementById("form-success").style.display = "block";
     } else {
-      btn.disabled = false; btn.textContent = "Send message";
-      alert("Something went wrong. Please try again.");
+      btn.disabled = false; btn.textContent = "Enviar mensaje";
+      alert("Algo ha ido mal. Por favor, inténtalo de nuevo.");
     }
   }).catch(() => {
-    btn.disabled = false; btn.textContent = "Send message";
-    alert("Something went wrong. Please try again.");
+    btn.disabled = false; btn.textContent = "Enviar mensaje";
+    alert("Algo ha ido mal. Por favor, inténtalo de nuevo.");
   });
 }
 </script>

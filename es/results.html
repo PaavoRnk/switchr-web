@@ -1,0 +1,1474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google tag (gtag.js) — Consent Mode v2 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
+  gtag('js', new Date());
+  gtag('config', 'G-ZF2VXXL0FP');
+  if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
+</script>
+<script defer src="../cookie-consent.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Informe de Ahorro — Switchr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--gp:#f0fdf4;--gb:rgba(37,211,102,0.12);
+  --ink:#0a1a15;--ink2:#2d4a3e;--ink3:#6b8c7e;--ink4:#a8c4b8;
+  --bg:#f8fdfb;--white:#fff;
+  --red:#e53e3e;--amber:#d97706;
+  --border:rgba(37,211,102,0.15);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;min-height:100vh}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 40px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-size:14px;color:var(--ink2);text-decoration:none;font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--ink);}
+.logo:hover{text-decoration:none;}
+.nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--gd);color:#fff;}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:101;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--ink)}
+@media(max-width:580px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:99}
+  nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px}
+  nav.menu-open .nav-links a:hover{background:var(--gp)}
+  nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px}
+}
+
+/* PROGRESS STEPPER */
+.stepper{display:flex;align-items:center;gap:0;padding:20px 32px 0;max-width:900px;margin:0 auto}
+.step-item{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;position:relative}
+.step-item:not(:last-child)::after{content:'';position:absolute;top:14px;left:calc(50% + 16px);right:calc(-50% + 16px);height:2px;background:var(--border2);z-index:0}
+.step-item.done:not(:last-child)::after,.step-item.active:not(:last-child)::after{background:var(--g)}
+.step-circle{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:600;z-index:1;
+  transition:all .3s;
+}
+.step-item.done .step-circle{background:var(--g);color:#fff}
+.step-item.active .step-circle{background:#fff;border:2px solid var(--g);color:var(--g)}
+.step-item.todo .step-circle{background:#fff;border:2px solid var(--border2);color:var(--ink4)}
+.step-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.step-item.done .step-label{color:var(--g)}
+.step-item.active .step-label{color:var(--ink)}
+.step-item.todo .step-label{color:var(--ink4)}
+
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:0 32px 120px}
+
+/* RESULTS HERO */
+.results-hero{
+  text-align:center;
+  padding:40px 0 32px;
+  animation:fadeUp .5s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.analyzed-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gp);border:1px solid var(--border);
+  padding:5px 14px;border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--gd);
+  margin-bottom:20px;
+}
+.save-num{
+  font-family:'Sora',sans-serif;
+  font-size:clamp(64px,10vw,96px);
+  font-weight:800;line-height:.95;
+  color:var(--g);letter-spacing:-0.03em;
+  margin-bottom:4px;
+}
+.save-period{font-size:18px;color:var(--ink3);font-weight:300;margin-bottom:16px}
+.pct-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--ink);color:#fff;
+  padding:7px 18px;border-radius:24px;
+  font-size:13px;font-weight:500;
+  margin-bottom:20px;
+}
+.switch-from-to{
+  font-size:15px;color:var(--ink2);margin-bottom:8px;
+}
+.switch-from-to strong{color:var(--ink);font-weight:500}
+.tariff-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--gp);border:1px solid var(--border);
+  padding:4px 12px;border-radius:16px;
+  font-size:12px;font-weight:500;color:var(--gd);
+  margin-bottom:20px;
+}
+.meta-line{font-size:12px;color:var(--ink4);font-family:monospace}
+
+/* TICKER */
+.ticker-wrap{
+  overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  padding:10px 0;margin:0 -32px 32px;background:var(--white);
+}
+.ticker-inner{
+  display:inline-flex;gap:40px;white-space:nowrap;
+  animation:tick 18s linear infinite;
+}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tick-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3)}
+.tick-item strong{color:var(--g)}
+.tick-dot{width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0}
+
+/* SECTION CARD */
+.scard{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:28px;margin-bottom:16px;
+  animation:fadeUp .5s ease both;
+}
+.scard-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.scard-icon{
+  width:40px;height:40px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.scard-icon.green{background:var(--gp)}
+.scard-icon.amber{background:#fffbeb}
+.scard-icon.blue{background:#eff6ff}
+.scard-num-badge{
+  width:28px;height:28px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:700;color:#fff;flex-shrink:0;margin-top:6px;
+}
+.scard-num-badge.green{background:var(--g)}
+.scard-num-badge.amber{background:#d97706}
+.scard-num-badge.blue{background:#3b82f6}
+.scard-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:2px}
+.scard-sub{font-size:11px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--ink4)}
+
+/* COMPARISON TABLE */
+.comp-table{width:100%;border-collapse:collapse}
+.comp-table th{
+  font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink4);padding:8px 0;text-align:right;
+}
+.comp-table th:first-child{text-align:left}
+.comp-table td{padding:14px 0;border-bottom:1px solid #f0f7f3;font-size:14px;text-align:right;vertical-align:middle}
+.comp-table td:first-child{text-align:left;color:var(--ink2);font-weight:400}
+.comp-table tr:last-child td{border-bottom:none}
+.comp-table .current-val{color:var(--ink);font-weight:500}
+.comp-table .new-val{color:var(--g);font-weight:700;font-size:16px}
+.comp-table .saving-pill{
+  display:inline-block;
+  background:var(--gp);color:var(--gd);
+  padding:2px 8px;border-radius:10px;
+  font-size:11px;font-weight:600;margin-left:6px;
+}
+.comp-table .worse-pill{
+  display:inline-block;
+  background:#fff7ed;color:#92400e;
+  padding:2px 8px;border-radius:10px;
+  font-size:11px;font-weight:600;margin-left:6px;
+}
+.old-cost{color:var(--red);text-decoration:line-through;opacity:.65;font-size:13px;font-weight:400}
+.old-cost-total{color:var(--red);text-decoration:line-through;opacity:.65;font-size:14px;font-weight:500}
+.provider-badge{display:inline-flex;align-items:center;padding:2px 9px;border-radius:10px;font-size:11px;font-weight:600;vertical-align:middle;margin-left:5px}
+.tariff-options-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:10px}
+.tariff-option{border:2px solid var(--border2);border-radius:12px;padding:14px 16px 28px;cursor:pointer;transition:border-color .15s,background .15s,box-shadow .15s;text-align:left;background:#fff;position:relative;width:100%;font-family:'DM Sans',sans-serif}
+.tariff-option:hover{border-color:rgba(37,211,102,0.45);background:var(--gp);box-shadow:0 2px 8px rgba(37,211,102,.1)}
+.tariff-option.selected{border-color:var(--g);background:var(--gp)}
+.tariff-option-provider{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;margin-bottom:3px}
+.tariff-option-name{font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;line-height:1.3;padding-right:26px}
+.tariff-option-cost{font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--g)}
+.tariff-option-mo{font-size:12px;font-weight:400;color:var(--ink3)}
+.tariff-option-saving{font-size:11px;color:var(--ink3);margin-top:2px}
+.tariff-option-best{position:absolute;bottom:10px;right:10px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:var(--g);color:#fff;padding:2px 7px;border-radius:8px}
+.tariff-option-check{position:absolute;top:10px;right:10px;width:18px;height:18px;border-radius:50%;background:var(--g);display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700}
+.totals-row td{font-weight:700!important;font-size:15px!important;background:var(--gp);padding:16px 12px!important;border-radius:8px}
+.totals-row td:first-child{border-radius:8px 0 0 8px}
+.totals-row td:last-child{border-radius:0 8px 8px 0}
+.you-save-row{background:var(--gp)}
+.you-save-row td{padding:18px 12px!important;border-bottom:none!important}
+.you-save-label{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--gd);text-transform:uppercase;letter-spacing:.06em}
+.you-save-val{font-family:'Sora',sans-serif;font-size:26px;font-weight:800;color:var(--g)}
+
+/* RATE GRID */
+.rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.rate-card{border-radius:10px;padding:14px 16px}
+.rate-card.current{background:#fafafa;border:1px solid #eee}
+.rate-card.new{background:var(--gp);border:1px solid var(--border)}
+.rate-card-label{font-size:10px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;margin-bottom:4px}
+.rate-card.current .rate-card-label{color:var(--ink4)}
+.rate-card.new .rate-card-label{color:var(--gd)}
+.rate-card-period{font-size:12px;color:var(--ink3);margin-bottom:8px}
+.rate-card-val{font-family:'Sora',sans-serif;font-size:22px;font-weight:700}
+.rate-card.current .rate-card-val{color:var(--red)}
+.rate-card.new .rate-card-val{color:var(--g)}
+
+/* AUDIT BOX */
+.audit-highlight{
+  background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
+  padding:16px;margin-top:12px;
+}
+.audit-highlight p{font-size:14px;color:#78350f;line-height:1.6}
+.audit-amount{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#d97706;margin-top:4px}
+
+/* DARK SUMMARY */
+.dark-summary{
+  background:var(--ink);border-radius:var(--r2);
+  padding:32px;margin-bottom:16px;
+  display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  align-items:start;
+  animation:fadeUp .5s ease both;
+}
+.ds-left{}
+.ds-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.ds-subtitle{font-size:13px;color:rgba(255,255,255,0.4);text-transform:uppercase;letter-spacing:.06em;margin-bottom:20px}
+.ds-body{font-size:14px;color:rgba(255,255,255,0.6);line-height:1.7}
+.ds-costs{margin-top:20px;display:flex;flex-direction:column;gap:8px}
+.ds-cost-row{display:flex;justify-content:space-between;align-items:center;font-size:14px}
+.ds-cost-label{color:rgba(255,255,255,0.5)}
+.ds-cost-val{font-weight:500;color:#fff}
+.ds-cost-row.divider{border-top:1px solid rgba(255,255,255,0.1);padding-top:8px;margin-top:4px}
+.ds-right{
+  background:rgba(37,211,102,0.08);border:1px solid rgba(37,211,102,0.2);
+  border-radius:16px;padding:24px;text-align:center;
+}
+.ds-est-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:8px}
+.ds-big-num{font-family:'Sora',sans-serif;font-size:52px;font-weight:800;color:var(--g);line-height:1;margin-bottom:4px}
+.ds-per-month{font-size:14px;color:rgba(255,255,255,0.4);margin-bottom:20px}
+.ds-new-cost{background:rgba(255,255,255,0.05);border-radius:10px;padding:14px;margin-bottom:16px}
+.ds-new-cost-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,0.4);margin-bottom:4px}
+.ds-new-cost-val{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#fff}
+.ds-new-cost-from{font-size:12px;color:rgba(255,255,255,0.35);margin-top:2px}
+.ds-trust{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.ds-trust-item{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,0.4)}
+.ds-trust-item svg{opacity:.5}
+
+/* HOW CALCULATED */
+.calc-accordion{
+  border:1px solid var(--border2);border-radius:10px;
+  overflow:hidden;margin-top:8px;
+}
+.calc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;cursor:pointer;
+  background:#fafafa;
+  font-size:13px;font-weight:500;color:var(--ink2);
+  user-select:none;
+}
+.calc-header:hover{background:#f5f5f5}
+.calc-body{
+  display:none;padding:16px 18px;font-size:13px;color:var(--ink3);line-height:1.7;
+  border-top:1px solid var(--border2);background:#fff;
+}
+.calc-body.open{display:block}
+.calc-body ul{padding-left:18px;margin-top:8px}
+.calc-body li{margin-bottom:4px}
+
+/* EMAIL CAPTURE */
+.email-card{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:28px;text-align:center;margin-bottom:16px;
+}
+.email-card-icon{font-size:32px;margin-bottom:12px}
+.email-card h3{font-family:'Sora',sans-serif;font-size:18px;font-weight:600;margin-bottom:6px}
+.email-card p{font-size:14px;color:var(--ink3);margin-bottom:20px}
+.email-row{display:flex;gap:10px;max-width:480px;margin:0 auto 12px}
+.email-row input{
+  flex:1;padding:11px 16px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;outline:none;
+}
+.email-row input:focus{border-color:var(--g)}
+.email-send-btn{
+  padding:11px 20px;background:var(--ink);color:#fff;
+  border:none;border-radius:8px;font-size:14px;font-weight:500;
+  cursor:pointer;white-space:nowrap;font-family:'DM Sans',sans-serif;
+}
+.reminder-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink3);justify-content:center}
+.reminder-check input{accent-color:var(--g)}
+
+/* STICKY FOOTER */
+.sticky-footer{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(248,253,251,0.95);backdrop-filter:blur(16px);
+  border-top:1px solid var(--border);
+  padding:12px 32px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+}
+.sf-saving{display:flex;flex-direction:column}
+.sf-saving-label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--ink4);font-weight:600}
+.sf-saving-val{font-family:'Sora',sans-serif;font-size:20px;font-weight:800;color:var(--g)}
+.sf-trust{display:flex;gap:20px;font-size:12px;color:var(--ink3)}
+.sf-trust-item{display:flex;align-items:center;gap:5px}
+.switch-cta{
+  display:flex;align-items:center;gap:10px;
+  background:var(--g);color:#fff;
+  padding:12px 24px;border-radius:10px;
+  border:none;font-family:'Sora',sans-serif;
+  font-size:14px;font-weight:700;cursor:pointer;
+  white-space:nowrap;transition:background .2s,transform .1s;
+}
+.switch-cta:hover{background:var(--gd)}
+.switch-cta:active{transform:scale(.98)}
+.switch-cta-sub{font-size:11px;opacity:.75;font-weight:400;margin-top:1px}
+
+/* MODAL */
+.modal-overlay{
+  display:none;position:fixed;inset:0;z-index:300;
+  background:rgba(10,26,21,0.6);backdrop-filter:blur(4px);
+  align-items:center;justify-content:center;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:#fff;border-radius:20px;
+  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
+  margin:20px;
+  animation:modalIn .25s ease both;
+}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 24px 16px;border-bottom:1px solid var(--border2);
+  position:sticky;top:0;background:#fff;z-index:1;
+}
+.modal-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700}
+.modal-close{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--border2);
+  background:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;
+  color:var(--ink3);
+}
+.modal-body{padding:24px}
+
+/* FORM */
+.form-section{margin-bottom:24px}
+.form-section-label{
+  display:flex;align-items:center;gap:8px;
+  font-size:13px;font-weight:600;color:var(--gd);
+  text-transform:uppercase;letter-spacing:.06em;
+  padding-bottom:10px;margin-bottom:16px;
+  border-bottom:2px solid var(--border);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-group{display:flex;flex-direction:column;gap:5px}
+.form-group.full{grid-column:1/-1}
+.form-label{font-size:12px;font-weight:500;color:var(--ink3)}
+.form-input{
+  padding:10px 14px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;
+  transition:border-color .2s;
+}
+.form-input:focus{border-color:var(--g);box-shadow:0 0 0 3px var(--gb)}
+.form-input.prefilled{background:var(--gp);border-color:var(--border)}
+.form-select{
+  padding:10px 14px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;
+  background:#fff;cursor:pointer;
+}
+.form-hint{font-size:11px;color:var(--ink4);margin-top:3px}
+.iban-wrap{position:relative}
+.iban-wrap .lock-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px}
+.iban-input{padding-left:34px!important}
+.consent-box{
+  background:var(--gp);border:1px solid var(--border);border-radius:10px;
+  padding:14px;margin-top:4px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.consent-check{accent-color:var(--g);margin-top:2px;flex-shrink:0}
+.consent-text{font-size:13px;color:var(--ink2);line-height:1.55}
+.submit-btn{
+  width:100%;padding:14px;margin-top:20px;
+  background:var(--g);color:#fff;border:none;border-radius:10px;
+  font-family:'Sora',sans-serif;font-size:16px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;
+  transition:background .2s;
+}
+.submit-btn:hover{background:var(--gd)}
+.submit-btn:disabled{background:var(--ink4);cursor:not-allowed}
+.modal-footer-trust{
+  text-align:center;padding:0 24px 20px;
+  font-size:12px;color:var(--ink4);
+  display:flex;align-items:center;justify-content:center;gap:16px;
+}
+
+/* CONFIRMATION */
+.confirm-screen{
+  display:none;text-align:center;padding:48px 32px;
+}
+.confirm-screen.show{display:block}
+.confirm-icon{font-size:56px;margin-bottom:20px}
+.confirm-title{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.confirm-sub{font-size:16px;color:var(--ink3);line-height:1.65;max-width:360px;margin:0 auto 24px}
+.confirm-steps{text-align:left;max-width:340px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
+.confirm-step{display:flex;gap:12px;font-size:14px;color:var(--ink2)}
+.confirm-step-num{
+  width:24px;height:24px;border-radius:50%;background:var(--gp);
+  color:var(--gd);font-weight:700;font-size:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+
+/* LOADING STATES */
+.modal-loading{display:none;text-align:center;padding:48px 32px}
+.modal-loading.show{display:block}
+.loading-spinner{
+  width:56px;height:56px;border-radius:50%;
+  border:3px solid var(--border2);border-top-color:var(--g);
+  animation:spin 1s linear infinite;margin:0 auto 20px;
+  display:flex;align-items:center;justify-content:center;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-spinner-inner{width:24px;height:24px;font-size:16px}
+.loading-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:600;margin-bottom:6px}
+.loading-sub{font-size:14px;color:var(--ink3)}
+.security-line{
+  margin-top:20px;font-size:12px;color:var(--ink4);
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+
+/* UTILS */
+.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:600}
+.tag-green{background:var(--gp);color:var(--gd)}
+.tag-amber{background:#fffbeb;color:#92400e}
+.divider-line{height:1px;background:var(--border2);margin:20px 0}
+
+@media(max-width:640px){
+  nav{padding:0 16px}
+  main{padding:0 16px 120px}
+  .stepper{padding:16px 16px 0;gap:0}
+  .dark-summary{grid-template-columns:1fr}
+  .rate-grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .sticky-footer{padding:12px 16px}
+  .sf-trust{display:none}
+  .scard{padding:20px}
+  .ticker-wrap{margin:0 -16px 32px}
+  .modal{margin:12px}
+  .step-label{font-size:9px}
+  .tariff-options-grid{grid-template-columns:1fr 1fr}
+}
+
+/* TARIFF INFO SHEET */
+.info-sheet-overlay{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(10,26,21,0.5);backdrop-filter:blur(4px);
+  align-items:flex-end;justify-content:center;
+}
+.info-sheet-overlay.open{display:flex}
+.info-sheet{
+  background:#fff;border-radius:20px 20px 0 0;
+  width:100%;max-height:82vh;overflow-y:auto;
+  padding:0 24px 32px;
+  animation:sheetUp .25s ease both;
+}
+@keyframes sheetUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.info-handle{width:40px;height:4px;background:var(--border2);border-radius:2px;margin:14px auto 20px;flex-shrink:0}
+.info-provider-tag{display:inline-flex;align-items:center;padding:3px 10px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.info-vibe{
+  background:var(--gp);border-left:3px solid var(--g);
+  border-radius:0 8px 8px 0;padding:12px 16px;
+  margin:14px 0;font-size:14px;font-style:italic;
+  color:var(--ink2);line-height:1.55;
+}
+.info-who-text{font-size:14px;color:var(--ink3);margin-bottom:16px;line-height:1.6}
+.info-notes-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.info-notes-list li{display:flex;gap:10px;font-size:13px;color:var(--ink2);line-height:1.5}
+.info-notes-list li::before{content:'✦';color:var(--g);font-size:10px;flex-shrink:0;margin-top:3px}
+.info-no-perm{padding:10px 14px;background:var(--gp);border-radius:8px;font-size:12px;font-weight:600;color:var(--gd);display:flex;align-items:center;gap:8px}
+.tariff-card-about{
+  position:absolute;bottom:10px;left:10px;
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:10px;font-weight:500;color:var(--ink3);
+  cursor:pointer;transition:color .15s;
+  font-family:'DM Sans',sans-serif;
+}
+.tariff-card-about:hover{color:var(--gd)}
+.tariff-about-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  background:#fff;border:1px solid var(--border2);
+  padding:5px 14px;border-radius:20px;
+  font-size:12px;font-weight:500;color:var(--ink3);
+  cursor:pointer;transition:border-color .15s,color .15s;
+}
+.tariff-about-pill:hover{border-color:var(--g);color:var(--gd)}
+@media(min-width:641px){
+  .info-sheet-overlay{align-items:center}
+  .info-sheet{border-radius:20px;max-width:480px;margin:20px;padding:24px 28px 32px}
+  .info-handle{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo"><img src="../switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <div class="nav-links">
+    <a href="index.html#como-funciona">Cómo funciona</a>
+    <a href="how-it-works.html">Guía completa</a>
+    <a href="index.html#observatorio">Observatorio</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="contact.html">Contacto</a>
+    <a href="https://wa.me/34662403660" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Empezar ahora
+    </a>
+    <span style="font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:4px;margin-left:4px"><a href="#" onclick="(function(){var m={'/es/index.html':'/index.html','/es/how-it-works.html':'/how-it-works.html','/es/contact.html':'/contact.html','/es/sample-report.html':'/sample-report.html','/es/results.html':'/results.html'};localStorage.setItem('sw_lang','en');window.location.href=m[window.location.pathname]||'/index.html'})();return false" style="color:inherit;text-decoration:none;opacity:.55">EN</a><span style="opacity:.3">·</span><b>ES</b></span>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- STEPPER -->
+<div class="stepper">
+  <div class="step-item done">
+    <div class="step-circle">✓</div>
+    <div class="step-label">Factura enviada</div>
+  </div>
+  <div class="step-item done">
+    <div class="step-circle">✓</div>
+    <div class="step-label">Analizada</div>
+  </div>
+  <div class="step-item active">
+    <div class="step-circle">3</div>
+    <div class="step-label">Revisión</div>
+  </div>
+  <div class="step-item todo">
+    <div class="step-circle">4</div>
+    <div class="step-label">Cambio</div>
+  </div>
+</div>
+
+<main>
+
+  <!-- HERO -->
+  <div class="results-hero">
+    <div class="analyzed-badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Mejor tarifa encontrada · calculada con tu consumo real
+    </div>
+    <div class="save-num">€456</div>
+    <div class="save-period">ahorro anual estimado</div>
+    <div class="pct-badge">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+      <span id="pct-text">28% menos que tu factura actual</span>
+    </div>
+    <div class="switch-from-to">Cambiar de <strong>Iberdrola</strong> a <strong>Nordy — Tarifa Tramos</strong></div>
+    <div style="margin-bottom:8px"><span class="tag tag-green">Precio fijo · Sin permanencia · Sin letra pequeña</span></div>
+    <div style="margin-bottom:16px">
+      <span class="tariff-about-pill" onclick="showSelectedTariffInfo()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Sobre esta tarifa
+      </span>
+    </div>
+    <div class="meta-line" id="meta-line">CUPS: ES 0021 0000 1343 2884 RF &nbsp;·&nbsp; Period: 04/07/2025 – 24/07/2025 (30 days)</div>
+  </div>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <div class="tick-item"><div class="tick-dot"></div>Emma ahorró <strong>€441/año</strong> al cambiarse a Nordy &nbsp;·&nbsp; Costa Blanca · hace 2 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>James ahorró <strong>€318/año</strong> &nbsp;·&nbsp; Murcia · hace 5 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah ahorró <strong>€503/año</strong> &nbsp;·&nbsp; Alicante · hace 1 semana</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter ahorró <strong>€389/año</strong> &nbsp;·&nbsp; Torrevieja · hace 1 semana</div>
+      <div class="tick-item"><div class="tick-dot"></div>Emma ahorró <strong>€441/año</strong> al cambiarse a Nordy &nbsp;·&nbsp; Costa Blanca · hace 2 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>James ahorró <strong>€318/año</strong> &nbsp;·&nbsp; Murcia · hace 5 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah ahorró <strong>€503/año</strong> &nbsp;·&nbsp; Alicante · hace 1 semana</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter ahorró <strong>€389/año</strong> &nbsp;·&nbsp; Torrevieja · hace 1 semana</div>
+    </div>
+  </div>
+
+  <!-- TARIFF SELECTOR -->
+  <div class="scard" style="animation-delay:.07s">
+    <div class="scard-header">
+      <div class="scard-num-badge blue">☆</div>
+      <div>
+        <div class="scard-title">Elige tu tarifa</div>
+        <div class="scard-sub">Mejor opción preseleccionada · pulsa cualquier plan para comparar</div>
+      </div>
+    </div>
+    <div id="tariff-options" class="tariff-options-grid"></div>
+  </div>
+
+  <!-- SECTION 1: CONSUMPTION & RATES -->
+  <div class="scard" id="section-1" style="animation-delay:.1s">
+    <div class="scard-header">
+      <div class="scard-num-badge green">1</div>
+      <div>
+        <div class="scard-icon green" style="display:none"></div>
+        <div class="scard-title">Consumo y tarifas</div>
+        <div class="scard-sub">Tus kWh reales por período vs. nuevas tarifas</div>
+      </div>
+    </div>
+    <p id="s1-desc" style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Aplicamos tu consumo real de P1/P2/P3 a las nuevas tarifas. Cada cifra de kWh viene directamente de tu factura.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Período</th>
+          <th>Uso anual</th>
+          <th>Nueva tarifa</th>
+          <th>Coste actual*</th>
+          <th>Nuevo coste anual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Punta (P1)</td>
+          <td class="current-val" id="s1-p1-kwh">—</td>
+          <td class="new-val" id="s1-p1-rate">—</td>
+          <td class="old-cost" id="s1-p1-old">—</td>
+          <td class="current-val" id="s1-p1-cost">—</td>
+        </tr>
+        <tr>
+          <td>Llano (P2)</td>
+          <td class="current-val" id="s1-p2-kwh">—</td>
+          <td class="new-val" id="s1-p2-rate">—</td>
+          <td class="old-cost" id="s1-p2-old">—</td>
+          <td class="current-val" id="s1-p2-cost">—</td>
+        </tr>
+        <tr>
+          <td>Valle (P3)</td>
+          <td class="current-val" id="s1-p3-kwh">—</td>
+          <td class="new-val" id="s1-p3-rate">—</td>
+          <td class="old-cost" id="s1-p3-old">—</td>
+          <td class="current-val" id="s1-p3-cost">—</td>
+        </tr>
+        <tr class="you-save-row">
+          <td colspan="3" class="you-save-label">Coste energía anual</td>
+          <td class="old-cost-total" id="s1-old-energy">—</td>
+          <td class="you-save-val" id="s1-total-energy" style="font-size:18px">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--ink4);margin-top:10px">* Coste actual estimado proporcionalmente desde el importe de tu factura</p>
+  </div>
+
+  <!-- SECTION 2: POTENCIA -->
+  <div class="scard" id="section-2" style="animation-delay:.2s">
+    <div class="scard-header">
+      <div class="scard-num-badge amber">2</div>
+      <div>
+        <div class="scard-title">Potencia (potencia contratada)</div>
+        <div class="scard-sub">Cargos fijos diarios — tarifa actual vs nueva</div>
+      </div>
+    </div>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Son los cargos fijos diarios basados en tu potencia contratada — se pagan independientemente del consumo. Aquí se compara tu tarifa actual con la nueva comercializadora.</p>
+
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th style="text-align:left">Período</th>
+          <th>Potencia contratada</th>
+          <th>Nueva tarifa</th>
+          <th>Coste actual*</th>
+          <th>Nuevo coste anual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>P1 (Punta)</td>
+          <td class="current-val" id="s2-power-p1">—</td>
+          <td class="new-val" id="s2-pp1-rate">—</td>
+          <td class="old-cost" id="s2-p1-old">—</td>
+          <td class="current-val" id="s2-p1-cost">—</td>
+        </tr>
+        <tr>
+          <td>P2 (Llano/Valle)</td>
+          <td class="current-val" id="s2-power-p2">—</td>
+          <td class="new-val" id="s2-pp2-rate">—</td>
+          <td class="old-cost" id="s2-p2-old">—</td>
+          <td class="current-val" id="s2-p2-cost">—</td>
+        </tr>
+        <tr class="you-save-row">
+          <td colspan="3" class="you-save-label">Coste anual potencia</td>
+          <td class="old-cost-total" id="s2-old-potencia">—</td>
+          <td class="you-save-val" id="s2-potencia-total" style="font-size:18px">—</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--ink4);margin-top:10px">* Coste actual estimado proporcionalmente desde el importe de tu factura</p>
+  </div>
+
+  <!-- DARK SUMMARY -->
+  <div class="dark-summary" style="animation-delay:.4s">
+    <div class="ds-left">
+      <div class="ds-title">Tu resumen financiero</div>
+      <div class="ds-subtitle">Basado en 4.704 kWh de consumo anual</div>
+      <div class="ds-body">Aplicamos tu consumo real medido a las tarifas publicadas hoy. Todas las cifras incluyen IEE (5,11%) e IVA (21%). No se asume cambio en tus hábitos de consumo.</div>
+      <div class="ds-costs">
+        <div class="ds-cost-row">
+          <div class="ds-cost-label">Tu coste anual actual</div>
+          <div class="ds-cost-val" id="ds-current-annual">€1,632</div>
+        </div>
+        <div class="ds-cost-row">
+          <div class="ds-cost-label">Nuevo coste anual estimado</div>
+          <div class="ds-cost-val" id="ds-new-annual" style="color:var(--g)">€1,176</div>
+        </div>
+        <div class="ds-cost-row divider">
+          <div class="ds-cost-label" style="color:var(--g);font-weight:600">Ahorras</div>
+          <div class="ds-cost-val" id="ds-saving-amount" style="color:var(--g);font-size:18px;font-weight:700">€456 / año</div>
+        </div>
+      </div>
+    </div>
+    <div class="ds-right">
+      <div class="ds-est-label">Ahorro estimado primer año</div>
+      <div class="ds-big-num" id="ds-big-num">€456</div>
+      <div class="ds-per-month" id="ds-per-month">≈ €38 al mes</div>
+      <div class="ds-new-cost">
+        <div class="ds-new-cost-label">Tu nuevo coste anual</div>
+        <div class="ds-new-cost-val" id="ds-new-cost-val">€1,176</div>
+        <div class="ds-new-cost-from" id="ds-new-cost-from">Desde €1.632</div>
+      </div>
+      <div class="ds-trust">
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Cambio en 48–72h
+        </div>
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Sin corte de suministro
+        </div>
+        <div class="ds-trust-item">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          100% gratuito
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW CALCULATED -->
+  <div class="calc-accordion">
+    <div class="calc-header" onclick="toggleCalc(this)">
+      <span style="display:flex;align-items:center;gap:8px">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Cómo calculamos tu ahorro — lógica de tarifa y auditoría
+      </span>
+      <svg id="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="calc-body" id="calc-body">
+      <p>Todas las cifras se calculan usando tu consumo real medido de la factura enviada, tus fechas de facturación y tu potencia contratada.</p>
+      <ul>
+        <li>Los totales anuales se escalan desde tu período de facturación a 365 días usando las tarifas publicadas hoy</li>
+        <li>Los precios de energía incluyen IEE (5,11%) e IVA (21%) según la legislación española</li>
+        <li>Los cargos de potencia se basan en tu potencia contratada <span id="calc-potencia-kw">potencia</span> — no se asume cambio en la potencia contratada</li>
+        <li>No se asume cambio en tus hábitos de consumo — usamos tu distribución real de P1/P2/P3 cuando está disponible</li>
+      </ul>
+      <div style="margin-top:12px;padding:10px 12px;background:var(--gp);border-radius:8px;font-size:12px;color:var(--gd)">
+        TODOS LOS CONTRATOS SON DIRECTOS CON LA COMERCIALIZADORA. SIN PENALIZACIÓN POR SALIDA. SIN PERMANENCIA.
+      </div>
+    </div>
+  </div>
+
+  <div style="height:24px"></div>
+
+  <!-- EMAIL CAPTURE -->
+  <div class="email-card">
+    <div class="email-card-icon">✉</div>
+    <h3>Recibe este informe en tu correo</h3>
+    <p>Te enviamos el desglose completo — con todas las cifras de arriba — para que puedas revisarlo más tarde o compartirlo.</p>
+    <div class="email-row">
+      <input type="email" placeholder="tu@correo.com" id="email-input">
+      <button class="email-send-btn" onclick="sendReport()">Enviar informe</button>
+    </div>
+    <div class="reminder-check">
+      <input type="checkbox" id="remind" checked>
+      <label for="remind">Envíame también un recordatorio en 24h si aún no he cambiado</label>
+    </div>
+  </div>
+
+</main>
+
+<!-- STICKY FOOTER -->
+<div class="sticky-footer">
+  <div class="sf-saving">
+    <div class="sf-saving-label">Ahorro estimado</div>
+    <div class="sf-saving-val" id="sf-saving-val">€456 / año</div>
+  </div>
+  <div class="sf-trust">
+    <div class="sf-trust-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Seguridad bancaria
+    </div>
+    <div class="sf-trust-item">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Cambio en 48h
+    </div>
+  </div>
+  <button class="switch-cta" onclick="openModal()">
+    <div>
+      <div id="sf-tariff-name">Cambiar a Tarifa Tramos</div>
+      <div class="switch-cta-sub" id="sf-saving-sub">Ahorra €456 al año →</div>
+    </div>
+  </button>
+</div>
+
+<!-- TARIFF INFO SHEET -->
+<div class="info-sheet-overlay" id="info-sheet-overlay" onclick="closeInfoSheetOutside(event)">
+  <div class="info-sheet">
+    <div class="info-handle"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+      <span id="info-provider-tag" class="info-provider-tag"></span>
+      <button class="modal-close" onclick="closeInfoSheet()">✕</button>
+    </div>
+    <div id="info-tariff-title" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.25"></div>
+    <div id="info-vibe" class="info-vibe"></div>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px">Para quién es</div>
+    <p id="info-who" class="info-who-text"></p>
+    <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink4);margin-bottom:10px">Resumen</div>
+    <ul id="info-notes" class="info-notes-list"></ul>
+    <div class="info-no-perm">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Sin permanencia — cancela cuando quieras.
+    </div>
+  </div>
+</div>
+
+<!-- SWITCH MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal-inner">
+
+    <!-- LOADING STATE -->
+    <div class="modal-loading" id="modal-loading">
+      <div class="loading-spinner">
+        <div class="loading-spinner-inner" id="spinner-inner">🔒</div>
+      </div>
+      <div class="loading-title" id="loading-title">Enviando tu solicitud de cambio...</div>
+      <div class="loading-sub" id="loading-sub">Enviando tu contrato a la nueva comercializadora</div>
+      <div class="security-line">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Cifrado bancario · cumplimiento GDPR
+      </div>
+    </div>
+
+    <!-- CONFIRMATION -->
+    <div class="confirm-screen" id="confirm-screen">
+      <div class="confirm-icon">✅</div>
+      <div class="confirm-title">¡Cambio confirmado!</div>
+      <div class="confirm-sub">Tu cambio a <span id="confirm-tariff">Nordy — Tarifa Tramos</span> ha sido enviado. Recibirás un correo de confirmación en breve.</div>
+      <div class="confirm-steps">
+        <div class="confirm-step"><div class="confirm-step-num">1</div><div>Tu nueva comercializadora contactará a la actual en 24 horas</div></div>
+        <div class="confirm-step"><div class="confirm-step-num">2</div><div>El cambio se completa en 3–4 días laborables — sin corte de suministro</div></div>
+        <div class="confirm-step"><div class="confirm-step-num">3</div><div>Tu primera factura de la nueva comercializadora llegará en 30–40 días</div></div>
+      </div>
+      <button onclick="closeModal()" style="margin-top:28px;padding:12px 32px;background:var(--g);color:#fff;border:none;border-radius:10px;font-family:'Sora',sans-serif;font-size:15px;font-weight:600;cursor:pointer">Hecho</button>
+    </div>
+
+    <!-- FORM -->
+    <div id="modal-form">
+      <div class="modal-header">
+        <div class="modal-title">Completa tu cambio</div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- Summary strip -->
+        <div style="background:var(--gp);border-radius:10px;padding:14px 16px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--gd);margin-bottom:2px">Cambiando a</div>
+            <div id="modal-tariff-name" style="font-size:14px;font-weight:500;color:var(--ink)">Nordy · Tarifa Tramos</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:11px;color:var(--gd);font-weight:600;text-transform:uppercase">Ahorro</div>
+            <div id="modal-saving-amount" style="font-family:'Sora',sans-serif;font-size:20px;font-weight:700;color:var(--g)">€456/yr</div>
+          </div>
+        </div>
+
+        <!-- Personal Details -->
+        <div class="form-section">
+          <div class="form-section-label">📋 Datos personales</div>
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Nombre</label>
+              <input id="f-name" class="form-input" placeholder="Nombre">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Primer apellido</label>
+              <input id="f-surname1" class="form-input" placeholder="Primer apellido">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Segundo apellido <span style="color:var(--ink4)">(opcional)</span></label>
+              <input id="f-surname2" class="form-input" placeholder="Segundo apellido">
+            </div>
+            <div class="form-group">
+              <label class="form-label">NIE / NIF</label>
+              <input id="f-nie" class="form-input" placeholder="Z1234567T">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input id="f-email" class="form-input" type="email" placeholder="tu@correo.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Teléfono móvil</label>
+              <input id="f-phone" class="form-input" type="tel" placeholder="+34 6xx xxx xxx">
+            </div>
+          </div>
+        </div>
+
+        <!-- Supply Address -->
+        <div class="form-section">
+          <div class="form-section-label">🏠 Domicilio de suministro</div>
+          <div class="form-grid">
+            <div class="form-group full">
+              <label class="form-label">Dirección completa</label>
+              <input id="f-address" class="form-input" placeholder="Calle Mayor 10">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Código postal</label>
+              <input id="f-postal" class="form-input" placeholder="30709">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Localidad</label>
+              <input id="f-municipality" class="form-input" placeholder="Murcia">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Provincia</label>
+              <input id="f-province" class="form-input" placeholder="Murcia">
+            </div>
+            <div class="form-group full">
+              <label class="form-label">Número CUPS</label>
+              <input id="f-cups" class="form-input" placeholder="ES0021000013432884RF">
+              <div class="form-hint">Extraído de tu factura · 20–22 caracteres que empiezan por ES</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bank Details -->
+        <div class="form-section">
+          <div class="form-section-label">💳 Datos bancarios</div>
+          <p style="font-size:13px;color:var(--ink3);margin-bottom:14px;line-height:1.6">Se necesita tu IBAN para configurar el débito directo con la nueva comercializadora. Tu cuenta bancaria no cambia — solo se actualiza el domicilio de cobro de la factura de luz.</p>
+          <div class="form-group">
+            <label class="form-label">IBAN</label>
+            <div class="iban-wrap">
+              <span class="lock-icon">🔒</span>
+              <input id="f-iban" class="form-input iban-input" placeholder="ES45 0081 0544 0600 0273 ****">
+            </div>
+            <div class="form-hint">Tu IBAN permanece en tu banco — esto solo configura la instrucción de domiciliación</div>
+          </div>
+        </div>
+
+        <!-- Consent -->
+        <div class="consent-box">
+          <input type="checkbox" class="consent-check" id="consent">
+          <label for="consent" class="consent-text">Autorizo expresamente a Switchr a enviar esta solicitud de cambio de comercializadora a la nueva proveedora en mi nombre. Confirmo que todos los datos facilitados son correctos y soy el titular del punto de suministro.</label>
+        </div>
+
+        <button class="submit-btn" id="submit-btn" onclick="submitSwitch()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Enviar solicitud de cambio
+        </button>
+      </div>
+
+      <div class="modal-footer-trust">
+        <span>🔒 Cifrado bancario</span>
+        <span>✓ Cumple el GDPR</span>
+        <span>✓ Sin penalización</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL  = 'https://ufyindkuuvsberajyiar.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmeWluZGt1dXZzYmVyYWp5aWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MTQsImV4cCI6MjA4ODA4ODgxNH0.pLEsg5bLGugkaodUDLdj-zt6YKWzGYXVd7V5-wVt7TI';
+const SUBMIT_URL    = SUPABASE_URL + '/functions/v1/website-submit-contract';
+const SEND_REPORT_URL = SUPABASE_URL + '/functions/v1/send-website-report';
+
+/* ── Tariff info data ── */
+const TARIFF_INFO = {
+  gana_mercado: {
+    vibe: 'Compra energía al coste, como comprar naranjas directamente al agricultor.',
+    who: 'Ahorradores inteligentes que no se preocupan por las fluctuaciones del mercado para conseguir el precio medio más bajo.',
+    notes: [
+      'Sin margen de beneficio en tu energía — pagas el precio mayorista.',
+      'Gana solo cobra una pequeña tarifa de gestión de €0,167/día.',
+      'Total flexibilidad: sin permanencia.',
+      'Incluye un descuento de €5/mes en combustible (consulta disponibilidad local).',
+    ],
+  },
+  gana_24h: {
+    vibe: 'Olvídalo y relájate. Tranquilidad total.',
+    who: 'Hogares con alto consumo diurno, o personas que no quieren estar pendientes del reloj.',
+    notes: [
+      'Un único precio para la energía todo el día y la noche.',
+      'Pon la lavadora cuando quieras — sin necesidad de mirar la app.',
+      'Ideal para familias o trabajadores desde casa con necesidades de consumo estables.',
+    ],
+  },
+  gana_tramos: {
+    vibe: 'Lo primero la eficiencia. Ahorro para los disciplinados.',
+    who: 'Personas que pueden trasladar consumos intensos (lavadora, lavavajillas) a noches o fines de semana.',
+    notes: [
+      'Facturación española estándar en 3 períodos: Punta, Llano, Valle.',
+      'Gran ahorro en horas Valle — noches y fines de semana.',
+      'Precios fijos por franja horaria, para que puedas predecir tu factura.',
+    ],
+  },
+  nordy_24h: {
+    vibe: 'Estabilidad premium a un precio base más bajo.',
+    who: 'El expatriado moderno que quiere una experiencia digital con tarifa plana.',
+    notes: [
+      'Energía fija a €0,099/kWh — una de las tarifas más estables del mercado 2026.',
+      'Sin discriminación horaria: el mismo precio a las 14h y a las 2h.',
+      'Diseñado para hogares con consumo de hasta 8.000 kWh/año.',
+    ],
+  },
+  nordy_3p: {
+    vibe: 'El híbrido "Ahorrador Inteligente".',
+    who: 'Usuarios que quieren ahorro en horas valle con la seguridad de un contrato totalmente fijo.',
+    notes: [
+      'Tres precios fijos: Punta (€0,139/kWh), Llano (€0,099) y Valle (€0,079).',
+      '"Control Real" sobre tu factura — ves exactamente cuándo la energía es más barata.',
+      'Sin penalización por cambio o baja.',
+    ],
+  },
+  nordy_mercado: {
+    vibe: 'Transparencia total.',
+    who: 'Usuarios flexibles que quieren la energía más barata durante las caídas del mercado.',
+    notes: [
+      'Energía al coste + una pequeña tarifa de gestión de €0,015/kWh.',
+      'Cuota mensual de plataforma de €3,90.',
+      'Perfecto para quienes siguen el mercado para aprovechar las ventanas de "Energía Gratis" los fines de semana.',
+    ],
+  },
+  nordy_1p: {
+    vibe: 'Alto Consumo / Potencia Alta.',
+    who: 'Hogares grandes (más de 8.000 kWh/año) o con alta potencia — aire acondicionado, calefacción eléctrica.',
+    notes: [
+      'Una tarifa ligeramente superior (€0,129/kWh) optimizada para niveles de consumo elevados.',
+      '"Libertad Total de Uso" — sin sustos en la factura independientemente de los aparatos que uses.',
+    ],
+  },
+};
+
+function getTariffInfo(tariff) {
+  const p = (tariff.provider || '').toLowerCase();
+  const n = (tariff.name || '').toLowerCase();
+  if (p.includes('gana')) {
+    if (tariff.isMercado || n.includes('mercado')) return TARIFF_INFO.gana_mercado;
+    if (n.includes('tramos') || n.includes('horario')) return TARIFF_INFO.gana_tramos;
+    return TARIFF_INFO.gana_24h;
+  }
+  if (p.includes('nordy')) {
+    if (tariff.isMercado || n.includes('mercado')) return TARIFF_INFO.nordy_mercado;
+    if (n.includes('3p')) return TARIFF_INFO.nordy_3p;
+    if (n.includes('1p')) return TARIFF_INFO.nordy_1p;
+    return TARIFF_INFO.nordy_24h;
+  }
+  return null;
+}
+
+function showTariffInfo(tariffId) {
+  const tariff = _allTariffs.find(t => t.id === tariffId);
+  if (!tariff) return;
+  const info = getTariffInfo(tariff);
+  if (!info) return;
+  const provLabel = tariff.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+  const provColor = tariff.provider === 'nordy' ? '#7c3aed' : '#ea580c';
+  const provBg    = tariff.provider === 'nordy' ? '#f5f3ff' : '#fff7ed';
+  const tag = document.getElementById('info-provider-tag');
+  tag.textContent = provLabel;
+  tag.style.background = provBg;
+  tag.style.color = provColor;
+  document.getElementById('info-tariff-title').textContent = tariff.name;
+  document.getElementById('info-vibe').textContent = '✦  ' + info.vibe;
+  document.getElementById('info-who').textContent = info.who;
+  document.getElementById('info-notes').innerHTML = info.notes.map(n => '<li>' + n + '</li>').join('');
+  document.getElementById('info-sheet-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function showSelectedTariffInfo() {
+  if (_selectedTariffId) showTariffInfo(_selectedTariffId);
+}
+
+function closeInfoSheet() {
+  document.getElementById('info-sheet-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeInfoSheetOutside(e) {
+  if (e.target === document.getElementById('info-sheet-overlay')) closeInfoSheet();
+}
+
+/* ── State ── */
+const params    = new URLSearchParams(location.search);
+const sessionId = params.get('session');
+let _session = null;
+let _selectedTariffId   = null;
+let _selectedProvider   = null;
+let _selectedTariffName = null;
+let _allTariffs  = [];
+let _bestTariffId = null;
+// Bill-level constants (don't change when tariff changes)
+let _ext, _comp, _days, _p1Ann, _p2Ann, _p3Ann, _p1kw, _p2kw, _currentAnnual;
+
+/* ── Helpers ── */
+function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
+const fmt     = n => '€' + Math.round(n).toLocaleString('en-GB');
+const fmtRate = r => '€' + Number(r).toFixed(4);
+
+/* ── Tariff selector ── */
+function renderTariffOptions() {
+  const grid = document.getElementById('tariff-options');
+  if (!grid || !_allTariffs.length) return;
+  const sorted = [..._allTariffs].sort((a, b) => b.annualSaving - a.annualSaving);
+  grid.innerHTML = sorted.map(t => {
+    const isSelected = t.id === _selectedTariffId;
+    const isBest     = t.id === _bestTariffId;
+    const provLabel  = t.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+    const provColor  = t.provider === 'nordy' ? '#7c3aed' : '#ea580c';
+    const mercTag    = t.isMercado ? ' <span style="font-size:10px;color:#d97706;font-weight:600">⚡ mercado</span>' : '';
+    const aboutLink  = getTariffInfo(t) ? '<div class="tariff-card-about" onclick="event.stopPropagation();showTariffInfo(\'' + t.id + '\')" aria-label="Sobre esta tarifa">ⓘ Sobre esta tarifa</div>' : '';
+    return '<div class="tariff-option' + (isSelected ? ' selected' : '') + '" role="button" tabindex="0" onclick="selectTariff(\'' + t.id + '\')" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();selectTariff(\'' + t.id + '\')}">' +
+      (isSelected ? '<div class="tariff-option-check">✓</div>' : '') +
+      '<div class="tariff-option-provider" style="color:' + provColor + '">' + provLabel + '</div>' +
+      '<div class="tariff-option-name">' + t.name + mercTag + '</div>' +
+      '<div class="tariff-option-cost">€' + t.estimatedMonthly.toFixed(2) + '<span class="tariff-option-mo">/mo</span></div>' +
+      '<div class="tariff-option-saving">Ahorra €' + Math.round(t.annualSaving) + '/año</div>' +
+      (isBest ? '<span class="tariff-option-best">Mejor opción</span>' : '') +
+      aboutLink +
+      '</div>';
+  }).join('');
+}
+
+function selectTariff(id) {
+  const tariff = _allTariffs.find(t => t.id === id);
+  if (!tariff) return;
+  _selectedTariffId   = tariff.id;
+  _selectedProvider   = tariff.provider;
+  _selectedTariffName = tariff.name;
+  renderForTariff(tariff);
+  renderTariffOptions();
+}
+
+/* ── Main render (called on init + every tariff change) ── */
+function renderForTariff(tariff) {
+  const TAX = 1.0511 * 1.21;
+  const ep  = tariff.ep  || 0;
+  const el  = tariff.el  || 0;
+  const ev  = tariff.ev  || 0;
+  const pp1 = tariff.pp1 || 0;
+  const pp2 = tariff.pp2 || 0;
+
+  // New energy costs
+  const p1Cost      = Math.round(_p1Ann * ep * TAX);
+  const p2Cost      = Math.round(_p2Ann * el * TAX);
+  const p3Cost      = Math.round(_p3Ann * ev * TAX);
+  const totalEnergy = p1Cost + p2Cost + p3Cost;
+
+  // New potencia costs
+  const pot1Cost = Math.round(_p1kw * pp1 * 365 * TAX);
+  const pot2Cost = Math.round(_p2kw * pp2 * 365 * TAX);
+  const potTotal = pot1Cost + pot2Cost;
+
+  // Financials
+  const newAnnual     = Math.round(tariff.estimatedMonthly * 12);
+  const annualSaving  = Math.round(tariff.annualSaving);
+  const monthlySaving = Math.round(tariff.monthlySaving);
+  const pct = _currentAnnual > 0 ? Math.round((annualSaving / _currentAnnual) * 100) : 0;
+
+  // Old cost estimates — proportionally split from current bill total
+  const newAnnualTotal  = totalEnergy + potTotal;
+  const oldEnergyAnnual = newAnnualTotal > 0 ? Math.round(_currentAnnual * totalEnergy / newAnnualTotal) : 0;
+  const oldPotAnnual    = _currentAnnual - oldEnergyAnnual;
+  const totalAnn = _p1Ann + _p2Ann + _p3Ann;
+  const oldP1Cost  = totalAnn > 0 ? Math.round(oldEnergyAnnual * _p1Ann / totalAnn) : 0;
+  const oldP2Cost  = totalAnn > 0 ? Math.round(oldEnergyAnnual * _p2Ann / totalAnn) : 0;
+  const oldP3Cost  = oldEnergyAnnual - oldP1Cost - oldP2Cost;
+  const oldPot1Cost = potTotal > 0 ? Math.round(oldPotAnnual * pot1Cost / potTotal) : 0;
+  const oldPot2Cost = oldPotAnnual - oldPot1Cost;
+
+  const provLabel   = tariff.provider === 'nordy' ? 'Nordy' : 'Gana Energía';
+  const provColor   = tariff.provider === 'nordy' ? '#7c3aed' : '#ea580c';
+  const provBg      = tariff.provider === 'nordy' ? '#f5f3ff' : '#fff7ed';
+  const tariffLabel = tariff.name;
+  const tariffShort = tariffLabel.includes(' — ') ? tariffLabel.split(' — ')[1] : tariffLabel;
+  const currProv    = (_ext.current_provider || 'your current provider').replace(', S.A.U.','').replace(', S.A.','').trim();
+
+  // ── Hero ──
+  const saveNumEl = document.querySelector('.save-num');
+  if (saveNumEl) saveNumEl.textContent = fmt(annualSaving);
+  const switchFromTo = document.querySelector('.switch-from-to');
+  if (switchFromTo) switchFromTo.innerHTML = 'Cambiar de <strong>' + currProv + '</strong> a <strong>' + tariffLabel + '</strong>&nbsp;<span class="provider-badge" style="background:' + provBg + ';color:' + provColor + '">' + provLabel + '</span>';
+  set('pct-text', pct + '% menos que tu factura actual');
+
+  // ── Section 1 ──
+  set('s1-p1-kwh',      _p1Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p2-kwh',      _p2Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p3-kwh',      _p3Ann.toLocaleString('en-GB') + ' kWh');
+  set('s1-p1-rate',     fmtRate(ep));
+  set('s1-p2-rate',     fmtRate(el));
+  set('s1-p3-rate',     fmtRate(ev));
+  set('s1-p1-old',      fmt(oldP1Cost));
+  set('s1-p2-old',      fmt(oldP2Cost));
+  set('s1-p3-old',      fmt(oldP3Cost));
+  set('s1-p1-cost',     fmt(p1Cost));
+  set('s1-p2-cost',     fmt(p2Cost));
+  set('s1-p3-cost',     fmt(p3Cost));
+  set('s1-old-energy',  fmt(oldEnergyAnnual) + '/yr');
+  set('s1-total-energy', fmt(totalEnergy) + '/yr');
+
+  // ── Section 2 ──
+  set('s2-power-p1',       _p1kw + ' kW');
+  set('s2-power-p2',       _p2kw + ' kW');
+  set('s2-pp1-rate',       fmtRate(pp1) + '/kW·day');
+  set('s2-pp2-rate',       fmtRate(pp2) + '/kW·day');
+  set('s2-p1-old',         fmt(oldPot1Cost));
+  set('s2-p2-old',         fmt(oldPot2Cost));
+  set('s2-p1-cost',        fmt(pot1Cost));
+  set('s2-p2-cost',        fmt(pot2Cost));
+  set('s2-old-potencia',   fmt(oldPotAnnual) + '/yr');
+  set('s2-potencia-total', fmt(potTotal) + '/yr');
+
+  // ── Dark summary ──
+  const dsSubEl = document.querySelector('.ds-subtitle');
+  if (dsSubEl) dsSubEl.textContent = 'Basado en ' + _comp.annualKwh.toLocaleString('es-ES') + ' kWh de consumo anual';
+  set('ds-current-annual', fmt(_currentAnnual));
+  set('ds-new-annual',     fmt(newAnnual));
+  set('ds-saving-amount',  fmt(annualSaving) + ' / año');
+  set('ds-big-num',        fmt(annualSaving));
+  set('ds-per-month',      '≈ ' + fmt(monthlySaving) + ' al mes');
+  set('ds-new-cost-val',   fmt(newAnnual));
+  set('ds-new-cost-from',  'Desde ' + fmt(_currentAnnual));
+
+  // ── How calculated ──
+  set('calc-potencia-kw', _p1kw + ' kW (P1) y ' + _p2kw + ' kW (P2)');
+
+  // ── Sticky footer ──
+  set('sf-saving-val',  fmt(annualSaving) + ' / año');
+  set('sf-tariff-name', 'Cambiar a ' + tariffShort);
+  set('sf-saving-sub',  'Ahorra ' + fmt(annualSaving) + ' al año →');
+
+  // ── Modal / confirm ──
+  set('confirm-tariff',      tariffLabel);
+  set('modal-tariff-name',   provLabel + ' · ' + tariffLabel);
+  set('modal-saving-amount', fmt(annualSaving) + '/año');
+}
+
+/* ── Init ── */
+(function init() {
+  const urlSession = new URLSearchParams(location.search).get('session');
+  if (urlSession) {
+    fetch(`${SUPABASE_URL}/rest/v1/website_sessions?session_id=eq.${urlSession}&select=session_id,extracted_data,comparison_result,selected_provider,selected_tariff`, {
+      headers: { 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON }
+    }).then(r => r.json()).then(rows => {
+      const ws = rows?.[0];
+      if (!ws) { location.href = 'index.html'; return; }
+      _session = { session_id: ws.session_id, extracted_data: ws.extracted_data, comparison_result: ws.comparison_result };
+      _initFromSession();
+    }).catch(() => { location.href = 'index.html'; });
+    return;
+  }
+  const raw = sessionStorage.getItem('sw_session');
+  if (!raw) {
+    document.body.innerHTML = '<div style="padding:60px 40px;text-align:center;font-family:sans-serif"><h2 style="margin-bottom:12px">Sesión expirada</h2><p style="color:#666;margin-bottom:24px">Los datos de tu sesión ya no están disponibles. Sube tu factura de nuevo para ver tus resultados.</p><a href="index.html" style="background:#25D366;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600">Subir tu factura</a></div>';
+    return;
+  }
+  try { _session = JSON.parse(raw); } catch (e) { return; }
+  if (!_session) return;
+  _initFromSession();
+})();
+
+function _initFromSession() {
+  _ext  = _session.extracted_data   || {};
+  _comp = _session.comparison_result;
+  const best = _comp?.bestTariff;
+  if (!best || !_comp) return;
+
+  // Tariff state
+  _allTariffs       = _comp.allResults || [];
+  _bestTariffId     = best.id;
+  _selectedTariffId = best.id;
+  _selectedProvider = best.provider;
+  _selectedTariffName = best.name;
+
+  // Pre-compute bill-level constants
+  _days         = Number(_ext.billing_period_days) || 30;
+  const scale   = 365 / _days;
+  _p1Ann        = Math.round((Number(_ext.punta_kwh) || 0) * scale);
+  _p2Ann        = Math.round((Number(_ext.llano_kwh) || 0) * scale);
+  _p3Ann        = Math.round((Number(_ext.valle_kwh) || 0) * scale);
+  _p1kw         = Number(_ext.power_p1) || 4.4;
+  _p2kw         = Number(_ext.power_p2) || _p1kw;
+  _currentAnnual = Math.round(_comp.currentMonthly * 12);
+
+  // Static elements
+  const cupsFormatted = (_ext.cups || '').replace(/(.{4})/g, '$1 ').trim();
+  const metaParts = [];
+  if (cupsFormatted) metaParts.push('CUPS: ' + cupsFormatted);
+  metaParts.push('Basado en período de facturación de ' + _days + ' días');
+  set('meta-line', metaParts.join('  ·  '));
+
+  set('s1-desc', _comp.hasTramosData
+    ? 'Aplicamos tu consumo real de P1/P2/P3 a las nuevas tarifas. Cada cifra de kWh viene directamente de tu factura.'
+    : 'Tu factura no incluía un desglose completo de P1/P2/P3 — las cifras siguientes usan una distribución de consumo típica como estimación.');
+
+  // Pre-fill form
+  function fillField(id, val) { const el = document.getElementById(id); if (el && val) { el.value = val; el.classList.add('prefilled'); } }
+  fillField('f-name',         _ext.name);
+  fillField('f-surname1',     _ext.surname1);
+  fillField('f-surname2',     _ext.surname2);
+  fillField('f-nie',          _ext.dni);
+  fillField('f-email',        _ext.email);
+  fillField('f-phone',        _ext.phone);
+  fillField('f-address',      _ext.address);
+  fillField('f-postal',       _ext.postal_code);
+  fillField('f-municipality', _ext.municipality);
+  fillField('f-province',     _ext.province);
+  fillField('f-cups',         _ext.cups);
+  if (_ext.iban_prefix) {
+    const ibanEl = document.getElementById('f-iban');
+    if (ibanEl) ibanEl.placeholder = _ext.iban_prefix + ' (introduce el IBAN completo)';
+  }
+
+  renderForTariff(best);
+  renderTariffOptions();
+}
+
+/* ── Modal helpers ── */
+function toggleCalc(el) {
+  const body    = document.getElementById('calc-body');
+  const chevron = document.getElementById('calc-chevron');
+  body.classList.toggle('open');
+  chevron.style.transform = body.classList.contains('open') ? 'rotate(180deg)' : 'rotate(0deg)';
+}
+function openModal() {
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+let _submitted = false;
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.body.style.overflow = '';
+  if (!_submitted) {
+    document.getElementById('modal-loading').classList.remove('show');
+    document.getElementById('confirm-screen').classList.remove('show');
+    document.getElementById('modal-form').style.display = '';
+  }
+}
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+/* ── Submit ── */
+async function submitSwitch() {
+  const consent = document.getElementById('consent').checked;
+  if (!consent) { alert('Por favor confirma la casilla de autorización para continuar.'); return; }
+
+  const g = id => (document.getElementById(id) || {}).value || '';
+  const payload = {
+    session_id: _session?.session_id || sessionId,
+    name: g('f-name'), surname1: g('f-surname1'), surname2: g('f-surname2'),
+    nie: g('f-nie'), email: g('f-email'), phone: g('f-phone'), iban: g('f-iban'),
+    address: g('f-address'), postal_code: g('f-postal'),
+    municipality: g('f-municipality'), province: g('f-province'),
+    cups: g('f-cups'),
+    power_p1: _ext?.power_p1 || 4.4,
+    power_p2: _ext?.power_p2 || 4.4,
+    selected_tariff_id:   _selectedTariffId,
+    selected_tariff_name: _selectedTariffName,
+    selected_provider:    _selectedProvider,
+  };
+
+  const required = ['name','surname1','nie','email','phone','iban','cups','address','postal_code','municipality','province'];
+  const missing  = required.filter(k => !payload[k]);
+  if (missing.length) { alert('Por favor completa: ' + missing.join(', ')); return; }
+
+  document.getElementById('modal-form').style.display = 'none';
+  const loading = document.getElementById('modal-loading');
+  loading.classList.add('show');
+
+  try {
+    const res  = await fetch(SUBMIT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+    const data = await res.json();
+    loading.classList.remove('show');
+
+    if (!res.ok || !data.success) {
+      document.getElementById('modal-form').style.display = '';
+      alert('Error: ' + (data.error || 'Algo ha ido mal. Por favor inténtalo de nuevo.'));
+      return;
+    }
+
+    _submitted = true;
+    const confirmScreen = document.getElementById('confirm-screen');
+    confirmScreen.classList.add('show');
+    const steps = document.querySelectorAll('.step-item');
+    if (steps[2]) { steps[2].className = 'step-item done'; steps[2].querySelector('.step-circle').textContent = '✓'; }
+    if (steps[3]) { steps[3].className = 'step-item done'; steps[3].querySelector('.step-circle').textContent = '✓'; steps[3].querySelector('.step-label').textContent = 'Cambiado'; }
+
+    // Disable sticky footer CTA
+    const sfBtn = document.querySelector('.switch-cta');
+    if (sfBtn) {
+      sfBtn.disabled = true;
+      sfBtn.style.cssText += ';background:#a8c4d8;cursor:default;pointer-events:none';
+      const nameEl = document.getElementById('sf-tariff-name');
+      const subEl  = document.getElementById('sf-saving-sub');
+      if (nameEl) nameEl.textContent = 'Cambio enviado ✓';
+      if (subEl)  subEl.textContent  = 'Nos pondremos en contacto pronto';
+    }
+
+    if (data.provider === 'gana' && data.signaturitUrl) {
+      const existing = confirmScreen.querySelector('.sign-link');
+      if (!existing) {
+        const link = document.createElement('a');
+        link.href = data.signaturitUrl; link.target = '_blank'; link.className = 'sign-link';
+        link.style.cssText = 'display:inline-block;margin-top:16px;padding:12px 24px;background:var(--g);color:#fff;border-radius:10px;font-family:Sora,sans-serif;font-weight:700;text-decoration:none';
+        link.textContent = '✍ Firma tu contrato →';
+        confirmScreen.appendChild(link);
+      }
+    } else if (data.provider === 'nordy' || data.manual) {
+      const title = confirmScreen.querySelector('[class*="title"]');
+      if (title) title.textContent = '¡Todo listo! Nuestro equipo se pondrá en contacto contigo.';
+    }
+    sessionStorage.removeItem('sw_session');
+  } catch (err) {
+    loading.classList.remove('show');
+    document.getElementById('modal-form').style.display = '';
+    alert('Error de red: ' + err.message);
+  }
+}
+
+async function sendReport() {
+  const emailEl = document.getElementById('email-input');
+  const btn     = document.querySelector('.email-send-btn');
+  const email   = emailEl ? emailEl.value.trim() : '';
+  if (!email || !email.includes('@')) { emailEl.style.borderColor = '#ef4444'; emailEl.focus(); return; }
+  emailEl.style.borderColor = '';
+  const sid = _session?.session_id || sessionId;
+  if (!sid) { alert('Sin ID de sesión — sube tu factura de nuevo.'); return; }
+  btn.textContent = 'Enviando…'; btn.disabled = true;
+  try {
+    const remind = document.getElementById('remind')?.checked !== false;
+    const res  = await fetch(SEND_REPORT_URL, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify({ session_id: sid, email, remind }) });
+    const data = await res.json();
+    if (!res.ok || data.error) { btn.textContent = 'Error — inténtalo de nuevo'; btn.disabled = false; }
+    else { btn.textContent = '✓ Enviado!'; btn.style.background = '#16a34a'; emailEl.disabled = true; }
+  } catch (err) { btn.textContent = 'Error — inténtalo de nuevo'; btn.disabled = false; }
+}
+
+// Hamburger menu
+function toggleMenu(){document.querySelector('nav').classList.toggle('menu-open')}
+document.addEventListener('click',function(e){var n=document.querySelector('nav');if(n.classList.contains('menu-open')&&!n.contains(e.target))n.classList.remove('menu-open')});
+document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('menu-open')})});
+
+// Scroll-in animation
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.style.opacity = 1; });
+}, { threshold: 0.1 });
+document.querySelectorAll('.scard,.dark-summary').forEach(el => { obs.observe(el); });
+</script>
+</body>
+</html>

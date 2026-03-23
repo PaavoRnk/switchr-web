@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- Google tag (gtag.js) — Consent Mode v2 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied'});
+  gtag('js', new Date());
+  gtag('config', 'G-ZF2VXXL0FP');
+  if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
+</script>
+<script defer src="../cookie-consent.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analizando tu factura — Switchr</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--gp:#f0fdf4;--gb:rgba(37,211,102,0.12);
+  --ink:#0a1a15;--ink2:#253d35;--ink3:#4e7265;--ink4:#8aada3;
+  --bg:#f8fdfb;--white:#fff;
+  --border:rgba(37,211,102,0.18);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;flex-direction:column;}
+
+/* NAV */
+nav{
+  background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 40px;height:60px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-family:'Sora',sans-serif;font-weight:700;font-size:18px;color:var(--ink);display:flex;align-items:center;gap:7px;text-decoration:none}
+.logo-mark{width:28px;height:28px;border-radius:8px;background:var(--g);display:flex;align-items:center;justify-content:center;}
+
+/* STEPPER */
+.stepper{display:flex;align-items:center;padding:20px 40px 0;max-width:700px;margin:0 auto;width:100%;}
+.st{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;position:relative;}
+.st:not(:last-child)::after{content:'';position:absolute;top:13px;left:calc(50% + 14px);right:calc(-50% + 14px);height:2px;background:var(--border2);}
+.st.done:not(:last-child)::after,.st.active:not(:last-child)::after{background:var(--g);}
+.st-circle{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;z-index:1;transition:all .3s;}
+.st.done .st-circle{background:var(--g);color:#fff;}
+.st.active .st-circle{background:#fff;border:2px solid var(--g);color:var(--g);}
+.st.todo .st-circle{background:#fff;border:2px solid var(--border2);color:var(--ink4);}
+.st-label{font-size:10px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;}
+.st.done .st-label{color:var(--g);}
+.st.active .st-label{color:var(--ink);}
+.st.todo .st-label{color:var(--ink4);}
+
+/* MAIN */
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 24px;}
+
+.card{
+  background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);
+  padding:40px;max-width:560px;width:100%;text-align:center;
+}
+
+/* ── PHASE 1: UPLOADING ── */
+.phase{display:none;}
+.phase.active{display:block;}
+
+/* Spinner */
+.spinner-wrap{
+  width:72px;height:72px;margin:0 auto 24px;position:relative;
+}
+.spinner-ring{
+  width:72px;height:72px;border-radius:50%;
+  border:3px solid var(--border2);
+  border-top-color:var(--g);
+  animation:spin 1s linear infinite;
+  position:absolute;top:0;left:0;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-icon{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:32px;height:32px;border-radius:9px;
+  background:var(--gp);display:flex;align-items:center;justify-content:center;
+}
+.phase-title{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.phase-sub{font-size:15px;color:var(--ink3);font-weight:300;line-height:1.6;margin-bottom:24px;}
+.security-line{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:12px;color:var(--ink4);
+  background:var(--gp);border:1px solid var(--border);
+  padding:6px 14px;border-radius:20px;
+}
+
+/* Scan animation */
+.bill-scan{
+  width:200px;margin:0 auto 24px;position:relative;
+  background:#fff;border:1px solid var(--border2);border-radius:10px;
+  padding:16px;overflow:hidden;
+}
+.bill-scan-line{
+  position:absolute;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,var(--g),transparent);
+  animation:scanMove 1.8s ease-in-out infinite;
+  top:20px;
+}
+@keyframes scanMove{0%,100%{top:16px;opacity:0}10%,90%{opacity:1}50%{top:140px}}
+.bill-row{height:8px;background:#f0f0f0;border-radius:4px;margin-bottom:8px;}
+.bill-row:nth-child(2){width:70%;}
+.bill-row:nth-child(3){width:90%;}
+.bill-row:nth-child(4){width:55%;}
+.bill-row:nth-child(5){width:80%;}
+.bill-row:nth-child(6){width:65%;}
+.bill-row.highlight{background:rgba(37,211,102,0.25);}
+
+/* Progress bar */
+.progress-wrap{margin:20px 0 8px;}
+.progress-track{height:5px;background:var(--border2);border-radius:3px;overflow:hidden;}
+.progress-bar{height:5px;background:var(--g);border-radius:3px;width:0%;transition:width .4s ease;}
+.progress-label{font-size:12px;color:var(--ink4);margin-top:6px;}
+
+/* ── PHASE 2: EXTRACTION SUMMARY ── */
+.extracted-grid{
+  display:flex;flex-direction:column;gap:8px;
+  margin:20px 0 28px;text-align:left;
+}
+.ex-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:11px 14px;border-radius:10px;
+  border:1px solid var(--border2);background:#fff;
+  gap:12px;
+  animation:rowIn .3s ease both;
+}
+@keyframes rowIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:translateX(0)}}
+.ex-left{display:flex;align-items:center;gap:10px;}
+.ex-icon{
+  width:32px;height:32px;border-radius:8px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.ex-icon.ok{background:var(--gp);}
+.ex-icon.warn{background:#fffbeb;}
+.ex-icon.fail{background:#fef2f2;}
+.ex-label{font-size:13px;font-weight:500;color:var(--ink);}
+.ex-sub{font-size:11px;color:var(--ink4);margin-top:1px;}
+.ex-value{
+  font-family:'Sora',sans-serif;font-size:14px;font-weight:600;
+  white-space:nowrap;
+}
+.ex-value.ok{color:var(--g);}
+.ex-value.warn{color:#d97706;}
+.ex-value.fail{color:#ef4444;font-size:12px;font-weight:400;}
+
+.status-banner{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 16px;border-radius:10px;margin-bottom:20px;
+  font-size:14px;font-weight:500;
+}
+.status-banner.all-ok{background:var(--gp);border:1px solid var(--border);color:var(--gd);}
+.status-banner.has-warn{background:#fffbeb;border:1px solid #fde68a;color:#92400e;}
+.status-banner.has-fail{background:#fef2f2;border:1px solid #fecaca;color:#991b1b;}
+
+.missing-note{
+  background:#fffbeb;border:1px solid #fde68a;border-radius:10px;
+  padding:12px 16px;font-size:13px;color:#78350f;line-height:1.55;
+  margin-bottom:20px;text-align:left;
+}
+.missing-note strong{display:block;margin-bottom:4px;}
+
+/* Manual input fields */
+.manual-field{
+  display:none;flex-direction:column;gap:6px;
+  margin-bottom:12px;text-align:left;
+}
+.manual-field.show{display:flex;}
+.manual-field label{font-size:12px;font-weight:500;color:var(--ink3);}
+.manual-field input{
+  padding:9px 12px;border:1px solid var(--border2);border-radius:8px;
+  font-size:14px;font-family:'DM Sans',sans-serif;color:var(--ink);outline:none;
+}
+.manual-field input:focus{border-color:var(--g);}
+
+/* CTAs */
+.cta-primary{
+  width:100%;padding:13px;background:var(--g);color:#fff;
+  border:none;border-radius:10px;
+  font-family:'Sora',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;transition:background .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.cta-primary:hover{background:var(--gd);}
+.cta-primary:disabled{background:var(--ink4);cursor:not-allowed;}
+.cta-secondary{
+  margin-top:10px;font-size:13px;color:var(--ink4);
+  background:none;border:none;cursor:pointer;text-decoration:underline;
+}
+
+/* ── PHASE 3: READY ── */
+.success-icon{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--gp);border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;
+}
+.redirect-bar{
+  margin-top:20px;padding:12px 16px;
+  background:var(--gp);border-radius:10px;
+  font-size:13px;color:var(--gd);
+  display:flex;align-items:center;gap:8px;
+}
+.redirect-progress{height:3px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden;}
+.redirect-fill{height:3px;background:var(--g);border-radius:2px;width:0%;transition:width 2.5s linear;}
+
+@media(max-width:500px){
+  nav{padding:0 16px}
+  .stepper{padding:16px 16px 0}
+  .card{padding:24px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">
+    <div class="logo-mark">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </div>
+    Switchr
+  </a>
+  <div style="font-size:13px;color:var(--ink3);">Analizando tu factura</div>
+</nav>
+
+<div class="stepper">
+  <div class="st done"><div class="st-circle">✓</div><div class="st-label">Subida</div></div>
+  <div class="st active" id="st-analyse"><div class="st-circle" id="st-analyse-circle">2</div><div class="st-label">Análisis</div></div>
+  <div class="st todo" id="st-review"><div class="st-circle">3</div><div class="st-label">Revisión</div></div>
+  <div class="st todo"><div class="st-circle">4</div><div class="st-label">Cambio</div></div>
+</div>
+
+<main>
+<div class="card">
+
+  <!-- ── FASE 1: SUBIENDO / ESCANEANDO ── -->
+  <div class="phase active" id="phase-upload">
+    <div class="spinner-wrap">
+      <div class="spinner-ring"></div>
+      <div class="spinner-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+    </div>
+    <div class="phase-title" id="upload-title">Subiendo de forma segura...</div>
+    <div class="phase-sub" id="upload-sub">Ciframos tu factura antes de que salga de tu dispositivo.</div>
+
+    <div class="bill-scan">
+      <div class="bill-scan-line"></div>
+      <div class="bill-row"></div>
+      <div class="bill-row"></div>
+      <div class="bill-row"></div>
+      <div class="bill-row highlight"></div>
+      <div class="bill-row"></div>
+      <div class="bill-row highlight"></div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-bar" id="progress-bar"></div></div>
+      <div class="progress-label" id="progress-label">Subiendo...</div>
+    </div>
+
+    <div class="security-line">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Cifrado bancario · Cumple con el RGPD
+    </div>
+  </div>
+
+  <!-- ── FASE 2: RESUMEN DE EXTRACCIÓN ── -->
+  <div class="phase" id="phase-extract">
+    <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;">Esto es lo que encontramos</div>
+    <div style="font-size:14px;color:var(--ink3);margin-bottom:20px;">Comprueba los datos extraídos de tu factura. Corrige lo que no sea correcto antes de calcular tu ahorro.</div>
+
+    <div class="status-banner all-ok" id="status-banner">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      <span id="status-text">Todo extraído correctamente — listos para calcular tu ahorro.</span>
+    </div>
+
+    <div class="extracted-grid" id="extracted-grid">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="missing-note" id="missing-note" style="display:none">
+      <strong>Algunos campos que no pudimos leer de tu factura</strong>
+      <span id="missing-note-text"></span>
+    </div>
+
+    <!-- Manual input for any missing fields -->
+    <div class="manual-field" id="field-cups">
+      <label>Número CUPS (en tu factura, empieza por ES)</label>
+      <input type="text" id="input-cups" placeholder="ES0021 0000 0000 0000 XX" maxlength="22">
+    </div>
+    <div class="manual-field" id="field-provider">
+      <label>Comercializadora actual</label>
+      <input type="text" id="input-provider" placeholder="p.ej. Iberdrola, Endesa, Naturgy...">
+    </div>
+    <div class="manual-field" id="field-monthly">
+      <label>Factura mensual aproximada (€)</label>
+      <input type="number" id="input-monthly" placeholder="p.ej. 85" min="10" max="500">
+    </div>
+
+    <button class="cta-primary" id="btn-calculate" onclick="goToResults()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Calcular mi ahorro
+    </button>
+    <button class="cta-secondary" onclick="startOver()">Subir una factura diferente</button>
+  </div>
+
+  <!-- ── FASE 3: REDIRIGIENDO ── -->
+  <div class="phase" id="phase-ready">
+    <div class="success-icon">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="phase-title">¡Ahorro calculado!</div>
+    <div class="phase-sub">Hemos encontrado tu mejor tarifa. Llevándote a tu informe ahora.</div>
+    <div class="redirect-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Redirigiendo a tu informe de ahorro...
+      <div class="redirect-progress" style="flex:1"><div class="redirect-fill" id="redirect-fill"></div></div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+const SUPABASE_URL = 'https://ufyindkuuvsberajyiar.supabase.co';
+const PROCESS_URL = SUPABASE_URL + '/functions/v1/process-website-bill';
+
+const FIELD_META = {
+  cups:         { label: 'CUPS',                    critical: true  },
+  provider:     { label: 'Comercializadora actual', critical: true  },
+  monthly_cost: { label: 'Factura mensual',         critical: false },
+  annual_kwh:   { label: 'Consumo anual',           critical: true  },
+  potencia_kw:  { label: 'Potencia contratada',     critical: false },
+  p1_kwh:       { label: 'Consumo Punta (P1)',      critical: true  },
+  p2_kwh:       { label: 'Consumo Llano (P2)',      critical: true  },
+  p3_kwh:       { label: 'Consumo Valle (P3)',      critical: true  },
+  tariff_type:  { label: 'Tarifa actual',           critical: false },
+};
+
+/* ── Animation steps (play while API call runs) ── */
+const bar   = document.getElementById('progress-bar');
+const label = document.getElementById('progress-label');
+const title = document.getElementById('upload-title');
+const sub   = document.getElementById('upload-sub');
+
+const steps = [
+  { pct: 15, label: 'Subiendo...',          title: 'Subiendo de forma segura...',    sub: 'Tu factura se cifra antes de salir de tu dispositivo.' },
+  { pct: 40, label: 'Leyendo factura...',   title: 'Leyendo tu factura...',          sub: 'Nuestra IA escanea cada línea — proveedor, CUPS, consumo, tarifa.' },
+  { pct: 65, label: 'Extrayendo datos...', title: 'Extrayendo tus datos...',         sub: 'Extrayendo el consumo P1/P2/P3, la potencia contratada y el periodo de facturación.' },
+  { pct: 85, label: 'Calculando ahorro...', title: 'Calculando tu ahorro...',        sub: 'Comparando tarifas de todos los proveedores para encontrar tu mejor oferta.' },
+];
+
+let si = 0;
+let animDone = false;
+let apiResult = null;
+
+function animTick() {
+  if (si >= steps.length) { animDone = true; tryShowExtraction(); return; }
+  const s = steps[si++];
+  bar.style.width = s.pct + '%';
+  label.textContent = s.label;
+  title.textContent = s.title;
+  sub.textContent = s.sub;
+  setTimeout(animTick, 2500);
+}
+setTimeout(animTick, 300);
+
+/* ── API call ── */
+async function uploadBill() {
+  const billName = sessionStorage.getItem('sw_bill_name');
+  const billType = sessionStorage.getItem('sw_bill_type') || 'application/pdf';
+  const billData = sessionStorage.getItem('sw_bill_data'); // data:type;base64,...
+
+  if (!billData) {
+    showError('No se encontró ninguna factura. Por favor, vuelve y sube tu factura.');
+    return;
+  }
+
+  try {
+    const res = await fetch(billData);
+    const blob = await res.blob();
+    const file = new File([blob], billName || 'bill.pdf', { type: billType });
+
+    const formData = new FormData();
+    formData.append('bill', file);
+
+    const apiRes = await fetch(PROCESS_URL, { method: 'POST', body: formData });
+    const data = await apiRes.json();
+
+    sessionStorage.removeItem('sw_bill_data');
+
+    if (!apiRes.ok || data.error) {
+      showError(data.error || 'Error en la extracción. Por favor, inténtalo de nuevo.');
+      return;
+    }
+
+    sessionStorage.setItem('sw_session', JSON.stringify(data));
+    apiResult = data;
+    tryShowExtraction();
+  } catch (err) {
+    showError('Error al subir: ' + err.message);
+  }
+}
+
+uploadBill();
+
+function tryShowExtraction() {
+  if (animDone && apiResult) renderExtraction(apiResult);
+}
+
+/* ── Render extraction summary from real data ── */
+function renderExtraction(data) {
+  bar.style.width = '100%';
+  label.textContent = '¡Hecho!';
+  title.textContent = '¡Análisis completo!';
+  sub.textContent = 'Comprobando lo que encontramos...';
+
+  setTimeout(() => {
+    document.getElementById('phase-upload').classList.remove('active');
+    document.getElementById('phase-extract').classList.add('active');
+    document.getElementById('st-analyse').className = 'st done';
+    document.getElementById('st-analyse-circle').textContent = '✓';
+    document.getElementById('st-review').className = 'st active';
+
+    const ext = data.extracted_data || {};
+    const comp = data.comparison_result;
+
+    const fields = {
+      cups:         { value: ext.cups || null,                found: !!ext.cups },
+      provider:     { value: ext.current_provider || null,   found: !!ext.current_provider },
+      monthly_cost: { value: ext.monthly_cost ? '€' + Number(ext.monthly_cost).toFixed(2) : null, found: !!ext.monthly_cost },
+      annual_kwh:   { value: comp ? comp.annualKwh + ' kWh' : null, found: !!(comp && comp.annualKwh) },
+      potencia_kw:  { value: ext.power_p1 ? ext.power_p1 + ' kW' : null, found: !!ext.power_p1 },
+      p1_kwh:       { value: ext.punta_kwh ? ext.punta_kwh + ' kWh (Punta)' : null, found: !!ext.punta_kwh },
+      p2_kwh:       { value: ext.llano_kwh ? ext.llano_kwh + ' kWh (Llano)' : null, found: !!ext.llano_kwh },
+      p3_kwh:       { value: ext.valle_kwh ? ext.valle_kwh + ' kWh (Valle)' : null, found: !!ext.valle_kwh },
+      tariff_type:  { value: ext.current_tariff || null,     found: !!ext.current_tariff },
+    };
+
+    const grid = document.getElementById('extracted-grid');
+    const banner = document.getElementById('status-banner');
+    const statusTx = document.getElementById('status-text');
+    const missingN = document.getElementById('missing-note');
+    const missingT = document.getElementById('missing-note-text');
+
+    let missing = [], allOk = true;
+    let delay = 0;
+
+    Object.entries(fields).forEach(([key, field]) => {
+      const meta = FIELD_META[key];
+      if (!meta) return;
+      delay += 80;
+      const row = document.createElement('div');
+      row.className = 'ex-row';
+      row.style.animationDelay = delay + 'ms';
+
+      if (field.found) {
+        row.innerHTML = `
+          <div class="ex-left">
+            <div class="ex-icon ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div><div class="ex-label">${meta.label}</div></div>
+          </div>
+          <div class="ex-value ok">${field.value}</div>`;
+      } else {
+        allOk = false;
+        missing.push(meta.label);
+        const severity = meta.critical ? 'fail' : 'warn';
+        row.innerHTML = `
+          <div class="ex-left">
+            <div class="ex-icon ${severity}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${severity==='fail'?'#ef4444':'#d97706'}" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div><div class="ex-label">${meta.label}</div><div class="ex-sub">${meta.critical?'Necesario para el cálculo':'Opcional — se estimará'}</div></div>
+          </div>
+          <div class="ex-value ${severity}">${meta.critical?'No encontrado — introdúcelo a continuación':'No encontrado'}</div>`;
+        if (meta.critical && key === 'cups') {
+          const el = document.getElementById('field-cups');
+          if (el) el.classList.add('show');
+        }
+      }
+      grid.appendChild(row);
+    });
+
+    if (allOk) {
+      banner.className = 'status-banner all-ok';
+      statusTx.textContent = 'Todo extraído correctamente — listos para calcular tu ahorro.';
+    } else if (missing.some(m => Object.entries(FIELD_META).find(([k,v]) => v.label === m && v.critical))) {
+      banner.className = 'status-banner has-fail';
+      statusTx.textContent = 'No pudimos leer algunos campos necesarios. Por favor, rellena los que faltan a continuación.';
+      if (missingN) missingN.style.display = 'block';
+      if (missingT) missingT.textContent = ' ' + missing.join(', ') + '.';
+    } else {
+      banner.className = 'status-banner has-warn';
+      statusTx.textContent = 'La mayoría de campos extraídos. Algunos datos opcionales no estaban claros — los estimaremos.';
+    }
+  }, 600);
+}
+
+function showError(msg) {
+  bar.style.width = '100%';
+  bar.style.background = '#ef4444';
+  title.textContent = 'Algo ha ido mal';
+  sub.textContent = msg;
+  label.textContent = 'Error';
+}
+
+/* ── Phase 3: go to results ── */
+function goToResults() {
+  const session = apiResult;
+  if (!session || !session.session_id) { window.location.href = 'index.html'; return; }
+
+  document.getElementById('phase-extract').classList.remove('active');
+  document.getElementById('phase-ready').classList.add('active');
+  document.getElementById('st-review').className = 'st done';
+  document.getElementById('st-review').querySelector('.st-circle').textContent = '✓';
+
+  setTimeout(() => { document.getElementById('redirect-fill').style.width = '100%'; }, 100);
+  setTimeout(() => { window.location.href = 'results.html?session=' + session.session_id; }, 2700);
+}
+
+function startOver() {
+  sessionStorage.removeItem('sw_bill_data');
+  sessionStorage.removeItem('sw_bill_name');
+  sessionStorage.removeItem('sw_bill_type');
+  sessionStorage.removeItem('sw_session');
+  window.location.href = 'index.html';
+}
+</script>
+</body>
+</html>

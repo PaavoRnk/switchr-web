@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <!-- Google tag (gtag.js) — Consent Mode v2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
@@ -11,14 +11,13 @@
   gtag('config', 'G-ZF2VXXL0FP');
   if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
 </script>
-<script defer src="cookie-consent.js"></script>
-<script src="language.js"></script>
+<script defer src="../cookie-consent.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Switchr — Reduce tu factura de la luz en España</title>
 <link rel="alternate" hreflang="en" href="https://switchr.es/">
 <link rel="alternate" hreflang="es" href="https://switchr.es/es/">
 <link rel="alternate" hreflang="x-default" href="https://switchr.es/">
-<title>Switchr — Cut your Spanish electricity bill</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -648,20 +647,20 @@ nav.scrolled .hamburger span{background:var(--ink)}
 
 <!-- NAV:START -->
 <nav id="nav">
-  <a href="#" class="logo"><img src="switchr_logo_white.png" alt="Switchr" class="logo-white" style="height:47px;width:auto;"><img src="switchr_logo_black.png" alt="Switchr" class="logo-black" style="height:47px;width:auto;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <a href="index.html" class="logo"><img src="../switchr_logo_white.png" alt="Switchr" class="logo-white" style="height:47px;width:auto;"><img src="../switchr_logo_black.png" alt="Switchr" class="logo-black" style="height:47px;width:auto;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
   <div class="nav-links">
-    <a href="#how-it-works">How it works</a>
-    <a href="how-it-works.html">Full explainer</a>
-    <a href="#market-watch">Market watch</a>
+    <a href="#como-funciona">Cómo funciona</a>
+    <a href="how-it-works.html">Guía completa</a>
+    <a href="#observatorio">Observatorio</a>
     <a href="#faq">FAQ</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html">Contacto</a>
     <a href="https://wa.me/34662403660" class="nav-cta">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Start now
+      Empezar ahora
     </a>
-    <span style="font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:4px;margin-left:4px"><b>EN</b><span style="opacity:.3">·</span><a href="#" onclick="if(typeof switchLang==='function')switchLang('es');return false" style="color:inherit;text-decoration:none;opacity:.55">ES</a></span>
+    <span style="font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:4px;margin-left:4px"><a href="#" onclick="localStorage.setItem('sw_lang','en');window.location.href='/index.html';return false" style="color:inherit;text-decoration:none;opacity:.55">EN</a><span style="opacity:.3">·</span><b>ES</b></span>
   </div>
-  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <!-- NAV:END -->
 
@@ -670,43 +669,43 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <div class="hero-inner">
     <div class="hero-kicker">
       <div class="kicker-dot"></div>
-      Live across Murcia, Alicante & Costa Blanca
+      Activo en Murcia, Alicante y Costa Blanca
     </div>
-    <h1>Stop overpaying for<br>electricity in Spain.</h1>
+    <h1>¿Cansado de no entender<br>tu factura de la luz?</h1>
     <div style="display:inline-flex;align-items:center;gap:10px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);border-radius:12px;padding:10px 18px;margin:4px 0 16px;animation:fadeDown .5s .12s ease both;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
       <span style="font-family:Sora,sans-serif;font-size:15px;font-weight:700;color:#25D366;">€380</span>
-      <span style="font-size:13px;color:rgba(255,255,255,0.55);">average annual saving for expats in Spain</span>
+      <span style="font-size:13px;color:rgba(255,255,255,0.55);">ahorro medio anual para expats en España</span>
     </div>
-    <p class="hero-sub">Send us your bill — any way that works for you — and we will calculate your real savings and switch you to a cheaper tariff. Free, in English, in under 5 minutes.</p>
+    <p class="hero-sub">Envíanos tu factura — por el canal que prefieras — y calculamos tu ahorro real. Te cambiamos de tarifa gratis, en menos de 5 minutos.</p>
 
     <div class="trust-row">
-      <div class="tpill"><div class="tpill-dot"></div>100% free</div>
-      <div class="tpill"><div class="tpill-dot"></div>No power interruption</div>
-      <div class="tpill"><div class="tpill-dot"></div>English throughout</div>
-      <div class="tpill"><div class="tpill-dot"></div>WhatsApp · Email · Website</div>
+      <div class="tpill"><div class="tpill-dot"></div>100% Gratuito</div>
+      <div class="tpill"><div class="tpill-dot"></div>Sin Permanencia</div>
+      <div class="tpill"><div class="tpill-dot"></div>Sin Letra Pequeña</div>
+      <div class="tpill"><div class="tpill-dot"></div>WhatsApp · Email · Web</div>
     </div>
 
     <!-- CHANNEL PICKER -->
     <div class="channel-section">
-      <div class="channel-header">How would you like to send your bill?</div>
+      <div class="channel-header">¿Cómo quieres enviarnos tu factura?</div>
 
       <!-- Tab bar -->
       <div class="channel-tabs" id="channel-tabs">
         <button class="ctab active-wa" onclick="switchTab('wa',this)" id="tab-wa">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span class="ctab-label">WhatsApp</span>
-          <span class="ctab-rec rec-mobile">Best on mobile</span>
+          <span class="ctab-rec rec-mobile">Mejor en móvil</span>
         </button>
         <button class="ctab" onclick="switchTab('email',this)" id="tab-email">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
-          <span class="ctab-label">Forward by email</span>
-          <span class="ctab-rec rec-email">Easiest option</span>
+          <span class="ctab-label">Reenviar por email</span>
+          <span class="ctab-rec rec-email">La más fácil</span>
         </button>
         <button class="ctab" onclick="switchTab('web',this)" id="tab-web">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-          <span class="ctab-label">Upload on website</span>
-          <span class="ctab-rec rec-web">Best on desktop</span>
+          <span class="ctab-label">Subir en la web</span>
+          <span class="ctab-rec rec-web">Mejor en ordenador</span>
         </button>
       </div>
 
@@ -715,32 +714,32 @@ nav.scrolled .hamburger span{background:var(--ink)}
         <div class="wa-panel">
           <div class="wa-panel-top">
             <div class="wa-panel-text">
-              <span class="panel-mobile-tag rec-mobile-panel">Best on mobile</span>
-              <h3>Send your bill on WhatsApp</h3>
-              <p>Open a chat with Switchr, attach your bill PDF or take a photo, and we'll have your savings in under 2 minutes.</p>
+              <span class="panel-mobile-tag rec-mobile-panel">Mejor en móvil</span>
+              <h3>Envía tu factura por WhatsApp</h3>
+              <p>Abre un chat con Switchr, adjunta el PDF o haz una foto, y tendrás tu ahorro en menos de 2 minutos.</p>
             </div>
-            <a href="https://wa.me/34662403660?text=Hi%2C+I'd+like+to+check+my+electricity+bill" class="wa-big-btn">
+            <a href="https://wa.me/34662403660?text=Hola%2C+quiero+revisar+mi+factura+de+la+luz" class="wa-big-btn">
               <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Open WhatsApp
+              Abrir WhatsApp
             </a>
           </div>
           <div class="wa-panel-bottom">
-            <div class="wa-step"><div class="wa-step-num">1</div><div class="wa-step-text"><strong>Open the chat</strong>Tap the button — WhatsApp opens automatically</div></div>
-            <div class="wa-step"><div class="wa-step-num">2</div><div class="wa-step-text"><strong>Send your bill</strong>Attach the PDF from your email app, or take a photo</div></div>
-            <div class="wa-step"><div class="wa-step-num">3</div><div class="wa-step-text"><strong>Get your result</strong>Savings figure in under 2 minutes, switch in one tap</div></div>
+            <div class="wa-step"><div class="wa-step-num">1</div><div class="wa-step-text"><strong>Abre el chat</strong>Pulsa el botón — WhatsApp se abre automáticamente</div></div>
+            <div class="wa-step"><div class="wa-step-num">2</div><div class="wa-step-text"><strong>Envía tu factura</strong>Adjunta el PDF desde tu email o haz una foto</div></div>
+            <div class="wa-step"><div class="wa-step-num">3</div><div class="wa-step-text"><strong>Recibe tu resultado</strong>Tu ahorro en menos de 2 minutos, cambia con un toque</div></div>
           </div>
           <div class="wa-chat-preview">
             <div style="display:flex;flex-direction:column;gap:6px">
-              <div class="wm-in-sm wa-msg-bubble" style="max-width:75%">Hi! Send me your latest electricity bill and I'll check if you're overpaying.</div>
+              <div class="wm-in-sm wa-msg-bubble" style="max-width:75%">¡Hola! Envíame tu última factura de luz y te digo si estás pagando de más.</div>
               <div class="pdf-msg" style="background:#dcf8c6;border-radius:8px 2px 8px 8px;align-self:flex-end;padding:7px 10px;display:flex;align-items:center;gap:7px;max-width:70%">
                 <div class="pdf-sm">PDF</div>
                 <div style="font-size:11px;color:#333;font-weight:500">factura_junio.pdf<div style="font-size:9px;color:#888;font-weight:400">248 KB</div></div>
               </div>
               <div class="wm-result-sm">
                 <div style="font-size:10px;color:#888;margin-bottom:3px">Your savings report · ES0021 0000 1343...</div>
-                <div class="wa-result-sm-num">Save €456/yr</div>
-                <div class="wa-result-sm-sub">Switch Iberdrola → cheaper tariff · ~28% less</div>
-                <div class="wa-btns-sm"><div class="wa-btn-sm">Switch now</div><div class="wa-btn-sm">See breakdown</div></div>
+                <div class="wa-result-sm-num">Ahorras €456/año</div>
+                <div class="wa-result-sm-sub">Cambio Iberdrola → tarifa más barata · ~28% menos</div>
+                <div class="wa-btns-sm"><div class="wa-btn-sm">Cambiar ahora</div><div class="wa-btn-sm">Ver desglose</div></div>
               </div>
             </div>
           </div>
@@ -752,23 +751,23 @@ nav.scrolled .hamburger span{background:var(--ink)}
         <div class="email-panel">
           <div class="email-panel-top">
             <div class="email-panel-text">
-              <span class="panel-mobile-tag rec-email-panel">Easiest option</span>
-              <h3>Forward your bill by email</h3>
-              <p>Got your bill as an email from Iberdrola, Endesa, or Naturgy? Just forward that email to us — attachment included. We'll reply with your savings report within minutes.</p>
+              <span class="panel-mobile-tag rec-email-panel">La más fácil</span>
+              <h3>Reenvía tu factura por email</h3>
+              <p>¿Tienes la factura en tu bandeja de Iberdrola, Endesa o Naturgy? Reenvíala directamente — con el adjunto. Te respondemos con tu informe de ahorro en minutos.</p>
             </div>
             <div class="email-address-card">
-              <div class="email-address-label">Forward your bill to</div>
+              <div class="email-address-label">Reenvía tu factura a</div>
               <div class="email-address">audit@switchr.es</div>
               <button class="copy-btn" onclick="copyEmail()">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-                <span id="copy-label">Copy address</span>
+                <span id="copy-label">Copiar dirección</span>
               </button>
             </div>
           </div>
           <div class="email-panel-bottom">
-            <div class="email-step"><div class="email-step-num">1</div><div class="email-step-text"><strong>Find the bill email</strong>Check your inbox — your provider sent it as a PDF attachment</div></div>
-            <div class="email-step"><div class="email-step-num">2</div><div class="email-step-text"><strong>Forward to audit@switchr.es</strong>Just forward the email — we extract the bill from the attachment automatically</div></div>
-            <div class="email-step"><div class="email-step-num">3</div><div class="email-step-text"><strong>Get your report by email</strong>We reply with your savings breakdown and a link to switch</div></div>
+            <div class="email-step"><div class="email-step-num">1</div><div class="email-step-text"><strong>Encuentra el email de la factura</strong>Busca en tu bandeja — tu proveedor lo envió como PDF adjunto</div></div>
+            <div class="email-step"><div class="email-step-num">2</div><div class="email-step-text"><strong>Reenvía a audit@switchr.es</strong>Reenvía el email — extraemos la factura del adjunto automáticamente</div></div>
+            <div class="email-step"><div class="email-step-num">3</div><div class="email-step-text"><strong>Recibe tu informe por email</strong>Te respondemos con el desglose de ahorro y un enlace para cambiar</div></div>
           </div>
           <div class="email-mock">
             <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
@@ -790,12 +789,12 @@ nav.scrolled .hamburger span{background:var(--ink)}
               <div style="flex:1;min-width:200px">
                 <div style="font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:#3b82f6;margin-bottom:8px">Reply from Switchr</div>
                 <div style="background:#fff;border:1px solid rgba(59,130,246,0.15);border-radius:10px;padding:14px;border-left:3px solid #3b82f6">
-                  <div style="font-size:11px;color:#888;margin-bottom:4px">Results for your Iberdrola bill</div>
-                  <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:var(--g)">Save €456/yr</div>
-                  <div style="font-size:12px;color:#555;margin:4px 0 10px">Switch to a cheaper tariff · ~28% less</div>
+                  <div style="font-size:11px;color:#888;margin-bottom:4px">Resultados de tu factura de Iberdrola</div>
+                  <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:800;color:var(--g)">Ahorras €456/año</div>
+                  <div style="font-size:12px;color:#555;margin:4px 0 10px">Cambio a tarifa más barata · ~28% menos</div>
                   <div style="display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;padding:7px 14px;border-radius:7px;font-size:12px;font-weight:600">
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                    Switch now on WhatsApp →
+                    Cambiar ahora por WhatsApp →
                   </div>
                 </div>
               </div>
@@ -809,33 +808,33 @@ nav.scrolled .hamburger span{background:var(--ink)}
         <div class="web-panel">
           <div class="web-panel-top">
             <div class="web-panel-text">
-              <span class="panel-mobile-tag rec-web-panel">Best on desktop</span>
-              <h3>Upload your bill on this website</h3>
-              <p>On a computer? Drag and drop your bill PDF here. We'll analyse it instantly and show your full savings report on screen.</p>
+              <span class="panel-mobile-tag rec-web-panel">Mejor en ordenador</span>
+              <h3>Sube tu factura en esta web</h3>
+              <p>¿En el ordenador? Arrastra y suelta el PDF aquí. Lo analizamos al instante y mostramos tu informe completo en pantalla.</p>
             </div>
             <button class="web-upload-btn" onclick="openUploadModal()">
               <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-              Upload my bill
+              Subir mi factura
             </button>
           </div>
           <div class="web-panel-bottom">
-            <div class="web-step"><div class="web-step-num">1</div><div class="web-step-text"><strong>Upload your PDF</strong>Drag it in or click to browse — any Spanish energy provider</div></div>
-            <div class="web-step"><div class="web-step-num">2</div><div class="web-step-text"><strong>See your full report</strong>Interactive savings breakdown, tariff comparison, all on screen</div></div>
-            <div class="web-step"><div class="web-step-num">3</div><div class="web-step-text"><strong>Switch in one click</strong>Confirm on WhatsApp — takes 2 minutes, no paperwork</div></div>
+            <div class="web-step"><div class="web-step-num">1</div><div class="web-step-text"><strong>Sube tu PDF</strong>Arrástralo o haz clic para buscar — cualquier proveedor español</div></div>
+            <div class="web-step"><div class="web-step-num">2</div><div class="web-step-text"><strong>Ve tu informe completo</strong>Desglose interactivo, comparativa de tarifas, todo en pantalla</div></div>
+            <div class="web-step"><div class="web-step-num">3</div><div class="web-step-text"><strong>Cambia con un clic</strong>Confirma por WhatsApp — 2 minutos, sin papeleo</div></div>
           </div>
           <div class="web-preview">
             <div class="dropzone-mock" id="dropzone" ondragover="event.preventDefault();this.style.borderColor='var(--web)'" ondragleave="this.style.borderColor=''" ondrop="handleDrop(event)">
               <div class="dropzone-icon">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
               </div>
-              <h4>Drop your bill PDF here</h4>
-              <p>or</p>
+              <h4>Arrastra tu PDF aquí</h4>
+              <p>o</p>
               <label class="dropzone-btn" style="cursor:pointer">
-                Browse files
+                Explorar archivos
                 <input type="file" accept=".pdf,image/*" onchange="handleFileSelect(this)" style="display:none">
               </label>
               <div class="or-divider">or</div>
-              <p style="font-size:12px;color:var(--ink4)">PDF, JPG, or PNG · Max 10MB</p>
+              <p style="font-size:12px;color:var(--ink4)">PDF, JPG o PNG · Máx 10MB</p>
             </div>
           </div>
         </div>
@@ -848,16 +847,16 @@ nav.scrolled .hamburger span{background:var(--ink)}
 <!-- TICKER -->
 <div class="ticker-wrap">
   <div class="ticker-track">
-    <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> via WhatsApp · Costa Blanca · 2 days ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> · Murcia · 5 days ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> via email · Alicante · 1 week ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> · Torrevieja · 1 week ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Linda saved <strong>€612/yr</strong> via website · Benidorm · 2 weeks ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> via WhatsApp · Costa Blanca · 2 days ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> · Murcia · 5 days ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> via email · Alicante · 1 week ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> · Torrevieja · 1 week ago</div>
-    <div class="tick-item"><div class="tick-dot"></div>Linda saved <strong>€612/yr</strong> via website · Benidorm · 2 weeks ago</div>
+    <div class="tick-item"><div class="tick-dot"></div>Emma ahorró <strong>€441/año</strong> por WhatsApp · Costa Blanca · hace 2 días</div>
+    <div class="tick-item"><div class="tick-dot"></div>James ahorró <strong>€318/año</strong> · Murcia · hace 5 días</div>
+    <div class="tick-item"><div class="tick-dot"></div>Sarah ahorró <strong>€503/año</strong> por email · Alicante · hace 1 semana</div>
+    <div class="tick-item"><div class="tick-dot"></div>Peter ahorró <strong>€389/año</strong> · Torrevieja · hace 1 semana</div>
+    <div class="tick-item"><div class="tick-dot"></div>Linda ahorró <strong>€612/año</strong> por web · Benidorm · hace 2 semanas</div>
+    <div class="tick-item"><div class="tick-dot"></div>Emma ahorró <strong>€441/año</strong> por WhatsApp · Costa Blanca · hace 2 días</div>
+    <div class="tick-item"><div class="tick-dot"></div>James ahorró <strong>€318/año</strong> · Murcia · hace 5 días</div>
+    <div class="tick-item"><div class="tick-dot"></div>Sarah ahorró <strong>€503/año</strong> por email · Alicante · hace 1 semana</div>
+    <div class="tick-item"><div class="tick-dot"></div>Peter ahorró <strong>€389/año</strong> · Torrevieja · hace 1 semana</div>
+    <div class="tick-item"><div class="tick-dot"></div>Linda ahorró <strong>€612/año</strong> por web · Benidorm · hace 2 semanas</div>
   </div>
 </div>
 
@@ -871,25 +870,25 @@ nav.scrolled .hamburger span{background:var(--ink)}
       <div style="width:28px;height:28px;border-radius:7px;border:1.5px dashed var(--border2);display:flex;align-items:center;justify-content:center;">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--ink4)" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
       </div>
-      <span style="font-size:11px;color:var(--ink4);font-style:italic;">More providers coming</span>
+      <span style="font-size:11px;color:var(--ink4);font-style:italic;">Más proveedores próximamente</span>
     </div>
   </div>
 </div>
 
 <!-- HOW IT WORKS -->
-<section class="hiw-compact" id="how-it-works">
+<section class="hiw-compact" id="como-funciona">
   <div class="section-inner">
     <div class="reveal" style="margin-bottom:0;max-width:600px">
-      <span class="section-kicker">How it works</span>
-      <h2 class="section-title">Four steps. Every channel.</h2>
-      <p class="section-sub">Whether you come via WhatsApp, email or website — the process is the same and you're done in minutes.</p>
+      <span class="section-kicker">Cómo funciona</span>
+      <h2 class="section-title">Cuatro pasos. Cualquier canal.</h2>
+      <p class="section-sub">Tanto si usas WhatsApp, email o la web — el proceso es el mismo y terminas en minutos.</p>
     </div>
     <div class="steps-row reveal">
       <div class="step-box">
-        <div class="step-n">Step 01<span class="step-n-bg">1</span></div>
+        <div class="step-n">Paso 01<span class="step-n-bg">1</span></div>
         <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
   <rect width="44" height="44" rx="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
-  
+
   <rect x="12" y="9" width="14" height="18" rx="2" fill="rgba(16,185,129,0.25)" stroke="#10b981" stroke-width="1.4"/>
   <line x1="15" y1="14" x2="23" y2="14" stroke="#10b981" stroke-width="1" stroke-linecap="round" opacity=".6"/>
   <line x1="15" y1="17" x2="23" y2="17" stroke="#10b981" stroke-width="1" stroke-linecap="round" opacity=".6"/>
@@ -898,8 +897,8 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <line x1="30" y1="33" x2="30" y2="27" stroke="white" stroke-width="1.8" stroke-linecap="round"/>
   <polyline points="27,29.5 30,27 33,29.5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
 
-</svg></span><h3>Send us your bill</h3></div>
-        <p>WhatsApp, email forward, or website upload — your choice.</p>
+</svg></span><h3>Envíanos tu factura</h3></div>
+        <p>Por WhatsApp, reenvío por email o subida web — tú eliges.</p>
         <div class="step-channel-tags">
           <span class="sct sct-wa">WhatsApp</span>
           <span class="sct sct-em">Email</span>
@@ -907,7 +906,7 @@ nav.scrolled .hamburger span{background:var(--ink)}
         </div>
       </div>
       <div class="step-box">
-        <div class="step-n">Step 02<span class="step-n-bg">2</span></div>
+        <div class="step-n">Paso 02<span class="step-n-bg">2</span></div>
         <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
   <rect width="44" height="44" rx="12" fill="rgba(59,130,246,0.08)" stroke="rgba(59,130,246,0.2)" stroke-width="1"/>
   
@@ -924,11 +923,11 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <line x1="22" y1="31" x2="22" y2="35" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
   <line x1="27" y1="31" x2="27" y2="35" stroke="#3b82f6" stroke-width="1.2" stroke-linecap="round"/>
 
-</svg></span><h3>AI reads every line</h3></div>
-        <p>We extract your real P1/P2/P3 consumption, potencia, and current provider — not estimates.</p>
+</svg></span><h3>La IA lee cada línea</h3></div>
+        <p>Extraemos tu consumo real P1/P2/P3, potencia y proveedor actual — no estimaciones.</p>
       </div>
       <div class="step-box">
-        <div class="step-n">Step 03<span class="step-n-bg">3</span></div>
+        <div class="step-n">Paso 03<span class="step-n-bg">3</span></div>
         <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
   <rect width="44" height="44" rx="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
   
@@ -938,11 +937,11 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <line x1="24" y1="31" x2="28" y2="31" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
   <line x1="24" y1="33" x2="28" y2="33" stroke="#10b981" stroke-width="1.2" stroke-linecap="round"/>
 
-</svg></span><h3>Your savings report</h3></div>
-        <p>We compare tariffs from our partner providers against your usage and show you the honest number.</p>
+</svg></span><h3>Tu informe de ahorro</h3></div>
+        <p>Comparamos tarifas de nuestros proveedores asociados con tu consumo real y te mostramos la cifra honesta.</p>
       </div>
       <div class="step-box">
-        <div class="step-n">Step 04<span class="step-n-bg">4</span></div>
+        <div class="step-n">Paso 04<span class="step-n-bg">4</span></div>
         <div class="step-header"><span class="step-icon"><svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" width="44" height="44">
   <rect width="44" height="44" rx="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
   
@@ -952,10 +951,10 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <polyline points="28,24 25,27 22,24" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
   <path d="M25,27 Q25,18 18,18" stroke="rgba(255,255,255,0.4)" stroke-width="1.4" stroke-linecap="round" fill="none"/>
 
-</svg></span><h3>Switch — we handle it</h3></div>
-        <p>Confirm on WhatsApp. No phone calls, no Spanish paperwork, no interruption to your supply.</p>
+</svg></span><h3>Cambiamos — nosotros nos encargamos</h3></div>
+        <p>Confirma por WhatsApp. Sin llamadas, sin papeleo, sin corte de suministro.</p>
         <div class="step-channel-tags">
-          <span class="sct sct-wa">Confirms via WhatsApp</span>
+          <span class="sct sct-wa">Confirma por WhatsApp</span>
         </div>
       </div>
     </div>
@@ -967,22 +966,22 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <div class="section-inner">
     <div class="why-grid">
       <div class="why-text reveal">
-        <span class="section-kicker">Why Switchr</span>
-        <h2 class="section-title" style="color:#fff">Three ways in.<br>One honest result.</h2>
-        <p class="section-sub">Every competitor makes you fill a form and wait. Switchr meets you where you already are — WhatsApp, email, or browser — and gives you accurate savings, not inflated estimates.</p>
+        <span class="section-kicker">Por qué Switchr</span>
+        <h2 class="section-title" style="color:#fff">Tres formas de empezar.<br>Un resultado honesto.</h2>
+        <p class="section-sub">Todos los demás te hacen rellenar un formulario y esperar. Switchr te encuentra donde ya estás — WhatsApp, email o navegador — y te da un ahorro preciso, no estimaciones infladas.</p>
         <div class="why-cards">
           <div class="why-card"><div class="why-card-icon"><svg viewBox="0 0 36 36" fill="none" width="36" height="36">
   <rect width="36" height="36" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
   <path d="M20 6L11 20h8l-3 10L27 16h-8l1-10z" fill="rgba(16,185,129,0.3)" stroke="#10b981" stroke-width="1.4" stroke-linejoin="round"/>
   <path d="M20 6L13 19h7l-3 9 10-13h-7z" fill="rgba(255,255,255,0.15)"/>
-</svg></div><div><h4>No new apps, no accounts</h4><p>Use what you already have — WhatsApp on your phone, your email app, or this browser.</p></div></div>
+</svg></div><div><h4>Sin nuevas apps, sin cuentas</h4><p>Usa lo que ya tienes — WhatsApp en tu móvil, tu app de email o este navegador.</p></div></div>
           <div class="why-card"><div class="why-card-icon"><svg viewBox="0 0 36 36" fill="none" width="36" height="36">
   <rect width="36" height="36" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
   <rect x="9" y="22" width="4" height="8" rx="1.5" fill="rgba(16,185,129,0.3)" stroke="#10b981" stroke-width="1.2"/>
   <rect x="16" y="16" width="4" height="14" rx="1.5" fill="rgba(16,185,129,0.5)" stroke="#10b981" stroke-width="1.2"/>
   <rect x="23" y="10" width="4" height="20" rx="1.5" fill="#10b981" stroke="#10b981" stroke-width="1.2"/>
   <line x1="9" y1="31" x2="27" y2="31" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-</svg></div><div><h4>Calculated from your real usage</h4><p>We use your actual P1/P2/P3 kWh — not industry averages. If the saving is small, we tell you that too.</p></div></div>
+</svg></div><div><h4>Calculado con tu consumo real</h4><p>Usamos tus kWh reales P1/P2/P3 — no medias del sector. Si el ahorro es pequeño, también te lo decimos.</p></div></div>
           <div class="why-card"><div class="why-card-icon"><svg viewBox="0 0 36 36" fill="none" width="36" height="36">
   <rect width="36" height="36" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.25)" stroke-width="1"/>
   <rect x="8" y="9" width="20" height="14" rx="3" fill="rgba(16,185,129,0.2)" stroke="#10b981" stroke-width="1.3"/>
@@ -990,18 +989,18 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <line x1="12" y1="14" x2="24" y2="14" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
   <line x1="12" y1="17.5" x2="24" y2="17.5" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
   <line x1="12" y1="21" x2="19" y2="21" stroke="white" stroke-width="1.4" stroke-linecap="round" opacity=".8"/>
-</svg></div><div><h4>English, start to finish</h4><p>Built for expats. Not translated as an afterthought.</p></div></div>
+</svg></div><div><h4>En tu idioma, de principio a fin</h4><p>Pensado para expats. No traducido como idea de última hora.</p></div></div>
         </div>
       </div>
       <div class="compare-table reveal">
-        <div class="ct-header"><span>Feature</span><span>Others</span><span>Switchr</span></div>
-        <div class="ct-row"><span>WhatsApp-native switching</span><span>✕</span><span>✓</span></div>
-        <div class="ct-row"><span>Email bill forwarding</span><span>✕</span><span>✓</span></div>
-        <div class="ct-row"><span>Website upload option</span><span>✓</span><span>✓</span></div>
-        <div class="ct-row"><span>Real P1/P2/P3 calculation</span><span>✕</span><span>✓</span></div>
-        <div class="ct-row"><span>English throughout</span><span>Partial</span><span>✓</span></div>
-        <div class="ct-row"><span>No forms, no accounts</span><span>✕</span><span>✓</span></div>
-        <div class="ct-row"><span>100% free</span><span>✓</span><span>✓</span></div>
+        <div class="ct-header"><span>Característica</span><span>Otros</span><span>Switchr</span></div>
+        <div class="ct-row"><span>Cambio nativo por WhatsApp</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>Reenvío de factura por email</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>Subida web</span><span>✓</span><span>✓</span></div>
+        <div class="ct-row"><span>Cálculo real P1/P2/P3</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>En tu idioma</span><span>Parcial</span><span>✓</span></div>
+        <div class="ct-row"><span>Sin formularios, sin cuentas</span><span>✕</span><span>✓</span></div>
+        <div class="ct-row"><span>100% gratuito</span><span>✓</span><span>✓</span></div>
       </div>
     </div>
   </div>
@@ -1011,40 +1010,40 @@ nav.scrolled .hamburger span{background:var(--ink)}
 <section class="testi-section">
   <div class="section-inner">
     <div class="reveal">
-      <span class="section-kicker">What expats say</span>
-      <h2 class="section-title">Real people, real savings</h2>
+      <span class="section-kicker">Lo que dicen los expats</span>
+      <h2 class="section-title">Personas reales, ahorros reales</h2>
     </div>
     <div class="testi-grid">
       <div class="tcard reveal">
         <div class="tcard-stars">★★★★★</div>
-        <p class="tcard-body">"I just forwarded the Iberdrola email I'd been ignoring for months. Got my report back in minutes. Done before my morning coffee."</p>
+        <p class="tcard-body">"Reenvié el email de Iberdrola que llevaba meses ignorando. El informe llegó en minutos. Listo antes de mi café de la mañana."</p>
         <div class="tcard-foot">
           <div class="tcard-avatar" style="background:#3b82f6">JM</div>
           <div>
             <div class="tcard-name">James M. · Torrevieja</div>
-            <div class="tcard-via tcard-via-em">via email forward · saved €389/yr</div>
+            <div class="tcard-via tcard-via-em">por email · ahorró €389/año</div>
           </div>
         </div>
       </div>
       <div class="tcard reveal" style="transition-delay:.1s">
         <div class="tcard-stars">★★★★★</div>
-        <p class="tcard-body">"WhatsApp was so easy. Sent the PDF, got the savings figure, tapped switch. No Spanish, no forms, no waiting on hold."</p>
+        <p class="tcard-body">"WhatsApp fue facilísimo. Envié el PDF, recibí la cifra de ahorro y pulsé cambiar. Sin formularios, sin esperar al teléfono."</p>
         <div class="tcard-foot">
           <div class="tcard-avatar" style="background:#25D366">SE</div>
           <div>
             <div class="tcard-name">Sarah E. · San Javier</div>
-            <div class="tcard-via tcard-via-wa">via WhatsApp · saved €503/yr</div>
+            <div class="tcard-via tcard-via-wa">por WhatsApp · ahorró €503/año</div>
           </div>
         </div>
       </div>
       <div class="tcard reveal" style="transition-delay:.2s">
         <div class="tcard-stars">★★★★★</div>
-        <p class="tcard-body">"Used the website on my laptop. The breakdown was really transparent — they actually showed where one charge would be slightly higher. That made me trust them completely."</p>
+        <p class="tcard-body">"Usé la web desde el portátil. El desglose fue muy transparente — mostraron incluso dónde un cargo sería algo más alto. Eso me generó total confianza."</p>
         <div class="tcard-foot">
           <div class="tcard-avatar" style="background:#7c3aed">PK</div>
           <div>
             <div class="tcard-name">Peter K. · Orihuela Costa</div>
-            <div class="tcard-via" style="background:rgba(139,92,246,0.1);color:#6d28d9">via website · saved €441/yr</div>
+            <div class="tcard-via" style="background:rgba(139,92,246,0.1);color:#6d28d9">por web · ahorró €441/año</div>
           </div>
         </div>
       </div>
@@ -1055,7 +1054,7 @@ nav.scrolled .hamburger span{background:var(--ink)}
 
 
 <!-- MARKET WATCH SECTION -->
-<section id="market-watch" style="background:#0b1f3a;padding:96px 40px;position:relative;overflow:hidden;">
+<section id="observatorio" style="background:#0b1f3a;padding:96px 40px;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(16,185,129,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(16,185,129,0.04) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;"></div>
   <div style="position:absolute;width:600px;height:400px;border-radius:50%;background:radial-gradient(ellipse,rgba(16,185,129,0.06) 0%,transparent 70%);top:-80px;left:50%;transform:translateX(-50%);pointer-events:none;"></div>
 
@@ -1064,10 +1063,10 @@ nav.scrolled .hamburger span{background:var(--ink)}
     <!-- Header -->
     <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#10b981;margin-bottom:16px;">
       <div style="width:6px;height:6px;border-radius:50%;background:#10b981;animation:mwPulse 2s ease-in-out infinite;"></div>
-      Market Watch · Spain 2025
+      Observatorio de Mercado · España 2025
     </div>
-    <h2 style="font-family:Sora,sans-serif;font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin-bottom:12px;">Two tariffs.<br><span style="color:#10b981;">Two very different years.</span></h2>
-    <p style="font-size:17px;color:#a8c4d8;font-weight:300;max-width:580px;line-height:1.65;margin-bottom:48px;">One stayed flat. One swung 148%. Which worked better depends entirely on how you live — and the quiz below will tell you which fits you.</p>
+    <h2 style="font-family:Sora,sans-serif;font-size:clamp(32px,4.5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-0.025em;color:#fff;margin-bottom:12px;">Dos tarifas.<br><span style="color:#10b981;">Dos años muy diferentes.</span></h2>
+    <p style="font-size:17px;color:#a8c4d8;font-weight:300;max-width:580px;line-height:1.65;margin-bottom:48px;">Una se mantuvo estable. La otra varió un 148%. Cuál fue mejor depende de cómo vives — y el cuestionario te dirá cuál te conviene.</p>
 
     <!-- Plan Cards -->
     <div class="mw-cards" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;">
@@ -1083,13 +1082,13 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <line x1="24" y1="34" x2="24" y2="37" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round"/>
 </svg></div>
         <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#10b981;margin-bottom:6px;">Plan A</div>
-        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Set &amp; Forget</div>
-        <div style="font-size:14px;color:#a8c4d8;line-height:1.6;margin-bottom:18px;">Pay the same price 24/7. No monitoring, no surprises. Ideal for a stress-free Spanish life — you never think about your electricity bill again.</div>
+        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Precio Fijo</div>
+        <div style="font-size:14px;color:#a8c4d8;line-height:1.6;margin-bottom:18px;">Paga el mismo precio 24/7. Sin vigilar el mercado, sin sorpresas. Ideal para vivir tranquilo en España — nunca vuelves a preocuparte por la factura.</div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;">
-          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#10b981;">€0.099</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Fixed rate, always</div></div>
-          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#10b981;">100%</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Price stability</div></div>
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#10b981;">€0.099</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Precio fijo, siempre</div></div>
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#10b981;">100%</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Estabilidad de precio</div></div>
         </div>
-        <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;margin-top:14px;">✓ 85% of Switchr expats choose this</div>
+        <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(16,185,129,0.15);color:#10b981;margin-top:14px;">✓ El 85% de los expats de Switchr lo elige</div>
       </div>
 
       <!-- Plan B: Active Savings — electric sky blue (neutral, smart) -->
@@ -1104,15 +1103,15 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <line x1="8" y1="38" x2="8" y2="34" stroke="rgba(56,189,248,0.5)" stroke-width="1" stroke-linecap="round"/>
 </svg></div>
         <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#38bdf8;margin-bottom:6px;">Plan B</div>
-        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Active Savings</div>
-        <div style="font-size:14px;color:#a8c4d8;line-height:1.6;margin-bottom:18px;">Market-linked pricing. Save more in winter and off-peak hours. Great for part-time residents, EV owners, or those who shift usage to cheaper times.</div>
+        <div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:8px;">Ahorro Activo</div>
+        <div style="font-size:14px;color:#a8c4d8;line-height:1.6;margin-bottom:18px;">Precio ligado al mercado. Ahorra más en invierno y en horas valle. Ideal para residentes a tiempo parcial, propietarios de VE o quienes desplazan el consumo a horas baratas.</div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;">
-          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#38bdf8;">€0.075–0.186</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Hourly rate range</div></div>
-          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#38bdf8;">38%</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Price stability</div></div>
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#38bdf8;">€0.075–0.186</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Rango de precio por hora</div></div>
+          <div><div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#38bdf8;">38%</div><div style="font-size:11px;color:#a8c4d8;font-weight:500;">Estabilidad de precio</div></div>
         </div>
         <div style="display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:600;background:rgba(56,189,248,0.1);color:#38bdf8;margin-top:14px;">
           <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-          Best for part-time residents &amp; EV owners
+          Ideal para residentes a tiempo parcial y propietarios de VE
         </div>
       </div>
     </div>
@@ -1121,17 +1120,17 @@ nav.scrolled .hamburger span{background:var(--ink)}
     <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:28px 28px 20px;margin-bottom:16px;">
       <div style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:20px;">
         <div>
-          <div style="font-family:Sora,sans-serif;font-size:15px;font-weight:600;color:#fff;margin-bottom:3px;">Electricity price comparison — Spain 2025</div>
-          <div style="font-size:12px;color:#a8c4d8;">€/kWh · Monthly average · Based on real OMIE market data</div>
+          <div style="font-family:Sora,sans-serif;font-size:15px;font-weight:600;color:#fff;margin-bottom:3px;">Comparativa de precio eléctrico — España 2025</div>
+          <div style="font-size:12px;color:#a8c4d8;">€/kWh · Media mensual · Basado en datos reales del mercado OMIE</div>
         </div>
         <div style="display:flex;gap:20px;flex-wrap:wrap;">
           <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#a8c4d8;">
             <div style="width:28px;height:2.5px;background:#10b981;border-radius:2px;flex-shrink:0;"></div>
-            Set &amp; Forget &nbsp;<span style="font-family:Sora,sans-serif;font-size:12px;font-weight:700;color:#10b981;">€0.099 flat</span>
+            Precio Fijo &nbsp;<span style="font-family:Sora,sans-serif;font-size:12px;font-weight:700;color:#10b981;">€0.099 fijo</span>
           </div>
           <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#a8c4d8;">
             <div style="width:28px;height:0;border-top:2.5px dashed #38bdf8;flex-shrink:0;"></div>
-            Active Savings &nbsp;<span style="font-family:Sora,sans-serif;font-size:12px;font-weight:700;color:#38bdf8;">€0.075–0.186</span>
+            Ahorro Activo &nbsp;<span style="font-family:Sora,sans-serif;font-size:12px;font-weight:700;color:#38bdf8;">€0.075–0.186</span>
           </div>
         </div>
       </div>
@@ -1140,8 +1139,8 @@ nav.scrolled .hamburger span{background:var(--ink)}
       <!-- Delta bar -->
       <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.08);">
         <div style="display:flex;justify-content:space-between;font-size:12px;color:#a8c4d8;margin-bottom:8px;">
-          <span>Price spread this year</span>
-          <span style="font-weight:600;color:#38bdf8;">Market peaked 88% above fixed rate in August</span>
+          <span>Rango de precio este año</span>
+          <span style="font-weight:600;color:#38bdf8;">El mercado alcanzó un 88% por encima del precio fijo en agosto</span>
         </div>
         <div style="height:6px;background:rgba(255,255,255,0.07);border-radius:3px;overflow:hidden;">
           <div id="mw-delta-fill" style="height:6px;border-radius:3px;background:linear-gradient(90deg,#10b981 0%,#38bdf8 100%);width:0%;transition:width 1.2s cubic-bezier(.4,0,.2,1);"></div>
@@ -1153,12 +1152,12 @@ nav.scrolled .hamburger span{background:var(--ink)}
     <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;margin-bottom:16px;">
       <div style="background:rgba(16,185,129,0.1);border:1px solid rgba(16,185,129,0.2);border-radius:14px;padding:16px 18px;text-align:center;">
         <div style="font-family:Sora,sans-serif;font-size:28px;font-weight:800;color:#10b981;">100%</div>
-        <div style="font-size:11px;color:#a8c4d8;margin-top:2px;">Set &amp; Forget stability</div>
+        <div style="font-size:11px;color:#a8c4d8;margin-top:2px;">Estabilidad Precio Fijo</div>
       </div>
       <div style="font-family:Sora,sans-serif;font-size:13px;font-weight:700;color:rgba(255,255,255,0.2);text-align:center;">VS</div>
       <div style="background:rgba(56,189,248,0.08);border:1px solid rgba(56,189,248,0.2);border-radius:14px;padding:16px 18px;text-align:center;">
         <div style="font-family:Sora,sans-serif;font-size:28px;font-weight:800;color:#38bdf8;">38%</div>
-        <div style="font-size:11px;color:#a8c4d8;margin-top:2px;">Active Savings stability</div>
+        <div style="font-size:11px;color:#a8c4d8;margin-top:2px;">Estabilidad Ahorro Activo</div>
       </div>
     </div>
 
@@ -1167,12 +1166,12 @@ nav.scrolled .hamburger span{background:var(--ink)}
       <div style="position:absolute;left:0;top:0;bottom:0;width:4px;background:#10b981;border-radius:2px 0 0 2px;"></div>
       <div style="flex:1;min-width:240px;">
         <div style="font-family:Sora,sans-serif;font-size:clamp(28px,3.5vw,40px);font-weight:800;color:#10b981;line-height:1;margin-bottom:4px;">85% <span style="font-size:16px;color:#a8c4d8;font-weight:400;font-family:DM Sans,sans-serif;">of Switchr expats</span></div>
-        <div style="font-size:15px;color:#fff;line-height:1.55;margin-bottom:4px;">choose <strong style="color:#10b981;">Set &amp; Forget</strong> for total peace of mind.</div>
-        <div style="font-size:13px;color:#a8c4d8;line-height:1.5;">Not sure which suits you? Our 30-second audit reads your usage pattern and tells you exactly which plan saves you more.</div>
+        <div style="font-size:15px;color:#fff;line-height:1.55;margin-bottom:4px;">elige <strong style="color:#10b981;">Precio Fijo</strong> para total tranquilidad.</div>
+        <div style="font-size:13px;color:#a8c4d8;line-height:1.5;">¿No sabes cuál te conviene? Nuestra auditoría de 30 segundos analiza tu patrón de consumo y te dice exactamente qué plan te ahorra más.</div>
       </div>
       <a href="https://wa.me/34662403660" style="display:inline-flex;align-items:center;gap:9px;background:#10b981;color:#fff;padding:13px 24px;border-radius:11px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap;box-shadow:0 4px 20px rgba(16,185,129,0.25);flex-shrink:0;">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Get my free audit
+        Obtener mi auditoría gratuita
       </a>
     </div>
 
@@ -1185,10 +1184,10 @@ nav.scrolled .hamburger span{background:var(--ink)}
           <div style="width:32px;height:32px;border-radius:9px;background:rgba(16,185,129,0.15);border:1px solid rgba(16,185,129,0.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           </div>
-          <div style="font-family:Sora,sans-serif;font-size:16px;font-weight:700;color:#fff;">Help me choose</div>
-          <div style="font-size:11px;color:#a8c4d8;margin-left:auto;">4 questions · 30 seconds</div>
+          <div style="font-family:Sora,sans-serif;font-size:16px;font-weight:700;color:#fff;">Ayúdame a elegir</div>
+          <div style="font-size:11px;color:#a8c4d8;margin-left:auto;">4 preguntas · 30 segundos</div>
         </div>
-        <p style="font-size:13px;color:#a8c4d8;line-height:1.5;margin-bottom:20px;">Answer honestly — we'll tell you exactly which plan fits your lifestyle and estimate your savings.</p>
+        <p style="font-size:13px;color:#a8c4d8;line-height:1.5;margin-bottom:20px;">Responde con sinceridad — te diremos exactamente qué plan encaja con tu estilo de vida y estimaremos tu ahorro.</p>
 
         <!-- Progress bar -->
         <div style="height:3px;background:rgba(255,255,255,0.08);border-radius:2px;margin-bottom:0;">
@@ -1201,64 +1200,64 @@ nav.scrolled .hamburger span{background:var(--ink)}
 
         <!-- Q1 -->
         <div class="hmc-q" id="hmc-q1">
-          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 1 of 4</div>
-          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">How do you feel about unexpected bill surprises?</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Pregunta 1 de 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">¿Cómo te sientan las sorpresas en la factura de luz?</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button class="hmc-opt" onclick="hmcAnswer(event,1,'fixed')" data-q="1">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">I hate bill surprises — I want to know exactly what I'm paying</div></div>
+              <div><div class="hmc-opt-title">Odio las sorpresas — quiero saber exactamente cuánto voy a pagar</div></div>
             </button>
             <button class="hmc-opt" onclick="hmcAnswer(event,1,'market')" data-q="1">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">I'm okay with price swings if it means savings in cheap months</div></div>
+              <div><div class="hmc-opt-title">No me importan los vaivenes si significa ahorrar en los meses baratos</div></div>
             </button>
           </div>
         </div>
 
         <!-- Q2 -->
         <div class="hmc-q" id="hmc-q2" style="display:none;">
-          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 2 of 4</div>
-          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">When do you run heavy appliances — washing machine, dishwasher, tumble dryer?</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Pregunta 2 de 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">¿Cuándo usas electrodomésticos pesados — lavadora, lavavajillas, secadora?</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button class="hmc-opt" onclick="hmcAnswer(event,2,'fixed')" data-q="2">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">Whenever it's convenient — daytime, evenings, no fixed pattern</div></div>
+              <div><div class="hmc-opt-title">Cuando me viene bien — de día, por la tarde, sin patrón fijo</div></div>
             </button>
             <button class="hmc-opt" onclick="hmcAnswer(event,2,'market')" data-q="2">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">I can schedule them late at night or during off-peak hours</div></div>
+              <div><div class="hmc-opt-title">Puedo programarlos de madrugada o en horas valle</div></div>
             </button>
           </div>
         </div>
 
         <!-- Q3 -->
         <div class="hmc-q" id="hmc-q3" style="display:none;">
-          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 3 of 4</div>
-          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">Do you have solar panels or charge an electric vehicle at home?</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Pregunta 3 de 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">¿Tienes placas solares o cargas un vehículo eléctrico en casa?</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button class="hmc-opt" onclick="hmcAnswer(event,3,'fixed')" data-q="3">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">No — standard home, no solar or EV</div></div>
+              <div><div class="hmc-opt-title">No — casa estándar, sin solar ni VE</div></div>
             </button>
             <button class="hmc-opt" onclick="hmcAnswer(event,3,'market')" data-q="3">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">Yes — I have solar panels and/or charge an EV overnight</div></div>
+              <div><div class="hmc-opt-title">Sí — tengo placas solares y/o cargo un VE de noche</div></div>
             </button>
           </div>
         </div>
 
         <!-- Q4 -->
         <div class="hmc-q" id="hmc-q4" style="display:none;">
-          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Question 4 of 4</div>
-          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">How much time do you spend at your Spanish property?</div>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Pregunta 4 de 4</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:16px;line-height:1.3;">¿Cuánto tiempo pasas en tu propiedad en España?</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <button class="hmc-opt" onclick="hmcAnswer(event,4,'fixed')" data-q="4">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">Full time or most of the year — it's my main home</div></div>
+              <div><div class="hmc-opt-title">A tiempo completo o la mayor parte del año — es mi residencia principal</div></div>
             </button>
             <button class="hmc-opt" onclick="hmcAnswer(event,4,'market')" data-q="4">
               <div class="hmc-opt-radio"></div>
-              <div><div class="hmc-opt-title">Part time — holidays, summers, or a few months a year</div></div>
+              <div><div class="hmc-opt-title">A tiempo parcial — vacaciones, veranos o unos meses al año</div></div>
             </button>
           </div>
         </div>
@@ -1266,17 +1265,17 @@ nav.scrolled .hamburger span{background:var(--ink)}
         <!-- Bill input (shown after Q4) -->
         <div id="hmc-bill-input" style="display:none;margin-top:20px;">
           <div style="height:1px;background:rgba(255,255,255,0.08);margin-bottom:20px;"></div>
-          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">One last thing</div>
-          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;line-height:1.3;">What's your typical monthly electricity bill?</div>
-          <p style="font-size:13px;color:#a8c4d8;margin-bottom:14px;">We'll use this to calculate your personalised savings estimate.</p>
+          <div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:10px;">Una última cosa</div>
+          <div style="font-family:Sora,sans-serif;font-size:17px;font-weight:600;color:#fff;margin-bottom:6px;line-height:1.3;">¿Cuánto suele ser tu factura mensual de luz?</div>
+          <p style="font-size:13px;color:#a8c4d8;margin-bottom:14px;">Lo usaremos para calcular tu estimación de ahorro personalizada.</p>
           <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
             <div style="position:relative;flex:1;min-width:140px;max-width:200px;">
               <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);font-family:Sora,sans-serif;font-size:16px;font-weight:600;color:#a8c4d8;">€</span>
               <input id="hmc-bill" type="number" min="20" max="500" value="85" placeholder="85"
                 style="width:100%;padding:11px 14px 11px 30px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:10px;font-size:16px;font-weight:600;color:#fff;font-family:Sora,sans-serif;outline:none;">
             </div>
-            <span style="font-size:13px;color:#a8c4d8;">per month</span>
-            <button onclick="hmcShowResult()" style="padding:11px 24px;background:#10b981;color:#fff;border:none;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;">See my result →</button>
+            <span style="font-size:13px;color:#a8c4d8;">al mes</span>
+            <button onclick="hmcShowResult()" style="padding:11px 24px;background:#10b981;color:#fff;border:none;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;">Ver mi resultado →</button>
           </div>
         </div>
 
@@ -1363,23 +1362,23 @@ nav.scrolled .hamburger span{background:var(--ink)}
         var newMonthly = Math.round(bill - monthlySaving);
 
         // Score breakdown text
-        var scoreText = 'You scored ' + scores.fixed + '/4 for predictability';
-        if (scores.market >= 3) scoreText = 'You scored ' + scores.market + '/4 for flexibility';
+        var scoreText = 'Puntuaste ' + scores.fixed + '/4 en previsibilidad';
+        if (scores.market >= 3) scoreText = 'Puntuaste ' + scores.market + '/4 en flexibilidad';
 
         // Verdict sentence
         var verdict, caveat;
         if (isFixed && scores.fixed >= 3) {
-          verdict = 'Set &amp; Forget is the clear match for your lifestyle.';
-          caveat = 'You value predictability and use energy on your own schedule. Locking in at €0.099/kWh means you will never worry about summer spikes or changing habits.';
+          verdict = 'Precio Fijo es la opción perfecta para tu estilo de vida.';
+          caveat = 'Valoras la previsibilidad y usas la energía según tu horario. Bloquear el precio a €0.099/kWh significa que nunca volverás a preocuparte por subidas veraniegas.';
         } else if (isFixed && scores.fixed === 2) {
-          verdict = 'Set &amp; Forget is the safer choice.';
-          caveat = 'Your answers are balanced — but the predictability of a fixed rate will suit your lifestyle better than chasing off-peak windows.';
+          verdict = 'Precio Fijo es la opción más segura.';
+          caveat = 'Tus respuestas están equilibradas — pero la previsibilidad de un precio fijo se adaptará mejor a tu estilo de vida que perseguir ventanas valle.';
         } else if (!isFixed && scores.market >= 3) {
-          verdict = 'Active Savings could work well for you.';
-          caveat = 'You have the flexibility and tools (EV, solar, or part-time usage) to genuinely benefit from market pricing in cheaper months.';
+          verdict = 'Ahorro Activo puede funcionar muy bien para ti.';
+          caveat = 'Tienes la flexibilidad y los recursos (VE, solar o uso a tiempo parcial) para beneficiarte realmente del precio de mercado en los meses más baratos.';
         } else {
-          verdict = 'Active Savings may be worth exploring.';
-          caveat = 'Your usage patterns suggest some potential for market savings — but you can always start with Set &amp; Forget and switch later.';
+          verdict = 'Ahorro Activo puede merecer la pena.';
+          caveat = 'Tus patrones de uso sugieren potencial para ahorrar en el mercado — pero siempre puedes empezar con Precio Fijo y cambiar más adelante.';
         }
 
         // Build result HTML
@@ -1387,7 +1386,7 @@ nav.scrolled .hamburger span{background:var(--ink)}
 
         // Plan recommendation badge
         html += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">';
-        html += '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a8c4d8;">Your result</div>';
+        html += '<div style="font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a8c4d8;">Tu resultado</div>';
         html += '<div style="flex:1;height:1px;background:rgba(255,255,255,0.08);"></div>';
         html += '<div style="font-size:11px;color:#a8c4d8;">' + scoreText + '</div>';
         html += '</div>';
@@ -1397,21 +1396,21 @@ nav.scrolled .hamburger span{background:var(--ink)}
         html += '<div style="display:flex;align-items:flex-start;gap:14px;">';
         html += '<div style="width:44px;height:44px;border-radius:12px;background:' + planBg + ';border:1px solid ' + planBorder + ';display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">' + (isFixed ? '<svg viewBox=\"0 0 24 24\" fill=\"none\" width=\"22\" height=\"22\"><rect x=\"5\" y=\"11\" width=\"14\" height=\"11\" rx=\"2\" fill=\"rgba(16,185,129,0.25)\" stroke=\"#10b981\" stroke-width=\"1.4\"/><path d=\"M8 11V7a4 4 0 0 1 8 0v4\" stroke=\"#10b981\" stroke-width=\"1.4\" stroke-linecap=\"round\"/><circle cx=\"12\" cy=\"16\" r=\"1.5\" fill=\"rgba(255,255,255,0.6)\"/></svg>' : '<svg viewBox=\"0 0 24 24\" fill=\"none\" width=\"22\" height=\"22\"><polyline points=\"3,17 8,11 12,13 17,7 21,9\" stroke=\"#38bdf8\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><polyline points=\"18,7 21,7 21,10\" stroke=\"#38bdf8\" stroke-width=\"1.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>') + '</div>';
         html += '<div style="flex:1;">';
-        html += '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:' + planColor + ';margin-bottom:4px;">Recommended for you</div>';
+        html += '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:' + planColor + ';margin-bottom:4px;">Recomendado para ti</div>';
         html += '<div style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;">' + planName + '</div>';
         html += '<div style="font-size:14px;color:#a8c4d8;line-height:1.55;">' + caveat + '</div>';
         html += '</div></div></div>';
 
         // Savings estimate
         html += '<div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px 24px;margin-bottom:16px;">';
-        html += '<div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:14px;">Your personalised savings estimate</div>';
+        html += '<div style="font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:#a8c4d8;margin-bottom:14px;">Tu estimación de ahorro personalizada</div>';
         html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;">';
 
         // Current
         html += '<div style="text-align:center;">';
-        html += '<div style="font-size:11px;color:#a8c4d8;margin-bottom:4px;">Current bill</div>';
+        html += '<div style="font-size:11px;color:#a8c4d8;margin-bottom:4px;">Factura actual</div>';
         html += '<div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:rgba(255,255,255,0.5);">€' + bill + '</div>';
-        html += '<div style="font-size:11px;color:rgba(255,255,255,0.3);">/ month</div>';
+        html += '<div style="font-size:11px;color:rgba(255,255,255,0.3);">/ mes</div>';
         html += '</div>';
 
         // Arrow
@@ -1421,28 +1420,28 @@ nav.scrolled .hamburger span{background:var(--ink)}
 
         // New
         html += '<div style="text-align:center;">';
-        html += '<div style="font-size:11px;color:#a8c4d8;margin-bottom:4px;">With Switchr</div>';
+        html += '<div style="font-size:11px;color:#a8c4d8;margin-bottom:4px;">Con Switchr</div>';
         html += '<div style="font-family:Sora,sans-serif;font-size:22px;font-weight:700;color:' + planColor + ';">€' + newMonthly + '</div>';
-        html += '<div style="font-size:11px;color:rgba(255,255,255,0.3);">/ month</div>';
+        html += '<div style="font-size:11px;color:rgba(255,255,255,0.3);">/ mes</div>';
         html += '</div>';
 
         html += '</div>';
 
         // Annual saving highlight
         html += '<div style="margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.07);display:flex;justify-content:space-between;align-items:center;">';
-        html += '<div style="font-size:13px;color:#a8c4d8;">Estimated annual saving</div>';
-        html += '<div style="font-family:Sora,sans-serif;font-size:20px;font-weight:800;color:' + planColor + ';">€' + annualSaving + ' / year</div>';
+        html += '<div style="font-size:13px;color:#a8c4d8;">Ahorro anual estimado</div>';
+        html += '<div style="font-family:Sora,sans-serif;font-size:20px;font-weight:800;color:' + planColor + ';">€' + annualSaving + ' / año</div>';
         html += '</div>';
         html += '</div>';
 
         // Disclaimer + CTA
-        html += '<div style="font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:14px;line-height:1.55;">Estimates based on your answers and average consumption for a household of your bill size. Your actual saving is calculated from your real bill.</div>';
+        html += '<div style="font-size:11px;color:rgba(255,255,255,0.25);margin-bottom:14px;line-height:1.55;">Estimaciones basadas en tus respuestas y el consumo medio de un hogar de tu tamaño de factura. Tu ahorro real se calcula a partir de tu factura actual.</div>';
 
         html += '<div style="display:flex;gap:10px;flex-wrap:wrap;">';
-        html += '<a href="https://wa.me/34662403660" style="display:inline-flex;align-items:center;gap:8px;background:#10b981;color:#fff;padding:12px 22px;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(16,185,129,0.25);">';
+        html += '<a href="https://wa.me/34662403660?text=Hola%2C+quiero+revisar+mi+factura+de+la+luz" style="display:inline-flex;align-items:center;gap:8px;background:#10b981;color:#fff;padding:12px 22px;border-radius:10px;font-family:Sora,sans-serif;font-size:14px;font-weight:700;text-decoration:none;box-shadow:0 4px 16px rgba(16,185,129,0.25);">';
         html += '<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>';
-        html += 'Get my exact saving on WhatsApp</a>';
-        html += '<button onclick="hmcReset()" style="padding:12px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#a8c4d8;border-radius:10px;font-family:DM Sans,sans-serif;font-size:13px;cursor:pointer;">Retake quiz</button>';
+        html += 'Obtener mi ahorro exacto por WhatsApp</a>';
+        html += '<button onclick="hmcReset()" style="padding:12px 18px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#a8c4d8;border-radius:10px;font-family:DM Sans,sans-serif;font-size:13px;cursor:pointer;">Repetir cuestionario</button>';
         html += '</div>';
         html += '</div>';
 
@@ -1505,10 +1504,10 @@ nav.scrolled .hamburger span{background:var(--ink)}
     const mwChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        labels: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'],
         datasets: [
           {
-            label: 'Set & Forget',
+            label: 'Precio Fijo',
             data: Array(12).fill(0.099),
             borderColor: '#10b981',
             borderWidth: 2.5,
@@ -1522,7 +1521,7 @@ nav.scrolled .hamburger span{background:var(--ink)}
             order: 1
           },
           {
-            label: 'Active Savings',
+            label: 'Ahorro Activo',
             data: [0.082,0.075,0.088,0.094,0.108,0.131,0.158,0.186,0.142,0.103,0.091,0.079],
             borderColor: '#38bdf8',
             borderWidth: 2,
@@ -1645,21 +1644,21 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <div style="position:absolute;right:-20px;top:-40px;font-family:Sora,sans-serif;font-size:280px;font-weight:900;color:rgba(37,211,102,0.04);line-height:1;pointer-events:none;user-select:none;z-index:0;">?</div>
   <div class="section-inner" style="position:relative;z-index:1;">
     <div class="reveal">
-      <span class="section-kicker">Questions</span>
-      <h2 class="section-title">Everything you need to know</h2>
+      <span class="section-kicker">Preguntas</span>
+      <h2 class="section-title">Todo lo que necesitas saber</h2>
     </div>
     <div class="faq-grid">
       <div class="faq-col">
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is this really free?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes — completely free for you. We earn a commission from our energy partners when a switch completes. They pay us, not you. This is standard practice in the energy sector and does not affect your tariff price.</div></div>
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is it safe to forward my bill email?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes. Your bill contains no sensitive payment data — just your consumption, CUPS code, and account number. We process it securely to extract the data needed for comparison and delete it after 30 days. We comply with GDPR.</div></div>
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">I am renting — can I switch?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes, if the electricity bill is in your name. If your landlord pays the electricity, you would need to speak with them first.</div></div>
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">How long until I see the savings?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">The switch completes in 3–4 working days. Your first bill from the new provider typically arrives 30–40 days after the switch date, and that is when you will see the lower number.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿Es realmente gratuito?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Sí — completamente gratuito para ti. Ganamos una comisión de nuestros proveedores de energía cuando se completa un cambio. Ellos nos pagan a nosotros, no tú. Es la práctica estándar del sector y no afecta al precio de tu tarifa.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿Es seguro reenviar el email de mi factura?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Sí. Tu factura no contiene datos de pago sensibles — solo tu consumo, código CUPS y número de cuenta. La procesamos de forma segura para extraer los datos necesarios para la comparativa y la eliminamos a los 30 días. Cumplimos con el RGPD.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Soy inquilino — ¿puedo cambiar?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Sí, si la factura de la luz está a tu nombre. Si es tu casero quien paga la electricidad, tendrías que hablar con él primero.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿Cuándo empiezo a notar el ahorro?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">El cambio se completa en 3–4 días laborables. Tu primera factura del nuevo proveedor suele llegar 30–40 días después de la fecha de cambio, y ahí es cuando verás el número más bajo.</div></div>
       </div>
       <div class="faq-col">
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Will my electricity be cut off?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Never. Switching suppliers in Spain only changes the billing company — the physical supply is never interrupted. Switch completes in 3–4 working days.</div></div>
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Which provider will I switch to?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">We work with a growing network of licensed Spanish energy providers — currently Gana Energía and Nordy, with more being added. We compare tariffs across our partners against your actual usage to find the best match for your household.</div></div>
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">What areas do you cover?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Currently active across Murcia, Alicante, and Costa Blanca. Expanding nationally. If you are elsewhere in Spain, send us your bill and we will let you know when your area is live.</div></div>
-        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">Is my data safe?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Yes. Your bill data is processed securely and used only to calculate your savings and submit your switch. We comply with GDPR and do not sell or share your personal data with third parties beyond our partner providers for the purpose of completing your contract.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿Me cortarán la luz?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Nunca. Cambiar de proveedor en España solo cambia la empresa de facturación — el suministro físico nunca se interrumpe. El cambio se completa en 3–4 días laborables.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿A qué proveedor me cambiaré?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Trabajamos con una red creciente de proveedores de energía españoles homologados — actualmente Gana Energía y Nordy, con más en camino. Comparamos tarifas de nuestros socios con tu consumo real para encontrar la mejor opción para tu hogar.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿Qué zonas cubrís?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Actualmente activos en Murcia, Alicante y Costa Blanca. Expandiéndonos a nivel nacional. Si estás en otro punto de España, envíanos tu factura y te avisamos cuando tu zona esté disponible.</div></div>
+        <div class="faq-item reveal"><div class="faq-q" onclick="toggleFaq(this)">¿Están mis datos seguros?<svg class="faq-ch" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></div><div class="faq-a">Sí. Los datos de tu factura se procesan de forma segura y se usan únicamente para calcular tu ahorro y tramitar tu cambio. Cumplimos con el RGPD y no vendemos ni compartimos tus datos personales con terceros más allá de nuestros proveedores asociados para completar tu contrato.</div></div>
       </div>
     </div>
   </div>
@@ -1669,23 +1668,23 @@ nav.scrolled .hamburger span{background:var(--ink)}
 <!-- FINAL CTA -->
 <section class="final">
   <div class="final-inner">
-    <h2>Ready to stop<br><em>overpaying?</em></h2>
-    <p>Choose whatever's easiest for you — WhatsApp, a quick email forward, or upload right here. All three take under 5 minutes.</p>
+    <h2>¿Listo para dejar de<br><em>pagar de más?</em></h2>
+    <p>Elige lo que te sea más cómodo — WhatsApp, reenvío por email o súbelo aquí. Los tres tardan menos de 5 minutos.</p>
     <div class="final-btns">
-      <a href="https://wa.me/34662403660" class="final-btn-wa">
+      <a href="https://wa.me/34662403660?text=Hola%2C+quiero+revisar+mi+factura+de+la+luz" class="final-btn-wa">
         <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp
       </a>
       <a href="#" onclick="copyEmail();return false" class="final-btn-em">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
-        Email your bill
+        Envía tu factura por email
       </a>
       <a href="#" onclick="openUploadModal();return false" class="final-btn-web">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload PDF
+        Subir PDF
       </a>
     </div>
-    <div class="final-trust">100% free · <span>No power interruption</span> · <span>English throughout</span> · GDPR compliant</div>
+    <div class="final-trust">100% gratuito · <span>Sin corte de suministro</span> · <span>En español e inglés</span> · Cumplimos con el RGPD</div>
   </div>
 </section>
 
@@ -1694,33 +1693,33 @@ nav.scrolled .hamburger span{background:var(--ink)}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="#" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
-        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+        <a href="#" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="../switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <p>Cambio de comercializadora de luz por WhatsApp, email o web para particulares en España. Trabajamos con los mejores proveedores del mercado libre.</p>
       </div>
       <div class="footer-col">
-        <h4>Product</h4>
-        <a href="#how-it-works">How it works</a>
-        <a href="how-it-works.html">Full explainer</a>
-        <a href="sample-report.html">Sample report</a>
+        <h4>Producto</h4>
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="how-it-works.html">Guía completa</a>
+        <a href="sample-report.html">Informe de muestra</a>
       </div>
       <div class="footer-col">
-        <h4>Start</h4>
+        <h4>Empezar</h4>
         <a href="https://wa.me/34662403660">WhatsApp</a>
         <a href="#" onclick="copyEmail();return false">Email</a>
-        <a href="#" onclick="openUploadModal()">Upload PDF</a>
+        <a href="#" onclick="openUploadModal()">Subir PDF</a>
       </div>
       <div class="footer-col">
-        <h4>Help</h4>
+        <h4>Ayuda</h4>
         <a href="#faq">FAQ</a>
-        <a href="privacy-policy.html">Privacy policy</a>
-        <a href="terms-and-conditions.html">Terms & conditions</a>
-        <a href="contact.html">Contact</a>
+        <a href="../privacy-policy.html">Política de privacidad</a>
+        <a href="../terms-and-conditions.html">Términos y condiciones</a>
+        <a href="contact.html">Contacto</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Proudly based in Murcia, Spain</p>
-      <p>Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
-      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Cookie preferences</a></p>
+      <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Hecho en España</p>
+      <p>Cambio multi-proveedor · Contratos directos con la compañía · RGPD</p>
+      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Preferencias de cookies</a></p>
     </div>
   </div>
 </footer>
@@ -1730,24 +1729,24 @@ nav.scrolled .hamburger span{background:var(--ink)}
 <div class="upload-modal" id="upload-modal" onclick="closeModalOutside(event)">
   <div class="upload-box" id="upload-box">
     <div class="upload-box-header">
-      <div class="upload-box-title">Upload your bill</div>
+      <div class="upload-box-title">Sube tu factura</div>
       <button class="upload-close" onclick="closeUploadModal()">✕</button>
     </div>
     <div class="upload-box-body">
       <div class="upload-drop" id="upload-drop" onclick="document.getElementById('file-input').click()" ondragover="event.preventDefault();this.style.borderColor='var(--g)'" ondragleave="this.style.borderColor=''" ondrop="handleModalDrop(event)">
         <div class="upload-drop-icon" id="drop-icon">📄</div>
-        <h3 id="drop-title">Drag your bill here</h3>
-        <p id="drop-sub">PDF, JPG or PNG · Max 10MB</p>
+        <h3 id="drop-title">Arrastra tu factura aquí</h3>
+        <p id="drop-sub">PDF, JPG o PNG · Máx 10MB</p>
         <input type="file" id="file-input" accept=".pdf,image/*" onchange="handleModalFile(this)" style="display:none">
       </div>
       <div class="upload-gdpr">
         <input type="checkbox" id="gdpr-check">
-        <label for="gdpr-check">I agree to Switchr's <a href="#" style="color:var(--g)">terms of service</a> and allow processing of my bill data to calculate my savings.</label>
+        <label for="gdpr-check">Acepto los <a href="../terms-and-conditions.html" style="color:var(--g)">términos de servicio</a> de Switchr y autorizo el tratamiento de los datos de mi factura para calcular mi ahorro.</label>
       </div>
-      <button class="upload-start-btn" id="upload-btn" onclick="startAnalysis()">Start analysis</button>
+      <button class="upload-start-btn" id="upload-btn" onclick="startAnalysis()">Iniciar análisis</button>
       <div class="upload-security">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Bank-grade encryption · GDPR compliant
+        Cifrado bancario · Cumplimos con el RGPD
       </div>
     </div>
   </div>
@@ -1828,10 +1827,10 @@ function setFile(f){
   document.getElementById('upload-drop').style.background='var(--gp)';
 }
 function startAnalysis(){
-  if(!document.getElementById('gdpr-check').checked){alert('Please agree to the terms to proceed.');return}
-  if(!_currentFile){alert('Please select a bill file first.');return}
+  if(!document.getElementById('gdpr-check').checked){alert('Por favor, acepta los términos para continuar.');return}
+  if(!_currentFile){alert('Por favor, selecciona un archivo de factura primero.');return}
   const btn=document.getElementById('upload-btn');
-  btn.disabled=true;btn.textContent='Preparing...';
+  btn.disabled=true;btn.textContent='Preparando...';
   const reader=new FileReader();
   reader.onerror=function(){btn.disabled=false;btn.textContent='Start analysis';alert('Could not read the file. Please try again.');};
   reader.onload=function(e){
@@ -1924,7 +1923,7 @@ function startAnalysis(){
   setInterval(updatePrice, 4000);
 })();
 </script>
-<div id="copy-toast">📋 Email copied — paste it in the To field</div>
+<div id="copy-toast">📋 Email copiado — pégalo en el campo Para</div>
 <script>
 /* ── REFERRAL TRACKING ── */
 (function () {
@@ -1942,7 +1941,7 @@ function startAnalysis(){
     document.querySelectorAll('a[href*="wa.me/34662403660"]').forEach(function (a) {
       try {
         var url = new URL(a.href);
-        url.searchParams.set('text', 'Hello, please audit my invoice (Ref:' + ref + ')');
+        url.searchParams.set('text', 'Hola, por favor audita mi factura (Ref:' + ref + ')');
         a.href = url.toString();
       } catch (e) {}
     });

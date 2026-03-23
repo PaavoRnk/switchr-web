@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 <!-- Google tag (gtag.js) — Consent Mode v2 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
@@ -11,15 +11,14 @@
   gtag('config', 'G-ZF2VXXL0FP');
   if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
 </script>
-<script defer src="cookie-consent.js"></script>
-<script src="language.js"></script>
+<script defer src="../cookie-consent.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="alternate" hreflang="en" href="https://switchr.es/sample-report.html">
+<title>Informe de Ahorro de Ejemplo — Switchr</title>
+<meta name="description" content="Mira cómo es un informe de ahorro de Switchr. Ejemplo con cambio de Endesa a Nordy ahorrando €392/año.">
 <link rel="alternate" hreflang="es" href="https://switchr.es/es/sample-report.html">
+<link rel="alternate" hreflang="en" href="https://switchr.es/sample-report.html">
 <link rel="alternate" hreflang="x-default" href="https://switchr.es/sample-report.html">
-<title>Sample Savings Report — Switchr</title>
-<meta name="description" content="See what a Switchr electricity savings report looks like. Sample analysis switching from Endesa to Nordy, saving €392/year.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 <style>
@@ -299,6 +298,10 @@ footer{background:#060f0c;padding:48px 40px 32px}
 }
 #copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+/* Hamburger */
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:101;flex-shrink:0}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--ink)}
+
 /* ── RESPONSIVE ── */
 @media(max-width:640px){
   nav{padding:0 16px}
@@ -311,6 +314,14 @@ footer{background:#060f0c;padding:48px 40px 32px}
   .sample-banner{padding:10px 16px;font-size:12px}
   .footer-top{grid-template-columns:1fr 1fr}
 }
+@media(max-width:580px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:99}
+  nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px}
+  nav.menu-open .nav-links a:hover{background:var(--gp)}
+  nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px}
+}
 @media(max-width:480px){
   .footer-top{grid-template-columns:1fr}
 }
@@ -320,25 +331,27 @@ footer{background:#060f0c;padding:48px 40px 32px}
 
 <!-- NAV:START -->
 <nav>
-  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <a href="index.html" class="logo"><img src="../switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
   <div class="nav-links">
-    <a href="index.html#how-it-works">How it works</a>
-    <a href="how-it-works.html">Full explainer</a>
-    <a href="index.html#market-watch">Market watch</a>
+    <a href="index.html#como-funciona">Cómo funciona</a>
+    <a href="how-it-works.html">Guía completa</a>
+    <a href="index.html#observatorio">Observatorio</a>
     <a href="index.html#faq">FAQ</a>
-    <a href="contact.html">Contact</a>
+    <a href="contact.html">Contacto</a>
     <a href="https://wa.me/34662403660" class="nav-cta">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      Start now
+      Empezar ahora
     </a>
+    <span style="font-size:12px;font-weight:500;white-space:nowrap;display:flex;align-items:center;gap:4px;margin-left:4px"><a href="#" onclick="(function(){var m={'/es/index.html':'/index.html','/es/how-it-works.html':'/how-it-works.html','/es/contact.html':'/contact.html','/es/sample-report.html':'/sample-report.html'};localStorage.setItem('sw_lang','en');window.location.href=m[window.location.pathname]||'/index.html'})();return false" style="color:inherit;text-decoration:none;opacity:.55">EN</a><span style="opacity:.3">·</span><b>ES</b></span>
   </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 <!-- NAV:END -->
 
 <!-- SAMPLE BANNER -->
 <div class="sample-banner">
-  <span class="sample-badge">Sample</span>
-  This is an example report — all figures are based on fictional customer data for illustration purposes only.
+  <span class="sample-badge">Ejemplo</span>
+  Este es un informe de ejemplo — todas las cifras se basan en datos ficticios con fines ilustrativos únicamente.
 </div>
 
 <main>
@@ -347,191 +360,191 @@ footer{background:#060f0c;padding:48px 40px 32px}
   <div class="results-hero">
     <div class="analyzed-badge">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Best tariff match · calculated from actual usage
+      Mejor tarifa encontrada · calculada a partir de tu consumo real
     </div>
     <div class="save-num">€392</div>
-    <div class="save-period">estimated annual saving</div>
+    <div class="save-period">ahorro anual estimado</div>
     <div class="pct-badge">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
-      27% less than current bill
+      27% menos que tu factura actual
     </div>
-    <div class="switch-from-to">Switch from <strong>Endesa</strong> to <strong>Nordy — Tarifa Luz</strong></div>
-    <div style="margin-bottom:8px"><span class="tag tag-green">Fixed price · No exit fees · No minimum stay</span></div>
-    <div class="meta-line">CUPS: ES 0023 0100 2187 6541 JK &nbsp;·&nbsp; Period: 15/01/2025 – 14/02/2025 (30 days)</div>
+    <div class="switch-from-to">Cambio de <strong>Endesa</strong> a <strong>Nordy — Tarifa Luz</strong></div>
+    <div style="margin-bottom:8px"><span class="tag tag-green">Precio fijo · Sin penalización por salida · Sin permanencia</span></div>
+    <div class="meta-line">CUPS: ES 0023 0100 2187 6541 JK &nbsp;·&nbsp; Periodo: 15/01/2025 – 14/02/2025 (30 días)</div>
   </div>
 
   <!-- TICKER -->
   <div class="ticker-wrap">
     <div class="ticker-inner">
-      <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> switching to Nordy &nbsp;·&nbsp; Costa Blanca · 2 days ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>Emma saved <strong>€441/yr</strong> switching to Nordy &nbsp;·&nbsp; Costa Blanca · 2 days ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
-      <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
+      <div class="tick-item"><div class="tick-dot"></div>Emma ahorró <strong>€441/año</strong> cambiando a Nordy &nbsp;·&nbsp; Costa Blanca · hace 2 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>James ahorró <strong>€318/año</strong> &nbsp;·&nbsp; Murcia · hace 5 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah ahorró <strong>€503/año</strong> &nbsp;·&nbsp; Alicante · hace 1 semana</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter ahorró <strong>€389/año</strong> &nbsp;·&nbsp; Torrevieja · hace 1 semana</div>
+      <div class="tick-item"><div class="tick-dot"></div>Emma ahorró <strong>€441/año</strong> cambiando a Nordy &nbsp;·&nbsp; Costa Blanca · hace 2 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>James ahorró <strong>€318/año</strong> &nbsp;·&nbsp; Murcia · hace 5 días</div>
+      <div class="tick-item"><div class="tick-dot"></div>Sarah ahorró <strong>€503/año</strong> &nbsp;·&nbsp; Alicante · hace 1 semana</div>
+      <div class="tick-item"><div class="tick-dot"></div>Peter ahorró <strong>€389/año</strong> &nbsp;·&nbsp; Torrevieja · hace 1 semana</div>
     </div>
   </div>
 
-  <!-- SECTION 1: CONSUMPTION & RATES -->
+  <!-- SECCIÓN 1: CONSUMO Y TARIFAS -->
   <div class="scard" style="animation-delay:.1s">
     <div class="scard-header">
       <div class="scard-num-badge green">1</div>
       <div>
-        <div class="scard-title">Consumption & rates</div>
-        <div class="scard-sub">Actual kWh per period vs. new rates</div>
+        <div class="scard-title">Consumo y tarifas</div>
+        <div class="scard-sub">kWh reales por periodo frente a las nuevas tarifas</div>
       </div>
     </div>
-    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">We applied your real P1/P2/P3 consumption to both your current Endesa rates and the recommended tariff rates. Every figure comes from your bill — nothing estimated.</p>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Hemos aplicado tu consumo real de P1/P2/P3 tanto a las tarifas actuales de Endesa como a las de la tarifa recomendada. Cada cifra proviene de tu factura — nada estimado.</p>
 
     <table class="comp-table">
       <thead>
         <tr>
-          <th style="text-align:left">Time period</th>
-          <th>Annual usage</th>
-          <th>Current rate</th>
-          <th>New rate</th>
-          <th>Annual saving</th>
+          <th style="text-align:left">Periodo horario</th>
+          <th>Uso anual</th>
+          <th>Tarifa actual</th>
+          <th>Nueva tarifa</th>
+          <th>Ahorro anual</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>Punta (P1)</td>
           <td class="current-val">780 kWh</td>
-          <td class="current-val" style="color:var(--red)">€0.2280</td>
-          <td class="new-val">€0.1078</td>
+          <td class="current-val" style="color:var(--red)">€0,2280</td>
+          <td class="new-val">€0,1078</td>
           <td class="current-val">€121<span class="saving-pill">−53%</span></td>
         </tr>
         <tr>
           <td>Llano (P2)</td>
-          <td class="current-val">1,170 kWh</td>
-          <td class="current-val" style="color:var(--red)">€0.1890</td>
-          <td class="new-val">€0.0890</td>
+          <td class="current-val">1.170 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0,1890</td>
+          <td class="new-val">€0,0890</td>
           <td class="current-val">€137<span class="saving-pill">−53%</span></td>
         </tr>
         <tr>
           <td>Valle (P3)</td>
-          <td class="current-val">2,250 kWh</td>
-          <td class="current-val" style="color:var(--red)">€0.1180</td>
-          <td class="new-val">€0.0470</td>
+          <td class="current-val">2.250 kWh</td>
+          <td class="current-val" style="color:var(--red)">€0,1180</td>
+          <td class="new-val">€0,0470</td>
           <td class="current-val">€159<span class="saving-pill">−60%</span></td>
         </tr>
         <tr class="you-save-row">
-          <td colspan="4" class="you-save-label">Energy saving total</td>
-          <td class="you-save-val" style="font-size:18px">€417/yr</td>
+          <td colspan="4" class="you-save-label">Ahorro total en energía</td>
+          <td class="you-save-val" style="font-size:18px">€417/año</td>
         </tr>
       </tbody>
     </table>
   </div>
 
-  <!-- SECTION 2: POTENCIA -->
+  <!-- SECCIÓN 2: POTENCIA -->
   <div class="scard" style="animation-delay:.2s">
     <div class="scard-header">
       <div class="scard-num-badge amber">2</div>
       <div>
-        <div class="scard-title">Potencia (contracted power)</div>
-        <div class="scard-sub">Fixed daily charges comparison</div>
+        <div class="scard-title">Potencia contratada</div>
+        <div class="scard-sub">Comparación de cargos fijos diarios</div>
       </div>
     </div>
-    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">Contracted power is 5.75 kW on both P1 and P2. These are the fixed daily charges paid regardless of consumption. The new provider's P2 rate is slightly higher — this is included in the net total calculation.</p>
+    <p style="font-size:14px;color:var(--ink3);margin-bottom:20px;line-height:1.6">La potencia contratada es de 5,75 kW en P1 y P2. Estos son los cargos fijos diarios que se pagan independientemente del consumo. La tarifa P2 del nuevo proveedor es ligeramente más alta — esto está incluido en el cálculo del ahorro neto total.</p>
 
     <div class="rate-grid">
       <div class="rate-card current">
-        <div class="rate-card-label">Current Endesa</div>
+        <div class="rate-card-label">Endesa actual</div>
         <div class="rate-card-period">P1 (punta)</div>
-        <div class="rate-card-val">€0.1280<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+        <div class="rate-card-val">€0,1280<span style="font-size:13px;font-weight:400">/kW·día</span></div>
       </div>
       <div class="rate-card new">
         <div class="rate-card-label">Nordy Tarifa Luz</div>
         <div class="rate-card-period">P1 (punta)</div>
-        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+        <div class="rate-card-val">€0,0990<span style="font-size:13px;font-weight:400">/kW·día</span></div>
       </div>
       <div class="rate-card current">
-        <div class="rate-card-label">Current Endesa</div>
+        <div class="rate-card-label">Endesa actual</div>
         <div class="rate-card-period">P2 (llano/valle)</div>
-        <div class="rate-card-val">€0.0640<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+        <div class="rate-card-val">€0,0640<span style="font-size:13px;font-weight:400">/kW·día</span></div>
       </div>
       <div class="rate-card new">
         <div class="rate-card-label">Nordy Tarifa Luz</div>
         <div class="rate-card-period">P2 (llano/valle)</div>
-        <div class="rate-card-val">€0.0990<span style="font-size:13px;font-weight:400">/kW·day</span></div>
+        <div class="rate-card-val">€0,0990<span style="font-size:13px;font-weight:400">/kW·día</span></div>
       </div>
     </div>
 
     <div style="background:#fafafa;border-radius:10px;padding:14px 16px;display:flex;justify-content:space-between;align-items:center">
-      <div style="font-size:13px;color:var(--ink2)">Net potencia difference (annual)</div>
-      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--amber)">+€25 <span style="font-size:12px;font-weight:400;color:var(--ink4)">(slightly higher)</span></div>
+      <div style="font-size:13px;color:var(--ink2)">Diferencia neta en potencia (anual)</div>
+      <div style="font-family:'Sora',sans-serif;font-size:16px;font-weight:700;color:var(--amber)">+€25 <span style="font-size:12px;font-weight:400;color:var(--ink4)">(ligeramente más alta)</span></div>
     </div>
   </div>
 
-  <!-- DARK SUMMARY -->
+  <!-- RESUMEN OSCURO -->
   <div class="dark-summary" style="animation-delay:.3s">
     <div class="ds-left">
-      <div class="ds-title">Financial summary</div>
-      <div class="ds-subtitle">Based on 4,200 kWh annual consumption</div>
-      <div class="ds-body">Actual metered usage applied to today's published tariff rates. All figures include IEE (5.11%) and IVA (21%). No change to electricity habits assumed.</div>
+      <div class="ds-title">Resumen financiero</div>
+      <div class="ds-subtitle">Basado en 4.200 kWh de consumo anual</div>
+      <div class="ds-body">Consumo real aplicado a las tarifas publicadas hoy. Todas las cifras incluyen el IEE (5,11%) y el IVA (21%). No se asume ningún cambio en los hábitos de consumo.</div>
       <div class="ds-costs">
         <div class="ds-cost-row">
-          <div class="ds-cost-label">Current annual cost</div>
-          <div class="ds-cost-val">€1,428</div>
+          <div class="ds-cost-label">Coste anual actual</div>
+          <div class="ds-cost-val">€1.428</div>
         </div>
         <div class="ds-cost-row">
-          <div class="ds-cost-label">New estimated annual cost</div>
-          <div class="ds-cost-val" style="color:var(--g)">€1,036</div>
+          <div class="ds-cost-label">Nuevo coste anual estimado</div>
+          <div class="ds-cost-val" style="color:var(--g)">€1.036</div>
         </div>
         <div class="ds-cost-row divider">
-          <div class="ds-cost-label" style="color:var(--g);font-weight:600">You save</div>
-          <div class="ds-cost-val" style="color:var(--g);font-size:18px;font-weight:700">€392 / year</div>
+          <div class="ds-cost-label" style="color:var(--g);font-weight:600">Ahorras</div>
+          <div class="ds-cost-val" style="color:var(--g);font-size:18px;font-weight:700">€392 / año</div>
         </div>
       </div>
     </div>
     <div class="ds-right">
-      <div class="ds-est-label">Estimated first year saving</div>
+      <div class="ds-est-label">Ahorro estimado en el primer año</div>
       <div class="ds-big-num">€392</div>
-      <div class="ds-per-month">≈ €33 per month</div>
+      <div class="ds-per-month">≈ €33 al mes</div>
       <div class="ds-new-cost">
-        <div class="ds-new-cost-label">New annual cost</div>
-        <div class="ds-new-cost-val">€1,036</div>
-        <div class="ds-new-cost-from">Down from €1,428</div>
+        <div class="ds-new-cost-label">Nuevo coste anual</div>
+        <div class="ds-new-cost-val">€1.036</div>
+        <div class="ds-new-cost-from">Frente a €1.428</div>
       </div>
       <div class="ds-trust">
         <div class="ds-trust-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          Switches in 48–72h
+          Cambio en 48–72h
         </div>
         <div class="ds-trust-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-          No power interruption
+          Sin corte de suministro
         </div>
         <div class="ds-trust-item">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          100% free to you
+          100% gratuito
         </div>
       </div>
     </div>
   </div>
 
-  <!-- HOW CALCULATED -->
+  <!-- CÓMO SE CALCULA -->
   <div class="calc-accordion">
     <div class="calc-header" onclick="toggleCalc(this)">
       <span style="display:flex;align-items:center;gap:8px">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        How we calculate your saving — audit proof & tariff logic
+        Cómo calculamos tu ahorro — transparencia total
       </span>
       <svg id="calc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="transition:transform .2s"><polyline points="6 9 12 15 18 9"/></svg>
     </div>
     <div class="calc-body" id="calc-body">
-      <p>All figures are calculated using actual metered consumption from the submitted bill, billing dates, and contracted power (potencia).</p>
+      <p>Todas las cifras se calculan utilizando el consumo real medido de la factura enviada, las fechas de facturación y la potencia contratada.</p>
       <ul>
-        <li>Annual totals are estimated using the supplier's stated yearly usage and today's published tariff rates</li>
-        <li>Energy prices include IEE (5.11%) and IVA (21%) as required by Spanish law</li>
-        <li>Potencia charges are based on the contracted 5.75 kW on both P1 and P2 — no power reduction is assumed</li>
-        <li>No change to electricity consumption habits is assumed — actual P1/P2/P3 split is used throughout</li>
-        <li>The net saving of €392 accounts for the slightly higher potencia rate on the new tariff (−€417 energy + €25 potencia)</li>
+        <li>Los totales anuales se estiman usando el consumo declarado por el proveedor y las tarifas publicadas hoy</li>
+        <li>Los precios de energía incluyen el IEE (5,11%) y el IVA (21%) según la legislación española</li>
+        <li>Los cargos de potencia se basan en los 5,75 kW contratados en P1 y P2 — no se asume cambio de potencia</li>
+        <li>No se asume ningún cambio en los hábitos de consumo — se usa el reparto real P1/P2/P3</li>
+        <li>El ahorro neto de €392 tiene en cuenta la tarifa de potencia ligeramente más alta de la nueva tarifa (−€417 energía + €25 potencia)</li>
       </ul>
       <div style="margin-top:12px;padding:10px 12px;background:var(--gp);border-radius:8px;font-size:12px;color:var(--gd)">
-        ALL CONTRACTS ARE DIRECT WITH THE PROVIDER. NO EXIT FEES. NO MINIMUM STAY.
+        TODOS LOS CONTRATOS SON DIRECTAMENTE CON EL PROVEEDOR. SIN PENALIZACIÓN. SIN PERMANENCIA.
       </div>
     </div>
   </div>
@@ -541,27 +554,27 @@ footer{background:#060f0c;padding:48px 40px 32px}
   <!-- CTA CARD -->
   <div class="cta-card">
     <div class="cta-card-icon">⚡</div>
-    <h3>Get your own savings report</h3>
-    <p>Send us a photo or PDF of your latest electricity bill on WhatsApp — we'll analyse it and send back your personalised report within a few hours. Free, no commitment.</p>
+    <h3>Obtén tu propio informe de ahorro</h3>
+    <p>Envíanos una foto o PDF de tu última factura de la luz por WhatsApp — la analizamos y te enviamos tu informe personalizado en pocas horas. Gratis, sin compromiso.</p>
     <div class="cta-btns">
       <a href="https://wa.me/34662403660" class="btn-wa">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp your bill
+        Enviar factura por WhatsApp
       </a>
-      <a href="how-it-works.html" class="btn-secondary">How it works →</a>
+      <a href="how-it-works.html" class="btn-secondary">Cómo funciona →</a>
     </div>
     <div class="cta-trust">
       <div class="cta-trust-item">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        GDPR compliant
+        Cumple con el RGPD
       </div>
       <div class="cta-trust-item">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-        Free — no hidden fees
+        Gratuito — sin costes ocultos
       </div>
       <div class="cta-trust-item">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Report in a few hours
+        Informe en pocas horas
       </div>
     </div>
   </div>
@@ -571,24 +584,24 @@ footer{background:#060f0c;padding:48px 40px 32px}
 <!-- STICKY FOOTER -->
 <div class="sticky-footer">
   <div class="sf-saving">
-    <div class="sf-saving-label">Customers save on average</div>
-    <div class="sf-saving-val">€400+ / year</div>
+    <div class="sf-saving-label">Los clientes ahorran de media</div>
+    <div class="sf-saving-val">€400+ / año</div>
   </div>
   <div class="sf-trust">
     <div class="sf-trust-item">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-      No exit fees
+      Sin permanencia
     </div>
     <div class="sf-trust-item">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Switches in 48h
+      Cambio en 48h
     </div>
   </div>
   <a href="https://wa.me/34662403660" class="switch-cta">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
     <div>
-      <div>Get your free report</div>
-      <div class="switch-cta-sub">WhatsApp us your bill →</div>
+      <div>Obtén tu informe gratuito</div>
+      <div class="switch-cta-sub">Envíanos tu factura por WhatsApp →</div>
     </div>
   </a>
 </div>
@@ -598,41 +611,46 @@ footer{background:#060f0c;padding:48px 40px 32px}
   <div class="footer-inner">
     <div class="footer-top">
       <div class="footer-brand">
-        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
-        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="../switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <p>Cambio de comercializadora de luz por WhatsApp, email o web para particulares en España. Trabajamos con los mejores proveedores del mercado libre.</p>
       </div>
       <div class="footer-col">
-        <h4>Product</h4>
-        <a href="index.html#how-it-works">How it works</a>
-        <a href="how-it-works.html">Full explainer</a>
-        <a href="sample-report.html">Sample report</a>
+        <h4>Producto</h4>
+        <a href="index.html#como-funciona">Cómo funciona</a>
+        <a href="how-it-works.html">Guía completa</a>
+        <a href="sample-report.html">Informe de muestra</a>
       </div>
       <div class="footer-col">
-        <h4>Start</h4>
+        <h4>Empezar</h4>
         <a href="https://wa.me/34662403660">WhatsApp</a>
         <a href="#" onclick="copyEmail();return false">Email</a>
-        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Upload PDF</a>
+        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Subir PDF</a>
       </div>
       <div class="footer-col">
-        <h4>Help</h4>
+        <h4>Ayuda</h4>
         <a href="index.html#faq">FAQ</a>
-        <a href="privacy-policy.html">Privacy policy</a>
-        <a href="terms-and-conditions.html">Terms & conditions</a>
-        <a href="contact.html">Contact</a>
+        <a href="../privacy-policy.html">Política de privacidad</a>
+        <a href="../terms-and-conditions.html">Términos y condiciones</a>
+        <a href="contact.html">Contacto</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Switchr · Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
-      <p>Made for expats in Spain</p>
-      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Cookie preferences</a></p>
+      <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Hecho en España</p>
+      <p>Cambio multi-proveedor · Contratos directos con la compañía · RGPD</p>
+      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Preferencias de cookies</a></p>
     </div>
   </div>
 </footer>
 <!-- FOOTER:END -->
 
-<div id="copy-toast">Email copied to clipboard</div>
+<div id="copy-toast">Email copiado al portapapeles</div>
 
 <script>
+// Hamburger menu
+function toggleMenu(){document.querySelector('nav').classList.toggle('menu-open')}
+document.addEventListener('click',function(e){var n=document.querySelector('nav');if(n.classList.contains('menu-open')&&!n.contains(e.target))n.classList.remove('menu-open')});
+document.querySelectorAll('.nav-links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('nav').classList.remove('menu-open')})});
+
 function toggleCalc(el) {
   const body = document.getElementById('calc-body');
   const chevron = document.getElementById('calc-chevron');
