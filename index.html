@@ -2059,5 +2059,23 @@ function startAnalysis(){
   }
 }());
 </script>
+<script>
+(function () {
+  fetch('https://ufyindkuuvsberajyiar.supabase.co/functions/v1/get-ticker-data')
+    .then(function (r) { return r.json(); })
+    .then(function (items) {
+      if (!Array.isArray(items) || items.length < 5) return;
+      var track = document.querySelector('.ticker-track');
+      if (!track) return;
+      var html = items.concat(items).map(function (item) {
+        return '<div class="tick-item"><div class="tick-dot"></div>Someone in ' +
+          item.municipality + ' · <strong>€' + item.annualSaving + '/yr</strong> potential saving · ' +
+          item.weeksAgo + '</div>';
+      }).join('');
+      track.innerHTML = html;
+    })
+    .catch(function () {});
+}());
+</script>
 </body>
 </html>

@@ -2058,5 +2058,26 @@ function startAnalysis(){
   }
 }());
 </script>
+<script>
+(function () {
+  fetch('https://ufyindkuuvsberajyiar.supabase.co/functions/v1/get-ticker-data')
+    .then(function (r) { return r.json(); })
+    .then(function (items) {
+      if (!Array.isArray(items) || items.length < 5) return;
+      var track = document.querySelector('.ticker-track');
+      if (!track) return;
+      var html = items.concat(items).map(function (item) {
+        var wa = item.weeksAgo === 'this week' ? 'esta semana'
+          : item.weeksAgo === '1 week ago' ? '1 semana'
+          : item.weeksAgo.replace(' weeks ago', ' semanas');
+        return '<div class="tick-item"><div class="tick-dot"></div>Alguien en ' +
+          item.municipality + ' · ahorro potencial de <strong>€' + item.annualSaving + '/año</strong> · hace ' +
+          wa + '</div>';
+      }).join('');
+      track.innerHTML = html;
+    })
+    .catch(function () {});
+}());
+</script>
 </body>
 </html>
