@@ -1850,12 +1850,26 @@ function toggleFaq(el){
 
 // Copy email
 // Waitlist signup
-function joinWaitlist(){
+async function joinWaitlist(){
   const input = document.getElementById('wl-email');
   const email = input ? input.value.trim() : '';
   if(!email || !email.includes('@')){input.focus();input.style.borderColor='#e53e3e';setTimeout(()=>input.style.borderColor='',1500);return;}
-  document.getElementById('wl-success').style.display='block';
-  document.querySelector('.waitlist-row').style.display='none';
+  const btn = document.querySelector('.waitlist-btn');
+  btn.disabled = true; btn.textContent = '...';
+  try {
+    await fetch('https://ufyindkuuvsberajyiar.supabase.co/rest/v1/waitlist_leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmeWluZGt1dXZzYmVyYWp5aWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MTQsImV4cCI6MjA4ODA4ODgxNH0.pLEsg5bLGugkaodUDLdj-zt6YKWzGYXVd7V5-wVt7TI',
+        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVmeWluZGt1dXZzYmVyYWp5aWFyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI1MTI4MTQsImV4cCI6MjA4ODA4ODgxNH0.pLEsg5bLGugkaodUDLdj-zt6YKWzGYXVd7V5-wVt7TI',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email, source: 'website_roadmap_en' })
+    });
+  } catch(e) {}
+  document.getElementById('wl-success').style.display = 'block';
+  document.querySelector('.waitlist-row').style.display = 'none';
 }
 
 function copyEmail(){
