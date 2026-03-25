@@ -508,20 +508,39 @@ nav:not(.scrolled) .lang-btn{color:#fff!important;border-color:rgba(255,255,255,
 .ct-row span:nth-child(2){text-align:center;color:rgba(255,255,255,0.25);font-size:14px}
 .ct-row span:last-child{text-align:center;color:var(--g);font-size:14px}
 
-/* ── TESTIMONIALS ── */
-.testi-section{padding:80px 40px}
-.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
-.tcard{background:var(--white);border:1px solid var(--border2);border-radius:var(--r2);padding:22px;transition:box-shadow .2s}
-.tcard:hover{box-shadow:0 6px 24px rgba(37,211,102,0.1)}
-.tcard-stars{color:var(--g);font-size:13px;letter-spacing:2px;margin-bottom:12px}
-.tcard-body{font-size:14px;color:var(--ink2);line-height:1.65;margin-bottom:14px;font-style:italic}
-.tcard-foot{display:flex;align-items:center;gap:10px}
-.tcard-avatar{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#fff;flex-shrink:0}
-.tcard-name{font-size:13px;font-weight:500;color:var(--ink)}
-.tcard-detail{font-size:12px;color:var(--ink4)}
-.tcard-via{display:inline-flex;align-items:center;gap:4px;margin-top:4px;font-size:11px;font-weight:500;padding:2px 8px;border-radius:8px}
-.tcard-via-wa{background:rgba(37,211,102,0.1);color:var(--gd)}
-.tcard-via-em{background:rgba(59,130,246,0.1);color:#1d4ed8}
+/* ── COMING SOON ── */
+.roadmap-section{padding:88px 40px;overflow:hidden;position:relative}
+.roadmap-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 110%,rgba(37,211,102,0.07) 0%,transparent 70%);pointer-events:none}
+.roadmap-intro{text-align:center;max-width:600px;margin:0 auto 52px}
+.roadmap-services{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-bottom:52px}
+.rs-card{border-radius:18px;padding:22px 16px 18px;text-align:center;border:1px solid transparent;transition:transform .2s,box-shadow .2s;cursor:default;position:relative}
+.rs-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.07)}
+.rs-card.solar{background:#fffbeb;border-color:#fde68a}
+.rs-card.gas{background:#fff1f2;border-color:#fecdd3}
+.rs-card.mobile{background:#eff6ff;border-color:#bfdbfe}
+.rs-card.fiber{background:#f0fdf4;border-color:#bbf7d0}
+.rs-card.car{background:#f5f3ff;border-color:#ddd6fe}
+.rs-card.insure{background:#fff7ed;border-color:#fed7aa}
+.rs-card-icon{font-size:32px;margin-bottom:10px;display:block;line-height:1}
+.rs-card-name{font-family:'Sora',sans-serif;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.rs-card-desc{font-size:11px;color:var(--ink3);line-height:1.45;margin-bottom:12px}
+.rs-soon{display:inline-block;font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;background:var(--ink);color:#fff}
+.rs-card.solar .rs-soon{background:#d97706;color:#fff}
+.rs-card.gas .rs-soon{background:#e11d48;color:#fff}
+.rs-card.mobile .rs-soon{background:#2563eb;color:#fff}
+.rs-card.fiber .rs-soon{background:#16a34a;color:#fff}
+.rs-card.car .rs-soon{background:#7c3aed;color:#fff}
+.rs-card.insure .rs-soon{background:#ea580c;color:#fff}
+.waitlist-box{max-width:500px;margin:0 auto;text-align:center}
+.waitlist-note{font-size:13px;color:var(--ink4);margin-top:12px}
+.waitlist-row{display:flex;gap:10px;margin-top:20px}
+.waitlist-row input{flex:1;padding:13px 18px;border:1.5px solid var(--border2);border-radius:10px;font-size:14px;font-family:'DM Sans',sans-serif;outline:none;background:#fff;color:var(--ink)}
+.waitlist-row input:focus{border-color:var(--g)}
+.waitlist-btn{padding:13px 22px;background:var(--ink);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:'Sora',sans-serif;cursor:pointer;white-space:nowrap;transition:background .2s}
+.waitlist-btn:hover{background:#1a3328}
+.waitlist-success{display:none;background:var(--gp);border:1px solid var(--border);border-radius:12px;padding:16px 20px;font-size:14px;color:var(--gd);font-weight:500;margin-top:16px;text-align:center}
+@media(max-width:860px){.roadmap-services{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.roadmap-services{grid-template-columns:repeat(2,1fr)}.waitlist-row{flex-direction:column}.roadmap-section{padding:64px 20px}}
 
 /* ── FAQ ── */
 .faq-section{padding:80px 40px;background:var(--white)}
@@ -1024,48 +1043,66 @@ nav.scrolled .hamburger span{background:var(--ink)}
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="testi-section">
+<!-- COMING SOON ROADMAP -->
+<section class="roadmap-section">
   <div class="section-inner">
-    <div class="reveal">
-      <span class="section-kicker">Lo que dicen los expats</span>
-      <h2 class="section-title">Personas reales, ahorros reales</h2>
+
+    <div class="roadmap-intro reveal">
+      <span class="section-kicker">Hoja de ruta</span>
+      <h2 class="section-title">La luz es solo el principio.</h2>
+      <p class="section-sub">Estamos construyendo el gestor de gastos del hogar más simple de España. Próximamente, todo lo que pagas cada mes — en un solo lugar.</p>
     </div>
-    <div class="testi-grid">
-      <div class="tcard reveal">
-        <div class="tcard-stars">★★★★★</div>
-        <p class="tcard-body">"Reenvié el email de Iberdrola que llevaba meses ignorando. El informe llegó en minutos. Listo antes de mi café de la mañana."</p>
-        <div class="tcard-foot">
-          <div class="tcard-avatar" style="background:#3b82f6">JM</div>
-          <div>
-            <div class="tcard-name">James M. · Torrevieja</div>
-            <div class="tcard-via tcard-via-em">por email · ahorró €389/año</div>
-          </div>
-        </div>
+
+    <div class="roadmap-services">
+      <div class="rs-card solar reveal">
+        <span class="rs-card-icon">☀️</span>
+        <div class="rs-card-name">Solar</div>
+        <div class="rs-card-desc">Compara instalaciones y amortiza tu inversión</div>
+        <span class="rs-soon">Próximamente</span>
       </div>
-      <div class="tcard reveal" style="transition-delay:.1s">
-        <div class="tcard-stars">★★★★★</div>
-        <p class="tcard-body">"WhatsApp fue facilísimo. Envié el PDF, recibí la cifra de ahorro y pulsé cambiar. Sin formularios, sin esperar al teléfono."</p>
-        <div class="tcard-foot">
-          <div class="tcard-avatar" style="background:#25D366">SE</div>
-          <div>
-            <div class="tcard-name">Sarah E. · San Javier</div>
-            <div class="tcard-via tcard-via-wa">por WhatsApp · ahorró €503/año</div>
-          </div>
-        </div>
+      <div class="rs-card gas reveal" style="transition-delay:.05s">
+        <span class="rs-card-icon">🔥</span>
+        <div class="rs-card-name">Gas</div>
+        <div class="rs-card-desc">Misma lógica, para tu tarifa de gas natural</div>
+        <span class="rs-soon">Próximamente</span>
       </div>
-      <div class="tcard reveal" style="transition-delay:.2s">
-        <div class="tcard-stars">★★★★★</div>
-        <p class="tcard-body">"Usé la web desde el portátil. El desglose fue muy transparente — mostraron incluso dónde un cargo sería algo más alto. Eso me generó total confianza."</p>
-        <div class="tcard-foot">
-          <div class="tcard-avatar" style="background:#7c3aed">PK</div>
-          <div>
-            <div class="tcard-name">Peter K. · Orihuela Costa</div>
-            <div class="tcard-via" style="background:rgba(139,92,246,0.1);color:#6d28d9">por web · ahorró €441/año</div>
-          </div>
-        </div>
+      <div class="rs-card mobile reveal" style="transition-delay:.1s">
+        <span class="rs-card-icon">📱</span>
+        <div class="rs-card-name">Móvil</div>
+        <div class="rs-card-desc">Encuentra el operador más barato para tu uso</div>
+        <span class="rs-soon">Próximamente</span>
+      </div>
+      <div class="rs-card fiber reveal" style="transition-delay:.15s">
+        <span class="rs-card-icon">🌐</span>
+        <div class="rs-card-name">Fibra</div>
+        <div class="rs-card-desc">Velocidad real al mejor precio de tu zona</div>
+        <span class="rs-soon">Próximamente</span>
+      </div>
+      <div class="rs-card car reveal" style="transition-delay:.2s">
+        <span class="rs-card-icon">🚗</span>
+        <div class="rs-card-name">Seguro de coche</div>
+        <div class="rs-card-desc">Cobertura que necesitas, sin pagar de más</div>
+        <span class="rs-soon">Próximamente</span>
+      </div>
+      <div class="rs-card insure reveal" style="transition-delay:.25s">
+        <span class="rs-card-icon">🛡️</span>
+        <div class="rs-card-name">Seguros hogar</div>
+        <div class="rs-card-desc">Hogar, vida, salud — comparados en minutos</div>
+        <span class="rs-soon">Próximamente</span>
       </div>
     </div>
+
+    <div class="waitlist-box reveal">
+      <h3 style="font-family:Sora,sans-serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Sé el primero en saberlo.</h3>
+      <p style="font-size:14px;color:var(--ink3);line-height:1.6">Apúntate y te avisamos en cuanto lancemos cada nuevo servicio.</p>
+      <div class="waitlist-row">
+        <input type="email" id="wl-email" placeholder="tu@email.com" autocomplete="email">
+        <button class="waitlist-btn" onclick="joinWaitlist()">Quiero ser el primero</button>
+      </div>
+      <div class="waitlist-success" id="wl-success">✓ Apuntado. Te avisaremos en cuanto esté listo.</div>
+      <p class="waitlist-note">Sin spam. Solo un aviso cuando lancemos.</p>
+    </div>
+
   </div>
 </section>
 
@@ -1808,6 +1845,15 @@ function toggleFaq(el){
   const a=el.nextElementSibling,ch=el.querySelector('.faq-ch');
   const open=a.classList.toggle('open');
   ch.style.transform=open?'rotate(180deg)':'rotate(0deg)';
+}
+
+// Waitlist signup
+function joinWaitlist(){
+  const input = document.getElementById('wl-email');
+  const email = input ? input.value.trim() : '';
+  if(!email || !email.includes('@')){input.focus();input.style.borderColor='#e53e3e';setTimeout(()=>input.style.borderColor='',1500);return;}
+  document.getElementById('wl-success').style.display='block';
+  document.querySelector('.waitlist-row').style.display='none';
 }
 
 // Copy email
