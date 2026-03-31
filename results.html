@@ -600,6 +600,11 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     ☀️ <strong>Solar compensation included</strong> — your exported kWh have been credited against each tariff's cost (Gana €0.06/kWh, Nordy €0.05/kWh).
   </div>
 
+  <!-- BILLING PERIOD BANNER (shown when period is outside 25–33 days) -->
+  <div id="period-banner" style="display:none;margin:0 0 16px;padding:12px 16px;background:#fff8e6;border:1px solid #f5c842;border-radius:8px;color:#92400e;font-size:13px;line-height:1.5;">
+    <span id="period-banner-text"></span>
+  </div>
+
   <!-- TARIFF SELECTOR -->
   <div class="scard" style="animation-delay:.07s">
     <div class="scard-header">
@@ -1384,6 +1389,23 @@ function _initFromSession() {
 
   const solarBanner = document.getElementById('solar-banner');
   if (solarBanner && _ext.has_solar) solarBanner.style.display = 'block';
+
+  const periodBanner = document.getElementById('period-banner');
+  const periodBannerText = document.getElementById('period-banner-text');
+  if (periodBanner && periodBannerText) {
+    const _lang = navigator.language?.startsWith('es') ? 'es' : 'en';
+    if (_days < 25) {
+      periodBannerText.innerHTML = _lang === 'es'
+        ? `⚠️ <strong>Factura de período corto (${_days} días)</strong> — el ahorro estimado se basa en tu historial de consumo anual, no en la extrapolación de este período.`
+        : `⚠️ <strong>Short billing period (${_days} days)</strong> — estimated savings are based on your annual usage history, not extrapolated from this period.`;
+      periodBanner.style.display = 'block';
+    } else if (_days > 33) {
+      periodBannerText.innerHTML = _lang === 'es'
+        ? `⚠️ <strong>Factura de período largo (${_days} días)</strong> — los importes mensuales se han ajustado a un período estándar de 30 días.`
+        : `⚠️ <strong>Long billing period (${_days} days)</strong> — monthly figures have been adjusted to a standard 30-day period.`;
+      periodBanner.style.display = 'block';
+    }
+  }
 
   renderForTariff(best);
   renderTariffOptions();
