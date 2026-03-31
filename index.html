@@ -1898,8 +1898,8 @@ function openUploadModal(){document.getElementById('upload-modal').classList.add
 function closeUploadModal(){document.getElementById('upload-modal').classList.remove('open');document.body.style.overflow=''}
 function closeModalOutside(e){if(e.target===document.getElementById('upload-modal'))closeUploadModal()}
 
-function handleDrop(e){e.preventDefault();openUploadModal()}
-function handleFileSelect(input){if(input.files[0])openUploadModal()}
+function handleDrop(e){e.preventDefault();const f=e.dataTransfer.files[0];openUploadModal();if(f)setFile(f);}
+function handleFileSelect(input){if(input.files[0]){openUploadModal();setFile(input.files[0]);}}
 
 function handleModalDrop(e){
   e.preventDefault();
