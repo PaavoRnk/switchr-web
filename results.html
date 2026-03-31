@@ -1147,6 +1147,7 @@ let _allTariffs  = [];
 let _bestTariffId = null;
 // Bill-level constants (don't change when tariff changes)
 let _ext, _comp, _days, _p1Ann, _p2Ann, _p3Ann, _p1kw, _p2kw, _currentAnnual;
+let _periodLabel = '/mo', _dCost = m => m;
 
 /* ── Helpers ── */
 function set(id, val) { const el = document.getElementById(id); if (el) el.textContent = val; }
@@ -1354,8 +1355,8 @@ function _initFromSession() {
   // Pre-compute bill-level constants
   _days         = Number(_ext.billing_period_days) || 30;
   const _showPeriod = _days < 25 || _days > 33;
-  const _periodLabel = _showPeriod ? ` / ${_days} days` : '/mo';
-  const _dCost = (m) => _showPeriod ? Math.round(m * (_days / 30) * 100) / 100 : m;
+  _periodLabel = _showPeriod ? ` / ${_days} days` : '/mo';
+  _dCost = (m) => _showPeriod ? Math.round(m * (_days / 30) * 100) / 100 : m;
   const scale   = 365 / _days;
   _p1Ann        = Math.round((Number(_ext.punta_kwh) || 0) * scale);
   _p2Ann        = Math.round((Number(_ext.llano_kwh) || 0) * scale);
