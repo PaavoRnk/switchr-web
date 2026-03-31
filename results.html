@@ -1169,7 +1169,7 @@ function renderTariffOptions() {
       (isSelected ? '<div class="tariff-option-check">✓</div>' : '') +
       '<div class="tariff-option-provider" style="color:' + provColor + '">' + provLabel + '</div>' +
       '<div class="tariff-option-name">' + t.name + mercTag + '</div>' +
-      '<div class="tariff-option-cost">€' + t.estimatedMonthly.toFixed(2) + '<span class="tariff-option-mo">/mo</span></div>' +
+      '<div class="tariff-option-cost">€' + _dCost(t.estimatedMonthly).toFixed(2) + '<span class="tariff-option-mo">' + _periodLabel + '</span></div>' +
       '<div class="tariff-option-saving">Save €' + Math.round(t.annualSaving) + '/yr</div>' +
       (isBest ? '<span class="tariff-option-best">Best match</span>' : '') +
       aboutLink +
@@ -1350,6 +1350,9 @@ function _initFromSession() {
 
   // Pre-compute bill-level constants
   _days         = Number(_ext.billing_period_days) || 30;
+  const _showPeriod = _days < 25 || _days > 33;
+  const _periodLabel = _showPeriod ? ` / ${_days} days` : '/mo';
+  const _dCost = (m) => _showPeriod ? Math.round(m * (_days / 30) * 100) / 100 : m;
   const scale   = 365 / _days;
   _p1Ann        = Math.round((Number(_ext.punta_kwh) || 0) * scale);
   _p2Ann        = Math.round((Number(_ext.llano_kwh) || 0) * scale);
@@ -1398,11 +1401,6 @@ function _initFromSession() {
       periodBannerText.innerHTML = _lang === 'es'
         ? `⚠️ <strong>Factura de período corto (${_days} días)</strong> — el ahorro estimado se basa en tu historial de consumo anual, no en la extrapolación de este período.`
         : `⚠️ <strong>Short billing period (${_days} days)</strong> — estimated savings are based on your annual usage history, not extrapolated from this period.`;
-      periodBanner.style.display = 'block';
-    } else if (_days > 33) {
-      periodBannerText.innerHTML = _lang === 'es'
-        ? `⚠️ <strong>Factura de período largo (${_days} días)</strong> — los importes mensuales se han ajustado a un período estándar de 30 días.`
-        : `⚠️ <strong>Long billing period (${_days} days)</strong> — monthly figures have been adjusted to a standard 30-day period.`;
       periodBanner.style.display = 'block';
     }
   }
