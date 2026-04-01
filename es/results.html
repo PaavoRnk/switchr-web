@@ -567,6 +567,7 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
     </div>
     <div class="save-num">€456</div>
     <div class="save-period">ahorro anual estimado</div>
+    <div id="savings-basis-note" style="font-size:11px;color:#9ca3af;margin-top:2px;margin-bottom:4px;">basado en el consumo de este período</div>
     <div class="pct-badge">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
       <span id="pct-text">28% menos que tu factura actual</span>
@@ -1213,6 +1214,7 @@ function renderForTariff(tariff) {
   // ── Hero ──
   const saveNumEl = document.querySelector('.save-num');
   if (saveNumEl) saveNumEl.textContent = fmt(annualSaving);
+  set('savings-basis-note', _comp?.savingsBasis === 'history' ? '📊 basado en tu historial de consumo' : 'basado en el consumo de este período');
   const switchFromTo = document.querySelector('.switch-from-to');
   if (switchFromTo) switchFromTo.innerHTML = 'Cambiar de <strong>' + currProv + '</strong> a <strong>' + tariffLabel + '</strong>&nbsp;<span class="provider-badge" style="background:' + provBg + ';color:' + provColor + '">' + provLabel + '</span>';
   set('pct-text', pct + '% menos que tu factura actual');
