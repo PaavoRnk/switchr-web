@@ -515,6 +515,16 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   .info-sheet{border-radius:20px;max-width:480px;margin:20px;padding:24px 28px 32px}
   .info-handle{display:none}
 }
+/* INSIGHT BOXES */
+.insight-box{border-radius:12px;padding:14px 16px;margin:0 0 16px;font-size:13px;line-height:1.55}
+.insight-neutral{background:#f0fdf4;border:1px solid rgba(37,211,102,0.25)}
+.insight-warning{background:#fffbeb;border:1px solid #fcd34d}
+.insight-title{font-weight:600;color:var(--ink);margin-bottom:4px}
+.insight-body{color:var(--ink2)}
+.insight-footer{font-size:11px;color:var(--ink3);margin-top:8px}
+.sva-list{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
+.sva-list li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.sva-list li:last-child{border-bottom:none}
 </style>
 </head>
 <body>
@@ -605,6 +615,12 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   <div id="period-banner" style="display:none;margin:0 0 16px;padding:12px 16px;background:#fff8e6;border:1px solid #f5c842;border-radius:8px;color:#92400e;font-size:13px;line-height:1.5;">
     <span id="period-banner-text"></span>
   </div>
+
+  <!-- USAGE PATTERN CALLOUT -->
+  <div id="usage-pattern-callout" style="display:none"></div>
+
+  <!-- SVA CALLOUT -->
+  <div id="sva-callout" style="display:none"></div>
 
   <!-- TARIFF SELECTOR -->
   <div class="scard" style="animation-delay:.07s">
@@ -1411,8 +1427,45 @@ function _initFromSession() {
     }
   }
 
+  const _insightLang = navigator.language?.startsWith('es') ? 'es' : 'en';
+  renderUsageInsight(_ext.usage_insight, _insightLang);
+  renderSvaInsight(_ext.sva_insight, _insightLang);
+
   renderForTariff(best);
   renderTariffOptions();
+}
+
+/* ── Insight callouts ── */
+function renderUsageInsight(insight, lang) {
+  const el = document.getElementById('usage-pattern-callout');
+  if (!el || !insight || insight === 'flat') return;
+  const isEs = lang === 'es';
+  const isPeak = insight === 'peak_heavy';
+  const title = isPeak
+    ? (isEs ? '📊 Consumo concentrado en horas punta' : '📊 High peak-hour usage detected')
+    : (isEs ? '🌙 Consumo concentrado en valle' : '🌙 High off-peak usage detected');
+  const body = isPeak
+    ? (isEs ? 'Usas mucho en P1 (punta). Las tarifas de tramos tienen un precio más alto en punta — considera si un precio único te ahorraría más.'
+            : 'You use a lot during peak hours (P1). Time-of-use tariffs charge more in peak — a flat-rate tariff may suit you better.')
+    : (isEs ? 'Usas mucho en P3 (valle). Las tarifas de tramos aprovechan al máximo tu perfil — el valle es el período más barato.'
+            : 'You use a lot during off-peak hours (P3). Time-of-use tariffs reward your pattern — valley is the cheapest period.');
+  el.innerHTML = `<div class="insight-box ${isPeak ? 'insight-warning' : 'insight-neutral'}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
+  el.style.display = 'block';
+}
+function renderSvaInsight(insight, lang) {
+  const el = document.getElementById('sva-callout');
+  if (!el || !insight || !insight.has_sva) return;
+  const isEs = lang === 'es';
+  const title = isEs ? '⚠️ Servicios de valor añadido detectados' : '⚠️ Add-on services detected';
+  const total = Number(insight.total_monthly_eur) || 0;
+  const annual = Number(insight.annual_eur) || 0;
+  const body = isEs
+    ? `Tu factura incluye servicios adicionales por <strong>€${total.toFixed(2)}/mes</strong> (≈€${annual.toFixed(0)}/año). Estos no son costes de electricidad y no se incluyen en la comparativa de tarifas.`
+    : `Your bill includes add-on services totalling <strong>€${total.toFixed(2)}/mo</strong> (≈€${annual.toFixed(0)}/yr). These are not electricity costs and are excluded from the tariff comparison.`;
+  const services = Array.isArray(insight.services) ? insight.services : [];
+  const listItems = services.map(s => `<li><span>${s.name}</span><span>€${Number(s.monthly_cost).toFixed(2)}/mo</span></li>`).join('');
+  el.innerHTML = `<div class="insight-box insight-warning"><div class="insight-title">${title}</div><div class="insight-body">${body}</div>${listItems ? `<ul class="sva-list">${listItems}</ul>` : ''}</div>`;
+  el.style.display = 'block';
 }
 
 /* ── Modal helpers ── */

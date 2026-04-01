@@ -515,6 +515,16 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   .info-sheet{border-radius:20px;max-width:480px;margin:20px;padding:24px 28px 32px}
   .info-handle{display:none}
 }
+/* INSIGHT BOXES */
+.insight-box{border-radius:12px;padding:14px 16px;margin:0 0 16px;font-size:13px;line-height:1.55}
+.insight-neutral{background:#f0fdf4;border:1px solid rgba(37,211,102,0.25)}
+.insight-warning{background:#fffbeb;border:1px solid #fcd34d}
+.insight-title{font-weight:600;color:var(--ink);margin-bottom:4px}
+.insight-body{color:var(--ink2)}
+.insight-footer{font-size:11px;color:var(--ink3);margin-top:8px}
+.sva-list{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
+.sva-list li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.sva-list li:last-child{border-bottom:none}
 </style>
 </head>
 <body>
@@ -601,6 +611,12 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
   <div id="solar-banner" style="display:none;margin:0 0 16px;padding:12px 16px;background:#fefce8;border:1px solid #fde047;border-radius:8px;color:#854d0e;font-size:13px;line-height:1.5;">
     ☀️ <strong>Compensación solar incluida</strong> — tus kWh exportados a la red ya están descontados del coste de cada tarifa (Gana €0.06/kWh, Nordy €0.05/kWh).
   </div>
+
+  <!-- USAGE PATTERN CALLOUT -->
+  <div id="usage-pattern-callout" style="display:none"></div>
+
+  <!-- SVA CALLOUT -->
+  <div id="sva-callout" style="display:none"></div>
 
   <!-- TARIFF SELECTOR -->
   <div class="scard" style="animation-delay:.07s">
@@ -1351,8 +1367,35 @@ function _initFromSession() {
   const solarBanner = document.getElementById('solar-banner');
   if (solarBanner && _ext.has_solar) solarBanner.style.display = 'block';
 
+  renderUsageInsight(_ext.usage_insight, 'es');
+  renderSvaInsight(_ext.sva_insight, 'es');
+
   renderForTariff(best);
   renderTariffOptions();
+}
+
+/* ── Insight callouts ── */
+function renderUsageInsight(insight, lang) {
+  const el = document.getElementById('usage-pattern-callout');
+  if (!el || !insight || insight === 'flat') return;
+  const isPeak = insight === 'peak_heavy';
+  const title = isPeak ? '📊 Consumo concentrado en horas punta' : '🌙 Consumo concentrado en valle';
+  const body = isPeak
+    ? 'Usas mucho en P1 (punta). Las tarifas de tramos tienen un precio más alto en punta — considera si un precio único te ahorraría más.'
+    : 'Usas mucho en P3 (valle). Las tarifas de tramos aprovechan al máximo tu perfil — el valle es el período más barato.';
+  el.innerHTML = `<div class="insight-box ${isPeak ? 'insight-warning' : 'insight-neutral'}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
+  el.style.display = 'block';
+}
+function renderSvaInsight(insight, lang) {
+  const el = document.getElementById('sva-callout');
+  if (!el || !insight || !insight.has_sva) return;
+  const total = Number(insight.total_monthly_eur) || 0;
+  const annual = Number(insight.annual_eur) || 0;
+  const body = `Tu factura incluye servicios adicionales por <strong>€${total.toFixed(2)}/mes</strong> (≈€${annual.toFixed(0)}/año). Estos no son costes de electricidad y no se incluyen en la comparativa de tarifas.`;
+  const services = Array.isArray(insight.services) ? insight.services : [];
+  const listItems = services.map(s => `<li><span>${s.name}</span><span>€${Number(s.monthly_cost).toFixed(2)}/mes</span></li>`).join('');
+  el.innerHTML = `<div class="insight-box insight-warning"><div class="insight-title">⚠️ Servicios de valor añadido detectados</div><div class="insight-body">${body}</div>${listItems ? `<ul class="sva-list">${listItems}</ul>` : ''}</div>`;
+  el.style.display = 'block';
 }
 
 /* ── Modal helpers ── */
