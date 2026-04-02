@@ -519,6 +519,8 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 .insight-box{border-radius:12px;padding:14px 16px;margin:0 0 16px;font-size:13px;line-height:1.55}
 .insight-neutral{background:#f0fdf4;border:1px solid rgba(37,211,102,0.25)}
 .insight-warning{background:#fffbeb;border:1px solid #fcd34d}
+.insight-danger{background:#fef2f2;border:1px solid #fca5a5}
+.insight-info{background:#eff6ff;border:1px solid #93c5fd}
 .insight-title{font-weight:600;color:var(--ink);margin-bottom:4px}
 .insight-body{color:var(--ink2)}
 .insight-footer{font-size:11px;color:var(--ink3);margin-top:8px}
@@ -617,6 +619,9 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 
   <!-- SVA CALLOUT -->
   <div id="sva-callout" style="display:none"></div>
+
+  <!-- POTENCIA CALLOUT -->
+  <div id="potencia-callout" style="display:none"></div>
 
   <!-- TARIFF SELECTOR -->
   <div class="scard" style="animation-delay:.07s">
@@ -1369,6 +1374,7 @@ function _initFromSession() {
 
   renderUsageInsight(_ext.usage_insight, 'es');
   renderSvaInsight(_ext.sva_insight, 'es');
+  renderPotenciaInsight(_ext.potencia_insight);
 
   renderForTariff(best);
   renderTariffOptions();
@@ -1412,6 +1418,48 @@ function renderSvaInsight(insight, lang) {
   const services = Array.isArray(insight.services) ? insight.services : [];
   const listItems = services.map(s => `<li><span>${s.name}</span><span>€${Number(s.monthly_cost).toFixed(2)}/mes</span></li>`).join('');
   el.innerHTML = `<div class="insight-box insight-warning"><div class="insight-title">⚠️ Servicios de valor añadido detectados</div><div class="insight-body">${body}</div>${listItems ? `<ul class="sva-list">${listItems}</ul>` : ''}</div>`;
+  el.style.display = 'block';
+}
+
+function formatMonthLabel(yyyyMM) {
+  const months = {
+    '01':'enero','02':'febrero','03':'marzo','04':'abril','05':'mayo','06':'junio',
+    '07':'julio','08':'agosto','09':'septiembre','10':'octubre','11':'noviembre','12':'diciembre'
+  };
+  const [year, month] = yyyyMM.split('-');
+  return `${months[month]} ${year}`;
+}
+function estimatePotenciaSaving(fromKw, toKw) {
+  return Math.round(Math.abs(fromKw - toKw) * 0.089 * 365 * 1.0511 * 1.21);
+}
+function renderPotenciaInsight(insight) {
+  const el = document.getElementById('potencia-callout');
+  if (!el || !insight || !insight.flag) return;
+  const pP1 = insight.currentKw;
+  const pRec = insight.recommendedKw;
+  const pUtil = insight.utilisationPct;
+  const pPeak = insight.peakMonthKwh;
+  const pLabel = insight.peakMonthLabel ? formatMonthLabel(insight.peakMonthLabel) : null;
+  const pConf = insight.confidence;
+  let boxClass, title, body;
+  if (insight.flag === 'under') {
+    boxClass = 'insight-danger';
+    if (pConf === 'full' || pConf === 'medium') {
+      title = `⚡ Potencia contratada al límite (${pP1} kW)`;
+      body = `Tu mes de mayor consumo fue ${pLabel} con ${pPeak} kWh — usaste el ${pUtil}% de tus ${pP1} kW contratados. Si el ICP te ha saltado alguna vez, probablemente sea por esto. Considera subir a <strong>${pRec} kW</strong> para evitarlo.`;
+    } else {
+      title = `⚡ Nota sobre potencia (${pP1} kW)`;
+      body = `Tu consumo anual es elevado para los ${pP1} kW que tienes contratados. Si el ICP te salta, considera subir a <strong>${pRec} kW</strong>.`;
+    }
+  } else if (insight.flag === 'over' && pRec) {
+    boxClass = 'insight-info';
+    const pSaving = estimatePotenciaSaving(pP1, pRec);
+    title = `💡 Potencia sobrecontratada (${pP1} kW)`;
+    body = `Incluso en tu mes de mayor consumo (${pLabel}, ${pPeak} kWh) solo usaste el ${pUtil}% de tus ${pP1} kW contratados. Bajar a <strong>${pRec} kW</strong> podría ahorrarte ~€${pSaving}/año en término de potencia.`;
+  } else {
+    return;
+  }
+  el.innerHTML = `<div class="insight-box ${boxClass}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
   el.style.display = 'block';
 }
 
