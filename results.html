@@ -1441,14 +1441,19 @@ function renderUsageInsight(insight, lang) {
   if (!el || !insight || insight === 'flat') return;
   const isEs = lang === 'es';
   const isPeak = insight === 'peak_heavy';
+  const totalKwh = (_p1Ann || 0) + (_p2Ann || 0) + (_p3Ann || 0);
+  const pct = totalKwh > 0 ? Math.round((isPeak ? _p1Ann : _p3Ann) / totalKwh * 100) : null;
+  const pctStr = pct !== null ? `${pct}%` : null;
   const title = isPeak
-    ? (isEs ? '📊 Consumo concentrado en horas punta' : '📊 High peak-hour usage detected')
-    : (isEs ? '🌙 Consumo concentrado en valle' : '🌙 High off-peak usage detected');
+    ? (isEs ? '📊 Consumo concentrado en horas punta' : '📊 High peak-hour usage')
+    : (isEs ? '🌙 Consumo concentrado en horas valle' : '🌙 High off-peak usage');
   const body = isPeak
-    ? (isEs ? 'Usas mucho en P1 (punta). Las tarifas de tramos tienen un precio más alto en punta — considera si un precio único te ahorraría más.'
-            : 'You use a lot during peak hours (P1). Time-of-use tariffs charge more in peak — a flat-rate tariff may suit you better.')
-    : (isEs ? 'Usas mucho en P3 (valle). Las tarifas de tramos aprovechan al máximo tu perfil — el valle es el período más barato.'
-            : 'You use a lot during off-peak hours (P3). Time-of-use tariffs reward your pattern — valley is the cheapest period.');
+    ? (isEs
+        ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas en horas punta (días laborables de 8h a 22h). Una tarifa de precio fijo — mismo precio todo el día — es probablemente tu mejor opción. Son las tarifas <strong>"24h"</strong>.`
+        : `${pctStr ? `${pctStr} of your electricity` : 'A large share of your electricity'} is used during peak hours (weekdays 8am–10pm). A flat-rate tariff — same price all day — is likely your best option. Those are the <strong>"24h" tariffs</strong> in the list.`)
+    : (isEs
+        ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas de noche o en fin de semana. Una tarifa por tramos puede ahorrarte más — más barata de noche y fines de semana. Son las tarifas <strong>"tramos"</strong>.`
+        : `${pctStr ? `${pctStr} of your electricity` : 'A large share of your electricity'} is used at night or on weekends. A time-of-use tariff rewards that pattern — cheaper at night and weekends. Those are the <strong>"tramos" tariffs</strong> in the list.`);
   el.innerHTML = `<div class="insight-box ${isPeak ? 'insight-warning' : 'insight-neutral'}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
   el.style.display = 'block';
 }
@@ -1458,10 +1463,17 @@ function renderSvaInsight(insight, lang) {
   const isEs = lang === 'es';
   const title = isEs ? '⚠️ Servicios de valor añadido detectados' : '⚠️ Add-on services detected';
   const total = Number(insight.total_monthly_eur) || 0;
-  const annual = Number(insight.annual_eur) || 0;
+  const svaSaving = Number(insight.annual_eur) || 0;
+  const totalSaving = Math.round(_comp?.bestTariff?.annualSaving || 0);
+  const elecSaving = Math.max(0, totalSaving - svaSaving);
+  const breakdownLine = totalSaving > 0
+    ? (isEs
+        ? `<br><strong>Desglose del ahorro: €${totalSaving}/año total (€${Math.round(elecSaving)} electricidad + €${Math.round(svaSaving)} extras)</strong>`
+        : `<br><strong>Savings breakdown: €${totalSaving}/yr total (€${Math.round(elecSaving)} electricity + €${Math.round(svaSaving)} extra services)</strong>`)
+    : '';
   const body = isEs
-    ? `Tu factura incluye servicios adicionales por <strong>€${total.toFixed(2)}/mes</strong> (≈€${annual.toFixed(0)}/año). Estos no son costes de electricidad y no se incluyen en la comparativa de tarifas.`
-    : `Your bill includes add-on services totalling <strong>€${total.toFixed(2)}/mo</strong> (≈€${annual.toFixed(0)}/yr). These are not electricity costs and are excluded from the tariff comparison.`;
+    ? `Estos extras no tienen que ver con el consumo eléctrico — la mayoría no los necesita. Al cambiarte dejarás de pagarlos.${breakdownLine}`
+    : `These extras are not related to electricity consumption — most people don't need them. By switching you simply stop paying for them.${breakdownLine}`;
   const services = Array.isArray(insight.services) ? insight.services : [];
   const listItems = services.map(s => `<li><span>${s.name}</span><span>€${Number(s.monthly_cost).toFixed(2)}/mo</span></li>`).join('');
   el.innerHTML = `<div class="insight-box insight-warning"><div class="insight-title">${title}</div><div class="insight-body">${body}</div>${listItems ? `<ul class="sva-list">${listItems}</ul>` : ''}</div>`;

@@ -1379,19 +1379,26 @@ function renderUsageInsight(insight, lang) {
   const el = document.getElementById('usage-pattern-callout');
   if (!el || !insight || insight === 'flat') return;
   const isPeak = insight === 'peak_heavy';
-  const title = isPeak ? '📊 Consumo concentrado en horas punta' : '🌙 Consumo concentrado en valle';
+  const totalKwh = (_p1Ann || 0) + (_p2Ann || 0) + (_p3Ann || 0);
+  const pct = totalKwh > 0 ? Math.round((isPeak ? _p1Ann : _p3Ann) / totalKwh * 100) : null;
+  const pctStr = pct !== null ? `${pct}%` : null;
+  const title = isPeak ? '📊 Consumo concentrado en horas punta' : '🌙 Consumo concentrado en horas valle';
   const body = isPeak
-    ? 'Usas mucho en P1 (punta). Las tarifas de tramos tienen un precio más alto en punta — considera si un precio único te ahorraría más.'
-    : 'Usas mucho en P3 (valle). Las tarifas de tramos aprovechan al máximo tu perfil — el valle es el período más barato.';
+    ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas en horas punta (días laborables de 8h a 22h). Una tarifa de precio fijo — mismo precio todo el día — es probablemente tu mejor opción. Son las tarifas <strong>"24h"</strong>.`
+    : `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas de noche o en fin de semana. Una tarifa por tramos puede ahorrarte más — más barata de noche y fines de semana. Son las tarifas <strong>"tramos"</strong>.`;
   el.innerHTML = `<div class="insight-box ${isPeak ? 'insight-warning' : 'insight-neutral'}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
   el.style.display = 'block';
 }
 function renderSvaInsight(insight, lang) {
   const el = document.getElementById('sva-callout');
   if (!el || !insight || !insight.has_sva) return;
-  const total = Number(insight.total_monthly_eur) || 0;
-  const annual = Number(insight.annual_eur) || 0;
-  const body = `Tu factura incluye servicios adicionales por <strong>€${total.toFixed(2)}/mes</strong> (≈€${annual.toFixed(0)}/año). Estos no son costes de electricidad y no se incluyen en la comparativa de tarifas.`;
+  const svaSaving = Number(insight.annual_eur) || 0;
+  const totalSaving = Math.round(_comp?.bestTariff?.annualSaving || 0);
+  const elecSaving = Math.max(0, totalSaving - svaSaving);
+  const breakdownLine = totalSaving > 0
+    ? `<br><strong>Desglose del ahorro: €${totalSaving}/año total (€${Math.round(elecSaving)} electricidad + €${Math.round(svaSaving)} extras)</strong>`
+    : '';
+  const body = `Estos extras no tienen que ver con el consumo eléctrico — la mayoría no los necesita. Al cambiarte dejarás de pagarlos.${breakdownLine}`;
   const services = Array.isArray(insight.services) ? insight.services : [];
   const listItems = services.map(s => `<li><span>${s.name}</span><span>€${Number(s.monthly_cost).toFixed(2)}/mes</span></li>`).join('');
   el.innerHTML = `<div class="insight-box insight-warning"><div class="insight-title">⚠️ Servicios de valor añadido detectados</div><div class="insight-body">${body}</div>${listItems ? `<ul class="sva-list">${listItems}</ul>` : ''}</div>`;
