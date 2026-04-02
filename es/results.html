@@ -1377,16 +1377,26 @@ function _initFromSession() {
 /* ── Insight callouts ── */
 function renderUsageInsight(insight, lang) {
   const el = document.getElementById('usage-pattern-callout');
-  if (!el || !insight || insight === 'flat') return;
+  if (!el || !insight) return;
   const isPeak = insight === 'peak_heavy';
+  const isValley = insight === 'valley_heavy';
   const totalKwh = (_p1Ann || 0) + (_p2Ann || 0) + (_p3Ann || 0);
-  const pct = totalKwh > 0 ? Math.round((isPeak ? _p1Ann : _p3Ann) / totalKwh * 100) : null;
-  const pctStr = pct !== null ? `${pct}%` : null;
-  const title = isPeak ? '📊 Consumo concentrado en horas punta' : '🌙 Consumo concentrado en horas valle';
-  const body = isPeak
-    ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas en horas punta (días laborables de 8h a 22h). Una tarifa de precio fijo — mismo precio todo el día — es probablemente tu mejor opción. Son las tarifas <strong>"24h"</strong>.`
-    : `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas de noche o en fin de semana. Una tarifa por tramos puede ahorrarte más — más barata de noche y fines de semana. Son las tarifas <strong>"tramos"</strong>.`;
-  el.innerHTML = `<div class="insight-box ${isPeak ? 'insight-warning' : 'insight-neutral'}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
+  let title, body, boxClass;
+  if (isPeak || isValley) {
+    const pct = totalKwh > 0 ? Math.round((isPeak ? _p1Ann : _p3Ann) / totalKwh * 100) : null;
+    const pctStr = pct !== null ? `${pct}%` : null;
+    title = isPeak ? '📊 Consumo concentrado en horas punta' : '🌙 Consumo concentrado en horas valle';
+    body = isPeak
+      ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas en horas punta (días laborables de 8h a 22h). Una tarifa de precio fijo — mismo precio todo el día — es probablemente tu mejor opción. Son las tarifas <strong>"24h"</strong>.`
+      : `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas de noche o en fin de semana. Una tarifa por tramos puede ahorrarte más — más barata de noche y fines de semana. Son las tarifas <strong>"tramos"</strong>.`;
+    boxClass = isPeak ? 'insight-warning' : 'insight-neutral';
+  } else {
+    // balanced
+    title = '💡 Consumo repartido a lo largo del día';
+    body = `Hemos elegido la tarifa que más te ahorra. Esto es lo que significan los tipos:<br>• <strong>"24h" (precio fijo)</strong> — el mismo precio todo el día, sin importar cuándo consumas. Simple y predecible.<br>• <strong>"Tramos"</strong> — más barata de noche y fines de semana, más cara en mañanas y tardes laborables.`;
+    boxClass = 'insight-neutral';
+  }
+  el.innerHTML = `<div class="insight-box ${boxClass}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
   el.style.display = 'block';
 }
 function renderSvaInsight(insight, lang) {

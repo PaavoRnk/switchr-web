@@ -1438,23 +1438,35 @@ function _initFromSession() {
 /* ── Insight callouts ── */
 function renderUsageInsight(insight, lang) {
   const el = document.getElementById('usage-pattern-callout');
-  if (!el || !insight || insight === 'flat') return;
+  if (!el || !insight) return;
   const isEs = lang === 'es';
   const isPeak = insight === 'peak_heavy';
+  const isValley = insight === 'valley_heavy';
   const totalKwh = (_p1Ann || 0) + (_p2Ann || 0) + (_p3Ann || 0);
-  const pct = totalKwh > 0 ? Math.round((isPeak ? _p1Ann : _p3Ann) / totalKwh * 100) : null;
-  const pctStr = pct !== null ? `${pct}%` : null;
-  const title = isPeak
-    ? (isEs ? '📊 Consumo concentrado en horas punta' : '📊 High peak-hour usage')
-    : (isEs ? '🌙 Consumo concentrado en horas valle' : '🌙 High off-peak usage');
-  const body = isPeak
-    ? (isEs
-        ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas en horas punta (días laborables de 8h a 22h). Una tarifa de precio fijo — mismo precio todo el día — es probablemente tu mejor opción. Son las tarifas <strong>"24h"</strong>.`
-        : `${pctStr ? `${pctStr} of your electricity` : 'A large share of your electricity'} is used during peak hours (weekdays 8am–10pm). A flat-rate tariff — same price all day — is likely your best option. Those are the <strong>"24h" tariffs</strong> in the list.`)
-    : (isEs
-        ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas de noche o en fin de semana. Una tarifa por tramos puede ahorrarte más — más barata de noche y fines de semana. Son las tarifas <strong>"tramos"</strong>.`
-        : `${pctStr ? `${pctStr} of your electricity` : 'A large share of your electricity'} is used at night or on weekends. A time-of-use tariff rewards that pattern — cheaper at night and weekends. Those are the <strong>"tramos" tariffs</strong> in the list.`);
-  el.innerHTML = `<div class="insight-box ${isPeak ? 'insight-warning' : 'insight-neutral'}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
+  let title, body, boxClass;
+  if (isPeak || isValley) {
+    const pct = totalKwh > 0 ? Math.round((isPeak ? _p1Ann : _p3Ann) / totalKwh * 100) : null;
+    const pctStr = pct !== null ? `${pct}%` : null;
+    title = isPeak
+      ? (isEs ? '📊 Consumo concentrado en horas punta' : '📊 High peak-hour usage')
+      : (isEs ? '🌙 Consumo concentrado en horas valle' : '🌙 High off-peak usage');
+    body = isPeak
+      ? (isEs
+          ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas en horas punta (días laborables de 8h a 22h). Una tarifa de precio fijo — mismo precio todo el día — es probablemente tu mejor opción. Son las tarifas <strong>"24h"</strong>.`
+          : `${pctStr ? `${pctStr} of your electricity` : 'A large share of your electricity'} is used during peak hours (weekdays 8am–10pm). A flat-rate tariff — same price all day — is likely your best option. Those are the <strong>"24h" tariffs</strong> in the list.`)
+      : (isEs
+          ? `${pctStr ? `El ${pctStr} de tu electricidad` : 'Gran parte de tu electricidad'} la usas de noche o en fin de semana. Una tarifa por tramos puede ahorrarte más — más barata de noche y fines de semana. Son las tarifas <strong>"tramos"</strong>.`
+          : `${pctStr ? `${pctStr} of your electricity` : 'A large share of your electricity'} is used at night or on weekends. A time-of-use tariff rewards that pattern — cheaper at night and weekends. Those are the <strong>"tramos" tariffs</strong> in the list.`);
+    boxClass = isPeak ? 'insight-warning' : 'insight-neutral';
+  } else {
+    // balanced
+    title = isEs ? '💡 Consumo repartido a lo largo del día' : '💡 Usage spread evenly across the day';
+    body = isEs
+      ? `Hemos elegido la tarifa que más te ahorra. Esto es lo que significan los tipos:<br>• <strong>"24h" (precio fijo)</strong> — el mismo precio todo el día, sin importar cuándo consumas. Simple y predecible.<br>• <strong>"Tramos"</strong> — más barata de noche y fines de semana, más cara en mañanas y tardes laborables.`
+      : `We've picked the tariff that saves you most. Here's what the types mean:<br>• <strong>"24h" (flat-rate)</strong> — same price all day, no matter when you use electricity. Simple and predictable.<br>• <strong>"Tramos" (time-of-use)</strong> — cheaper at night and weekends, more expensive on weekday mornings and afternoons.`;
+    boxClass = 'insight-neutral';
+  }
+  el.innerHTML = `<div class="insight-box ${boxClass}"><div class="insight-title">${title}</div><div class="insight-body">${body}</div></div>`;
   el.style.display = 'block';
 }
 function renderSvaInsight(insight, lang) {
