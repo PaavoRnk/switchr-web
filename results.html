@@ -1525,9 +1525,22 @@ function renderPotenciaInsight(insight, lang) {
   const pLabel = insight.peakMonthLabel ? formatMonthLabel(insight.peakMonthLabel, lang) : null;
   const pConf = insight.confidence;
   let boxClass, title, body;
+  const pMeas = insight.usedMeasuredPeak && insight.measuredPeakKw != null;
   if (insight.flag === 'under') {
     boxClass = 'insight-danger';
-    if (pConf === 'full' || pConf === 'medium') {
+    if (pMeas) {
+      const exceeded = insight.measuredPeakKw > pP1;
+      title = isEs
+        ? (exceeded ? `⚡ Tu potencia contratada (${pP1} kW) es insuficiente — tu contador lo confirma` : `⚡ Tu potencia contratada (${pP1} kW) está cerca de tu demanda máxima real`)
+        : (exceeded ? `⚡ Contracted power (${pP1} kW) is too low — your meter shows it's been exceeded` : `⚡ Contracted power (${pP1} kW) is close to your peak demand`);
+      body = isEs
+        ? (exceeded
+            ? `Tu contador registró una demanda máxima de ${insight.measuredPeakKw} kW el último año — por encima de tu límite de ${pP1} kW. Por eso salta el ICP. Te recomendamos subir a al menos <strong>${pRec} kW</strong>.`
+            : `Tu contador registró una demanda máxima de ${insight.measuredPeakKw} kW — el ${pUtil}% de tu límite. Tienes poco margen y es posible que el ICP salte en momentos de mayor consumo.`)
+        : (exceeded
+            ? `Your smart meter recorded a peak demand of ${insight.measuredPeakKw} kW last year — above your ${pP1} kW limit. This is why your circuit breaker trips. We recommend upgrading to at least <strong>${pRec} kW</strong>.`
+            : `Your smart meter recorded a peak of ${insight.measuredPeakKw} kW — ${pUtil}% of your limit. You have very little headroom and may experience circuit breaker trips.`);
+    } else if (pConf === 'full' || pConf === 'medium') {
       title = isEs ? `⚡ Potencia contratada al límite (${pP1} kW)` : `⚡ Contracted power near limit (${pP1} kW)`;
       body = isEs
         ? `Tu mes de mayor consumo fue ${pLabel} con ${pPeak} kWh — usaste el ${pUtil}% de tus ${pP1} kW contratados. Si el ICP te ha saltado alguna vez, probablemente sea por esto. Considera subir a <strong>${pRec} kW</strong> para evitarlo.`
@@ -1541,10 +1554,17 @@ function renderPotenciaInsight(insight, lang) {
   } else if (insight.flag === 'over' && pRec) {
     boxClass = 'insight-info';
     const pSaving = estimatePotenciaSaving(pP1, pRec);
-    title = isEs ? `💡 Potencia sobrecontratada (${pP1} kW)` : `💡 Over-contracted power (${pP1} kW)`;
-    body = isEs
-      ? `Incluso en tu mes de mayor consumo (${pLabel}, ${pPeak} kWh) solo usaste el ${pUtil}% de tus ${pP1} kW contratados. Bajar a <strong>${pRec} kW</strong> podría ahorrarte ~€${pSaving}/año en término de potencia.`
-      : `Even in your peak month (${pLabel}, ${pPeak} kWh) you only used ${pUtil}% of your contracted ${pP1} kW. Reducing to <strong>${pRec} kW</strong> could save ~€${pSaving}/year in standing charges.`;
+    if (pMeas) {
+      title = isEs ? `💡 Tu potencia contratada (${pP1} kW) supera tu demanda real` : `💡 Your contracted power (${pP1} kW) is higher than your actual peak demand`;
+      body = isEs
+        ? `Tu contador inteligente registró una demanda máxima de ${insight.measuredPeakKw} kW en el último año — el ${pUtil}% de tu límite de ${pP1} kW. Bajar a <strong>${pRec} kW</strong> te daría margen suficiente y podría ahorrarte unos €${pSaving}/año.`
+        : `Your smart meter recorded a maximum demand of ${insight.measuredPeakKw} kW over the past year — ${pUtil}% of your ${pP1} kW limit. Reducing to <strong>${pRec} kW</strong> would still give you comfortable headroom and could save around €${pSaving}/year.`;
+    } else {
+      title = isEs ? `💡 Potencia sobrecontratada (${pP1} kW)` : `💡 Over-contracted power (${pP1} kW)`;
+      body = isEs
+        ? `Incluso en tu mes de mayor consumo (${pLabel}, ${pPeak} kWh) solo usaste el ${pUtil}% de tus ${pP1} kW contratados. Bajar a <strong>${pRec} kW</strong> podría ahorrarte ~€${pSaving}/año en término de potencia.`
+        : `Even in your peak month (${pLabel}, ${pPeak} kWh) you only used ${pUtil}% of your contracted ${pP1} kW. Reducing to <strong>${pRec} kW</strong> could save ~€${pSaving}/year in standing charges.`;
+    }
   } else {
     return;
   }
