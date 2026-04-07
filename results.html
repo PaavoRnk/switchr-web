@@ -265,6 +265,39 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 .ds-trust-item{display:flex;align-items:center;gap:5px;font-size:12px;color:rgba(255,255,255,0.4)}
 .ds-trust-item svg{opacity:.5}
 
+/* BILL INFO ACCORDION */
+.bill-accordion{
+  border:1px solid var(--border2);border-radius:12px;overflow:hidden;
+  margin:0 0 16px;
+}
+.bill-acc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 18px;cursor:pointer;
+  background:#fafafa;
+  font-size:13px;font-weight:500;color:var(--ink3);
+  user-select:none;transition:background .15s;
+}
+.bill-acc-header:hover{background:#f5f5f5}
+.bill-acc-chevron{transition:transform .25s;flex-shrink:0}
+.bill-acc-body{
+  display:none;padding:14px 18px 16px;
+  border-top:1px solid var(--border2);background:#fff;
+}
+.bill-acc-body.open{display:block}
+.bill-acc-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:8px 0;border-bottom:1px solid #f0f7f3;font-size:13px;
+}
+.bill-acc-row:last-child{border-bottom:none}
+.bill-acc-label{color:var(--ink3)}
+.bill-acc-val{font-weight:500;color:var(--ink)}
+.bill-acc-val.estimated{color:#d97706;font-weight:400}
+.bill-acc-est-note{
+  margin-top:10px;font-size:12px;color:#92400e;
+  background:#fffbeb;border:1px solid #fde68a;border-radius:8px;
+  padding:8px 12px;line-height:1.5;
+}
+
 /* HOW CALCULATED */
 .calc-accordion{
   border:1px solid var(--border2);border-radius:10px;
@@ -553,19 +586,15 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 <div class="stepper">
   <div class="step-item done">
     <div class="step-circle">✓</div>
-    <div class="step-label">Bill sent</div>
+    <div class="step-label">Upload</div>
   </div>
   <div class="step-item done">
     <div class="step-circle">✓</div>
-    <div class="step-label">Analysed</div>
+    <div class="step-label">Analysis</div>
   </div>
   <div class="step-item active">
     <div class="step-circle">3</div>
-    <div class="step-label">Review</div>
-  </div>
-  <div class="step-item todo">
-    <div class="step-circle">4</div>
-    <div class="step-label">Switch</div>
+    <div class="step-label">Results</div>
   </div>
 </div>
 
@@ -606,6 +635,18 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
       <div class="tick-item"><div class="tick-dot"></div>James saved <strong>€318/yr</strong> &nbsp;·&nbsp; Murcia · 5 days ago</div>
       <div class="tick-item"><div class="tick-dot"></div>Sarah saved <strong>€503/yr</strong> &nbsp;·&nbsp; Alicante · 1 week ago</div>
       <div class="tick-item"><div class="tick-dot"></div>Peter saved <strong>€389/yr</strong> &nbsp;·&nbsp; Torrevieja · 1 week ago</div>
+    </div>
+  </div>
+
+  <!-- BILL INFO ACCORDION -->
+  <div class="bill-accordion" id="bill-accordion" style="display:none">
+    <div class="bill-acc-header" onclick="toggleBillAccordion()">
+      <span id="bill-acc-trigger">📄 See what we read from your bill</span>
+      <svg class="bill-acc-chevron" id="bill-acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </div>
+    <div class="bill-acc-body" id="bill-acc-body">
+      <div id="bill-acc-rows"></div>
+      <div class="bill-acc-est-note" id="bill-acc-est-note" style="display:none"></div>
     </div>
   </div>
 
@@ -1440,6 +1481,59 @@ function _initFromSession() {
 
   renderForTariff(best);
   renderTariffOptions();
+  _initBillAccordion();
+}
+
+function _initBillAccordion() {
+  const lang = navigator.language?.startsWith('es') ? 'es' : 'en';
+  const isEs = lang === 'es';
+  const rows = [
+    { label: isEs ? 'Comercializadora actual' : 'Current provider',   value: _ext.current_provider || null },
+    { label: isEs ? 'Tu punto de suministro'  : 'Your supply point',  value: _ext.cups || null },
+    { label: isEs ? 'Última factura'          : 'Last bill',          value: _ext.monthly_cost ? '€' + Number(_ext.monthly_cost).toFixed(2) : null },
+    { label: isEs ? 'Consumo anual'           : 'Annual usage',       value: (_comp && _comp.annualKwh) ? _comp.annualKwh + ' kWh' : null },
+    { label: isEs ? 'Potencia contratada'     : 'Contracted power',   value: _ext.power_p1 ? _ext.power_p1 + ' kW' : null },
+  ];
+
+  const estimated = rows.filter(r => !r.value);
+  const rowsEl = document.getElementById('bill-acc-rows');
+  if (!rowsEl) return;
+
+  rows.forEach(r => {
+    const div = document.createElement('div');
+    div.className = 'bill-acc-row';
+    const valHtml = r.value
+      ? `<span class="bill-acc-val">${r.value}</span>`
+      : `<span class="bill-acc-val estimated">~ ${isEs ? 'Estimado' : 'Estimated'}</span>`;
+    div.innerHTML = `<span class="bill-acc-label">${r.label}</span>${valHtml}`;
+    rowsEl.appendChild(div);
+  });
+
+  if (estimated.length > 0) {
+    const noteEl = document.getElementById('bill-acc-est-note');
+    if (noteEl) {
+      noteEl.textContent = isEs
+        ? `Hemos estimado ${estimated.map(r => r.label.toLowerCase()).join(', ')} — esto no afectará a tu cambio pero puede afectar al ahorro exacto mostrado.`
+        : `We estimated ${estimated.map(r => r.label.toLowerCase()).join(', ')} — this won't affect your switch but may affect the exact saving shown.`;
+      noteEl.style.display = 'block';
+    }
+  }
+
+  const acc = document.getElementById('bill-accordion');
+  if (acc) acc.style.display = 'block';
+}
+
+function toggleBillAccordion() {
+  const body = document.getElementById('bill-acc-body');
+  const chevron = document.getElementById('bill-acc-chevron');
+  const trigger = document.getElementById('bill-acc-trigger');
+  const lang = navigator.language?.startsWith('es') ? 'es' : 'en';
+  const isEs = lang === 'es';
+  const isOpen = body.classList.toggle('open');
+  chevron.style.transform = isOpen ? 'rotate(180deg)' : '';
+  trigger.textContent = isOpen
+    ? (isEs ? 'Ocultar detalles' : 'Hide details')
+    : (isEs ? '📄 Ver lo que leímos de tu factura' : '📄 See what we read from your bill');
 }
 
 /* ── Insight callouts ── */

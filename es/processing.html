@@ -238,8 +238,7 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
 <div class="stepper">
   <div class="st done"><div class="st-circle">✓</div><div class="st-label">Subida</div></div>
   <div class="st active" id="st-analyse"><div class="st-circle" id="st-analyse-circle">2</div><div class="st-label">Análisis</div></div>
-  <div class="st todo" id="st-review"><div class="st-circle">3</div><div class="st-label">Revisión</div></div>
-  <div class="st todo"><div class="st-circle">4</div><div class="st-label">Cambio</div></div>
+  <div class="st todo" id="st-results"><div class="st-circle">3</div><div class="st-label">Resultados</div></div>
 </div>
 
 <main>
@@ -280,56 +279,25 @@ main{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 
   <!-- ── FASE 2: RESUMEN DE EXTRACCIÓN ── -->
   <div class="phase" id="phase-extract">
     <div style="font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:6px;">Esto es lo que encontramos</div>
-    <div style="font-size:14px;color:var(--ink3);margin-bottom:20px;">Comprueba los datos extraídos de tu factura. Corrige lo que no sea correcto antes de calcular tu ahorro.</div>
-
-    <div class="status-banner all-ok" id="status-banner">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-      <span id="status-text">Todo extraído correctamente — listos para calcular tu ahorro.</span>
-    </div>
+    <div style="font-size:14px;color:var(--ink3);margin-bottom:20px;">Los datos de tu factura, confirmados y listos para la comparación.</div>
 
     <div class="extracted-grid" id="extracted-grid">
       <!-- Populated by JS -->
     </div>
 
-    <div class="missing-note" id="missing-note" style="display:none">
-      <strong>Algunos campos que no pudimos leer de tu factura</strong>
-      <span id="missing-note-text"></span>
+    <div class="missing-note" id="estimated-note" style="display:none;margin-bottom:20px;">
+      <strong>Algunos campos fueron estimados</strong>
+      <span id="estimated-note-text"> — esto no afectará a tu cambio, pero puede afectar al ahorro exacto mostrado.</span>
     </div>
 
-    <!-- Manual input for any missing fields -->
-    <div class="manual-field" id="field-cups">
-      <label>Número CUPS (en tu factura, empieza por ES)</label>
-      <input type="text" id="input-cups" placeholder="ES0021 0000 0000 0000 XX" maxlength="22">
+    <div class="redirect-bar" id="auto-redirect-bar">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Llevándote a tus resultados...
+      <div class="redirect-progress" style="flex:1"><div class="redirect-fill" id="redirect-fill"></div></div>
     </div>
-    <div class="manual-field" id="field-provider">
-      <label>Comercializadora actual</label>
-      <input type="text" id="input-provider" placeholder="p.ej. Iberdrola, Endesa, Naturgy...">
-    </div>
-    <div class="manual-field" id="field-monthly">
-      <label>Factura mensual aproximada (€)</label>
-      <input type="number" id="input-monthly" placeholder="p.ej. 85" min="10" max="500">
-    </div>
-
-    <button class="cta-primary" id="btn-calculate" onclick="goToResults()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      Calcular mi ahorro
-    </button>
     <button class="cta-secondary" onclick="startOver()">Subir una factura diferente</button>
   </div>
 
-  <!-- ── FASE 3: REDIRIGIENDO ── -->
-  <div class="phase" id="phase-ready">
-    <div class="success-icon">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
-    <div class="phase-title">¡Ahorro calculado!</div>
-    <div class="phase-sub">Hemos encontrado tu mejor tarifa. Llevándote a tu informe ahora.</div>
-    <div class="redirect-bar">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-      Redirigiendo a tu informe de ahorro...
-      <div class="redirect-progress" style="flex:1"><div class="redirect-fill" id="redirect-fill"></div></div>
-    </div>
-  </div>
 
 </div>
 </main>
@@ -339,15 +307,11 @@ const SUPABASE_URL = 'https://ufyindkuuvsberajyiar.supabase.co';
 const PROCESS_URL = SUPABASE_URL + '/functions/v1/process-website-bill';
 
 const FIELD_META = {
-  cups:         { label: 'CUPS',                    critical: true  },
-  provider:     { label: 'Comercializadora actual', critical: true  },
-  monthly_cost: { label: 'Factura mensual',         critical: false },
-  annual_kwh:   { label: 'Consumo anual',           critical: true  },
-  potencia_kw:  { label: 'Potencia contratada',     critical: false },
-  p1_kwh:       { label: 'Consumo Punta (P1)',      critical: true  },
-  p2_kwh:       { label: 'Consumo Llano (P2)',      critical: true  },
-  p3_kwh:       { label: 'Consumo Valle (P3)',      critical: true  },
-  tariff_type:  { label: 'Tarifa actual',           critical: false },
+  provider:     { label: 'Comercializadora actual' },
+  cups:         { label: 'Tu punto de suministro'  },
+  monthly_cost: { label: 'Última factura'          },
+  annual_kwh:   { label: 'Consumo anual'           },
+  potencia_kw:  { label: 'Potencia contratada'     },
 };
 
 /* ── Animation steps (play while API call runs) ── */
@@ -433,36 +397,28 @@ function renderExtraction(data) {
     document.getElementById('phase-extract').classList.add('active');
     document.getElementById('st-analyse').className = 'st done';
     document.getElementById('st-analyse-circle').textContent = '✓';
-    document.getElementById('st-review').className = 'st active';
+    document.getElementById('st-results').className = 'st active';
 
     const ext = data.extracted_data || {};
     const comp = data.comparison_result;
 
+    // Build display fields from real extraction
     const fields = {
-      cups:         { value: ext.cups || null,                found: !!ext.cups },
       provider:     { value: ext.current_provider || null,   found: !!ext.current_provider },
+      cups:         { value: ext.cups || null,               found: !!ext.cups },
       monthly_cost: { value: ext.monthly_cost ? '€' + Number(ext.monthly_cost).toFixed(2) : null, found: !!ext.monthly_cost },
       annual_kwh:   { value: comp ? comp.annualKwh + ' kWh' : null, found: !!(comp && comp.annualKwh) },
       potencia_kw:  { value: ext.power_p1 ? ext.power_p1 + ' kW' : null, found: !!ext.power_p1 },
-      p1_kwh:       { value: ext.punta_kwh ? ext.punta_kwh + ' kWh (Punta)' : null, found: !!ext.punta_kwh },
-      p2_kwh:       { value: ext.llano_kwh ? ext.llano_kwh + ' kWh (Llano)' : null, found: !!ext.llano_kwh },
-      p3_kwh:       { value: ext.valle_kwh ? ext.valle_kwh + ' kWh (Valle)' : null, found: !!ext.valle_kwh },
-      tariff_type:  { value: ext.current_tariff || null,     found: !!ext.current_tariff },
     };
 
     const grid = document.getElementById('extracted-grid');
-    const banner = document.getElementById('status-banner');
-    const statusTx = document.getElementById('status-text');
-    const missingN = document.getElementById('missing-note');
-    const missingT = document.getElementById('missing-note-text');
-
-    let missing = [], allOk = true;
+    let hasEstimated = false;
     let delay = 0;
 
     Object.entries(fields).forEach(([key, field]) => {
       const meta = FIELD_META[key];
       if (!meta) return;
-      delay += 80;
+      delay += 120;
       const row = document.createElement('div');
       row.className = 'ex-row';
       row.style.animationDelay = delay + 'ms';
@@ -473,37 +429,30 @@ function renderExtraction(data) {
             <div class="ex-icon ok"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
             <div><div class="ex-label">${meta.label}</div></div>
           </div>
-          <div class="ex-value ok">${field.value}</div>`;
+          <div class="ex-value ok">✓ Encontrado &nbsp;·&nbsp; ${field.value}</div>`;
       } else {
-        allOk = false;
-        missing.push(meta.label);
-        const severity = meta.critical ? 'fail' : 'warn';
+        hasEstimated = true;
         row.innerHTML = `
           <div class="ex-left">
-            <div class="ex-icon ${severity}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="${severity==='fail'?'#ef4444':'#d97706'}" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-            <div><div class="ex-label">${meta.label}</div><div class="ex-sub">${meta.critical?'Necesario para el cálculo':'Opcional — se estimará'}</div></div>
+            <div class="ex-icon warn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <div><div class="ex-label">${meta.label}</div></div>
           </div>
-          <div class="ex-value ${severity}">${meta.critical?'No encontrado — introdúcelo a continuación':'No encontrado'}</div>`;
-        if (meta.critical && key === 'cups') {
-          const el = document.getElementById('field-cups');
-          if (el) el.classList.add('show');
-        }
+          <div class="ex-value warn">~ Estimado</div>`;
       }
       grid.appendChild(row);
     });
 
-    if (allOk) {
-      banner.className = 'status-banner all-ok';
-      statusTx.textContent = 'Todo extraído correctamente — listos para calcular tu ahorro.';
-    } else if (missing.some(m => Object.entries(FIELD_META).find(([k,v]) => v.label === m && v.critical))) {
-      banner.className = 'status-banner has-fail';
-      statusTx.textContent = 'No pudimos leer algunos campos necesarios. Por favor, rellena los que faltan a continuación.';
-      if (missingN) missingN.style.display = 'block';
-      if (missingT) missingT.textContent = ' ' + missing.join(', ') + '.';
-    } else {
-      banner.className = 'status-banner has-warn';
-      statusTx.textContent = 'La mayoría de campos extraídos. Algunos datos opcionales no estaban claros — los estimaremos.';
+    if (hasEstimated) {
+      const n = document.getElementById('estimated-note');
+      if (n) n.style.display = 'block';
     }
+
+    // Auto-redirect after fields animate in
+    const totalDelay = delay + 2200;
+    setTimeout(() => {
+      document.getElementById('redirect-fill').style.width = '100%';
+      setTimeout(goToResults, 2600);
+    }, totalDelay);
   }, 600);
 }
 
@@ -519,14 +468,7 @@ function showError(msg) {
 function goToResults() {
   const session = apiResult;
   if (!session || !session.session_id) { window.location.href = 'index.html'; return; }
-
-  document.getElementById('phase-extract').classList.remove('active');
-  document.getElementById('phase-ready').classList.add('active');
-  document.getElementById('st-review').className = 'st done';
-  document.getElementById('st-review').querySelector('.st-circle').textContent = '✓';
-
-  setTimeout(() => { document.getElementById('redirect-fill').style.width = '100%'; }, 100);
-  setTimeout(() => { window.location.href = 'results.html?session=' + session.session_id; }, 2700);
+  window.location.href = 'results.html?session=' + session.session_id;
 }
 
 function startOver() {
