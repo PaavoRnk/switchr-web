@@ -43,11 +43,11 @@
       '.sw-cb-text{flex:1;min-width:200px}' +
       '.sw-cb-btns{display:flex;gap:10px;flex-shrink:0}' +
       '.sw-cb-reject{' +
-        'padding:9px 18px;border-radius:8px;font-size:13px;font-weight:500;cursor:pointer;' +
-        'background:transparent;border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.75);' +
-        'font-family:inherit;transition:border-color 0.2s,color 0.2s' +
+        'padding:9px 18px;font-size:13px;font-weight:400;cursor:pointer;' +
+        'background:transparent;border:none;color:rgba(255,255,255,0.55);' +
+        'font-family:inherit;text-decoration:underline;text-underline-offset:2px' +
       '}' +
-      '.sw-cb-reject:hover{border-color:rgba(255,255,255,0.5);color:#fff}' +
+      '.sw-cb-reject:hover{color:rgba(255,255,255,0.8)}' +
       '.sw-cb-accept{' +
         'padding:9px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;' +
         'background:#25D366;border:none;color:#0a1a15;' +
@@ -57,20 +57,19 @@
       '@media(max-width:520px){' +
         '#sw-cookie-banner{flex-direction:column;align-items:flex-start;gap:12px}' +
         '.sw-cb-btns{width:100%}' +
-        '.sw-cb-reject,.sw-cb-accept{flex:1;text-align:center}' +
+        '.sw-cb-accept{flex:1;text-align:center}' +
       '}' +
     '</style>';
 
     var html = css +
       '<div id="sw-cookie-banner">' +
         '<div class="sw-cb-text">' +
-          'We use Google Analytics to understand how visitors use our site. ' +
-          'No cookies are set without your consent. ' +
+          'We use Google Analytics. No cookies without your consent. ' +
           '<a href="privacy-policy.html">Privacy policy</a>' +
         '</div>' +
         '<div class="sw-cb-btns">' +
           '<button class="sw-cb-reject" id="sw-cb-reject-btn">Reject</button>' +
-          '<button class="sw-cb-accept" id="sw-cb-accept-btn">Accept analytics</button>' +
+          '<button class="sw-cb-accept" id="sw-cb-accept-btn">Accept &amp; continue</button>' +
         '</div>' +
       '</div>';
 
