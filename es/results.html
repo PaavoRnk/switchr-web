@@ -1657,7 +1657,17 @@ async function submitSwitch() {
       }
     } else if (data.provider === 'nordy' || data.manual) {
       const title = confirmScreen.querySelector('[class*="title"]');
-      if (title) title.textContent = '¡Todo listo! Nuestro equipo se pondrá en contacto contigo.';
+      if (title) title.textContent = '¡Todo listo! ✅';
+      const sub = confirmScreen.querySelector('[class*="sub"]');
+      if (sub) sub.textContent = 'Tu solicitud ha sido registrada. Firma el email de Logalty para activar tu cambio.';
+      if (!confirmScreen.querySelector('#logalty-note')) {
+        const note = document.createElement('div');
+        note.id = 'logalty-note';
+        note.style.cssText = 'margin-top:20px;background:#f5f3ff;border:1px solid #c4b5fd;border-radius:10px;padding:14px 16px;font-size:14px;color:#5b21b6;text-align:left;max-width:340px;margin-left:auto;margin-right:auto;line-height:1.55';
+        note.innerHTML = '<strong>📧 Revisa tu correo</strong><br>Recibirás un email de <strong>Logalty</strong> — la plataforma de firma electrónica de Nordy — en unos <strong>30 minutos</strong>.<br><span style="color:#7c3aed">¿No lo ves? Revisa la carpeta de spam.</span>';
+        const steps = confirmScreen.querySelector('[class*="steps"]');
+        if (steps) steps.after(note); else confirmScreen.appendChild(note);
+      }
     }
     sessionStorage.removeItem('sw_session');
   } catch (err) {
