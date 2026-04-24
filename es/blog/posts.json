@@ -1,1 +1,16 @@
-[]
+[
+  {
+    "slug": "why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home",
+    "title": "¿Por qué mi factura de luz es tan alta si no hay nadie en casa?",
+    "description": "Tu factura de luz en España tiene dos cargos distintos. Uno es por lo que consumes. El otro se cobra cada día aunque la vivienda esté vacía. Aquí te explicamos qué es y qué puedes hacer.",
+    "excerpt": "Si alguna vez has vuelto a tu propiedad española tras unas semanas fuera y te has encontrado con una factura de luz que parece demasiado alta para una casa que ha estado vacía — no estás imaginándotelo.",
+    "date": "2026-04-24",
+    "image": "/blog/images/why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home-hero.png",
+    "imageAlt": "Salón de un apartamento español vacío con una factura de luz en la mesita",
+    "category": "Guías",
+    "tags": ["facturas de luz", "potencia", "guía expat", "España", "casa vacacional"],
+    "readingTime": 5,
+    "cta": "whatsapp",
+    "relatedSlugs": []
+  }
+]
