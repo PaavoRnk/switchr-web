@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) — Consent Mode v2 -->
+<script async data-cfasync="false" src="https://www.googletagmanager.com/gtag/js?id=G-ZF2VXXL0FP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('consent','default',{'analytics_storage':'denied','ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','wait_for_update':500});
+  if(localStorage.getItem('sw_cookie_consent')==='accepted'){gtag('consent','update',{'analytics_storage':'granted'})}
+  gtag('js', new Date());
+  gtag('config', 'G-ZF2VXXL0FP');
+</script>
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "w0sc1rn5r8");
+</script>
+<script src="/language.js"></script>
+<script defer src="/cookie-consent.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="canonical" href="https://switchr.es/blog/">
+<link rel="alternate" hreflang="en" href="https://switchr.es/blog/">
+<link rel="alternate" hreflang="es" href="https://switchr.es/es/blog/">
+<link rel="alternate" hreflang="x-default" href="https://switchr.es/blog/">
+<title>Blog — Switchr</title>
+<meta name="description" content="Guides for English-speaking expats in Spain on electricity bills, tariffs, and how to switch to a better deal.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog — Switchr">
+<meta property="og:description" content="Guides for English-speaking expats in Spain on electricity bills, tariffs, and how to switch to a better deal.">
+<meta property="og:url" content="https://switchr.es/blog/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --g:#25D366;--gd:#128C7E;--sw:#0f7a45;
+  --gp:#f0fdf4;--gb:rgba(37,211,102,0.12);
+  --ink:#0a1a15;--ink2:#253d35;--ink3:#4e7265;--ink4:#8aada3;
+  --bg:#f8fdfb;--white:#fff;
+  --border:rgba(37,211,102,0.18);--border2:rgba(0,0,0,0.07);
+  --r:12px;--r2:20px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);overflow-x:hidden;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(248,253,251,0.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 40px;height:60px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-family:Sora,sans-serif;font-weight:700;font-size:20px;color:var(--ink);display:flex;align-items:center;gap:8px;text-decoration:none;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-size:14px;color:var(--ink2);text-decoration:none;font-weight:400;transition:color .15s;}
+.nav-links a:hover{color:var(--ink);}
+.nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--g);color:#fff;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--gd);color:#fff;}
+.hamburger{display:none;flex-direction:column;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;padding:6px;z-index:101;flex-shrink:0;}
+.hamburger span{display:block;width:22px;height:2px;border-radius:2px;background:var(--ink);}
+
+/* ── PAGE HERO ── */
+.page-hero{background:var(--ink);padding:80px 40px 72px;position:relative;overflow:hidden;}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 100%, rgba(15,122,69,0.35) 0%, transparent 70%);pointer-events:none;}
+.page-hero-ghost{position:absolute;right:-20px;top:-20px;font-family:'Sora',sans-serif;font-size:200px;font-weight:900;color:rgba(37,211,102,0.04);line-height:1;pointer-events:none;user-select:none;white-space:nowrap;}
+.page-hero-inner{max-width:760px;margin:0 auto;position:relative;z-index:1;}
+.hero-kicker{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:20px;}
+.kicker-dot{width:6px;height:6px;border-radius:50%;background:var(--g);}
+.page-hero h1{font-family:'Sora',sans-serif;font-size:clamp(28px,4vw,50px);font-weight:800;line-height:1.1;letter-spacing:-.025em;color:#fff;margin-bottom:16px;}
+.page-hero h1 em{color:var(--g);font-style:normal;}
+.page-hero p{font-size:17px;color:rgba(255,255,255,0.55);font-weight:300;line-height:1.65;max-width:520px;}
+
+/* ── SEARCH ── */
+.blog-search-wrap{padding:32px 40px 0;max-width:1080px;margin:0 auto;}
+.blog-search-inner{position:relative;max-width:480px;}
+.blog-search-inner svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--ink4);pointer-events:none;}
+#blog-search{width:100%;padding:12px 16px 12px 42px;border:1px solid var(--border);border-radius:var(--r);font-family:'DM Sans',sans-serif;font-size:15px;color:var(--ink);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;}
+#blog-search:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(37,211,102,0.1);}
+#blog-search::placeholder{color:var(--ink4);}
+
+/* ── BLOG GRID ── */
+.blog-main{padding:28px 40px 80px;max-width:1080px;margin:0 auto;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.blog-grid--hero{grid-template-columns:1fr;}
+.blog-grid--two{grid-template-columns:repeat(2,1fr);}
+
+/* ── BLOG CARD ── */
+.blog-card{background:#fff;border:1px solid var(--border2);border-radius:var(--r2);overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .2s,transform .2s;}
+.blog-card:hover{box-shadow:0 6px 32px rgba(0,0,0,0.09);transform:translateY(-2px);}
+.blog-card-img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--gp);}
+.blog-grid--hero .blog-card-img{aspect-ratio:21/9;}
+.blog-card-body{padding:24px;display:flex;flex-direction:column;gap:10px;flex:1;}
+.blog-tag{display:inline-block;background:var(--gp);color:var(--sw);font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:20px;align-self:flex-start;}
+.blog-card-body h2{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--ink);line-height:1.3;}
+.blog-grid--hero .blog-card-body h2{font-size:26px;}
+.blog-card-body h2 a{color:inherit;text-decoration:none;}
+.blog-card-body h2 a:hover{color:var(--sw);}
+.blog-excerpt{font-size:14px;color:var(--ink3);line-height:1.65;}
+.blog-meta{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink4);margin-top:auto;padding-top:4px;}
+.blog-meta-sep{opacity:.4;}
+.blog-read-more{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:var(--sw);text-decoration:none;margin-top:6px;transition:gap .15s;}
+.blog-read-more:hover{gap:8px;}
+
+/* ── EMPTY STATE ── */
+.blog-empty{text-align:center;padding:80px 40px;}
+.blog-empty-icon{font-size:48px;margin-bottom:20px;}
+.blog-empty h3{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:12px;}
+.blog-empty p{font-size:15px;color:var(--ink3);line-height:1.6;max-width:400px;margin:0 auto 24px;}
+.blog-empty-clear{background:none;border:1px solid var(--border);color:var(--sw);font-size:13px;font-weight:600;padding:8px 20px;border-radius:8px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:background .2s;}
+.blog-empty-clear:hover{background:var(--gp);}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:56px 40px 32px;border-top:1px solid rgba(37,211,102,0.15);}
+.footer-inner{max-width:1040px;margin:0 auto;}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.35);line-height:1.65;max-width:240px;margin-top:4px;}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:12px;}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;margin-bottom:7px;}
+.footer-col a:hover{color:rgba(255,255,255,0.75);}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:24px;text-align:center;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.2);margin-bottom:6px;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .blog-grid{grid-template-columns:repeat(2,1fr);}
+  .blog-grid--hero{grid-template-columns:1fr;}
+  .footer-top{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  nav{padding:0 20px;}
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:99;}
+  nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px;}
+  nav.menu-open .nav-links a:hover{background:var(--gp);}
+  nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px;}
+  .page-hero{padding:60px 20px 48px;}
+  .blog-search-wrap{padding:24px 20px 0;}
+  .blog-main{padding:20px 20px 60px;}
+  .blog-grid,.blog-grid--two{grid-template-columns:1fr;}
+  footer{padding:40px 20px 24px;}
+  .footer-top{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV:START -->
+<nav>
+  <a href="index.html" class="logo"><img src="switchr_logo_black.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:19px;">Switchr.es</span></a>
+  <div class="nav-links">
+    <a href="index.html#how-it-works">How it works</a>
+    <a href="how-it-works.html">Full explainer</a>
+    <a href="index.html#market-watch">Market watch</a>
+    <a href="index.html#faq">FAQ</a>
+    <a href="about.html">About</a>
+    <a href="/blog/">Blog</a>
+    <a href="contact.html">Contact</a>
+    <a href="https://wa.me/34662403660" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Start now
+    </a>
+    <a href="#" onclick="if(typeof switchLang==='function')switchLang('es');return false" style="display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border:1.5px solid currentColor;border-radius:6px;font-size:12px;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;color:inherit;opacity:.7;margin-left:4px;white-space:nowrap;flex-shrink:0"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>ES</a>
+  </div>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+<!-- NAV:END -->
+
+<section class="page-hero">
+  <div class="page-hero-ghost">Blog</div>
+  <div class="page-hero-inner">
+    <div class="hero-kicker"><span class="kicker-dot"></span>From the blog</div>
+    <h1>Electricity guides for <em>expats in Spain</em></h1>
+    <p>Plain-English advice on bills, tariffs, and switching — from people who've been through it.</p>
+  </div>
+</section>
+
+<div class="blog-search-wrap">
+  <div class="blog-search-inner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input id="blog-search" type="search" placeholder="Search articles..." aria-label="Search articles">
+  </div>
+</div>
+
+<main class="blog-main">
+  <div id="blog-grid" class="blog-grid"></div>
+  <div id="blog-empty" class="blog-empty" hidden></div>
+</main>
+
+<!-- FOOTER:START -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:14px;"><img src="switchr_logo_white.png" alt="Switchr" style="height:47px;width:auto;display:block;"><span style="font-family:Sora,sans-serif;font-weight:700;font-size:17px;color:rgba(255,255,255,0.85);">Switchr.es</span></a>
+        <p>WhatsApp, email & web-based electricity switching for English-speaking expats in Spain. Partnering with Spain's best energy providers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="index.html#how-it-works">How it works</a>
+        <a href="how-it-works.html">Full explainer</a>
+        <a href="sample-report.html">Sample report</a>
+      </div>
+      <div class="footer-col">
+        <h4>Start</h4>
+        <a href="https://wa.me/34662403660">WhatsApp</a>
+        <a href="#" onclick="copyEmail();return false">Email</a>
+        <a href="index.html" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}">Upload PDF</a>
+      </div>
+      <div class="footer-col">
+        <h4>Help</h4>
+        <a href="index.html#faq">FAQ</a>
+        <a href="privacy-policy.html">Privacy policy</a>
+        <a href="terms-and-conditions.html">Terms & conditions</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div class="footer-col" id="footer-blog-col">
+        <h4>Blog</h4>
+        <a href="/blog/">View all articles</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Switchr.es &nbsp;|&nbsp; 📍 Proudly based in Murcia, Spain</p>
+      <p>Multi-provider energy switching · All contracts direct with the provider · GDPR compliant</p>
+      <p><a href="#" onclick="if(typeof resetCookieConsent==='function'){resetCookieConsent();}return false;" style="color:rgba(255,255,255,0.4);font-size:12px;text-decoration:none;border-bottom:1px solid rgba(255,255,255,0.15);">Cookie preferences</a></p>
+    </div>
+  </div>
+</footer>
+<!-- FOOTER:END -->
+
+<script>
+function toggleMenu(){var n=document.querySelector('nav');n.classList.toggle('menu-open');}
+document.addEventListener('click',function(e){var n=document.querySelector('nav');if(n&&n.classList.contains('menu-open')&&!n.contains(e.target))n.classList.remove('menu-open');});
+
+(function(){
+  var allPosts=[];
+  var searchEl=document.getElementById('blog-search');
+
+  fetch('/blog/posts.json')
+    .then(function(r){return r.json();})
+    .then(function(posts){
+      allPosts=posts.slice().sort(function(a,b){return b.date.localeCompare(a.date);});
+      render(allPosts);
+    })
+    .catch(showError);
+
+  if(searchEl){
+    searchEl.addEventListener('input',function(e){
+      var q=e.target.value.trim().toLowerCase();
+      if(!q){render(allPosts);return;}
+      render(allPosts.filter(function(p){
+        return (p.title+' '+(p.excerpt||'')+' '+(p.tags||[]).join(' ')).toLowerCase().indexOf(q)!==-1;
+      }));
+    });
+  }
+
+  function render(posts){
+    var grid=document.getElementById('blog-grid');
+    var empty=document.getElementById('blog-empty');
+    var q=searchEl?searchEl.value.trim():'';
+    if(posts.length===0){
+      grid.innerHTML='';grid.className='blog-grid';empty.hidden=false;
+      if(q){
+        empty.innerHTML='<div class="blog-empty-icon">🔍</div><h3>No articles found</h3><p>No articles match "'+esc(q)+'". Try a different search term.</p><button class="blog-empty-clear" onclick="document.getElementById(\'blog-search\').value=\'\';document.getElementById(\'blog-search\').dispatchEvent(new Event(\'input\'))">Clear search</button>';
+      }else{
+        empty.innerHTML='<div class="blog-empty-icon">✍️</div><h3>Guides coming soon</h3><p>We\'re working on plain-English guides for expats in Spain. Check back soon.</p>';
+      }
+      return;
+    }
+    empty.hidden=true;
+    grid.className=posts.length===1?'blog-grid blog-grid--hero':posts.length===2?'blog-grid blog-grid--two':'blog-grid';
+    grid.innerHTML=posts.map(card).join('');
+  }
+
+  function card(p){
+    var href='/blog/'+p.slug+'.html';
+    var d=new Date(p.date).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+    return '<article class="blog-card">'+
+      '<a href="'+href+'" tabindex="-1" aria-hidden="true"><img class="blog-card-img" src="'+esc(p.image)+'" alt="'+esc(p.imageAlt||p.title)+'" loading="lazy" onerror="this.style.minHeight=\'180px\'"></a>'+
+      '<div class="blog-card-body">'+
+      '<span class="blog-tag">'+esc(p.category)+'</span>'+
+      '<h2><a href="'+href+'">'+esc(p.title)+'</a></h2>'+
+      '<p class="blog-excerpt">'+esc(p.excerpt||'')+'</p>'+
+      '<div class="blog-meta"><time datetime="'+p.date+'">'+d+'</time><span class="blog-meta-sep">·</span><span>'+p.readingTime+' min read</span></div>'+
+      '<a href="'+href+'" class="blog-read-more">Read more →</a>'+
+      '</div></article>';
+  }
+
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function showError(){var e=document.getElementById('blog-empty');document.getElementById('blog-grid').innerHTML='';e.hidden=false;e.innerHTML='<div class="blog-empty-icon">⚠️</div><h3>Something went wrong</h3><p>Could not load articles. Please refresh the page.</p>';}
+}());
+</script>
+</body>
+</html>

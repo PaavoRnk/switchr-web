@@ -14,6 +14,10 @@
   };
 
   function getESEquivalent(path) {
+    // Blog paths: /blog/... → /es/blog/...
+    if (path.startsWith('/blog/')) {
+      return '/es' + path;
+    }
     return EN_TO_ES[path] || '/es/index.html';
   }
 

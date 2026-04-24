@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Static EN pages -->
+  <url>
+    <loc>https://switchr.es/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/how-it-works.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/how-it-works.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/how-it-works.html"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/about.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://switchr.es/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/contact.html"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/privacy-policy.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://switchr.es/terms-and-conditions.html</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Static ES pages -->
+  <url>
+    <loc>https://switchr.es/es/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/es/how-it-works.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/how-it-works.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/how-it-works.html"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/es/contact.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/contact.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/contact.html"/>
+  </url>
+
+  <!-- Blog listing pages -->
+  <url>
+    <loc>https://switchr.es/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/blog/"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/es/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/blog/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/blog/"/>
+  </url>
+
+  <!-- Blog posts added below by add-blog-post skill -->
+
+</urlset>
