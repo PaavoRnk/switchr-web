@@ -10,13 +10,13 @@ const staticPages = [
   { file: 'contact.html',              nav: 'nav',         footer: 'footer'      },
   { file: 'privacy-policy.html',       nav: 'nav-lang',    footer: 'footer'      },
   { file: 'terms-and-conditions.html', nav: 'nav-lang',    footer: 'footer'      },
-  { file: 'blog/index.html',           nav: 'nav',         footer: 'footer'      },
+  { file: 'blog/index.html',           nav: 'nav-blog',    footer: 'footer-blog'    },
   // Spanish pages
-  { file: 'es/index.html',             nav: 'nav-home-es', footer: 'footer-home-es' },
-  { file: 'es/how-it-works.html',      nav: 'nav-es',      footer: 'footer-es'      },
-  { file: 'es/contact.html',           nav: 'nav-es',      footer: 'footer-es'      },
-  { file: 'es/sample-report.html',     nav: 'nav-es',      footer: 'footer-es'      },
-  { file: 'es/blog/index.html',        nav: 'nav-es',      footer: 'footer-es'      },
+  { file: 'es/index.html',             nav: 'nav-home-es', footer: 'footer-home-es'    },
+  { file: 'es/how-it-works.html',      nav: 'nav-es',      footer: 'footer-es'         },
+  { file: 'es/contact.html',           nav: 'nav-es',      footer: 'footer-es'         },
+  { file: 'es/sample-report.html',     nav: 'nav-es',      footer: 'footer-es'         },
+  { file: 'es/blog/index.html',        nav: 'nav-blog-es', footer: 'footer-blog-es'    },
 ];
 
 // Dynamic: discover blog post pages from posts.json
