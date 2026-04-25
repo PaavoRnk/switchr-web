@@ -82,6 +82,23 @@
   <!-- Blog posts added below by add-blog-post skill -->
 
   <url>
+    <loc>https://switchr.es/blog/who-chose-your-electricity-supplier-in-spain.html</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/blog/who-chose-your-electricity-supplier-in-spain.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/blog/who-chose-your-electricity-supplier-in-spain.html"/>
+  </url>
+  <url>
+    <loc>https://switchr.es/es/blog/who-chose-your-electricity-supplier-in-spain.html</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://switchr.es/blog/who-chose-your-electricity-supplier-in-spain.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://switchr.es/es/blog/who-chose-your-electricity-supplier-in-spain.html"/>
+  </url>
+
+  <url>
     <loc>https://switchr.es/blog/why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home.html</loc>
     <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>

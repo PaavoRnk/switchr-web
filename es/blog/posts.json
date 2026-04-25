@@ -1,5 +1,19 @@
 [
   {
+    "slug": "who-chose-your-electricity-supplier-in-spain",
+    "title": "¿Quién eligió tu compañía eléctrica en España?",
+    "description": "Tu compañía eléctrica en España probablemente fue elegida por tu abogado, no por ti. Te explicamos qué significa, qué revisar en tu factura y cómo cambiarlo.",
+    "excerpt": "Cuando cerraste la compra de tu propiedad, ¿te preguntaron qué compañía eléctrica querías? No. No lo hicieron. Aquí te explicamos qué pasó y qué puedes hacer.",
+    "date": "2026-04-25",
+    "image": "/blog/images/who-chose-your-electricity-supplier-in-spain-hero.png",
+    "imageAlt": "Documentos de compraventa de una propiedad española en un escritorio con una factura de luz",
+    "category": "Guías",
+    "tags": ["compañía eléctrica", "guía expat", "España", "cambio de compañía", "tarifa"],
+    "readingTime": 4,
+    "cta": "general",
+    "relatedSlugs": ["why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home"]
+  },
+  {
     "slug": "why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home",
     "title": "¿Por qué mi factura de luz es tan alta si no hay nadie en casa?",
     "description": "Tu factura de luz en España tiene dos cargos distintos. Uno es por lo que consumes. El otro se cobra cada día aunque la vivienda esté vacía. Aquí te explicamos qué es y qué puedes hacer.",
