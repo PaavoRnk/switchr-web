@@ -7,6 +7,7 @@ const fs = require('fs');
 const staticPages = [
   { file: 'index.html',                nav: 'nav-home',    footer: 'footer-home' },
   { file: 'how-it-works.html',         nav: 'nav',         footer: 'footer'      },
+  { file: 'results.html',              nav: 'nav',         footer: 'footer'      },
   { file: 'contact.html',              nav: 'nav',         footer: 'footer'      },
   { file: 'privacy-policy.html',       nav: 'nav-lang',    footer: 'footer'      },
   { file: 'terms-and-conditions.html', nav: 'nav-lang',    footer: 'footer'      },
@@ -14,6 +15,7 @@ const staticPages = [
   // Spanish pages
   { file: 'es/index.html',             nav: 'nav-home-es', footer: 'footer-home-es'    },
   { file: 'es/how-it-works.html',      nav: 'nav-es',      footer: 'footer-es'         },
+  { file: 'es/results.html',           nav: 'nav-es',      footer: 'footer-es'         },
   { file: 'es/contact.html',           nav: 'nav-es',      footer: 'footer-es'         },
   { file: 'es/sample-report.html',     nav: 'nav-es',      footer: 'footer-es'         },
   { file: 'es/blog/index.html',        nav: 'nav-blog-es', footer: 'footer-blog-es'    },
