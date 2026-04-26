@@ -560,6 +560,19 @@ main{max-width:900px;margin:0 auto;padding:0 32px 120px}
 .sva-list{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:2px}
 .sva-list li{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05)}
 .sva-list li:last-child{border-bottom:none}
+/* ── FOOTER ── */
+footer{background:#060f0c;padding:48px 40px 32px}
+.footer-inner{max-width:1040px;margin:0 auto}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;margin-bottom:36px}
+.footer-brand a{display:inline-block;}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,0.3);line-height:1.65;max-width:240px}
+.footer-col h4{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,0.25);margin-bottom:12px}
+.footer-col a{display:block;font-size:13px;color:rgba(255,255,255,0.4);text-decoration:none;margin-bottom:7px}
+.footer-col a:hover{color:rgba(255,255,255,0.75)}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,0.18)}
+@media(max-width:900px){.footer-top{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.footer-top{grid-template-columns:1fr}footer{padding:40px 20px 24px}}
 </style>
 </head>
 <body>
