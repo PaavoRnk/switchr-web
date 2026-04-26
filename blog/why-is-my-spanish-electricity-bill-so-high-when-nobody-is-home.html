@@ -74,10 +74,24 @@ nav{position:sticky;top:0;z-index:100;background:rgba(248,253,251,0.93);backdrop
 .post-cta{max-width:720px;margin:48px auto;background:var(--ink);border-radius:var(--r2);padding:40px;text-align:center;}
 .post-cta h3{font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:#fff;margin-bottom:12px;}
 .post-cta p{font-size:15px;color:rgba(255,255,255,0.5);line-height:1.6;margin-bottom:28px;}
-.cta-btn-wa{display:inline-flex;align-items:center;gap:8px;background:var(--g);color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;transition:background .2s;}
-.cta-btn-wa:hover{background:var(--gd);}
-.cta-btn-upload,.cta-btn-general{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:#fff;padding:13px 28px;border-radius:10px;font-size:15px;font-weight:600;font-family:'Sora',sans-serif;text-decoration:none;transition:background .2s;}
-.cta-btn-upload:hover,.cta-btn-general:hover{background:rgba(255,255,255,0.18);}
+.cta-channels{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:100%;margin:0 auto}
+.cta-ch{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:8px;text-decoration:none;color:inherit;transition:background .2s,border-color .2s;cursor:pointer;text-align:left;}
+.cta-ch:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2);}
+.cta-ch-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.cta-ch-wa .cta-ch-icon{background:rgba(37,211,102,0.2);}
+.cta-ch-em .cta-ch-icon{background:rgba(59,130,246,0.2);}
+.cta-ch-up .cta-ch-icon{background:rgba(139,92,246,0.2);}
+.cta-ch-title{font-family:Sora,sans-serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.02em;}
+.cta-ch-sub,.cta-ch-addr{font-size:12px;color:rgba(255,255,255,0.5);line-height:1.4;word-break:break-all;}
+.cta-ch-action{font-size:13px;font-weight:600;margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);}
+.cta-ch-wa .cta-ch-action{color:var(--g);}
+.cta-ch-em .cta-ch-action{color:rgba(147,197,253,1);}
+.cta-ch-up .cta-ch-action{color:rgba(196,181,253,1);}
+.cta-copy-btn{background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:rgba(147,197,253,0.8);padding:0;font-family:inherit;margin-top:auto;padding-top:10px;border-top:1px solid rgba(255,255,255,0.08);width:100%;}
+.cta-copy-btn:hover{color:rgba(147,197,253,1);}
+.cta-copy-toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(12px);background:#1a2e28;border:1px solid rgba(37,211,102,0.3);color:#fff;padding:10px 20px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:9999;white-space:nowrap;}
+.cta-copy-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+@media(max-width:560px){.cta-channels{grid-template-columns:1fr;}}
 .post-related{max-width:720px;margin:48px auto 0;padding-top:40px;border-top:1px solid var(--border2);}
 .post-related h3{font-family:'Sora',sans-serif;font-size:12px;font-weight:700;color:var(--ink);margin-bottom:20px;text-transform:uppercase;letter-spacing:.05em;}
 .post-related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
@@ -98,16 +112,6 @@ footer{background:var(--ink);padding:56px 40px 32px;border-top:1px solid rgba(37
 .footer-bottom p{font-size:12px;color:rgba(255,255,255,0.2);margin-bottom:6px;}
 @media(max-width:900px){.post-related-grid{grid-template-columns:1fr;}.footer-top{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:600px){nav{padding:0 20px;}.nav-links{display:none;}.hamburger{display:flex;}nav.menu-open .nav-links{display:flex;flex-direction:column;position:absolute;top:60px;left:0;right:0;background:rgba(248,253,251,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:12px 20px 18px;gap:2px;z-index:99;}nav.menu-open .nav-links a{color:var(--ink2)!important;padding:11px 10px;border-radius:8px;display:flex;font-size:15px;}nav.menu-open .nav-cta{background:var(--g)!important;color:#fff!important;justify-content:center;margin-top:6px;border-radius:9px;padding:12px 20px;}.post-hero img{height:260px;}.post-header{padding:32px 20px 24px;}.post-body{padding:32px 20px 60px;}.post-cta{padding:28px 20px;}.footer-top{grid-template-columns:1fr;}footer{padding:40px 20px 24px;}.final-btns{flex-direction:column;align-items:center;}.final-btn-wa,.final-btn-em,.final-btn-web{width:100%;max-width:320px;justify-content:center;}}
-.final-btns{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-bottom:0}
-.final-btn-wa{display:inline-flex;align-items:center;gap:10px;background:var(--g);color:#fff;padding:14px 28px;border-radius:12px;font-family:Sora,sans-serif;font-size:15px;font-weight:700;text-decoration:none;transition:background .2s,transform .1s;box-shadow:0 6px 24px rgba(37,211,102,0.25)}
-.final-btn-wa:hover{background:var(--gd);transform:translateY(-1px)}
-.final-btn-wa svg{width:19px;height:19px}
-.final-btn-em{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.15);border:1px solid rgba(59,130,246,0.25);color:rgba(255,255,255,0.85);padding:14px 28px;border-radius:12px;font-family:Sora,sans-serif;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s}
-.final-btn-em:hover{background:rgba(59,130,246,0.25)}
-.final-btn-em svg{width:17px;height:17px}
-.final-btn-web{display:inline-flex;align-items:center;gap:8px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.25);color:rgba(255,255,255,0.75);padding:14px 28px;border-radius:12px;font-family:Sora,sans-serif;font-size:15px;font-weight:600;text-decoration:none;transition:all .2s}
-.final-btn-web:hover{background:rgba(139,92,246,0.25)}
-.final-btn-web svg{width:17px;height:17px}
 </style>
 </head>
 <body>
@@ -193,22 +197,29 @@ footer{background:var(--ink);padding:56px 40px 32px;border-top:1px solid rgba(37
 
   <div class="post-cta">
     <h3>Ready to stop overpaying?</h3>
-    <p>Choose whatever's easiest — WhatsApp, email, or upload. All free, all under 5 minutes.</p>
-    <div class="final-btns">
-      <a href="https://wa.me/34662403660" class="final-btn-wa">
-        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
+    <p>Choose whatever's easiest — all free, all under 5 minutes.</p>
+    <div class="cta-channels">
+      <a href="https://wa.me/34662403660?text=Hi%2C+I%27d+like+to+check+my+electricity+bill" class="cta-ch cta-ch-wa">
+        <div class="cta-ch-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="rgba(37,211,102,0.9)"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a5.526 5.526 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>
+        <div class="cta-ch-title">WhatsApp</div>
+        <div class="cta-ch-sub">Send your bill, get savings in 2 min</div>
+        <div class="cta-ch-action">Open chat →</div>
       </a>
-      <a href="mailto:audit@switchr.es" class="final-btn-em">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg>
-        Email your bill
-      </a>
-      <a href="/" onclick="if(typeof openUploadModal==='function'){openUploadModal();return false}" class="final-btn-web">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-        Upload PDF
+      <div class="cta-ch cta-ch-em">
+        <div class="cta-ch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(147,197,253,0.9)" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg></div>
+        <div class="cta-ch-title">Email</div>
+        <div class="email-address cta-ch-addr">audit@switchr.es</div>
+        <button class="cta-copy-btn" onclick="copyEmail()"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span class="cta-copy-label">Copy address</span></button>
+      </div>
+      <a href="/#upload" class="cta-ch cta-ch-up">
+        <div class="cta-ch-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(196,181,253,0.9)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></div>
+        <div class="cta-ch-title">Upload</div>
+        <div class="cta-ch-sub">PDF, photo or drag &amp; drop</div>
+        <div class="cta-ch-action">Upload now →</div>
       </a>
     </div>
   </div>
+  <div class="cta-copy-toast" id="cta-copy-toast">Copied to clipboard ✓</div>
 
   <aside class="post-related" id="post-related" hidden>
     <h3>Related articles</h3>
@@ -260,6 +271,38 @@ footer{background:var(--ink);padding:56px 40px 32px;border-top:1px solid rgba(37
 </footer>
 <!-- FOOTER:END -->
 
+<script>
+function copyEmail(){
+  navigator.clipboard.writeText('audit@switchr.es').then(function(){
+    document.querySelectorAll('.cta-copy-label').forEach(function(el){el.textContent='Copied!';setTimeout(function(){el.textContent='Copy address';},2000);});
+    var ct=document.getElementById('cta-copy-toast');
+    if(ct){ct.classList.add('show');setTimeout(function(){ct.classList.remove('show');},2800);}
+  });
+}
+/* ── REFERRAL TRACKING ── */
+(function(){
+  var params=new URLSearchParams(window.location.search);
+  var refParam=params.get('ref');
+  if(refParam)localStorage.setItem('sw_ref',refParam.toUpperCase());
+  var ref=localStorage.getItem('sw_ref');
+  if(!ref)return;
+  var auditEmail='audit+ref'+ref+'@switchr.es';
+  function applyRef(){
+    document.querySelectorAll('a[href*="wa.me/34662403660"]').forEach(function(a){
+      try{var u=new URL(a.href);u.searchParams.set('text','Hello, please audit my invoice (Ref:'+ref+')');a.href=u.toString();}catch(e){}
+    });
+    document.querySelectorAll('.email-address').forEach(function(el){el.textContent=auditEmail;});
+    window.copyEmail=function(){
+      navigator.clipboard.writeText(auditEmail).then(function(){
+        document.querySelectorAll('.cta-copy-label').forEach(function(el){el.textContent='Copied!';setTimeout(function(){el.textContent='Copy address';},2000);});
+        var ct=document.getElementById('cta-copy-toast');
+        if(ct){ct.classList.add('show');setTimeout(function(){ct.classList.remove('show');},2800);}
+      });
+    };
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',applyRef);}else{applyRef();}
+}());
+</script>
 <script>
 function toggleMenu(){var n=document.querySelector('nav');n.classList.toggle('menu-open');}
 document.addEventListener('click',function(e){var n=document.querySelector('nav');if(n&&n.classList.contains('menu-open')&&!n.contains(e.target))n.classList.remove('menu-open');});

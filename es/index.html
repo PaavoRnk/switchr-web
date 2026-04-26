@@ -1858,6 +1858,10 @@ window.addEventListener('DOMContentLoaded',()=>{
   const mobile=/Android|iPhone|iPad/i.test(navigator.userAgent);
   // Default stays WhatsApp for mobile, which is already default
   // For desktop, we could default to web but WhatsApp still works — keep WA as default
+  if(window.location.hash==='#upload'){
+    history.replaceState(null,null,window.location.pathname);
+    openUploadModal();
+  }
 });
 
 // FAQ
