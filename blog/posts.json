@@ -1,5 +1,19 @@
 [
   {
+    "slug": "hidden-charges-on-your-spanish-electricity-bill",
+    "title": "Your electricity bill probably has charges on it you never agreed to",
+    "description": "Spanish electricity bills often include insurance and assistance services you never signed up for. Here's where to find them, what they cost, and how to remove them.",
+    "excerpt": "Pull out your last Spanish electricity bill. Find the section labelled 'Servicios y Otros Conceptos.' If there's anything listed there, read it carefully — those line items are not electricity charges.",
+    "date": "2026-04-27",
+    "image": "/blog/images/hidden-charges-on-your-spanish-electricity-bill-hero.png",
+    "imageAlt": "Spanish electricity bill with add-on services highlighted",
+    "category": "Guides",
+    "tags": ["electricity bills", "add-ons", "Iberdrola", "expat guide", "Spain"],
+    "readingTime": 4,
+    "cta": "upload",
+    "relatedSlugs": ["who-chose-your-electricity-supplier-in-spain", "why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home"]
+  },
+  {
     "slug": "who-chose-your-electricity-supplier-in-spain",
     "title": "Who chose your electricity supplier in Spain?",
     "description": "Your Spanish electricity supplier was probably chosen by your lawyer, not you. Here's what that means, what to check on your bill, and how to fix it.",

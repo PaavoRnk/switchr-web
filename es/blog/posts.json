@@ -1,5 +1,19 @@
 [
   {
+    "slug": "hidden-charges-on-your-spanish-electricity-bill",
+    "title": "Tu factura de luz probablemente tiene cargos que nunca contrataste",
+    "description": "Las facturas de luz en España suelen incluir seguros y servicios de asistencia que nunca contrataste. Te explicamos dónde encontrarlos, cuánto cuestan y cómo cancelarlos.",
+    "excerpt": "Coge tu última factura de luz. Busca la sección 'Servicios y Otros Conceptos'. Si hay algo ahí, léelo con atención — esas líneas no son cargos por electricidad.",
+    "date": "2026-04-27",
+    "image": "/blog/images/hidden-charges-on-your-spanish-electricity-bill-hero.png",
+    "imageAlt": "Factura de luz española con servicios adicionales destacados",
+    "category": "Guías",
+    "tags": ["facturas de luz", "servicios adicionales", "Iberdrola", "guía expat", "España"],
+    "readingTime": 4,
+    "cta": "upload",
+    "relatedSlugs": ["who-chose-your-electricity-supplier-in-spain", "why-is-my-spanish-electricity-bill-so-high-when-nobody-is-home"]
+  },
+  {
     "slug": "who-chose-your-electricity-supplier-in-spain",
     "title": "¿Quién eligió tu compañía eléctrica en España?",
     "description": "Tu compañía eléctrica en España probablemente fue elegida por tu abogado, no por ti. Te explicamos qué significa, qué revisar en tu factura y cómo cambiarlo.",
