@@ -1,0 +1,19 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Switchr Website (live-server)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "C:/Users/User/Documents/switchr/switchr web",
+      "port": 3000
+    },
+    {
+      "name": "Switchr Inbox (Vite)",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "cwd": "C:/Users/User/Documents/switchr/inbox",
+      "port": 5173
+    }
+  ]
+}

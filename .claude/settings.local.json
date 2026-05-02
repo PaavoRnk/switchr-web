@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(git:*)",
+      "WebFetch(domain:switchr.es)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "mcp__claude_ai_Supabase__list_projects",
+      "mcp__claude_ai_Supabase__list_edge_functions",
+      "mcp__claude_ai_Supabase__get_edge_function",
+      "mcp__claude_ai_Supabase__deploy_edge_function",
+      "Bash(python3:*)",
+      "Bash(grep:*)",
+      "Bash(supabase functions:*)",
+      "Bash(npx supabase:*)",
+      "Skill(gsd:progress)",
+      "mcp__claude_ai_Supabase__list_tables",
+      "mcp__claude_ai_Supabase__apply_migration",
+      "mcp__claude_ai_Supabase__execute_sql",
+      "Bash(powershell:*)",
+      "Bash(rm:*)",
+      "mcp__claude_ai_Supabase__get_publishable_keys",
+      "Bash(supabase:*)"
+    ]
+  }
+}

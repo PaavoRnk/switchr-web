@@ -1,5 +1,19 @@
 [
   {
+    "slug": "what-happens-when-you-switch-electricity-supplier-in-spain",
+    "title": "Qué pasa realmente cuando cambias de compañía eléctrica en España",
+    "description": "¿Crees que cambiar de compañía eléctrica en España implica técnicos, cortes o papeleo? Aquí te contamos qué pasa realmente — y por qué es más sencillo de lo que imaginas.",
+    "excerpt": "Nada. Esa es la respuesta corta. No viene ningún técnico. Las luces no parpadean. No tienes que estar en casa. Todo ocurre en papel, en segundo plano.",
+    "date": "2026-05-02",
+    "image": "/blog/images/what-happens-when-you-switch-electricity-supplier-in-spain-hero.png",
+    "imageAlt": "Contador de luz en la pared de un hogar español",
+    "category": "Guías",
+    "tags": ["cambio de compañía", "guía expat", "España", "compañía eléctrica"],
+    "readingTime": 3,
+    "cta": "general",
+    "relatedSlugs": ["who-chose-your-electricity-supplier-in-spain", "hidden-charges-on-your-spanish-electricity-bill"]
+  },
+  {
     "slug": "hidden-charges-on-your-spanish-electricity-bill",
     "title": "Tu factura de luz probablemente tiene cargos que nunca contrataste",
     "description": "Las facturas de luz en España suelen incluir seguros y servicios de asistencia que nunca contrataste. Te explicamos dónde encontrarlos, cuánto cuestan y cómo cancelarlos.",
